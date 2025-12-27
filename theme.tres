@@ -1,0 +1,12 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://dxoeymo5y7ebp"]
+
+[ext_resource type="FontFile" uid="uid://c0lxhx1wpgnvs" path="res://font/Ubuntu-Regular.ttf" id="1_e1x85"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wvktn"]
+bg_color = Color(0.11489678, 0.11489683, 0.11489671, 1)
+
+[resource]
+default_font = ExtResource("1_e1x85")
+default_font_size = 16
+HSeparator/constants/separation = 12
+ProgressBar/styles/background = SubResource("StyleBoxFlat_wvktn")
