@@ -11,15 +11,15 @@ config_version=5
 [application]
 
 config/name="Controller Rumble Tool"
-run/main_scene="uid://bd7djkeek6oem"
+run/main_scene="uid://cmikhaqwhlrq1"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 run/low_processor_mode=true
 config/icon="res://icon.svg"
 
 [display]
 
-window/size/viewport_width=480
-window/size/viewport_height=480
+window/size/viewport_width=560
+window/size/viewport_height=560
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 

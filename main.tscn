@@ -1,7 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://bd7djkeek6oem"]
+[gd_scene load_steps=9 format=3 uid="uid://cmikhaqwhlrq1"]
 
 [ext_resource type="Theme" uid="uid://dxoeymo5y7ebp" path="res://theme.tres" id="1_0xm2m"]
-[ext_resource type="Script" uid="uid://ci8gltknaa8n0" path="res://main.gd" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://ci8gltknaa8n0" path="res://main.gd" id="1_h2yge"]
+[ext_resource type="Texture2D" uid="uid://dp4da2dll6r6" path="res://icon/Xbox Series/Default/xbox_button_back_icon.png" id="3_1bvp3"]
+[ext_resource type="Texture2D" uid="uid://ba4381ogxnwoo" path="res://icon/Xbox Series/Default/xbox_button_start_icon.png" id="4_lquwl"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1bvp3"]
 bg_color = Color(0.66, 0.66, 0.66, 0.27058825)
@@ -15,9 +17,10 @@ bg_color = Color(0.8233589, 0.48257828, 0.56837255, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h2yge"]
 bg_color = Color(0.48380002, 0.67991674, 0.82, 1)
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_0xm2m"]
+[node name="Main" type="Node"]
+script = ExtResource("1_h2yge")
 
-[node name="Main" type="Control"]
+[node name="UI" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -26,9 +29,8 @@ grow_horizontal = 2
 grow_vertical = 2
 focus_behavior_recursive = 1
 theme = ExtResource("1_0xm2m")
-script = ExtResource("1_ig7tw")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="MainVBox" type="VBoxContainer" parent="UI"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -40,18 +42,18 @@ offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Title" type="HBoxContainer" parent="VBoxContainer"]
+[node name="Title" type="HBoxContainer" parent="UI/MainVBox"]
 layout_mode = 2
 alignment = 1
 
-[node name="NameLabel" type="Label" parent="VBoxContainer/Title"]
+[node name="NameLabel" type="Label" parent="UI/MainVBox/Title"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Welcome"
 clip_text = true
 
-[node name="ControllerIdBox" type="SpinBox" parent="VBoxContainer/Title"]
+[node name="ControllerIdBox" type="SpinBox" parent="UI/MainVBox/Title"]
 layout_mode = 2
 focus_behavior_recursive = 2
 max_value = 99.0
@@ -59,17 +61,18 @@ rounded = true
 alignment = 1
 prefix = "ID"
 
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="UI/MainVBox"]
 layout_mode = 2
 
-[node name="Gauges" type="HBoxContainer" parent="VBoxContainer"]
+[node name="Gauges" type="HBoxContainer" parent="UI/MainVBox"]
 layout_mode = 2
 alignment = 1
 
-[node name="StrongDesired" type="ProgressBar" parent="VBoxContainer/Gauges"]
+[node name="StrongDesired" type="ProgressBar" parent="UI/MainVBox/Gauges"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(20, 75)
 layout_mode = 2
+tooltip_text = "Strong motor, desired intensity"
 theme_override_styles/background = SubResource("StyleBoxFlat_1bvp3")
 theme_override_styles/fill = SubResource("StyleBoxFlat_lquwl")
 max_value = 1.0
@@ -77,7 +80,7 @@ value = 0.5
 fill_mode = 3
 show_percentage = false
 
-[node name="StrongPower" type="ProgressBar" parent="VBoxContainer/Gauges"]
+[node name="StrongPower" type="ProgressBar" parent="UI/MainVBox/Gauges"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(50, 75)
 layout_mode = 2
@@ -87,7 +90,7 @@ max_value = 1.0
 value = 0.5
 fill_mode = 3
 
-[node name="WeakPower" type="ProgressBar" parent="VBoxContainer/Gauges"]
+[node name="WeakPower" type="ProgressBar" parent="UI/MainVBox/Gauges"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(50, 75)
 layout_mode = 2
@@ -97,10 +100,11 @@ max_value = 1.0
 value = 0.5
 fill_mode = 3
 
-[node name="WeakDesired" type="ProgressBar" parent="VBoxContainer/Gauges"]
+[node name="WeakDesired" type="ProgressBar" parent="UI/MainVBox/Gauges"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(20, 75)
 layout_mode = 2
+tooltip_text = "Weak motor, desired intensity"
 theme_override_styles/background = SubResource("StyleBoxFlat_1bvp3")
 theme_override_styles/fill = SubResource("StyleBoxFlat_lquwl")
 max_value = 1.0
@@ -108,56 +112,69 @@ value = 0.5
 fill_mode = 3
 show_percentage = false
 
-[node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
+[node name="HSeparator2" type="HSeparator" parent="UI/MainVBox"]
 layout_mode = 2
 
-[node name="TabContainer" type="TabContainer" parent="VBoxContainer"]
+[node name="ModeTabs" type="TabContainer" parent="UI/MainVBox"]
 layout_mode = 2
 size_flags_vertical = 3
 tab_alignment = 1
 current_tab = 0
 
-[node name="Analog" type="TabBar" parent="VBoxContainer/TabContainer"]
+[node name="Analog" type="TabBar" parent="UI/MainVBox/ModeTabs"]
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="Control" type="TabBar" parent="VBoxContainer/TabContainer"]
+[node name="Modes" type="TabBar" parent="UI/MainVBox/ModeTabs"]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
-[node name="third mode" type="TabBar" parent="VBoxContainer/TabContainer"]
+[node name="WIP" type="TabBar" parent="UI/MainVBox/ModeTabs"]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
-[node name="HSeparator3" type="HSeparator" parent="VBoxContainer"]
+[node name="HSeparator3" type="HSeparator" parent="UI/MainVBox"]
 layout_mode = 2
 
-[node name="Settings" type="VBoxContainer" parent="VBoxContainer"]
+[node name="Settings" type="VBoxContainer" parent="UI/MainVBox"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Settings"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/MainVBox/Settings"]
 layout_mode = 2
 
-[node name="FlipControls" type="CheckBox" parent="VBoxContainer/Settings/HBoxContainer"]
+[node name="FlipControls" type="CheckBox" parent="UI/MainVBox/Settings/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "Flips the triggers/joysticks that control each motor"
 text = "Flip L/R Controls"
 
-[node name="CoupleMotors" type="CheckBox" parent="VBoxContainer/Settings/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="UI/MainVBox/Settings/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_1bvp3")
+expand_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="UI/MainVBox/Settings/HBoxContainer"]
+layout_mode = 2
+
+[node name="CoupleMotors" type="CheckBox" parent="UI/MainVBox/Settings/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "Control both motors with any trigger (instead of separately)"
 text = "Couple Motors"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/Settings"]
+[node name="TextureRect2" type="TextureRect" parent="UI/MainVBox/Settings/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("4_lquwl")
+expand_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="UI/MainVBox/Settings"]
 layout_mode = 2
 
-[node name="MultiplierNode" type="HBoxContainer" parent="VBoxContainer/Settings/HBoxContainer2"]
+[node name="MultiplierNode" type="HBoxContainer" parent="UI/MainVBox/Settings/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "Set a multiplier for the final rumble intensity,
@@ -166,28 +183,31 @@ on Linux have a problem with cutting-off rumble
 above a specific threshold, use this to mitigate
 this issue (usually around the 0.75 - 0.8 range)"
 
-[node name="Label" type="Label" parent="VBoxContainer/Settings/HBoxContainer2/MultiplierNode"]
+[node name="Label" type="Label" parent="UI/MainVBox/Settings/HBoxContainer2/MultiplierNode"]
 layout_mode = 2
 text = "Rumble Multiplier: "
 
-[node name="MultiplierBox" type="SpinBox" parent="VBoxContainer/Settings/HBoxContainer2/MultiplierNode"]
+[node name="Control" type="Control" parent="UI/MainVBox/Settings/HBoxContainer2/MultiplierNode"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MultiplierBox" type="SpinBox" parent="UI/MainVBox/Settings/HBoxContainer2/MultiplierNode"]
 layout_mode = 2
 focus_behavior_recursive = 2
 max_value = 1.0
 step = 0.001
 value = 1.0
 
-[node name="SnapControls" type="CheckBox" parent="VBoxContainer/Settings/HBoxContainer2"]
+[node name="VSeparator" type="VSeparator" parent="UI/MainVBox/Settings/HBoxContainer2"]
+layout_mode = 2
+
+[node name="SnapControls" type="CheckBox" parent="UI/MainVBox/Settings/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "Snap the controls to increments of 10%"
 text = "Snap Controls"
 
-[node name="ControllerCheckTimer" type="Timer" parent="."]
-wait_time = 0.5
-autostart = true
-
-[node name="Button" type="Button" parent="."]
+[node name="InfoButton" type="Button" parent="UI"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -195,18 +215,83 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -32.0
-offset_top = -32.0
-offset_right = -8.0
-offset_bottom = -8.0
+offset_top = -35.0
 grow_horizontal = 0
 grow_vertical = 0
-icon = SubResource("NoiseTexture2D_0xm2m")
+text = "ⓘ"
 flat = true
 expand_icon = true
 
-[connection signal="value_changed" from="VBoxContainer/Title/ControllerIdBox" to="." method="_on_controller_id_box_value_changed"]
-[connection signal="toggled" from="VBoxContainer/Settings/HBoxContainer/FlipControls" to="." method="_on_flip_controls_toggled"]
-[connection signal="toggled" from="VBoxContainer/Settings/HBoxContainer/CoupleMotors" to="." method="_on_couple_motors_toggled"]
-[connection signal="value_changed" from="VBoxContainer/Settings/HBoxContainer2/MultiplierNode/MultiplierBox" to="." method="_on_multiplier_box_value_changed"]
-[connection signal="toggled" from="VBoxContainer/Settings/HBoxContainer2/SnapControls" to="." method="_on_snap_controls_toggled"]
+[node name="BlurRect" type="ColorRect" parent="UI"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.19607843)
+
+[node name="InfoPopup" type="Popup" parent="UI"]
+unique_name_in_owner = true
+oversampling_override = 1.0
+initial_position = 1
+size = Vector2i(500, 500)
+
+[node name="Panel" type="Panel" parent="UI/InfoPopup"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/InfoPopup/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 18.0
+offset_top = 18.0
+offset_right = -26.0
+offset_bottom = -26.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="InfoCredits" type="RichTextLabel" parent="UI/InfoPopup/Panel/VBoxContainer"]
+layout_mode = 2
+bbcode_enabled = true
+text = "[center][b]Controller Rumble Tool[/b]
+(Gamepad Vibration)
+[i]v0.2[/i][/center]
+
+
+Credits:
+[ul]Cabin Font - [url]https://github.com/impallari/Cabin.git[/url]
+Glyphs - [url]https://kenney.nl/assets/input-prompts[/url]
+Godot 4.5.1[/ul]
+
+
+This project:
+[url]https://github.com/leosefcik/controller-rumble-tool[/url]
+
+
+Made by leosefcik
+[url]https://eggsandchickens.info/[/url]
+"
+fit_content = true
+
+[node name="ControllerCheckTimer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[connection signal="value_changed" from="UI/MainVBox/Title/ControllerIdBox" to="." method="_on_controller_id_box_value_changed"]
+[connection signal="toggled" from="UI/MainVBox/Settings/HBoxContainer/FlipControls" to="." method="_on_flip_controls_toggled"]
+[connection signal="toggled" from="UI/MainVBox/Settings/HBoxContainer/CoupleMotors" to="." method="_on_couple_motors_toggled"]
+[connection signal="value_changed" from="UI/MainVBox/Settings/HBoxContainer2/MultiplierNode/MultiplierBox" to="." method="_on_multiplier_box_value_changed"]
+[connection signal="toggled" from="UI/MainVBox/Settings/HBoxContainer2/SnapControls" to="." method="_on_snap_controls_toggled"]
+[connection signal="pressed" from="UI/InfoButton" to="." method="_on_info_button_pressed"]
+[connection signal="popup_hide" from="UI/InfoPopup" to="." method="_on_info_popup_popup_hide"]
+[connection signal="meta_clicked" from="UI/InfoPopup/Panel/VBoxContainer/InfoCredits" to="." method="_on_info_credits_meta_clicked"]
 [connection signal="timeout" from="ControllerCheckTimer" to="." method="_on_controller_check_timer_timeout"]

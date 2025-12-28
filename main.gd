@@ -1,4 +1,4 @@
-extends Control
+extends Node
 
 var controller_id := 0
 var controller_name := "Empty"
@@ -79,7 +79,7 @@ func _on_controller_check_timer_timeout() -> void:
 		controller_name = current_controller_name
 		
 		if not controller_name:
-			%NameLabel.text = "Controller not detected on ID #" + str(controller_id) + " (try #0)"
+			%NameLabel.text = "No device detected on ID #" + str(controller_id) + " (try #0)"
 		else:
 			%NameLabel.text = controller_name
 
@@ -104,3 +104,18 @@ func _on_couple_motors_toggled(toggled_on: bool) -> void:
 
 func _on_snap_controls_toggled(toggled_on: bool) -> void:
 	snapped = toggled_on
+
+
+
+### OTHER
+
+func _on_info_button_pressed() -> void:
+	%BlurRect.show()
+	%InfoPopup.popup()
+
+func _on_info_popup_popup_hide() -> void:
+	%BlurRect.hide()
+
+# For the URLs to work in the Credits Popup
+func _on_info_credits_meta_clicked(meta: Variant) -> void:
+	OS.shell_open(str(meta))
