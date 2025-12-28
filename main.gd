@@ -89,20 +89,17 @@ func _input(event: InputEvent) -> void:
 		%FlipControls.button_pressed = !%FlipControls.button_pressed
 	
 	elif event.is_action_pressed("lock_rumble_left"):
-		if coupled:
-			_toggle_locks(1,1)
-		elif not flipped:
-			_toggle_locks(1,0)
-		else:
-			_toggle_locks(0,1)
+		if coupled: _toggle_locks(1,1)
+		elif not flipped: _toggle_locks(1,0)
+		else: _toggle_locks(0,1)
 	
 	elif event.is_action_pressed("lock_rumble_right"):
-		if coupled:
-			_toggle_locks(1,1)
-		elif not flipped:
-			_toggle_locks(0,1)
-		else:
-			_toggle_locks(1,0)
+		if coupled: _toggle_locks(1,1)
+		elif not flipped: _toggle_locks(0,1)
+		else: _toggle_locks(1,0)
+	
+	elif event.is_action_pressed("lock_both_rumbles"):
+		_toggle_locks(1,1)
 
 
 func _toggle_locks(toggle_weak: bool, toggle_strong: bool) -> void:
