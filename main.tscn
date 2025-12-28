@@ -119,14 +119,14 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 tab_alignment = 1
-current_tab = 0
+current_tab = 1
 
 [node name="Analog" type="TabBar" parent="UI/MainVBox/ModeTabs"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
 [node name="Modes" type="TabBar" parent="UI/MainVBox/ModeTabs"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
@@ -268,7 +268,7 @@ text = "[center][b]Controller Rumble Tool[/b]
 
 
 Credits:
-[ul]Cabin Font - [url]https://github.com/impallari/Cabin.git[/url]
+[ul]Cabin Font - [url]https://github.com/impallari/Cabin[/url]
 Glyphs - [url]https://kenney.nl/assets/input-prompts[/url]
 Godot 4.5.1[/ul]
 

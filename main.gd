@@ -6,7 +6,7 @@ var controller_name := "Empty"
 var rumble_multiplier := 1.0
 var flipped := false
 var coupled := false
-var snapped := false
+var incremented := false
 
 enum Modes {ANALOG, CONTROL}
 var mode := Modes.ANALOG
@@ -14,11 +14,23 @@ var mode := Modes.ANALOG
 var weak_desired := 0.0
 var strong_desired := 0.0
 
+# These are used to apply a "fix frame" every ~2 seconds
+# Every "fix frame", rumble functions should run a 0.99x multiplier,
+# and then return to normal. This variation will allow the controller
+# to rumble continuously, because usually, hardware prevents the controller
+# from rumbling too long with the same intensity.
+var fix_delta_counter := 0.0
+var apply_fix_frame := false
+
 
 func _ready() -> void:
 	pass
 
 func _process(delta: float) -> void:
+	# Fix Frame counter
+	_increment_fix_frame(delta)
+	
+	# Analog mode processing
 	if mode == Modes.ANALOG:
 		
 		# We take the max of either the triggers/joyUP or joyDOWN for control variety
@@ -43,7 +55,7 @@ func _process(delta: float) -> void:
 			weak_desired = right_magnitude
 			strong_desired = left_magnitude
 		
-		if snapped:
+		if incremented:
 			strong_desired = snappedf(strong_desired, 0.1)
 			weak_desired = snappedf(weak_desired, 0.1)
 		
@@ -61,14 +73,33 @@ func _input(event: InputEvent) -> void:
 
 
 func _rumble_analog() -> void:
+	# Applying fix
+	var fix := _get_fix_multiplier()
+	
 	Input.start_joy_vibration(
 		controller_id,
-		weak_desired * rumble_multiplier,
-		strong_desired * rumble_multiplier,
+		weak_desired * rumble_multiplier * fix,
+		strong_desired * rumble_multiplier * fix,
 		0.0)
 	
 	%StrongPower.value = strong_desired
 	%WeakPower.value = weak_desired
+
+# Every 2 seconds of _process, make the current frame a fix frame
+func _increment_fix_frame(delta: float) -> void:
+	fix_delta_counter += delta
+	if fix_delta_counter > 2.0:
+		apply_fix_frame = true
+		fix_delta_counter = 0.0
+
+# When in a fix frame, return a 0.99 multiplier for rumble functions to use
+# (and reset fix frame status)
+func _get_fix_multiplier() -> float:
+	var fix := 1.0
+	if apply_fix_frame:
+		fix = 0.99
+		apply_fix_frame = false
+	return fix
 
 
 ### CONTROLLER
@@ -103,7 +134,7 @@ func _on_couple_motors_toggled(toggled_on: bool) -> void:
 	coupled = toggled_on
 
 func _on_snap_controls_toggled(toggled_on: bool) -> void:
-	snapped = toggled_on
+	incremented = toggled_on
 
 
 
