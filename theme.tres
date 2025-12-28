@@ -1,8 +1,10 @@
-[gd_resource type="Theme" load_steps=5 format=3 uid="uid://dxoeymo5y7ebp"]
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://dxoeymo5y7ebp"]
 
 [ext_resource type="FontFile" uid="uid://cfhihdagg725w" path="res://font/Cabin-Bold.ttf" id="1_cjfk0"]
 [ext_resource type="FontFile" uid="uid://cyvnbcshmtw7w" path="res://font/Cabin-Italic.ttf" id="2_110ce"]
 [ext_resource type="FontFile" uid="uid://car6m0wxvtbx2" path="res://font/Cabin-Regular.ttf" id="2_vj6dk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vj6dk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wvktn"]
 bg_color = Color(0.11489678, 0.11489683, 0.11489671, 1)
@@ -12,6 +14,7 @@ default_font = ExtResource("2_vj6dk")
 default_font_size = 18
 HSeparator/constants/separation = 12
 LineEdit/constants/minimum_character_width = 3
+LineEdit/styles/focus = SubResource("StyleBoxEmpty_vj6dk")
 ProgressBar/styles/background = SubResource("StyleBoxFlat_wvktn")
 RichTextLabel/fonts/bold_font = ExtResource("1_cjfk0")
 RichTextLabel/fonts/italics_font = ExtResource("2_110ce")

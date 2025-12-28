@@ -224,7 +224,13 @@ offset_right = 177.0
 offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
-text = "These are all empty, but hopefully not for long!"
+text = "Analog mode:
+
+Press a trigger OR move a joystick up/down to
+activate the coresponding rumble motor.
+
+Press Left D-Pad or the Right Button (Circle/B/A)
+to lock both sides simultaneously"
 
 [node name="Program" type="TabBar" parent="UI/MainVBox/ModeTabs"]
 visible = false
@@ -351,7 +357,6 @@ unique_name_in_owner = true
 oversampling_override = 1.0
 initial_position = 1
 size = Vector2i(500, 500)
-visible = true
 
 [node name="Panel" type="Panel" parent="UI/InfoPopup"]
 anchors_preset = 15

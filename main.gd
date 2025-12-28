@@ -77,9 +77,7 @@ func _process(delta: float) -> void:
 			weak_desired = snappedf(weak_desired, 0.1)
 		
 		_rumble_analog()
-		
-		%WeakDesired.value = weak_desired
-		%StrongDesired.value = strong_desired
+		_update_desired_gauges(weak_desired, strong_desired)
 
 
 func _input(event: InputEvent) -> void:
@@ -125,8 +123,7 @@ func _rumble_analog() -> void:
 		strong_final * rumble_multiplier * fix,
 		0.0)
 	
-	%StrongPower.value = strong_final
-	%WeakPower.value = weak_final
+	_update_power_gauges(weak_final, strong_final)
 
 # Every 2 seconds of _process, make the current frame a fix frame
 func _increment_fix_frame(delta: float) -> void:
@@ -162,6 +159,14 @@ func _update_glyphs() -> void:
 	%CoupleMotorsGlyph.texture = START_OFF_GLYPH if not coupled else START_ON_GLYPH
 
 
+func _update_desired_gauges(weak_desired: float, strong_desired: float) -> void:
+	%WeakDesired.value = weak_desired
+	%StrongDesired.value = strong_desired
+
+func _update_power_gauges(weak_power: float, strong_power: float) -> void:
+	%WeakPower.value = weak_power
+	%StrongPower.value = strong_power
+
 ### CONTROLLER
 
 func _on_controller_check_timer_timeout() -> void:
@@ -186,8 +191,18 @@ func _on_controller_id_box_value_changed(value: float) -> void:
 
 func _on_mode_tabs_tab_changed(tab: int) -> void:
 	mode = tab
-	Input.stop_joy_vibration(controller_id)
+	_reset_rumble()
+	
 
+func _reset_rumble() -> void:
+	Input.stop_joy_vibration(controller_id)
+	weak_desired = 0.0
+	strong_desired = 0.0
+	_update_desired_gauges(0.0, 0.0)
+	_update_power_gauges(0.0, 0.0)
+	weak_locked = false
+	strong_locked = false
+	_update_glyphs()
 
 ### LOCK BUTTON UI
 
