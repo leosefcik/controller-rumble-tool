@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://cmikhaqwhlrq1"]
+[gd_scene load_steps=10 format=3 uid="uid://cmikhaqwhlrq1"]
 
 [ext_resource type="Theme" uid="uid://dxoeymo5y7ebp" path="res://theme.tres" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://ci8gltknaa8n0" path="res://main.gd" id="1_h2yge"]
 [ext_resource type="Texture2D" uid="uid://dp4da2dll6r6" path="res://icon/Xbox Series/Default/xbox_button_back_icon.png" id="3_1bvp3"]
+[ext_resource type="Texture2D" uid="uid://bnhad4lkyu0fw" path="res://icon/Xbox Series/Default/controller_xboxone.png" id="3_lquwl"]
 [ext_resource type="Texture2D" uid="uid://ba4381ogxnwoo" path="res://icon/Xbox Series/Default/xbox_button_start_icon.png" id="4_lquwl"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1bvp3"]
@@ -45,6 +46,13 @@ grow_vertical = 2
 [node name="Title" type="HBoxContainer" parent="UI/MainVBox"]
 layout_mode = 2
 alignment = 1
+
+[node name="ControllerStatusIcon" type="TextureRect" parent="UI/MainVBox/Title"]
+unique_name_in_owner = true
+modulate = Color(0.41, 0.41, 0.41, 1)
+layout_mode = 2
+texture = ExtResource("3_lquwl")
+expand_mode = 2
 
 [node name="NameLabel" type="Label" parent="UI/MainVBox/Title"]
 unique_name_in_owner = true

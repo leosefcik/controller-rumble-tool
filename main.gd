@@ -111,8 +111,10 @@ func _on_controller_check_timer_timeout() -> void:
 		
 		if not controller_name:
 			%NameLabel.text = "No device detected on ID #" + str(controller_id) + " (try #0)"
+			%ControllerStatusIcon.modulate = Color.DIM_GRAY
 		else:
 			%NameLabel.text = controller_name
+			%ControllerStatusIcon.modulate = Color.WHITE
 
 
 func _on_controller_id_box_value_changed(value: float) -> void:
