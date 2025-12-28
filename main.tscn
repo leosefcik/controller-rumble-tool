@@ -1,10 +1,18 @@
-[gd_scene load_steps=10 format=3 uid="uid://cmikhaqwhlrq1"]
+[gd_scene load_steps=18 format=3 uid="uid://cmikhaqwhlrq1"]
 
 [ext_resource type="Theme" uid="uid://dxoeymo5y7ebp" path="res://theme.tres" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://ci8gltknaa8n0" path="res://main.gd" id="1_h2yge"]
-[ext_resource type="Texture2D" uid="uid://dp4da2dll6r6" path="res://icon/Xbox Series/Default/xbox_button_back_icon.png" id="3_1bvp3"]
-[ext_resource type="Texture2D" uid="uid://bnhad4lkyu0fw" path="res://icon/Xbox Series/Default/controller_xboxone.png" id="3_lquwl"]
-[ext_resource type="Texture2D" uid="uid://ba4381ogxnwoo" path="res://icon/Xbox Series/Default/xbox_button_start_icon.png" id="4_lquwl"]
+[ext_resource type="Texture2D" uid="uid://bh7ruashafx4t" path="res://icon/lock_closed.svg" id="2_dg77c"]
+[ext_resource type="Texture2D" uid="uid://5nds8kddfl4l" path="res://icon/lock_open.svg" id="4_7mycd"]
+[ext_resource type="Texture2D" uid="uid://ckbr8bdov2vbg" path="res://icon/kenney_glyphs/Xbox Series/Double/xbox_lb.png" id="5_vivmo"]
+[ext_resource type="Texture2D" uid="uid://br5rppxn7r5cb" path="res://icon/kenney_glyphs/Xbox Series/Double/xbox_rb.png" id="7_2cqfq"]
+[ext_resource type="Texture2D" uid="uid://c6tew0gsdkewp" path="res://icon/kenney_glyphs/Xbox Series/Double/xbox_button_back_icon_outline.png" id="8_yaehf"]
+[ext_resource type="Texture2D" uid="uid://cd1atd5fn6l1m" path="res://icon/kenney_glyphs/Xbox Series/Double/xbox_button_back_icon.png" id="9_074og"]
+[ext_resource type="Texture2D" uid="uid://huvc07wk6boa" path="res://icon/kenney_glyphs/Xbox Series/Double/xbox_button_start_icon_outline.png" id="10_cegan"]
+[ext_resource type="Texture2D" uid="uid://c128ifahpnhil" path="res://icon/kenney_glyphs/Xbox Series/Double/xbox_button_start_icon.png" id="11_82xsv"]
+[ext_resource type="Texture2D" uid="uid://bl85x6w66rijj" path="res://icon/kenney_glyphs/Xbox Series/Double/xbox_rb_outline.png" id="11_w48qg"]
+[ext_resource type="Texture2D" uid="uid://dqfjtcdx6ghms" path="res://icon/kenney_glyphs/Xbox Series/Double/xbox_lb_outline.png" id="12_vivmo"]
+[ext_resource type="Texture2D" uid="uid://cydtbpei7bv56" path="res://icon/kenney_glyphs/Xbox Series/Double/controller_xboxone.png" id="13_ycdy4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1bvp3"]
 bg_color = Color(0.66, 0.66, 0.66, 0.27058825)
@@ -20,6 +28,16 @@ bg_color = Color(0.48380002, 0.67991674, 0.82, 1)
 
 [node name="Main" type="Node"]
 script = ExtResource("1_h2yge")
+LOCK_ICON = ExtResource("2_dg77c")
+UNLOCK_ICON = ExtResource("4_7mycd")
+LB_OFF_GLYPH = ExtResource("12_vivmo")
+LB_ON_GLYPH = ExtResource("5_vivmo")
+RB_OFF_GLYPH = ExtResource("11_w48qg")
+RB_ON_GLYPH = ExtResource("7_2cqfq")
+SELECT_OFF_GLYPH = ExtResource("8_yaehf")
+SELECT_ON_GLYPH = ExtResource("9_074og")
+START_OFF_GLYPH = ExtResource("10_cegan")
+START_ON_GLYPH = ExtResource("11_82xsv")
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
@@ -51,7 +69,7 @@ alignment = 1
 unique_name_in_owner = true
 modulate = Color(0.41, 0.41, 0.41, 1)
 layout_mode = 2
-texture = ExtResource("3_lquwl")
+texture = ExtResource("13_ycdy4")
 expand_mode = 2
 
 [node name="NameLabel" type="Label" parent="UI/MainVBox/Title"]
@@ -75,6 +93,36 @@ layout_mode = 2
 [node name="Gauges" type="HBoxContainer" parent="UI/MainVBox"]
 layout_mode = 2
 alignment = 1
+
+[node name="StrongLockButton" type="Button" parent="UI/MainVBox/Gauges"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+flat = true
+
+[node name="StrongLockIcons" type="VBoxContainer" parent="UI/MainVBox/Gauges/StrongLockButton"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="StrongLock" type="TextureRect" parent="UI/MainVBox/Gauges/StrongLockButton/StrongLockIcons"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("4_7mycd")
+expand_mode = 4
+stretch_mode = 5
+flip_h = true
+
+[node name="StrongLockGlyph" type="TextureRect" parent="UI/MainVBox/Gauges/StrongLockButton/StrongLockIcons"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("11_w48qg")
+expand_mode = 4
+stretch_mode = 5
 
 [node name="StrongDesired" type="ProgressBar" parent="UI/MainVBox/Gauges"]
 unique_name_in_owner = true
@@ -120,6 +168,35 @@ value = 0.5
 fill_mode = 3
 show_percentage = false
 
+[node name="WeakLockButton" type="Button" parent="UI/MainVBox/Gauges"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+flat = true
+
+[node name="WeakLockIcons" type="VBoxContainer" parent="UI/MainVBox/Gauges/WeakLockButton"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="WeakLock" type="TextureRect" parent="UI/MainVBox/Gauges/WeakLockButton/WeakLockIcons"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("4_7mycd")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="WeakLockGlyph" type="TextureRect" parent="UI/MainVBox/Gauges/WeakLockButton/WeakLockIcons"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("12_vivmo")
+expand_mode = 4
+stretch_mode = 5
+
 [node name="HSeparator2" type="HSeparator" parent="UI/MainVBox"]
 layout_mode = 2
 
@@ -127,21 +204,66 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 tab_alignment = 1
-current_tab = 1
+current_tab = 0
 
 [node name="Analog" type="TabBar" parent="UI/MainVBox/ModeTabs"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="Modes" type="TabBar" parent="UI/MainVBox/ModeTabs"]
+[node name="Label" type="Label" parent="UI/MainVBox/ModeTabs/Analog"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -177.0
+offset_top = -11.5
+offset_right = 177.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "These are all empty, but hopefully not for long!"
+
+[node name="Control" type="TabBar" parent="UI/MainVBox/ModeTabs"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 1
+
+[node name="Label" type="Label" parent="UI/MainVBox/ModeTabs/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -177.0
+offset_top = -11.5
+offset_right = 177.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "These are all empty, but hopefully not for long!"
 
 [node name="WIP" type="TabBar" parent="UI/MainVBox/ModeTabs"]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 2
+
+[node name="Label" type="Label" parent="UI/MainVBox/ModeTabs/WIP"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -177.0
+offset_top = -11.5
+offset_right = 177.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "These are all empty, but hopefully not for long!"
 
 [node name="HSeparator3" type="HSeparator" parent="UI/MainVBox"]
 layout_mode = 2
@@ -159,9 +281,10 @@ size_flags_horizontal = 3
 tooltip_text = "Flips the triggers/joysticks that control each motor"
 text = "Flip L/R Controls"
 
-[node name="TextureRect" type="TextureRect" parent="UI/MainVBox/Settings/HBoxContainer"]
+[node name="FlipControlsGlyph" type="TextureRect" parent="UI/MainVBox/Settings/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
-texture = ExtResource("3_1bvp3")
+texture = ExtResource("8_yaehf")
 expand_mode = 2
 
 [node name="VSeparator" type="VSeparator" parent="UI/MainVBox/Settings/HBoxContainer"]
@@ -174,9 +297,10 @@ size_flags_horizontal = 3
 tooltip_text = "Control both motors with any trigger (instead of separately)"
 text = "Couple Motors"
 
-[node name="TextureRect2" type="TextureRect" parent="UI/MainVBox/Settings/HBoxContainer"]
+[node name="CoupleMotorsGlyph" type="TextureRect" parent="UI/MainVBox/Settings/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
-texture = ExtResource("4_lquwl")
+texture = ExtResource("10_cegan")
 expand_mode = 2
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="UI/MainVBox/Settings"]
@@ -274,20 +398,19 @@ text = "[center][b]Controller Rumble Tool[/b]
 (Gamepad Vibration)
 [i]v0.2[/i][/center]
 
-
 Credits:
 [ul]Cabin Font - [url]https://github.com/impallari/Cabin[/url]
 Glyphs - [url]https://kenney.nl/assets/input-prompts[/url]
+Icons - [url]https://fonts.google.com/icons[/url]
 Godot 4.5.1[/ul]
-
 
 This project:
 [url]https://github.com/leosefcik/controller-rumble-tool[/url]
 
-
 Made by leosefcik
 [url]https://eggsandchickens.info/[/url]
-"
+
+Warning: We are not responsible for any damage that may be caused to you or your controller. Be mindful of excessive vibrations and battery drain."
 fit_content = true
 
 [node name="ControllerCheckTimer" type="Timer" parent="."]
@@ -295,6 +418,8 @@ wait_time = 0.5
 autostart = true
 
 [connection signal="value_changed" from="UI/MainVBox/Title/ControllerIdBox" to="." method="_on_controller_id_box_value_changed"]
+[connection signal="pressed" from="UI/MainVBox/Gauges/StrongLockButton" to="." method="_on_strong_lock_button_pressed"]
+[connection signal="pressed" from="UI/MainVBox/Gauges/WeakLockButton" to="." method="_on_weak_lock_button_pressed"]
 [connection signal="toggled" from="UI/MainVBox/Settings/HBoxContainer/FlipControls" to="." method="_on_flip_controls_toggled"]
 [connection signal="toggled" from="UI/MainVBox/Settings/HBoxContainer/CoupleMotors" to="." method="_on_couple_motors_toggled"]
 [connection signal="value_changed" from="UI/MainVBox/Settings/HBoxContainer2/MultiplierNode/MultiplierBox" to="." method="_on_multiplier_box_value_changed"]
