@@ -9,4 +9,5 @@ bg_color = Color(0.11489678, 0.11489683, 0.11489671, 1)
 default_font = ExtResource("1_e1x85")
 default_font_size = 16
 HSeparator/constants/separation = 12
+LineEdit/constants/minimum_character_width = 3
 ProgressBar/styles/background = SubResource("StyleBoxFlat_wvktn")

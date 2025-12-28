@@ -1,13 +1,21 @@
-[gd_scene load_steps=5 format=3 uid="uid://bd7djkeek6oem"]
+[gd_scene load_steps=8 format=3 uid="uid://bd7djkeek6oem"]
 
 [ext_resource type="Theme" uid="uid://dxoeymo5y7ebp" path="res://theme.tres" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://ci8gltknaa8n0" path="res://main.gd" id="1_ig7tw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1bvp3"]
+bg_color = Color(0.66, 0.66, 0.66, 0.27058825)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lquwl"]
+bg_color = Color(0.6748146, 0.67481464, 0.6748144, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0xm2m"]
 bg_color = Color(0.8233589, 0.48257828, 0.56837255, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h2yge"]
 bg_color = Color(0.48380002, 0.67991674, 0.82, 1)
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_0xm2m"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -16,6 +24,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+focus_behavior_recursive = 1
 theme = ExtResource("1_0xm2m")
 script = ExtResource("1_ig7tw")
 
@@ -31,31 +40,171 @@ offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="Title" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
-text = "Controller"
-horizontal_alignment = 1
+alignment = 1
+
+[node name="NameLabel" type="Label" parent="VBoxContainer/Title"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Welcome"
+clip_text = true
+
+[node name="ControllerIdBox" type="SpinBox" parent="VBoxContainer/Title"]
+layout_mode = 2
+max_value = 99.0
+rounded = true
+alignment = 1
+prefix = "ID"
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="Gauges" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="Strong Power" type="ProgressBar" parent="VBoxContainer/HBoxContainer"]
+[node name="StrongDesired" type="ProgressBar" parent="VBoxContainer/Gauges"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(20, 75)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_1bvp3")
+theme_override_styles/fill = SubResource("StyleBoxFlat_lquwl")
+max_value = 1.0
+value = 0.5
+fill_mode = 3
+show_percentage = false
+
+[node name="StrongPower" type="ProgressBar" parent="VBoxContainer/Gauges"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(50, 75)
 layout_mode = 2
+tooltip_text = "Strong motor, current intensity"
 theme_override_styles/fill = SubResource("StyleBoxFlat_0xm2m")
 max_value = 1.0
+value = 0.5
 fill_mode = 3
 
-[node name="Weak Power" type="ProgressBar" parent="VBoxContainer/HBoxContainer"]
+[node name="WeakPower" type="ProgressBar" parent="VBoxContainer/Gauges"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(50, 75)
 layout_mode = 2
+tooltip_text = "Weak motor, current intensity"
 theme_override_styles/fill = SubResource("StyleBoxFlat_h2yge")
 max_value = 1.0
 value = 0.5
 fill_mode = 3
+
+[node name="WeakDesired" type="ProgressBar" parent="VBoxContainer/Gauges"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(20, 75)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_1bvp3")
+theme_override_styles/fill = SubResource("StyleBoxFlat_lquwl")
+max_value = 1.0
+value = 0.5
+fill_mode = 3
+show_percentage = false
+
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="TabContainer" type="TabContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+tab_alignment = 1
+current_tab = 0
+
+[node name="Analog" type="TabBar" parent="VBoxContainer/TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="Control" type="TabBar" parent="VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="third mode" type="TabBar" parent="VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="HSeparator3" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Settings" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Settings"]
+layout_mode = 2
+
+[node name="FlipControls" type="CheckBox" parent="VBoxContainer/Settings/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Flips the triggers/joysticks that control each motor"
+text = "Flip L/R Controls"
+
+[node name="CoupleMotors" type="CheckBox" parent="VBoxContainer/Settings/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Control both motors with any trigger (instead of separately)"
+text = "Couple Motors"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/Settings"]
+layout_mode = 2
+
+[node name="MultiplierNode" type="HBoxContainer" parent="VBoxContainer/Settings/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Set a multiplier for the final rumble intensity,
+effectively capping the max. Some controllers
+on Linux have a problem with cutting-off rumble
+above a specific threshold, use this to mitigate
+this issue (usually around the 0.75 - 0.8 range)"
+
+[node name="Label" type="Label" parent="VBoxContainer/Settings/HBoxContainer2/MultiplierNode"]
+layout_mode = 2
+text = "Rumble Multiplier: "
+
+[node name="MultiplierBox" type="SpinBox" parent="VBoxContainer/Settings/HBoxContainer2/MultiplierNode"]
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+value = 1.0
+
+[node name="SnapControls" type="CheckBox" parent="VBoxContainer/Settings/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Snap the controls to increments of 10%"
+text = "Snap Controls"
+
+[node name="ControllerCheckTimer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -32.0
+offset_top = -32.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 0
+grow_vertical = 0
+icon = SubResource("NoiseTexture2D_0xm2m")
+flat = true
+expand_icon = true
+
+[connection signal="value_changed" from="VBoxContainer/Title/ControllerIdBox" to="." method="_on_controller_id_box_value_changed"]
+[connection signal="toggled" from="VBoxContainer/Settings/HBoxContainer/FlipControls" to="." method="_on_flip_controls_toggled"]
+[connection signal="toggled" from="VBoxContainer/Settings/HBoxContainer/CoupleMotors" to="." method="_on_couple_motors_toggled"]
+[connection signal="value_changed" from="VBoxContainer/Settings/HBoxContainer2/MultiplierNode/MultiplierBox" to="." method="_on_multiplier_box_value_changed"]
+[connection signal="toggled" from="VBoxContainer/Settings/HBoxContainer2/SnapControls" to="." method="_on_snap_controls_toggled"]
+[connection signal="timeout" from="ControllerCheckTimer" to="." method="_on_controller_check_timer_timeout"]
