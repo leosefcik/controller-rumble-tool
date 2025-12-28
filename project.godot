@@ -14,7 +14,7 @@ config/name="Controller Rumble Tool"
 run/main_scene="uid://cmikhaqwhlrq1"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 run/low_processor_mode=true
-config/icon="res://icon.svg"
+config/icon="uid://cst8li6a7al6b"
 
 [display]
 

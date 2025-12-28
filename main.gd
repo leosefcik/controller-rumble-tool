@@ -21,7 +21,7 @@ var flipped := false
 var coupled := false
 var incremented := false
 
-enum Modes {ANALOG, CONTROL}
+enum Modes {ANALOG, PROGAM}
 var mode := Modes.ANALOG
 
 var weak_desired := 0.0
@@ -182,6 +182,11 @@ func _on_controller_id_box_value_changed(value: float) -> void:
 	controller_id = int(value)
 
 
+### TAB NAVIGATION
+
+func _on_mode_tabs_tab_changed(tab: int) -> void:
+	mode = tab
+	Input.stop_joy_vibration(controller_id)
 
 
 ### LOCK BUTTON UI

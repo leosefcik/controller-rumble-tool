@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cmikhaqwhlrq1"]
+[gd_scene load_steps=19 format=3 uid="uid://cmikhaqwhlrq1"]
 
 [ext_resource type="Theme" uid="uid://dxoeymo5y7ebp" path="res://theme.tres" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://ci8gltknaa8n0" path="res://main.gd" id="1_h2yge"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://bl85x6w66rijj" path="res://icon/kenney_glyphs/Xbox Series/Double/xbox_rb_outline.png" id="11_w48qg"]
 [ext_resource type="Texture2D" uid="uid://dqfjtcdx6ghms" path="res://icon/kenney_glyphs/Xbox Series/Double/xbox_lb_outline.png" id="12_vivmo"]
 [ext_resource type="Texture2D" uid="uid://cydtbpei7bv56" path="res://icon/kenney_glyphs/Xbox Series/Double/controller_xboxone.png" id="13_ycdy4"]
+[ext_resource type="Texture2D" uid="uid://cst8li6a7al6b" path="res://motor_icon_v1.png" id="14_w48qg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1bvp3"]
 bg_color = Color(0.66, 0.66, 0.66, 0.27058825)
@@ -225,32 +226,12 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "These are all empty, but hopefully not for long!"
 
-[node name="Control" type="TabBar" parent="UI/MainVBox/ModeTabs"]
+[node name="Program" type="TabBar" parent="UI/MainVBox/ModeTabs"]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
-[node name="Label" type="Label" parent="UI/MainVBox/ModeTabs/Control"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -177.0
-offset_top = -11.5
-offset_right = 177.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "These are all empty, but hopefully not for long!"
-
-[node name="WIP" type="TabBar" parent="UI/MainVBox/ModeTabs"]
-visible = false
-layout_mode = 2
-metadata/_tab_index = 2
-
-[node name="Label" type="Label" parent="UI/MainVBox/ModeTabs/WIP"]
+[node name="Label" type="Label" parent="UI/MainVBox/ModeTabs/Program"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -370,6 +351,7 @@ unique_name_in_owner = true
 oversampling_override = 1.0
 initial_position = 1
 size = Vector2i(500, 500)
+visible = true
 
 [node name="Panel" type="Panel" parent="UI/InfoPopup"]
 anchors_preset = 15
@@ -395,7 +377,7 @@ grow_vertical = 2
 layout_mode = 2
 bbcode_enabled = true
 text = "[center][b]Controller Rumble Tool[/b]
-(Gamepad Vibration)
+(Gamepad Vibration Massager)
 [i]v0.2[/i][/center]
 
 Credits:
@@ -413,6 +395,20 @@ Made by leosefcik
 Warning: We are not responsible for any damage that may be caused to you or your controller. Be mindful of excessive vibrations and battery drain."
 fit_content = true
 
+[node name="IconProgram" type="TextureRect" parent="UI/InfoPopup/Panel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -114.0
+offset_top = 17.0
+offset_right = -10.0
+offset_bottom = 113.0
+grow_horizontal = 0
+texture = ExtResource("14_w48qg")
+expand_mode = 1
+stretch_mode = 4
+
 [node name="ControllerCheckTimer" type="Timer" parent="."]
 wait_time = 0.5
 autostart = true
@@ -420,6 +416,7 @@ autostart = true
 [connection signal="value_changed" from="UI/MainVBox/Title/ControllerIdBox" to="." method="_on_controller_id_box_value_changed"]
 [connection signal="pressed" from="UI/MainVBox/Gauges/StrongLockButton" to="." method="_on_strong_lock_button_pressed"]
 [connection signal="pressed" from="UI/MainVBox/Gauges/WeakLockButton" to="." method="_on_weak_lock_button_pressed"]
+[connection signal="tab_changed" from="UI/MainVBox/ModeTabs" to="." method="_on_mode_tabs_tab_changed"]
 [connection signal="toggled" from="UI/MainVBox/Settings/HBoxContainer/FlipControls" to="." method="_on_flip_controls_toggled"]
 [connection signal="toggled" from="UI/MainVBox/Settings/HBoxContainer/CoupleMotors" to="." method="_on_couple_motors_toggled"]
 [connection signal="value_changed" from="UI/MainVBox/Settings/HBoxContainer2/MultiplierNode/MultiplierBox" to="." method="_on_multiplier_box_value_changed"]
