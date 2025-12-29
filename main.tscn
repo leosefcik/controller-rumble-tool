@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cmikhaqwhlrq1"]
+[gd_scene load_steps=22 format=3 uid="uid://cmikhaqwhlrq1"]
 
 [ext_resource type="Theme" uid="uid://dxoeymo5y7ebp" path="res://theme.tres" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://ci8gltknaa8n0" path="res://main.gd" id="1_h2yge"]
@@ -13,7 +13,10 @@
 [ext_resource type="Texture2D" uid="uid://bl85x6w66rijj" path="res://icon/kenney_glyphs/Xbox Series/Double/xbox_rb_outline.png" id="11_w48qg"]
 [ext_resource type="Texture2D" uid="uid://dqfjtcdx6ghms" path="res://icon/kenney_glyphs/Xbox Series/Double/xbox_lb_outline.png" id="12_vivmo"]
 [ext_resource type="Texture2D" uid="uid://cydtbpei7bv56" path="res://icon/kenney_glyphs/Xbox Series/Double/controller_xboxone.png" id="13_ycdy4"]
+[ext_resource type="Texture2D" uid="uid://dsw3y5kyg543j" path="res://icon/kenney_glyphs/Generic/Double/generic_button_trigger_b_fill.png" id="14_2cqfq"]
+[ext_resource type="Texture2D" uid="uid://clyw8g54blu5p" path="res://icon/kenney_glyphs/Generic/Double/generic_stick_vertical.png" id="14_vivmo"]
 [ext_resource type="Texture2D" uid="uid://cst8li6a7al6b" path="res://motor_icon_v1.png" id="14_w48qg"]
+[ext_resource type="Texture2D" uid="uid://cgxhsima8b2d3" path="res://icon/kenney_glyphs/Flairs/Double/flair_disabled_cross.png" id="15_yaehf"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1bvp3"]
 bg_color = Color(0.66, 0.66, 0.66, 0.27058825)
@@ -82,6 +85,10 @@ clip_text = true
 
 [node name="ControllerIdBox" type="SpinBox" parent="UI/MainVBox/Title"]
 layout_mode = 2
+tooltip_text = "The ID of the device to activate rumble on.
+Usually, the first connected gamepad is at #0.
+Inputs are taken from ALL conected controllers,
+regardless of the ID set here."
 focus_behavior_recursive = 2
 max_value = 99.0
 rounded = true
@@ -95,9 +102,81 @@ layout_mode = 2
 layout_mode = 2
 alignment = 1
 
+[node name="LeftOfGauge" type="Control" parent="UI/MainVBox/Gauges"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MainVBox/Gauges/LeftOfGauge"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+grow_vertical = 2
+alignment = 1
+
+[node name="TriggerToggle" type="Button" parent="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer"]
+custom_minimum_size = Vector2(35, 35)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Toggle trigger function"
+
+[node name="TextureRect" type="TextureRect" parent="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer/TriggerToggle"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("14_2cqfq")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TriggerToggleX" type="TextureRect" parent="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer/TriggerToggle"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("15_yaehf")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="JoystickToggle" type="Button" parent="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer"]
+custom_minimum_size = Vector2(35, 35)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Toggle joystick function"
+
+[node name="TextureRect" type="TextureRect" parent="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer/JoystickToggle"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("14_vivmo")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="JoystickToggleX" type="TextureRect" parent="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer/JoystickToggle"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("15_yaehf")
+expand_mode = 1
+stretch_mode = 5
+
 [node name="StrongLockButton" type="Button" parent="UI/MainVBox/Gauges"]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
+tooltip_text = "Toggle strong motor lock"
 flat = true
 
 [node name="StrongLockIcons" type="VBoxContainer" parent="UI/MainVBox/Gauges/StrongLockButton"]
@@ -172,6 +251,7 @@ show_percentage = false
 [node name="WeakLockButton" type="Button" parent="UI/MainVBox/Gauges"]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
+tooltip_text = "Toggle weak motor lock"
 flat = true
 
 [node name="WeakLockIcons" type="VBoxContainer" parent="UI/MainVBox/Gauges/WeakLockButton"]
@@ -198,6 +278,10 @@ texture = ExtResource("12_vivmo")
 expand_mode = 4
 stretch_mode = 5
 
+[node name="Spacer" type="Control" parent="UI/MainVBox/Gauges"]
+layout_mode = 2
+size_flags_horizontal = 3
+
 [node name="HSeparator2" type="HSeparator" parent="UI/MainVBox"]
 layout_mode = 2
 
@@ -213,15 +297,13 @@ metadata/_tab_index = 0
 
 [node name="Label" type="Label" parent="UI/MainVBox/ModeTabs/Analog"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -177.0
-offset_top = -11.5
-offset_right = 177.0
-offset_bottom = 11.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 12.0
+offset_right = -12.0
+offset_bottom = -12.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Analog mode:
@@ -419,6 +501,8 @@ wait_time = 0.5
 autostart = true
 
 [connection signal="value_changed" from="UI/MainVBox/Title/ControllerIdBox" to="." method="_on_controller_id_box_value_changed"]
+[connection signal="pressed" from="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer/TriggerToggle" to="." method="_on_trigger_toggle_pressed"]
+[connection signal="pressed" from="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer/JoystickToggle" to="." method="_on_joystick_toggle_pressed"]
 [connection signal="pressed" from="UI/MainVBox/Gauges/StrongLockButton" to="." method="_on_strong_lock_button_pressed"]
 [connection signal="pressed" from="UI/MainVBox/Gauges/WeakLockButton" to="." method="_on_weak_lock_button_pressed"]
 [connection signal="tab_changed" from="UI/MainVBox/ModeTabs" to="." method="_on_mode_tabs_tab_changed"]

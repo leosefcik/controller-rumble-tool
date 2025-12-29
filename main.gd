@@ -21,6 +21,9 @@ var flipped := false
 var coupled := false
 var incremented := false
 
+var trigger_enabled := true
+var joystick_enabled := true
+
 enum Modes {ANALOG, PROGAM}
 var mode := Modes.ANALOG
 
@@ -175,7 +178,8 @@ func _on_controller_check_timer_timeout() -> void:
 		controller_name = current_controller_name
 		
 		if not controller_name:
-			%NameLabel.text = "No device detected on ID #" + str(controller_id) + " (try #0)"
+			%NameLabel.text = "No device detected on ID #" + str(controller_id)
+			if controller_id != 0: %NameLabel.text += " (try #0)"
 			%ControllerStatusIcon.modulate = Color.DIM_GRAY
 		else:
 			%NameLabel.text = controller_name
@@ -192,7 +196,7 @@ func _on_controller_id_box_value_changed(value: float) -> void:
 func _on_mode_tabs_tab_changed(tab: int) -> void:
 	mode = tab
 	_reset_rumble()
-	
+
 
 func _reset_rumble() -> void:
 	Input.stop_joy_vibration(controller_id)
@@ -211,6 +215,18 @@ func _on_weak_lock_button_pressed() -> void:
 
 func _on_strong_lock_button_pressed() -> void:
 	_toggle_locks(0,1)
+
+## TOGLGES
+
+func _on_trigger_toggle_pressed() -> void:
+	trigger_enabled = !trigger_enabled
+	if trigger_enabled: %TriggerToggleX.hide() 
+	else: %TriggerToggleX.show()
+
+func _on_joystick_toggle_pressed() -> void:
+	joystick_enabled = !joystick_enabled
+	if joystick_enabled: %JoystickToggleX.hide() 
+	else: %JoystickToggleX.show()
 
 ### SETTINGS
 
