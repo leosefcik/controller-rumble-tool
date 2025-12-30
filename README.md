@@ -10,13 +10,13 @@
  - Cabin Font - https://github.com/impallari/Cabin
  - Glyphs - https://kenney.nl/assets/input-prompts
  - Icons - https://fonts.google.com/icons
- - Godot 4.5.1
+ - Godot 4.5.1, Blender 5.0.1
 
  GitHub: https://github.com/leosefcik/controller-rumble-tool
  
  Itch.io: https://leosefcik.itch.io/controller-rumble-tool
 
- Made by leosefcik
+ Made by leosefcik 2025-2026
  
  https://eggsandchickens.info
 

@@ -13,6 +13,9 @@ extends Node
 @export var START_OFF_GLYPH: CompressedTexture2D
 @export var START_ON_GLYPH: CompressedTexture2D
 
+@export var MOUSE_STICKY_GLYPH: CompressedTexture2D
+@export var MOUSE_SNAP_GLPYH: CompressedTexture2D
+
 var controller_id := 0
 var controller_name := "Empty"
 
@@ -23,6 +26,7 @@ var incremented := false
 
 var trigger_enabled := true
 var joystick_enabled := true
+var mouse_sticky_enabled := false
 
 enum Modes {ANALOG, PROGAM}
 var mode := Modes.ANALOG
@@ -53,15 +57,31 @@ func _process(delta: float) -> void:
 	# Analog mode processing
 	if mode == Modes.ANALOG:
 		
-		# We take the max of either the triggers/joyUP or joyDOWN for control variety
-		var left_magnitude := maxf(
+		# We take the max of either the triggers/joyUP/joyDOWN for control variety
+		# first checking if they're enabled
+		var left_joy_mag := 0.0
+		var left_trigger_mag := 0.0
+		var right_joy_mag := 0.0
+		var right_trigger_mag := 0.0
+		
+		if joystick_enabled:
+			left_joy_mag = maxf(
 			Input.get_action_strength("increase_rumble_left"),
 			Input.get_action_strength("decrease_rumble_left")
 			)
-		var right_magnitude := maxf(
+			right_joy_mag = maxf(
 			Input.get_action_strength("increase_rumble_right"),
 			Input.get_action_strength("decrease_rumble_right")
 			)
+		
+		if trigger_enabled:
+			left_trigger_mag = Input.get_action_strength("increase_rumble_trigger_left")
+			right_trigger_mag = Input.get_action_strength("increase_rumble_trigger_right")
+		
+		var left_magnitude := maxf(left_joy_mag, left_trigger_mag)
+		left_magnitude = maxf(left_magnitude, %MouseControlSlider.value)
+		var right_magnitude := maxf(right_joy_mag, right_trigger_mag)
+		right_magnitude = maxf(right_magnitude, %MouseControlSlider.value)
 		
 		# Mapping the controls
 		if coupled:
@@ -212,9 +232,11 @@ func _reset_rumble() -> void:
 
 func _on_weak_lock_button_pressed() -> void:
 	_toggle_locks(1,0)
+	if coupled: _toggle_locks(0,1)
 
 func _on_strong_lock_button_pressed() -> void:
 	_toggle_locks(0,1)
+	if coupled: _toggle_locks(1,0)
 
 ## TOGLGES
 
@@ -260,3 +282,18 @@ func _on_info_popup_popup_hide() -> void:
 # For the URLs to work in the Credits Popup
 func _on_info_credits_meta_clicked(meta: Variant) -> void:
 	OS.shell_open(str(meta))
+
+
+# Mouse control slider logic
+
+func _on_mouse_control_slider_drag_ended(value_changed: bool) -> void:
+	if not mouse_sticky_enabled:
+		%MouseControlSlider.value = 0.0
+
+func _on_mouse_sticky_mode_pressed() -> void:
+	mouse_sticky_enabled = !mouse_sticky_enabled
+	if not mouse_sticky_enabled:
+		%MouseStickyMode.icon = MOUSE_SNAP_GLPYH
+		%MouseControlSlider.value = 0.0
+	else:
+		%MouseStickyMode.icon = MOUSE_STICKY_GLYPH
