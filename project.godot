@@ -10,17 +10,22 @@ config_version=5
 
 [application]
 
-config/name="Controller Rumble Tool"
+config/name="Controller Rumble Tool (Gamepad Vibration Massager)"
 run/main_scene="uid://cmikhaqwhlrq1"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 run/low_processor_mode=true
 boot_splash/image="uid://bqlw2dstnbqor"
 config/icon="uid://cst8li6a7al6b"
 
+[debug]
+
+gdscript/warnings/untyped_declaration=1
+
 [display]
 
 window/size/viewport_width=560
 window/size/viewport_height=560
+window/energy_saving/keep_screen_on=false
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 

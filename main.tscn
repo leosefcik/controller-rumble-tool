@@ -16,7 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://cydtbpei7bv56" path="res://icon/kenney_glyphs/Xbox Series/controller_xboxone.png" id="13_ycdy4"]
 [ext_resource type="Texture2D" uid="uid://dsw3y5kyg543j" path="res://icon/kenney_glyphs/Generic/generic_button_trigger_b_fill.png" id="14_2cqfq"]
 [ext_resource type="Texture2D" uid="uid://clyw8g54blu5p" path="res://icon/kenney_glyphs/Generic/generic_stick_vertical.png" id="14_vivmo"]
-[ext_resource type="Texture2D" uid="uid://cst8li6a7al6b" path="res://motor_icon_v1.png" id="14_w48qg"]
+[ext_resource type="Texture2D" uid="uid://cst8li6a7al6b" path="res://logos/motor_icon_v1.png" id="14_w48qg"]
 [ext_resource type="Texture2D" uid="uid://cgxhsima8b2d3" path="res://icon/kenney_glyphs/Flairs/flair_disabled_cross.png" id="15_yaehf"]
 [ext_resource type="Texture2D" uid="uid://c4k7h56m5qum3" path="res://icon/kenney_glyphs/Generic/generic_joystick_left.png" id="17_074og"]
 [ext_resource type="Texture2D" uid="uid://cobfw7wvbxehb" path="res://icon/kenney_glyphs/Nintendo Switch/switch_dpad_right_outline.png" id="19_getpj"]
@@ -370,7 +370,7 @@ autowrap_mode = 3
 layout_mode = 2
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Analog/VBoxContainer/HBoxContainer2"]
-custom_minimum_size = Vector2(0, 40)
+custom_minimum_size = Vector2(0, 35)
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -391,7 +391,7 @@ layout_mode = 2
 text = "- Control motors"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Analog/VBoxContainer/HBoxContainer2"]
-custom_minimum_size = Vector2(0, 40)
+custom_minimum_size = Vector2(0, 35)
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -416,20 +416,157 @@ visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
-[node name="Label" type="Label" parent="UI/MainVBox/ModeTabs/Program"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -177.0
-offset_top = -11.5
-offset_right = 177.0
-offset_bottom = 11.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 6.0
+offset_right = -6.0
+offset_bottom = -6.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "These are all empty, but hopefully not for long!"
+alignment = 2
+
+[node name="HSeparator" type="HSeparator" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer/HBoxContainer3/VBoxContainer"]
+layout_mode = 2
+text = "Duration:"
+
+[node name="Control" type="Control" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer/HBoxContainer3/VBoxContainer"]
+custom_minimum_size = Vector2(0, 6)
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer/HBoxContainer3/VBoxContainer"]
+layout_mode = 2
+text = "Pause:"
+
+[node name="Spacer" type="Control" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(12, 0)
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer/HBoxContainer3/VBoxContainer2"]
+layout_mode = 2
+focus_behavior_recursive = 2
+
+[node name="SpinBox" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer/HBoxContainer3/VBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+max_value = 999.99
+step = 0.01
+suffix = "s"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer/HBoxContainer3/VBoxContainer2"]
+layout_mode = 2
+focus_behavior_recursive = 2
+
+[node name="SpinBox" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer/HBoxContainer3/VBoxContainer2/HBoxContainer2"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+max_value = 999.99
+step = 0.01
+suffix = "s"
+
+[node name="Spacer2" type="Control" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(12, 0)
+layout_mode = 2
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer/HBoxContainer3/VBoxContainer3"]
+layout_mode = 2
+focus_behavior_recursive = 2
+
+[node name="SpinBox" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer/HBoxContainer3/VBoxContainer3/HBoxContainer"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+max_value = 999.99
+step = 0.01
+suffix = "s"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer/HBoxContainer3/VBoxContainer3"]
+layout_mode = 2
+focus_behavior_recursive = 2
+
+[node name="SpinBox" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer/HBoxContainer3/VBoxContainer3/HBoxContainer2"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+max_value = 999.99
+step = 0.01
+suffix = "s"
+
+[node name="Spacer3" type="Control" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(12, 0)
+layout_mode = 2
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer/HBoxContainer3/VBoxContainer4"]
+layout_mode = 2
+focus_behavior_recursive = 2
+
+[node name="SpinBox" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer/HBoxContainer3/VBoxContainer4/HBoxContainer"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+max_value = 999.99
+step = 0.01
+suffix = "s"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer/HBoxContainer3/VBoxContainer4"]
+layout_mode = 2
+focus_behavior_recursive = 2
+
+[node name="SpinBox" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer/HBoxContainer3/VBoxContainer4/HBoxContainer2"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+max_value = 999.99
+step = 0.01
+suffix = "s"
+
+[node name="Spacer4" type="Control" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(12, 0)
+layout_mode = 2
+
+[node name="VBoxContainer5" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer/HBoxContainer3/VBoxContainer5"]
+layout_mode = 2
+focus_behavior_recursive = 2
+
+[node name="SpinBox" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer/HBoxContainer3/VBoxContainer5/HBoxContainer"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+max_value = 999.99
+step = 0.01
+suffix = "s"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer/HBoxContainer3/VBoxContainer5"]
+layout_mode = 2
+focus_behavior_recursive = 2
+
+[node name="SpinBox" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer/HBoxContainer3/VBoxContainer5/HBoxContainer2"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+max_value = 999.99
+step = 0.01
+suffix = "s"
 
 [node name="HSeparator3" type="HSeparator" parent="UI/MainVBox"]
 layout_mode = 2

@@ -182,13 +182,13 @@ func _update_glyphs() -> void:
 	%CoupleMotorsGlyph.texture = START_OFF_GLYPH if not coupled else START_ON_GLYPH
 
 
-func _update_desired_gauges(weak_desired: float, strong_desired: float) -> void:
-	%WeakDesired.value = weak_desired
-	%StrongDesired.value = strong_desired
+func _update_desired_gauges(weak: float, strong: float) -> void:
+	%WeakDesired.value = weak
+	%StrongDesired.value = strong
 
-func _update_power_gauges(weak_power: float, strong_power: float) -> void:
-	%WeakPower.value = weak_power
-	%StrongPower.value = strong_power
+func _update_power_gauges(weak: float, strong: float) -> void:
+	%WeakPower.value = weak
+	%StrongPower.value = strong
 
 ### CONTROLLER
 
@@ -214,7 +214,7 @@ func _on_controller_id_box_value_changed(value: float) -> void:
 ### TAB NAVIGATION
 
 func _on_mode_tabs_tab_changed(tab: int) -> void:
-	mode = tab
+	mode = tab as Modes
 	_reset_rumble()
 
 
@@ -286,7 +286,7 @@ func _on_info_credits_meta_clicked(meta: Variant) -> void:
 
 # Mouse control slider logic
 
-func _on_mouse_control_slider_drag_ended(value_changed: bool) -> void:
+func _on_mouse_control_slider_drag_ended(_value_changed: bool) -> void:
 	if not mouse_sticky_enabled:
 		%MouseControlSlider.value = 0.0
 
