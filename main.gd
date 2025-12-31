@@ -31,15 +31,29 @@ var mouse_sticky_enabled := false
 enum Modes {ANALOG, PROGAM}
 var mode := Modes.ANALOG
 
+# Desired - where controllers at, actual logic depends on many factors
 var weak_desired := 0.0
 var strong_desired := 0.0
+# Power - current real power of controller motors
+var weak_power := 0.0
+var strong_power := 0.0
+# Lock - statuses of both motors locks and values theyre locked at
 var weak_locked := false
 var strong_locked := false
 var weak_desired_lock := 0.0
 var strong_desired_lock := 0.0
 
+
+# Mouse slider
 var weak_slider_in_use := false
 var strong_slider_in_use := false
+
+# Analog settings
+var alternating_mode := false
+var hit_zero := true
+var velocity_mode := false
+var velocity_mode_speed := 1.0
+
 
 # These are used to apply a "fix frame" every ~2 seconds
 # Every "fix frame", rumble functions should run a 0.99x multiplier,
@@ -103,8 +117,18 @@ func _process(delta: float) -> void:
 			strong_desired = snappedf(strong_desired, 0.1)
 			weak_desired = snappedf(weak_desired, 0.1)
 		
-		_rumble_analog()
+		_rumble_analog(delta)
 		_update_desired_gauges(weak_desired, strong_desired)
+		
+		# Alternating mode check - flips controls exactly once, sets hit_zero check down
+		if alternating_mode:
+			if (
+				(weak_power == 0.0 and strong_power == 0.0)
+				and
+				not hit_zero
+			):
+				hit_zero = true
+				%FlipControls.button_pressed = !%FlipControls.button_pressed
 
 
 func _input(event: InputEvent) -> void:
@@ -137,20 +161,30 @@ func _toggle_locks(toggle_weak: bool, toggle_strong: bool) -> void:
 	_update_glyphs()
 
 
-func _rumble_analog() -> void:
+func _rumble_analog(delta: float) -> void:
 	# Applying fix
 	var fix := _get_fix_multiplier()
 	
-	var weak_final := weak_desired if not weak_locked else weak_desired_lock
-	var strong_final := strong_desired if not strong_locked else strong_desired_lock
+	if not velocity_mode: # Regular, direct operation
+		weak_power = weak_desired if not weak_locked else weak_desired_lock
+		strong_power = strong_desired if not strong_locked else strong_desired_lock
+	else: # Velocity Mode logic
+		weak_power = move_toward(weak_power, weak_desired, delta*velocity_mode_speed)
+		strong_power = move_toward(strong_power, strong_desired, delta*velocity_mode_speed)
 	
 	Input.start_joy_vibration(
 		controller_id,
-		weak_final * rumble_multiplier * fix,
-		strong_final * rumble_multiplier * fix,
+		weak_power * rumble_multiplier * fix,
+		strong_power * rumble_multiplier * fix,
 		0.0)
 	
-	_update_power_gauges(weak_final, strong_final)
+	# Alternating mode check - readies hit_zero check if motors in use
+	if alternating_mode:
+		if hit_zero and (weak_power > 0.0 or strong_power > 0.0):
+			hit_zero = false
+	
+	_update_power_gauges(weak_power, strong_power)
+
 
 # Every 2 seconds of _process, make the current frame a fix frame
 func _increment_fix_frame(delta: float) -> void:
@@ -322,3 +356,19 @@ func _on_strong_slider_drag_ended(_value_changed: bool) -> void:
 	strong_slider_in_use = false
 	if not mouse_sticky_enabled:
 		%StrongSlider.value = 0.0
+
+
+
+## Analog Mode settings
+
+func _on_analog_alt_mode_toggled(toggled_on: bool) -> void:
+	alternating_mode = toggled_on
+
+func _on_analog_vel_mode_toggled(toggled_on: bool) -> void:
+	velocity_mode = toggled_on
+	if toggled_on: %VelocityModeSpeedContainer.show()
+	else: %VelocityModeSpeedContainer.hide()
+
+func _on_velocity_mode_speed_value_changed(value: float) -> void:
+	velocity_mode_speed = value
+	%VelocityModeSpeedLabel.text = str("Speed: ", value, "x")

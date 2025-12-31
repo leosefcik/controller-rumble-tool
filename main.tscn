@@ -427,6 +427,44 @@ stretch_mode = 5
 layout_mode = 2
 text = "- Toggle both locks"
 
+[node name="HSeparator" type="HSeparator" parent="UI/MainVBox/ModeTabs/Analog/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Analog/VBoxContainer"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+
+[node name="AnalogAltMode" type="CheckBox" parent="UI/MainVBox/ModeTabs/Analog/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "When both motors reach 0%, toggles Flip Controls"
+text = "Alternating Mode"
+
+[node name="AnalogVelMode" type="CheckBox" parent="UI/MainVBox/ModeTabs/Analog/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "\"Drags\" the input along instead of having it control rumble directly"
+text = "Velocity Mode"
+
+[node name="VelocityModeSpeedContainer" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Analog/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VelocityModeSpeedLabel" type="Label" parent="UI/MainVBox/ModeTabs/Analog/VBoxContainer/HBoxContainer/VelocityModeSpeedContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Speed: 1.0"
+
+[node name="VelocityModeSpeed" type="HSlider" parent="UI/MainVBox/ModeTabs/Analog/VBoxContainer/HBoxContainer/VelocityModeSpeedContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+min_value = 0.1
+max_value = 4.0
+step = 0.1
+value = 1.0
+
 [node name="Program" type="TabBar" parent="UI/MainVBox/ModeTabs"]
 visible = false
 layout_mode = 2
@@ -784,6 +822,9 @@ autostart = true
 [connection signal="value_changed" from="UI/MainVBox/Gauges/Spacer/VBoxContainer/StrongSlider" to="." method="_on_strong_slider_value_changed"]
 [connection signal="pressed" from="UI/MainVBox/Gauges/Spacer/VBoxContainer/MouseStickyMode" to="." method="_on_mouse_sticky_mode_pressed"]
 [connection signal="tab_changed" from="UI/MainVBox/ModeTabs" to="." method="_on_mode_tabs_tab_changed"]
+[connection signal="toggled" from="UI/MainVBox/ModeTabs/Analog/VBoxContainer/HBoxContainer/AnalogAltMode" to="." method="_on_analog_alt_mode_toggled"]
+[connection signal="toggled" from="UI/MainVBox/ModeTabs/Analog/VBoxContainer/HBoxContainer/AnalogVelMode" to="." method="_on_analog_vel_mode_toggled"]
+[connection signal="value_changed" from="UI/MainVBox/ModeTabs/Analog/VBoxContainer/HBoxContainer/VelocityModeSpeedContainer/VelocityModeSpeed" to="." method="_on_velocity_mode_speed_value_changed"]
 [connection signal="toggled" from="UI/MainVBox/Settings/HBoxContainer3/VBoxContainer/HBoxContainer/FlipControls" to="." method="_on_flip_controls_toggled"]
 [connection signal="toggled" from="UI/MainVBox/Settings/HBoxContainer3/VBoxContainer/HBoxContainer2/CoupleMotors" to="." method="_on_couple_motors_toggled"]
 [connection signal="value_changed" from="UI/MainVBox/Settings/HBoxContainer3/VBoxContainer2/MultiplierNode/MultiplierBox" to="." method="_on_multiplier_box_value_changed"]
