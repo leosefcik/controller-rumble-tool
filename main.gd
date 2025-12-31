@@ -38,6 +38,9 @@ var strong_locked := false
 var weak_desired_lock := 0.0
 var strong_desired_lock := 0.0
 
+var weak_slider_in_use := false
+var strong_slider_in_use := false
+
 # These are used to apply a "fix frame" every ~2 seconds
 # Every "fix frame", rumble functions should run a 0.99x multiplier,
 # and then return to normal. This variation will allow the controller
@@ -79,9 +82,7 @@ func _process(delta: float) -> void:
 			right_trigger_mag = Input.get_action_strength("increase_rumble_trigger_right")
 		
 		var left_magnitude := maxf(left_joy_mag, left_trigger_mag)
-		left_magnitude = maxf(left_magnitude, %MouseControlSlider.value)
 		var right_magnitude := maxf(right_joy_mag, right_trigger_mag)
-		right_magnitude = maxf(right_magnitude, %MouseControlSlider.value)
 		
 		# Mapping the controls
 		if coupled:
@@ -94,6 +95,9 @@ func _process(delta: float) -> void:
 		else:
 			weak_desired = right_magnitude
 			strong_desired = left_magnitude
+		
+		weak_desired = maxf(weak_desired, %WeakSlider.value)
+		strong_desired = maxf(strong_desired, %StrongSlider.value)
 		
 		if incremented:
 			strong_desired = snappedf(strong_desired, 0.1)
@@ -286,14 +290,35 @@ func _on_info_credits_meta_clicked(meta: Variant) -> void:
 
 # Mouse control slider logic
 
-func _on_mouse_control_slider_drag_ended(_value_changed: bool) -> void:
-	if not mouse_sticky_enabled:
-		%MouseControlSlider.value = 0.0
-
 func _on_mouse_sticky_mode_pressed() -> void:
 	mouse_sticky_enabled = !mouse_sticky_enabled
 	if not mouse_sticky_enabled:
 		%MouseStickyMode.icon = MOUSE_SNAP_GLPYH
-		%MouseControlSlider.value = 0.0
+		%WeakSlider.value = 0.0
+		%StrongSlider.value = 0.0
 	else:
 		%MouseStickyMode.icon = MOUSE_STICKY_GLYPH
+
+func _on_weak_slider_drag_started() -> void:
+	weak_slider_in_use = true
+
+func _on_strong_slider_drag_started() -> void:
+	strong_slider_in_use = true
+
+func _on_weak_slider_value_changed(value: float) -> void:
+	if coupled and not strong_slider_in_use:
+		%StrongSlider.value = value
+
+func _on_strong_slider_value_changed(value: float) -> void:
+	if coupled and not weak_slider_in_use:
+		%WeakSlider.value = value
+
+func _on_weak_slider_drag_ended(_value_changed: bool) -> void:
+	weak_slider_in_use = false
+	if not mouse_sticky_enabled:
+		%WeakSlider.value = 0.0
+
+func _on_strong_slider_drag_ended(_value_changed: bool) -> void:
+	strong_slider_in_use = false
+	if not mouse_sticky_enabled:
+		%StrongSlider.value = 0.0

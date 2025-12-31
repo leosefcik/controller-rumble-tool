@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://cmikhaqwhlrq1"]
+[gd_scene load_steps=28 format=3 uid="uid://cmikhaqwhlrq1"]
 
 [ext_resource type="Theme" uid="uid://dxoeymo5y7ebp" path="res://theme.tres" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://ci8gltknaa8n0" path="res://main.gd" id="1_h2yge"]
@@ -29,10 +29,16 @@ bg_color = Color(0.66, 0.66, 0.66, 0.27058825)
 bg_color = Color(0.6748146, 0.67481464, 0.6748144, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0xm2m"]
-bg_color = Color(0.8233589, 0.48257828, 0.56837255, 1)
+bg_color = Color(0.8235294, 0.48235294, 0.5686275, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h2yge"]
-bg_color = Color(0.48380002, 0.67991674, 0.82, 1)
+bg_color = Color(0.48235294, 0.6784314, 0.81960785, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_getpj"]
+bg_color = Color(0.48235294, 0.6784314, 0.81960785, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ryguw"]
+bg_color = Color(0.8235294, 0.48235294, 0.5686275, 1)
 
 [node name="Main" type="Node"]
 script = ExtResource("1_h2yge")
@@ -312,11 +318,21 @@ layout_mode = 2
 text = "Mouse control"
 horizontal_alignment = 1
 
-[node name="MouseControlSlider" type="HSlider" parent="UI/MainVBox/Gauges/Spacer/VBoxContainer"]
+[node name="WeakSlider" type="HSlider" parent="UI/MainVBox/Gauges/Spacer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-tooltip_text = "Mouse slider for controlling both motors
-(to control individual ones, use the lock function)"
+tooltip_text = "Mouse slider for controlling the weak motor"
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_getpj")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_getpj")
+max_value = 1.0
+step = 0.01
+
+[node name="StrongSlider" type="HSlider" parent="UI/MainVBox/Gauges/Spacer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Mouse slider for controlling the strong motor"
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_ryguw")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_ryguw")
 max_value = 1.0
 step = 0.01
 
@@ -428,6 +444,10 @@ offset_bottom = -6.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 2
+
+[node name="Label" type="Label" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer"]
+layout_mode = 2
+text = "wip"
 
 [node name="HSeparator" type="HSeparator" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer"]
 layout_mode = 2
@@ -639,6 +659,11 @@ size_flags_horizontal = 3
 
 [node name="MultiplierBox" type="SpinBox" parent="UI/MainVBox/Settings/HBoxContainer3/VBoxContainer2/MultiplierNode"]
 layout_mode = 2
+tooltip_text = "Set a multiplier for the final rumble intensity,
+effectively capping the max. Some controllers
+on Linux have a problem with cutting-off rumble
+above a specific threshold, use this to mitigate
+this issue (usually around the 0.75 - 0.8 range)"
 focus_behavior_recursive = 2
 max_value = 1.0
 step = 0.001
@@ -749,7 +774,12 @@ autostart = true
 [connection signal="pressed" from="UI/MainVBox/Gauges/LeftOfGauge/HBoxContainer/JoystickToggle" to="." method="_on_joystick_toggle_pressed"]
 [connection signal="pressed" from="UI/MainVBox/Gauges/StrongLockButton" to="." method="_on_strong_lock_button_pressed"]
 [connection signal="pressed" from="UI/MainVBox/Gauges/WeakLockButton" to="." method="_on_weak_lock_button_pressed"]
-[connection signal="drag_ended" from="UI/MainVBox/Gauges/Spacer/VBoxContainer/MouseControlSlider" to="." method="_on_mouse_control_slider_drag_ended"]
+[connection signal="drag_ended" from="UI/MainVBox/Gauges/Spacer/VBoxContainer/WeakSlider" to="." method="_on_weak_slider_drag_ended"]
+[connection signal="drag_started" from="UI/MainVBox/Gauges/Spacer/VBoxContainer/WeakSlider" to="." method="_on_weak_slider_drag_started"]
+[connection signal="value_changed" from="UI/MainVBox/Gauges/Spacer/VBoxContainer/WeakSlider" to="." method="_on_weak_slider_value_changed"]
+[connection signal="drag_ended" from="UI/MainVBox/Gauges/Spacer/VBoxContainer/StrongSlider" to="." method="_on_strong_slider_drag_ended"]
+[connection signal="drag_started" from="UI/MainVBox/Gauges/Spacer/VBoxContainer/StrongSlider" to="." method="_on_strong_slider_drag_started"]
+[connection signal="value_changed" from="UI/MainVBox/Gauges/Spacer/VBoxContainer/StrongSlider" to="." method="_on_strong_slider_value_changed"]
 [connection signal="pressed" from="UI/MainVBox/Gauges/Spacer/VBoxContainer/MouseStickyMode" to="." method="_on_mouse_sticky_mode_pressed"]
 [connection signal="tab_changed" from="UI/MainVBox/ModeTabs" to="." method="_on_mode_tabs_tab_changed"]
 [connection signal="toggled" from="UI/MainVBox/Settings/HBoxContainer3/VBoxContainer/HBoxContainer/FlipControls" to="." method="_on_flip_controls_toggled"]
