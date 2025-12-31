@@ -447,7 +447,9 @@ alignment = 2
 
 [node name="Label" type="Label" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer"]
 layout_mode = 2
-text = "wip"
+size_flags_vertical = 6
+text = "WIP Section! Doesn't do anything."
+horizontal_alignment = 1
 
 [node name="HSeparator" type="HSeparator" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer"]
 layout_mode = 2
@@ -733,7 +735,7 @@ layout_mode = 2
 bbcode_enabled = true
 text = "[center][b]Controller Rumble Tool[/b]
 (Gamepad Vibration Massager)
-[i]v0.3[/i][/center]
+[i]v0.3.1[/i][/center]
 
 Credits:
 [ul]Cabin Font - [url]https://github.com/impallari/Cabin[/url]
