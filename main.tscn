@@ -119,7 +119,7 @@ alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/MainVBox/Gauges/LeftOfGauge"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MainVBox/Gauges/LeftOfGauge"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -128,13 +128,17 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="TriggerToggle" type="Button" parent="UI/MainVBox/Gauges/LeftOfGauge/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TriggerToggle" type="Button" parent="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(35, 35)
 layout_mode = 2
 size_flags_vertical = 4
 tooltip_text = "Toggle trigger function"
 
-[node name="TextureRect" type="TextureRect" parent="UI/MainVBox/Gauges/LeftOfGauge/HBoxContainer/TriggerToggle"]
+[node name="TextureRect" type="TextureRect" parent="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer/HBoxContainer/TriggerToggle"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -145,7 +149,7 @@ texture = ExtResource("14_2cqfq")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="TriggerToggleX" type="TextureRect" parent="UI/MainVBox/Gauges/LeftOfGauge/HBoxContainer/TriggerToggle"]
+[node name="TriggerToggleX" type="TextureRect" parent="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer/HBoxContainer/TriggerToggle"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
@@ -158,13 +162,13 @@ texture = ExtResource("15_yaehf")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="JoystickToggle" type="Button" parent="UI/MainVBox/Gauges/LeftOfGauge/HBoxContainer"]
+[node name="JoystickToggle" type="Button" parent="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(35, 35)
 layout_mode = 2
 size_flags_vertical = 4
 tooltip_text = "Toggle joystick function"
 
-[node name="TextureRect" type="TextureRect" parent="UI/MainVBox/Gauges/LeftOfGauge/HBoxContainer/JoystickToggle"]
+[node name="TextureRect" type="TextureRect" parent="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer/HBoxContainer/JoystickToggle"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -175,7 +179,7 @@ texture = ExtResource("14_vivmo")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="JoystickToggleX" type="TextureRect" parent="UI/MainVBox/Gauges/LeftOfGauge/HBoxContainer/JoystickToggle"]
+[node name="JoystickToggleX" type="TextureRect" parent="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer/HBoxContainer/JoystickToggle"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
@@ -187,6 +191,18 @@ grow_vertical = 2
 texture = ExtResource("15_yaehf")
 expand_mode = 1
 stretch_mode = 5
+
+[node name="ControlSensitivityLabel" type="Label" parent="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Sens.: 1.0"
+horizontal_alignment = 1
+
+[node name="ControlSensitivitySlider" type="HSlider" parent="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer"]
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+value = 1.0
 
 [node name="VSeparator2" type="VSeparator" parent="UI/MainVBox/Gauges"]
 layout_mode = 2
@@ -455,7 +471,7 @@ size_flags_horizontal = 3
 [node name="VelocityModeSpeedLabel" type="Label" parent="UI/MainVBox/ModeTabs/Analog/VBoxContainer/HBoxContainer/VelocityModeSpeedContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Speed: 1.0"
+text = "Speed: 1.0x"
 
 [node name="VelocityModeSpeed" type="HSlider" parent="UI/MainVBox/ModeTabs/Analog/VBoxContainer/HBoxContainer/VelocityModeSpeedContainer"]
 unique_name_in_owner = true
@@ -698,6 +714,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="MultiplierBox" type="SpinBox" parent="UI/MainVBox/Settings/HBoxContainer3/VBoxContainer2/MultiplierNode"]
+custom_minimum_size = Vector2(85, 0)
 layout_mode = 2
 tooltip_text = "Set a multiplier for the final rumble intensity,
 effectively capping the max. Some controllers
@@ -708,6 +725,7 @@ focus_behavior_recursive = 2
 max_value = 1.0
 step = 0.001
 value = 1.0
+suffix = "x"
 
 [node name="SnapControls" type="CheckBox" parent="UI/MainVBox/Settings/HBoxContainer3/VBoxContainer2"]
 layout_mode = 2
@@ -810,8 +828,9 @@ wait_time = 0.5
 autostart = true
 
 [connection signal="value_changed" from="UI/MainVBox/Title/ControllerIdBox" to="." method="_on_controller_id_box_value_changed"]
-[connection signal="pressed" from="UI/MainVBox/Gauges/LeftOfGauge/HBoxContainer/TriggerToggle" to="." method="_on_trigger_toggle_pressed"]
-[connection signal="pressed" from="UI/MainVBox/Gauges/LeftOfGauge/HBoxContainer/JoystickToggle" to="." method="_on_joystick_toggle_pressed"]
+[connection signal="pressed" from="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer/HBoxContainer/TriggerToggle" to="." method="_on_trigger_toggle_pressed"]
+[connection signal="pressed" from="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer/HBoxContainer/JoystickToggle" to="." method="_on_joystick_toggle_pressed"]
+[connection signal="value_changed" from="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer/ControlSensitivitySlider" to="." method="_on_control_sensitivity_slider_value_changed"]
 [connection signal="pressed" from="UI/MainVBox/Gauges/StrongLockButton" to="." method="_on_strong_lock_button_pressed"]
 [connection signal="pressed" from="UI/MainVBox/Gauges/WeakLockButton" to="." method="_on_weak_lock_button_pressed"]
 [connection signal="drag_ended" from="UI/MainVBox/Gauges/Spacer/VBoxContainer/WeakSlider" to="." method="_on_weak_slider_drag_ended"]

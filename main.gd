@@ -26,6 +26,8 @@ var incremented := false
 
 var trigger_enabled := true
 var joystick_enabled := true
+var control_sensitivty := 1.0
+
 var mouse_sticky_enabled := false
 
 enum Modes {ANALOG, PROGAM}
@@ -131,6 +133,7 @@ func _process(delta: float) -> void:
 				%FlipControls.button_pressed = !%FlipControls.button_pressed
 
 
+# Processing of button inputs
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("special_right"):
 		%CoupleMotors.button_pressed = !%CoupleMotors.button_pressed
@@ -165,6 +168,9 @@ func _rumble_analog(delta: float) -> void:
 	# Applying fix
 	var fix := _get_fix_multiplier()
 	
+	#######
+	####### FIX LOCKED MODE BROKEN
+	######3
 	if not velocity_mode: # Regular, direct operation
 		weak_power = weak_desired if not weak_locked else weak_desired_lock
 		strong_power = strong_desired if not strong_locked else strong_desired_lock
@@ -287,6 +293,11 @@ func _on_joystick_toggle_pressed() -> void:
 	joystick_enabled = !joystick_enabled
 	if joystick_enabled: %JoystickToggleX.hide() 
 	else: %JoystickToggleX.show()
+
+func _on_control_sensitivity_slider_value_changed(value: float) -> void:
+	control_sensitivty = value
+	%ControlSensitivityLabel.text = str("Sens.: ", value)
+
 
 ### SETTINGS
 
