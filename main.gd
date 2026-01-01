@@ -44,9 +44,6 @@ var strong_power := 0.0
 # Lock - statuses of both motors locks and values theyre locked at
 var weak_locked := false
 var strong_locked := false
-var weak_desired_lock := 0.0
-var strong_desired_lock := 0.0
-
 
 # Mouse slider
 var weak_slider_in_use := false
@@ -71,60 +68,19 @@ var apply_fix_frame := false
 func _ready() -> void:
 	_update_glyphs()
 
+
 func _process(delta: float) -> void:
-	# Fix Frame counter
+	# Fix Frame counter - every 2 seconds ish
 	_increment_fix_frame(delta)
 	
 	# Analog mode processing
 	if mode == Modes.ANALOG:
-		
-		# We take the max of either the triggers/joyUP/joyDOWN for control variety
-		# first checking if they're enabled
-		var left_joy_mag := 0.0
-		var left_trigger_mag := 0.0
-		var right_joy_mag := 0.0
-		var right_trigger_mag := 0.0
-		
-		if joystick_enabled:
-			left_joy_mag = maxf(
-			Input.get_action_strength("increase_rumble_left"),
-			Input.get_action_strength("decrease_rumble_left")
-			)
-			right_joy_mag = maxf(
-			Input.get_action_strength("increase_rumble_right"),
-			Input.get_action_strength("decrease_rumble_right")
-			)
-		
-		if trigger_enabled:
-			left_trigger_mag = Input.get_action_strength("increase_rumble_trigger_left")
-			right_trigger_mag = Input.get_action_strength("increase_rumble_trigger_right")
-		
-		var left_magnitude := maxf(left_joy_mag, left_trigger_mag)
-		var right_magnitude := maxf(right_joy_mag, right_trigger_mag)
-		
-		# Mapping the controls
-		if coupled:
-			var combined_desired := maxf(left_magnitude, right_magnitude)
-			weak_desired = combined_desired
-			strong_desired = combined_desired
-		elif not flipped:
-			weak_desired = left_magnitude
-			strong_desired = right_magnitude
-		else:
-			weak_desired = right_magnitude
-			strong_desired = left_magnitude
-		
-		weak_desired = maxf(weak_desired, %WeakSlider.value)
-		strong_desired = maxf(strong_desired, %StrongSlider.value)
-		
-		if incremented:
-			strong_desired = snappedf(strong_desired, 0.1)
-			weak_desired = snappedf(weak_desired, 0.1)
-		
-		_rumble_analog(delta)
+		_process_desired_analog() # sets desired values
+		_process_power_analog(delta) # sets final values
+		_rumble_analog() # processes final values into real rumble
 		_update_desired_gauges(weak_desired, strong_desired)
 		
-		# Alternating mode check - flips controls exactly once, sets hit_zero check down
+		# Alternating mode check - flips controls exactly once, resets hit_zero check
 		if alternating_mode:
 			if (
 				(weak_power == 0.0 and strong_power == 0.0)
@@ -135,50 +91,69 @@ func _process(delta: float) -> void:
 				%FlipControls.button_pressed = !%FlipControls.button_pressed
 
 
-# Processing of button inputs
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("special_right"):
-		%CoupleMotors.button_pressed = !%CoupleMotors.button_pressed
-	elif event.is_action_pressed("special_left"):
-		%FlipControls.button_pressed = !%FlipControls.button_pressed
+func _process_desired_analog() -> void:
+	# We take the max of either the triggers/joyUP/joyDOWN for control variety
+	# first checking if they're enabled
+	var left_joy_mag := 0.0
+	var left_trigger_mag := 0.0
+	var right_joy_mag := 0.0
+	var right_trigger_mag := 0.0
 	
-	elif event.is_action_pressed("lock_rumble_left"):
-		if coupled: _toggle_locks(1,1)
-		elif not flipped: _toggle_locks(1,0)
-		else: _toggle_locks(0,1)
+	if joystick_enabled:
+		left_joy_mag = maxf(
+		Input.get_action_strength("increase_rumble_left"),
+		Input.get_action_strength("decrease_rumble_left")
+		)
+		right_joy_mag = maxf(
+		Input.get_action_strength("increase_rumble_right"),
+		Input.get_action_strength("decrease_rumble_right")
+		)
 	
-	elif event.is_action_pressed("lock_rumble_right"):
-		if coupled: _toggle_locks(1,1)
-		elif not flipped: _toggle_locks(0,1)
-		else: _toggle_locks(1,0)
+	if trigger_enabled:
+		left_trigger_mag = Input.get_action_strength("increase_rumble_trigger_left")
+		right_trigger_mag = Input.get_action_strength("increase_rumble_trigger_right")
 	
-	elif event.is_action_pressed("lock_both_rumbles"):
-		_toggle_locks(1,1)
+	# Gets bigger of either joy/trigger, divs by sensitivity and caps it to 1.0
+	var left_magnitude := minf(maxf(left_joy_mag, left_trigger_mag) / control_sensitivty, 1.0)
+	var right_magnitude := minf(maxf(right_joy_mag, right_trigger_mag) / control_sensitivty, 1.0)
+	
+	# Mapping the controls
+	if coupled:
+		var combined_desired := maxf(left_magnitude, right_magnitude)
+		weak_desired = combined_desired
+		strong_desired = combined_desired
+	elif not flipped:
+		weak_desired = left_magnitude
+		strong_desired = right_magnitude
+	else:
+		weak_desired = right_magnitude
+		strong_desired = left_magnitude
+	
+	weak_desired = maxf(weak_desired, %WeakSlider.value)
+	strong_desired = maxf(strong_desired, %StrongSlider.value)
+	
+	if incremented:
+		strong_desired = snappedf(strong_desired, 0.1)
+		weak_desired = snappedf(weak_desired, 0.1)
 
 
-func _toggle_locks(toggle_weak: bool, toggle_strong: bool) -> void:
-	if toggle_weak:
-		weak_locked = !weak_locked
-		weak_desired_lock = weak_desired
-	if toggle_strong:
-		strong_locked = !strong_locked
-		strong_desired_lock = strong_desired
-	_update_glyphs()
+func _process_power_analog(delta: float) -> void:
+	if not weak_locked:
+		if not velocity_mode:
+			weak_power = weak_desired
+		else:
+			weak_power = move_toward(weak_power, weak_desired, delta*velocity_mode_speed)
+	
+	if not strong_locked:
+		if not velocity_mode:
+			strong_power = strong_desired
+		else:
+			strong_power = move_toward(strong_power, strong_desired, delta*velocity_mode_speed)
 
 
-func _rumble_analog(delta: float) -> void:
-	# Applying fix
+func _rumble_analog() -> void:
+	# Applying 0.99x fix every frame after 2 seconds, otherwise it's 1.00x
 	var fix := _get_fix_multiplier()
-	
-	#######
-	####### FIX LOCKED MODE BROKEN
-	######3
-	if not velocity_mode: # Regular, direct operation
-		weak_power = weak_desired if not weak_locked else weak_desired_lock
-		strong_power = strong_desired if not strong_locked else strong_desired_lock
-	else: # Velocity Mode logic
-		weak_power = move_toward(weak_power, weak_desired, delta*velocity_mode_speed)
-		strong_power = move_toward(strong_power, strong_desired, delta*velocity_mode_speed)
 	
 	Input.start_joy_vibration(
 		controller_id,
@@ -224,8 +199,9 @@ func _update_glyphs() -> void:
 	else:
 		%StrongLockGlyph.texture = RB_ON_GLYPH if not flipped else LB_ON_GLYPH
 	
-	%FlipControlsGlyph.texture = SELECT_OFF_GLYPH if not flipped else SELECT_ON_GLYPH
-	%CoupleMotorsGlyph.texture = START_OFF_GLYPH if not coupled else START_ON_GLYPH
+	# Disabled after changing the controls
+	#%FlipControlsGlyph.texture = SELECT_OFF_GLYPH if not flipped else SELECT_ON_GLYPH
+	#%CoupleMotorsGlyph.texture = START_OFF_GLYPH if not coupled else START_ON_GLYPH
 
 
 func _update_desired_gauges(weak: float, strong: float) -> void:
@@ -235,6 +211,39 @@ func _update_desired_gauges(weak: float, strong: float) -> void:
 func _update_power_gauges(weak: float, strong: float) -> void:
 	%WeakPower.value = weak
 	%StrongPower.value = strong
+
+
+
+## INPUT
+
+# Processing of button inputs
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("couple_motors"):
+		%CoupleMotors.button_pressed = !%CoupleMotors.button_pressed
+	elif event.is_action_pressed("flip_controls"):
+		%FlipControls.button_pressed = !%FlipControls.button_pressed
+	
+	elif event.is_action_pressed("lock_rumble_left"):
+		if coupled: _toggle_locks(1,1)
+		elif not flipped: _toggle_locks(1,0)
+		else: _toggle_locks(0,1)
+	
+	elif event.is_action_pressed("lock_rumble_right"):
+		if coupled: _toggle_locks(1,1)
+		elif not flipped: _toggle_locks(0,1)
+		else: _toggle_locks(1,0)
+	
+	elif event.is_action_pressed("lock_both_rumbles"):
+		_toggle_locks(1,1)
+
+
+func _toggle_locks(toggle_weak: bool, toggle_strong: bool) -> void:
+	if toggle_weak:
+		weak_locked = !weak_locked
+	if toggle_strong:
+		strong_locked = !strong_locked
+	_update_glyphs()
+
 
 ### CONTROLLER
 
@@ -253,7 +262,8 @@ func _on_controller_check_timer_timeout() -> void:
 
 
 func _on_controller_id_box_value_changed(value: float) -> void:
-	controller_name = "this is changed so the label update in _on_controller_check_timer_timeout() triggers"
+	# this is changed so the label update in _on_controller_check_timer_timeout() triggers
+	controller_name = "asdfasf"
 	controller_id = int(value)
 
 
@@ -288,17 +298,17 @@ func _on_strong_lock_button_pressed() -> void:
 
 func _on_trigger_toggle_pressed() -> void:
 	trigger_enabled = !trigger_enabled
-	if trigger_enabled: %TriggerToggleX.hide() 
+	if trigger_enabled: %TriggerToggleX.hide()
 	else: %TriggerToggleX.show()
 
 func _on_joystick_toggle_pressed() -> void:
 	joystick_enabled = !joystick_enabled
-	if joystick_enabled: %JoystickToggleX.hide() 
+	if joystick_enabled: %JoystickToggleX.hide()
 	else: %JoystickToggleX.show()
 
 func _on_control_sensitivity_slider_value_changed(value: float) -> void:
 	control_sensitivty = value
-	%ControlSensitivityLabel.text = str("Sens.: ", value)
+	%ControlSensitivityLabel.text = str("Sensitivity: ", value)
 
 
 ### SETTINGS
@@ -309,7 +319,7 @@ func _on_multiplier_box_value_changed(value: float) -> void:
 func _on_flip_controls_toggled(toggled_on: bool) -> void:
 	flipped = toggled_on
 	# Flip mouse slides too. A bit ugly but eh
-	if flipped: %WeakSlider.get_parent().move_child(%WeakSlider, 2)
+	if toggled_on: %WeakSlider.get_parent().move_child(%WeakSlider, 2)
 	else: %WeakSlider.get_parent().move_child(%WeakSlider, 1)
 	_update_glyphs() # to update LB/RB glyphs
 

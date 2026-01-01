@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cmikhaqwhlrq1"]
+[gd_scene load_steps=30 format=3 uid="uid://cmikhaqwhlrq1"]
 
 [ext_resource type="Theme" uid="uid://dxoeymo5y7ebp" path="res://theme.tres" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://ci8gltknaa8n0" path="res://main.gd" id="1_h2yge"]
@@ -21,6 +21,8 @@
 [ext_resource type="Texture2D" uid="uid://c4k7h56m5qum3" path="res://icon/kenney_glyphs/Generic/generic_joystick_left.png" id="17_074og"]
 [ext_resource type="Texture2D" uid="uid://cobfw7wvbxehb" path="res://icon/kenney_glyphs/Nintendo Switch/switch_dpad_right_outline.png" id="19_getpj"]
 [ext_resource type="Texture2D" uid="uid://77sud8rl3qs8" path="res://icon/kenney_glyphs/Nintendo Switch/switch_buttons_left_outline.png" id="20_ryguw"]
+[ext_resource type="Texture2D" uid="uid://dpbkmplgtdokt" path="res://icon/kenney_glyphs/Nintendo Switch/switch_dpad_up_outline.png" id="21_d13ii"]
+[ext_resource type="Texture2D" uid="uid://cr4gsturnc2nc" path="res://icon/kenney_glyphs/Nintendo Switch/switch_buttons_up_outline.png" id="22_1u8w0"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1bvp3"]
 bg_color = Color(0.66, 0.66, 0.66, 0.27058825)
@@ -195,13 +197,14 @@ stretch_mode = 5
 [node name="ControlSensitivityLabel" type="Label" parent="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Sens.: 1.0"
+text = "Sensitivity: 1.0"
 horizontal_alignment = 1
 
 [node name="ControlSensitivitySlider" type="HSlider" parent="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer"]
 layout_mode = 2
 tooltip_text = "Sensitivity of trigger/joystick.
-The lower the number, the less you have to push to reach 100% power."
+The lower this number is, the less you have to push to reach 100% power.
+If you push the trigger/joystick further, it'll stay at 100%."
 min_value = 0.01
 max_value = 1.0
 step = 0.01
@@ -400,51 +403,6 @@ text = "Analog mode:
 - Use either the triggers, joysticks UP/DOWN, or the slider in the top-right to control the weak and strong motors in your controller
 "
 autowrap_mode = 3
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Analog/VBoxContainer"]
-layout_mode = 2
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Analog/VBoxContainer/HBoxContainer2"]
-custom_minimum_size = Vector2(0, 35)
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="GlyphIcon" type="TextureRect" parent="UI/MainVBox/ModeTabs/Analog/VBoxContainer/HBoxContainer2/HBoxContainer2"]
-layout_mode = 2
-texture = ExtResource("14_2cqfq")
-expand_mode = 2
-stretch_mode = 5
-
-[node name="GlyphIcon2" type="TextureRect" parent="UI/MainVBox/ModeTabs/Analog/VBoxContainer/HBoxContainer2/HBoxContainer2"]
-layout_mode = 2
-texture = ExtResource("14_vivmo")
-expand_mode = 2
-stretch_mode = 5
-
-[node name="Label" type="Label" parent="UI/MainVBox/ModeTabs/Analog/VBoxContainer/HBoxContainer2/HBoxContainer2"]
-layout_mode = 2
-text = "- Control motors"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Analog/VBoxContainer/HBoxContainer2"]
-custom_minimum_size = Vector2(0, 35)
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="GlyphIcon" type="TextureRect" parent="UI/MainVBox/ModeTabs/Analog/VBoxContainer/HBoxContainer2/HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("19_getpj")
-expand_mode = 2
-stretch_mode = 5
-
-[node name="GlyphIcon2" type="TextureRect" parent="UI/MainVBox/ModeTabs/Analog/VBoxContainer/HBoxContainer2/HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("20_ryguw")
-expand_mode = 2
-stretch_mode = 5
-
-[node name="Label" type="Label" parent="UI/MainVBox/ModeTabs/Analog/VBoxContainer/HBoxContainer2/HBoxContainer"]
-layout_mode = 2
-text = "- Toggle both locks"
 
 [node name="HSeparator" type="HSeparator" parent="UI/MainVBox/ModeTabs/Analog/VBoxContainer"]
 layout_mode = 2
@@ -650,6 +608,54 @@ suffix = "s"
 [node name="HSeparator3" type="HSeparator" parent="UI/MainVBox"]
 layout_mode = 2
 
+[node name="HBoxContainer2" type="HBoxContainer" parent="UI/MainVBox"]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="UI/MainVBox/HBoxContainer2"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="GlyphIcon" type="TextureRect" parent="UI/MainVBox/HBoxContainer2/HBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("14_2cqfq")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="GlyphIcon2" type="TextureRect" parent="UI/MainVBox/HBoxContainer2/HBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("14_vivmo")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="UI/MainVBox/HBoxContainer2/HBoxContainer2"]
+layout_mode = 2
+text = "- Control motors"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/MainVBox/HBoxContainer2"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="GlyphIcon" type="TextureRect" parent="UI/MainVBox/HBoxContainer2/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("19_getpj")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="GlyphIcon2" type="TextureRect" parent="UI/MainVBox/HBoxContainer2/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("20_ryguw")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="UI/MainVBox/HBoxContainer2/HBoxContainer"]
+layout_mode = 2
+text = "- Toggle both locks"
+
+[node name="HSeparator4" type="HSeparator" parent="UI/MainVBox"]
+layout_mode = 2
+
 [node name="Settings" type="VBoxContainer" parent="UI/MainVBox"]
 layout_mode = 2
 
@@ -670,10 +676,16 @@ size_flags_horizontal = 3
 tooltip_text = "Flips the triggers/joysticks that control each motor"
 text = "Flip L/R Controls"
 
+[node name="FlipControlsGlyph2" type="TextureRect" parent="UI/MainVBox/Settings/HBoxContainer3/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("21_d13ii")
+expand_mode = 2
+
 [node name="FlipControlsGlyph" type="TextureRect" parent="UI/MainVBox/Settings/HBoxContainer3/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-texture = ExtResource("8_yaehf")
+texture = ExtResource("22_1u8w0")
 expand_mode = 2
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="UI/MainVBox/Settings/HBoxContainer3/VBoxContainer"]
@@ -687,6 +699,12 @@ tooltip_text = "Control both motors together with either L/R input"
 text = "Couple Motors"
 
 [node name="CoupleMotorsGlyph" type="TextureRect" parent="UI/MainVBox/Settings/HBoxContainer3/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("8_yaehf")
+expand_mode = 2
+
+[node name="CoupleMotorsGlyph2" type="TextureRect" parent="UI/MainVBox/Settings/HBoxContainer3/VBoxContainer/HBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
 texture = ExtResource("10_cegan")
@@ -794,7 +812,7 @@ layout_mode = 2
 bbcode_enabled = true
 text = "[center][b]Controller Rumble Tool[/b]
 (Gamepad Vibration Massager)
-[i]v0.3.1[/i][/center]
+[i]v0.4[/i][/center]
 
 Credits:
 [ul]Cabin Font - [url]https://github.com/impallari/Cabin[/url]
