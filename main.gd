@@ -30,15 +30,17 @@ var control_sensitivty := 1.0
 
 var mouse_sticky_enabled := false
 
+# Current program mode, controlled via the 2 tabs
 enum Modes {ANALOG, PROGAM}
 var mode := Modes.ANALOG
 
-# Desired - where controllers at, actual logic depends on many factors
+# Desired - where the controls point to
 var weak_desired := 0.0
 var strong_desired := 0.0
-# Power - current real power of controller motors
+# Power - current power of controller motors
 var weak_power := 0.0
 var strong_power := 0.0
+
 # Lock - statuses of both motors locks and values theyre locked at
 var weak_locked := false
 var strong_locked := false
@@ -306,6 +308,9 @@ func _on_multiplier_box_value_changed(value: float) -> void:
 
 func _on_flip_controls_toggled(toggled_on: bool) -> void:
 	flipped = toggled_on
+	# Flip mouse slides too. A bit ugly but eh
+	if flipped: %WeakSlider.get_parent().move_child(%WeakSlider, 2)
+	else: %WeakSlider.get_parent().move_child(%WeakSlider, 1)
 	_update_glyphs() # to update LB/RB glyphs
 
 func _on_couple_motors_toggled(toggled_on: bool) -> void:
