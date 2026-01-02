@@ -1,26 +1,28 @@
-# controller-rumble-tool
- A Godot app for controlling the rumble motors of a gamepad.
- 
- Godot version: 4.5.1
- 
-## Controller Rumble Tool
+# Controller Rumble Tool
  (Gamepad Vibration Massager)
+ 
+ A Godot app for directly controlling the rumble motors of a gamepad. Useful for controller diagnostics and massages!
+ 
+ Warning: We are not responsible for any damage that may be caused to you or your controller. Be mindful of excessive vibrations and battery drain.
 
- Credits:
+ Godot version: 4.5.1
+
+## Download & Links
+ To get the latest version: https://github.com/leosefcik/controller-rumble-tool/releases/latest
+ 
+ This GitHub: https://github.com/leosefcik/controller-rumble-tool
+ 
+ Itch.io (WIP): https://leosefcik.itch.io/controller-rumble-tool
+ 
+## Credits:
  - Cabin Font - https://github.com/impallari/Cabin
  - Glyphs - https://kenney.nl/assets/input-prompts
  - Icons - https://fonts.google.com/icons
  - Godot 4.5.1, Blender 5.0.1
-
- GitHub: https://github.com/leosefcik/controller-rumble-tool
  
- Itch.io: https://leosefcik.itch.io/controller-rumble-tool
-
  Made by leosefcik 2025-2026
  
  https://eggsandchickens.info
-
- Warning: We are not responsible for any damage that may be caused to you or your controller. Be mindful of excessive vibrations and battery drain.
  
 ## Export template
  To achieve a smaller export size, I compiled an export template using the following command:
