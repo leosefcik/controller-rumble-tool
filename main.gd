@@ -398,3 +398,16 @@ func _on_analog_vel_mode_toggled(toggled_on: bool) -> void:
 func _on_velocity_mode_speed_value_changed(value: float) -> void:
 	velocity_mode_speed = value
 	%VelocityModeSpeedLabel.text = str("Speed: ", value, "x")
+
+
+## Dropdowns
+
+func _on_hide_mode_tabs_toggled(toggled_on: bool) -> void:
+	if toggled_on: %ModeTabs.hide()
+	else: %ModeTabs.show()
+
+func _on_hide_bottom_row_toggled(toggled_on: bool) -> void:
+	if toggled_on:
+		%SettingsBox.hide()
+	else:
+		%SettingsBox.show()

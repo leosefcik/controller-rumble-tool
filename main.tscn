@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://cmikhaqwhlrq1"]
+[gd_scene load_steps=32 format=3 uid="uid://cmikhaqwhlrq1"]
 
 [ext_resource type="Theme" uid="uid://dxoeymo5y7ebp" path="res://theme.tres" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://ci8gltknaa8n0" path="res://main.gd" id="1_h2yge"]
@@ -19,7 +19,9 @@
 [ext_resource type="Texture2D" uid="uid://cst8li6a7al6b" path="res://logos/motor_icon_v1.png" id="14_w48qg"]
 [ext_resource type="Texture2D" uid="uid://cgxhsima8b2d3" path="res://icon/kenney_glyphs/Flairs/flair_disabled_cross.png" id="15_yaehf"]
 [ext_resource type="Texture2D" uid="uid://c4k7h56m5qum3" path="res://icon/kenney_glyphs/Generic/generic_joystick_left.png" id="17_074og"]
+[ext_resource type="Texture2D" uid="uid://vn8gli8llxvq" path="res://icon/drop_down.svg" id="19_0odxb"]
 [ext_resource type="Texture2D" uid="uid://cobfw7wvbxehb" path="res://icon/kenney_glyphs/Nintendo Switch/switch_dpad_right_outline.png" id="19_getpj"]
+[ext_resource type="Texture2D" uid="uid://c3scm3mwiyss1" path="res://icon/drop_up.svg" id="20_lswn8"]
 [ext_resource type="Texture2D" uid="uid://77sud8rl3qs8" path="res://icon/kenney_glyphs/Nintendo Switch/switch_buttons_left_outline.png" id="20_ryguw"]
 [ext_resource type="Texture2D" uid="uid://dpbkmplgtdokt" path="res://icon/kenney_glyphs/Nintendo Switch/switch_dpad_up_outline.png" id="21_d13ii"]
 [ext_resource type="Texture2D" uid="uid://cr4gsturnc2nc" path="res://icon/kenney_glyphs/Nintendo Switch/switch_buttons_up_outline.png" id="22_1u8w0"]
@@ -115,6 +117,8 @@ layout_mode = 2
 
 [node name="Gauges" type="HBoxContainer" parent="UI/MainVBox"]
 layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
 alignment = 1
 
 [node name="LeftOfGauge" type="Control" parent="UI/MainVBox/Gauges"]
@@ -248,6 +252,7 @@ stretch_mode = 5
 unique_name_in_owner = true
 custom_minimum_size = Vector2(20, 100)
 layout_mode = 2
+size_flags_vertical = 1
 tooltip_text = "Strong motor, desired intensity"
 theme_override_styles/background = SubResource("StyleBoxFlat_1bvp3")
 theme_override_styles/fill = SubResource("StyleBoxFlat_lquwl")
@@ -260,6 +265,7 @@ show_percentage = false
 unique_name_in_owner = true
 custom_minimum_size = Vector2(50, 100)
 layout_mode = 2
+size_flags_vertical = 1
 tooltip_text = "Strong motor, current intensity"
 theme_override_styles/fill = SubResource("StyleBoxFlat_0xm2m")
 max_value = 1.0
@@ -270,6 +276,7 @@ fill_mode = 3
 unique_name_in_owner = true
 custom_minimum_size = Vector2(50, 100)
 layout_mode = 2
+size_flags_vertical = 1
 tooltip_text = "Weak motor, current intensity"
 theme_override_styles/fill = SubResource("StyleBoxFlat_h2yge")
 max_value = 1.0
@@ -280,6 +287,7 @@ fill_mode = 3
 unique_name_in_owner = true
 custom_minimum_size = Vector2(20, 100)
 layout_mode = 2
+size_flags_vertical = 1
 tooltip_text = "Weak motor, desired intensity"
 theme_override_styles/background = SubResource("StyleBoxFlat_1bvp3")
 theme_override_styles/fill = SubResource("StyleBoxFlat_lquwl")
@@ -369,10 +377,30 @@ icon = ExtResource("17_074og")
 icon_alignment = 1
 expand_icon = true
 
-[node name="HSeparator2" type="HSeparator" parent="UI/MainVBox"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/MainVBox"]
 layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="UI/MainVBox/HBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"TooltipLabel"
+text = "Modes"
+
+[node name="HideModeTabs" type="TextureButton" parent="UI/MainVBox/HBoxContainer"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("19_0odxb")
+texture_pressed = ExtResource("20_lswn8")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="HSeparator2" type="HSeparator" parent="UI/MainVBox/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="ModeTabs" type="TabContainer" parent="UI/MainVBox"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 tab_alignment = 1
@@ -400,8 +428,7 @@ layout_mode = 2
 text = "Analog mode:
 
 - Connect a controller (if you have multiple, use the ID selector to choose which one to control)
-- Use either the triggers, joysticks UP/DOWN, or the slider in the top-right to control the weak and strong motors in your controller
-"
+- Use either the triggers, joysticks UP/DOWN, or the slider in the top-right to control the weak and strong motors in your controller"
 autowrap_mode = 3
 
 [node name="HSeparator" type="HSeparator" parent="UI/MainVBox/ModeTabs/Analog/VBoxContainer"]
@@ -605,154 +632,174 @@ max_value = 999.99
 step = 0.01
 suffix = "s"
 
-[node name="HSeparator3" type="HSeparator" parent="UI/MainVBox"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="UI/MainVBox"]
 layout_mode = 2
+alignment = 1
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="UI/MainVBox"]
+[node name="Label" type="Label" parent="UI/MainVBox/HBoxContainer3"]
 layout_mode = 2
+theme_type_variation = &"TooltipLabel"
+text = "Settings"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="UI/MainVBox/HBoxContainer2"]
-custom_minimum_size = Vector2(0, 35)
+[node name="HideBottomRow" type="TextureButton" parent="UI/MainVBox/HBoxContainer3"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("19_0odxb")
+texture_pressed = ExtResource("20_lswn8")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="HSeparator3" type="HSeparator" parent="UI/MainVBox/HBoxContainer3"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="GlyphIcon" type="TextureRect" parent="UI/MainVBox/HBoxContainer2/HBoxContainer2"]
+[node name="SettingsBox" type="VBoxContainer" parent="UI/MainVBox"]
+unique_name_in_owner = true
 layout_mode = 2
-texture = ExtResource("14_2cqfq")
-expand_mode = 2
-stretch_mode = 5
 
-[node name="GlyphIcon2" type="TextureRect" parent="UI/MainVBox/HBoxContainer2/HBoxContainer2"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="UI/MainVBox/SettingsBox"]
 layout_mode = 2
-texture = ExtResource("14_vivmo")
-expand_mode = 2
-stretch_mode = 5
 
-[node name="Label" type="Label" parent="UI/MainVBox/HBoxContainer2/HBoxContainer2"]
-layout_mode = 2
-text = "- Control motors"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/MainVBox/HBoxContainer2"]
-custom_minimum_size = Vector2(0, 35)
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MainVBox/SettingsBox/HBoxContainer3"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="GlyphIcon" type="TextureRect" parent="UI/MainVBox/HBoxContainer2/HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("19_getpj")
-expand_mode = 2
-stretch_mode = 5
-
-[node name="GlyphIcon2" type="TextureRect" parent="UI/MainVBox/HBoxContainer2/HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("20_ryguw")
-expand_mode = 2
-stretch_mode = 5
-
-[node name="Label" type="Label" parent="UI/MainVBox/HBoxContainer2/HBoxContainer"]
-layout_mode = 2
-text = "- Toggle both locks"
-
-[node name="HSeparator4" type="HSeparator" parent="UI/MainVBox"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer"]
 layout_mode = 2
 
-[node name="Settings" type="VBoxContainer" parent="UI/MainVBox"]
-layout_mode = 2
-
-[node name="HBoxContainer3" type="HBoxContainer" parent="UI/MainVBox/Settings"]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/MainVBox/Settings/HBoxContainer3"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/MainVBox/Settings/HBoxContainer3/VBoxContainer"]
-layout_mode = 2
-
-[node name="FlipControls" type="CheckBox" parent="UI/MainVBox/Settings/HBoxContainer3/VBoxContainer/HBoxContainer"]
+[node name="FlipControls" type="CheckBox" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "Flips the triggers/joysticks that control each motor"
 text = "Flip L/R Controls"
 
-[node name="FlipControlsGlyph2" type="TextureRect" parent="UI/MainVBox/Settings/HBoxContainer3/VBoxContainer/HBoxContainer"]
+[node name="FlipControlsGlyph2" type="TextureRect" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 texture = ExtResource("21_d13ii")
 expand_mode = 2
 
-[node name="FlipControlsGlyph" type="TextureRect" parent="UI/MainVBox/Settings/HBoxContainer3/VBoxContainer/HBoxContainer"]
+[node name="FlipControlsGlyph" type="TextureRect" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 texture = ExtResource("22_1u8w0")
 expand_mode = 2
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="UI/MainVBox/Settings/HBoxContainer3/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer"]
 layout_mode = 2
 
-[node name="CoupleMotors" type="CheckBox" parent="UI/MainVBox/Settings/HBoxContainer3/VBoxContainer/HBoxContainer2"]
+[node name="CoupleMotors" type="CheckBox" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer/HBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "Control both motors together with either L/R input"
 text = "Couple Motors"
 
-[node name="CoupleMotorsGlyph" type="TextureRect" parent="UI/MainVBox/Settings/HBoxContainer3/VBoxContainer/HBoxContainer2"]
+[node name="CoupleMotorsGlyph" type="TextureRect" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer/HBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
 texture = ExtResource("8_yaehf")
 expand_mode = 2
 
-[node name="CoupleMotorsGlyph2" type="TextureRect" parent="UI/MainVBox/Settings/HBoxContainer3/VBoxContainer/HBoxContainer2"]
+[node name="CoupleMotorsGlyph2" type="TextureRect" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer/HBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
 texture = ExtResource("10_cegan")
 expand_mode = 2
 
-[node name="VSeparator" type="VSeparator" parent="UI/MainVBox/Settings/HBoxContainer3"]
+[node name="VSeparator" type="VSeparator" parent="UI/MainVBox/SettingsBox/HBoxContainer3"]
 layout_mode = 2
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="UI/MainVBox/Settings/HBoxContainer3"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="UI/MainVBox/SettingsBox/HBoxContainer3"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MultiplierNode" type="HBoxContainer" parent="UI/MainVBox/Settings/HBoxContainer3/VBoxContainer2"]
+[node name="MultiplierNode" type="HBoxContainer" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "Set a multiplier for the final rumble intensity,
 effectively capping the max. Some controllers
 on Linux have a problem with cutting-off rumble
 above a specific threshold, use this to mitigate
-this issue (usually around the 0.75 - 0.8 range)"
+this issue (usually around the 0.75 - 0.85 range)"
 
-[node name="Label" type="Label" parent="UI/MainVBox/Settings/HBoxContainer3/VBoxContainer2/MultiplierNode"]
+[node name="Label" type="Label" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer2/MultiplierNode"]
 layout_mode = 2
 text = "Rumble Multiplier: "
 
-[node name="Control" type="Control" parent="UI/MainVBox/Settings/HBoxContainer3/VBoxContainer2/MultiplierNode"]
+[node name="Control" type="Control" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer2/MultiplierNode"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MultiplierBox" type="SpinBox" parent="UI/MainVBox/Settings/HBoxContainer3/VBoxContainer2/MultiplierNode"]
+[node name="MultiplierBox" type="SpinBox" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer2/MultiplierNode"]
 custom_minimum_size = Vector2(85, 0)
 layout_mode = 2
 tooltip_text = "Set a multiplier for the final rumble intensity,
 effectively capping the max. Some controllers
 on Linux have a problem with cutting-off rumble
 above a specific threshold, use this to mitigate
-this issue (usually around the 0.75 - 0.8 range)"
+this issue (usually around the 0.75 - 0.85 range)"
 focus_behavior_recursive = 2
 max_value = 1.0
 step = 0.001
 value = 1.0
 suffix = "x"
 
-[node name="SnapControls" type="CheckBox" parent="UI/MainVBox/Settings/HBoxContainer3/VBoxContainer2"]
+[node name="SnapControls" type="CheckBox" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "Snap the controls to increments of 10%"
 text = "Snap Controls"
+
+[node name="B2" type="HSeparator" parent="UI/MainVBox"]
+layout_mode = 2
+
+[node name="B1" type="HBoxContainer" parent="UI/MainVBox"]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="UI/MainVBox/B1"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="GlyphIcon" type="TextureRect" parent="UI/MainVBox/B1/HBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("14_2cqfq")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="GlyphIcon2" type="TextureRect" parent="UI/MainVBox/B1/HBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("14_vivmo")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="UI/MainVBox/B1/HBoxContainer2"]
+layout_mode = 2
+text = "- Control motors"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/MainVBox/B1"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="GlyphIcon" type="TextureRect" parent="UI/MainVBox/B1/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("19_getpj")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="GlyphIcon2" type="TextureRect" parent="UI/MainVBox/B1/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("20_ryguw")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="UI/MainVBox/B1/HBoxContainer"]
+layout_mode = 2
+text = "- Toggle both locks"
 
 [node name="InfoButton" type="Button" parent="UI"]
 layout_mode = 1
@@ -861,14 +908,16 @@ autostart = true
 [connection signal="drag_started" from="UI/MainVBox/Gauges/Spacer/VBoxContainer/StrongSlider" to="." method="_on_strong_slider_drag_started"]
 [connection signal="value_changed" from="UI/MainVBox/Gauges/Spacer/VBoxContainer/StrongSlider" to="." method="_on_strong_slider_value_changed"]
 [connection signal="pressed" from="UI/MainVBox/Gauges/Spacer/VBoxContainer/MouseStickyMode" to="." method="_on_mouse_sticky_mode_pressed"]
+[connection signal="toggled" from="UI/MainVBox/HBoxContainer/HideModeTabs" to="." method="_on_hide_mode_tabs_toggled"]
 [connection signal="tab_changed" from="UI/MainVBox/ModeTabs" to="." method="_on_mode_tabs_tab_changed"]
 [connection signal="toggled" from="UI/MainVBox/ModeTabs/Analog/VBoxContainer/HBoxContainer/AnalogAltMode" to="." method="_on_analog_alt_mode_toggled"]
 [connection signal="toggled" from="UI/MainVBox/ModeTabs/Analog/VBoxContainer/HBoxContainer/AnalogVelMode" to="." method="_on_analog_vel_mode_toggled"]
 [connection signal="value_changed" from="UI/MainVBox/ModeTabs/Analog/VBoxContainer/HBoxContainer/VelocityModeSpeedContainer/VelocityModeSpeed" to="." method="_on_velocity_mode_speed_value_changed"]
-[connection signal="toggled" from="UI/MainVBox/Settings/HBoxContainer3/VBoxContainer/HBoxContainer/FlipControls" to="." method="_on_flip_controls_toggled"]
-[connection signal="toggled" from="UI/MainVBox/Settings/HBoxContainer3/VBoxContainer/HBoxContainer2/CoupleMotors" to="." method="_on_couple_motors_toggled"]
-[connection signal="value_changed" from="UI/MainVBox/Settings/HBoxContainer3/VBoxContainer2/MultiplierNode/MultiplierBox" to="." method="_on_multiplier_box_value_changed"]
-[connection signal="toggled" from="UI/MainVBox/Settings/HBoxContainer3/VBoxContainer2/SnapControls" to="." method="_on_snap_controls_toggled"]
+[connection signal="toggled" from="UI/MainVBox/HBoxContainer3/HideBottomRow" to="." method="_on_hide_bottom_row_toggled"]
+[connection signal="toggled" from="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer/HBoxContainer/FlipControls" to="." method="_on_flip_controls_toggled"]
+[connection signal="toggled" from="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer/HBoxContainer2/CoupleMotors" to="." method="_on_couple_motors_toggled"]
+[connection signal="value_changed" from="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer2/MultiplierNode/MultiplierBox" to="." method="_on_multiplier_box_value_changed"]
+[connection signal="toggled" from="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer2/SnapControls" to="." method="_on_snap_controls_toggled"]
 [connection signal="pressed" from="UI/InfoButton" to="." method="_on_info_button_pressed"]
 [connection signal="popup_hide" from="UI/InfoPopup" to="." method="_on_info_popup_popup_hide"]
 [connection signal="meta_clicked" from="UI/InfoPopup/Panel/VBoxContainer/InfoCredits" to="." method="_on_info_credits_meta_clicked"]
