@@ -833,6 +833,7 @@ unique_name_in_owner = true
 oversampling_override = 1.0
 initial_position = 1
 size = Vector2i(500, 500)
+visible = true
 
 [node name="Panel" type="Panel" parent="UI/InfoPopup"]
 anchors_preset = 15
@@ -874,7 +875,7 @@ This project:
 Made by leosefcik 2025-2026
 [url]https://eggsandchickens.info/[/url]
 
-Warning: We are not responsible for any damage that may be caused to you or your controller. Be mindful of excessive vibrations and battery drain."
+[b]Warning:[/b] We are not responsible for any damage that may be caused to you or your controller. Be mindful of excessive vibrations and battery drain."
 fit_content = true
 
 [node name="IconProgram" type="TextureRect" parent="UI/InfoPopup/Panel"]

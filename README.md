@@ -3,10 +3,23 @@
  
  A Godot app for directly controlling the rumble motors of a gamepad. Useful for controller diagnostics and massages!
  
- Warning: We are not responsible for any damage that may be caused to you or your controller. Be mindful of excessive vibrations and battery drain.
+ ![Preview](production/screenshot1.png)
+ 
+ 🚨 **Warning:** We are not responsible for any damage that may be caused to you or your controller. Be mindful of excessive vibrations and battery drain.
 
- Godot version: 4.5.1
-
+## Features
+ - ⚡ **Interact directly** with the 2 motors, weak and strong, that are present in most modern controllers
+ - 🕹️ Use either the **triggers, joysticks** or **mouse** for a variety of tactile input options
+ - 🎮 **Choose** which device to control using its ID (with multiple connected controllers)
+ - 🔒 **Lock** any (or both) motors to keep them rumbling continuously
+ - ↔️ **Ambidextrous** gamepad controls (a mouse is still needed for full program functionality)
+ - 🔧 **Snap, flip or join** controls with various settings you can enable on the fly
+ 
+ Technical:
+ 
+ - 🔁 **Continuity fix:** Allows controllers to rumble indefinitely at the same intensity (overcoming a hardware limitation with rumble duration)
+ - *️⃣ **Rumble Multiplier:** Apply a final multiplier to reduce maximum intensity (can help with stubborn rumble cut-off issues on Linux)
+ 
 ## Download & Links
  To get the latest version: https://github.com/leosefcik/controller-rumble-tool/releases/latest
  
