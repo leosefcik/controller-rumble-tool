@@ -10,7 +10,7 @@
 ## Features
  - ⚡ **Interact directly** with the 2 motors, weak and strong, that are present in most modern controllers
  - 🕹️ Use either the **triggers, joysticks** or **mouse** for a variety of tactile input options
- - 🎮 **Choose** which device to control using its ID (with multiple connected controllers)
+ - 🎮 **Choose** which device to control using its ID (or even **all** of them!)
  - 🔒 **Lock** any (or both) motors to keep them rumbling continuously
  - ↔️ **Ambidextrous** gamepad controls (a mouse is still needed for full program functionality)
  - 🔧 **Snap, flip or join** controls with various settings you can enable on the fly

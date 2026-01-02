@@ -18,6 +18,8 @@ extends Node
 
 var controller_id := 0
 var controller_name := "Empty"
+var control_all_ids := false
+const CONTROLLER_ID_RANGE = 32 # an arbitrarily hardcoded amount of max controllers
 
 var rumble_multiplier := 1.0
 var flipped := false
@@ -155,11 +157,11 @@ func _rumble_analog() -> void:
 	# Applying 0.99x fix every frame after 2 seconds, otherwise it's 1.00x
 	var fix := _get_fix_multiplier()
 	
-	Input.start_joy_vibration(
-		controller_id,
-		weak_power * rumble_multiplier * fix,
-		strong_power * rumble_multiplier * fix,
-		0.0)
+	# Regular vs. "All" mode
+	if not control_all_ids: _continuous_vibration(controller_id, fix)
+	else:
+		for i in range(CONTROLLER_ID_RANGE):
+			_continuous_vibration(i, fix)
 	
 	# Alternating mode check - readies hit_zero check if motors in use
 	if alternating_mode:
@@ -168,6 +170,12 @@ func _rumble_analog() -> void:
 	
 	_update_power_gauges(weak_power, strong_power)
 
+func _continuous_vibration(id: int, fix: float) -> void:
+	Input.start_joy_vibration(
+		id,
+		weak_power * rumble_multiplier * fix,
+		strong_power * rumble_multiplier * fix,
+		0.0)
 
 # Every 2 seconds of _process, make the current frame a fix frame
 func _increment_fix_frame(delta: float) -> void:
@@ -247,18 +255,28 @@ func _toggle_locks(toggle_weak: bool, toggle_strong: bool) -> void:
 
 ### CONTROLLER
 
+# Checks for controller name every 0.5 seconds
 func _on_controller_check_timer_timeout() -> void:
-	var current_controller_name := Input.get_joy_name(controller_id)
-	if current_controller_name != controller_name:
-		controller_name = current_controller_name
-		
-		if not controller_name:
-			%NameLabel.text = "No device detected on ID #" + str(controller_id)
-			if controller_id != 0: %NameLabel.text += " (try #0)"
-			%ControllerStatusIcon.modulate = Color.DIM_GRAY
-		else:
-			%NameLabel.text = controller_name
-			%ControllerStatusIcon.modulate = Color.WHITE
+	if not control_all_ids:
+		var current_controller_name := Input.get_joy_name(controller_id)
+		if current_controller_name != controller_name:
+			controller_name = current_controller_name
+			
+			if not controller_name:
+				%NameLabel.text = "No device detected on ID #" + str(controller_id)
+				if controller_id != 0: %NameLabel.text += " (try #0)"
+				%ControllerStatusIcon.modulate = Color.DIM_GRAY
+			else:
+				%NameLabel.text = controller_name
+				%ControllerStatusIcon.modulate = Color.WHITE
+	
+	else: # "All" checked
+		var connected_count := 0
+		for i in range(CONTROLLER_ID_RANGE):
+			if Input.get_joy_name(i) != "":
+				connected_count += 1
+		%NameLabel.text = str("Controlling ", connected_count, " devices from #0 to #31")
+		%ControllerStatusIcon.modulate = Color.WHITE if connected_count > 0 else Color.DIM_GRAY
 
 
 func _on_controller_id_box_value_changed(value: float) -> void:
@@ -266,6 +284,14 @@ func _on_controller_id_box_value_changed(value: float) -> void:
 	controller_name = "asdfasf"
 	controller_id = int(value)
 
+
+func _on_all_ids_box_toggled(toggled_on: bool) -> void:
+	control_all_ids = toggled_on
+	if toggled_on: %ControllerIdBox.editable = false
+	else: %ControllerIdBox.editable = true
+	
+	# this is changed so the label update in _on_controller_check_timer_timeout() triggers
+	controller_name = "asdfasf"
 
 ### TAB NAVIGATION
 
