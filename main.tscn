@@ -833,7 +833,6 @@ unique_name_in_owner = true
 oversampling_override = 1.0
 initial_position = 1
 size = Vector2i(500, 500)
-visible = true
 
 [node name="Panel" type="Panel" parent="UI/InfoPopup"]
 anchors_preset = 15

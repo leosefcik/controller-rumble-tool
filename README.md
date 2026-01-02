@@ -3,7 +3,7 @@
  
  A Godot app for directly controlling the rumble motors of a gamepad. Useful for controller diagnostics and massages!
  
- ![Preview](production/screenshot1.png)
+ ![Preview](.production/screenshot1.png)
  
  🚨 **Warning:** We are not responsible for any damage that may be caused to you or your controller. Be mindful of excessive vibrations and battery drain.
 
