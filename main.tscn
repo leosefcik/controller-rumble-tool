@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://cmikhaqwhlrq1"]
+[gd_scene load_steps=33 format=3 uid="uid://cmikhaqwhlrq1"]
 
 [ext_resource type="Theme" uid="uid://dxoeymo5y7ebp" path="res://theme.tres" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://ci8gltknaa8n0" path="res://main.gd" id="1_h2yge"]
@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://c4k7h56m5qum3" path="res://icon/kenney_glyphs/Generic/generic_joystick_left.png" id="17_074og"]
 [ext_resource type="Texture2D" uid="uid://vn8gli8llxvq" path="res://icon/drop_down.svg" id="19_0odxb"]
 [ext_resource type="Texture2D" uid="uid://cobfw7wvbxehb" path="res://icon/kenney_glyphs/Nintendo Switch/switch_dpad_right_outline.png" id="19_getpj"]
+[ext_resource type="Texture2D" uid="uid://t7f811s4a6nd" path="res://icon/kenney_glyphs/Generic/generic_button_trigger_a_fill.png" id="19_lswn8"]
 [ext_resource type="Texture2D" uid="uid://c3scm3mwiyss1" path="res://icon/drop_up.svg" id="20_lswn8"]
 [ext_resource type="Texture2D" uid="uid://77sud8rl3qs8" path="res://icon/kenney_glyphs/Nintendo Switch/switch_buttons_left_outline.png" id="20_ryguw"]
 [ext_resource type="Texture2D" uid="uid://dpbkmplgtdokt" path="res://icon/kenney_glyphs/Nintendo Switch/switch_dpad_up_outline.png" id="21_d13ii"]
@@ -192,6 +193,36 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="JoystickToggleX" type="TextureRect" parent="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer/HBoxContainer/JoystickToggle"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("15_yaehf")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ShoulderToggle" type="Button" parent="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(35, 35)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Toggle shoulder button function"
+
+[node name="TextureRect" type="TextureRect" parent="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer/HBoxContainer/ShoulderToggle"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("19_lswn8")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ShoulderToggleX" type="TextureRect" parent="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer/HBoxContainer/ShoulderToggle"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
@@ -905,6 +936,7 @@ autostart = true
 [connection signal="toggled" from="UI/MainVBox/Title/AllIdsBox" to="." method="_on_all_ids_box_toggled"]
 [connection signal="pressed" from="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer/HBoxContainer/TriggerToggle" to="." method="_on_trigger_toggle_pressed"]
 [connection signal="pressed" from="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer/HBoxContainer/JoystickToggle" to="." method="_on_joystick_toggle_pressed"]
+[connection signal="pressed" from="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer/HBoxContainer/ShoulderToggle" to="." method="_on_shoulder_toggle_pressed"]
 [connection signal="value_changed" from="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer/ControlSensitivitySlider" to="." method="_on_control_sensitivity_slider_value_changed"]
 [connection signal="pressed" from="UI/MainVBox/Gauges/StrongLockButton" to="." method="_on_strong_lock_button_pressed"]
 [connection signal="pressed" from="UI/MainVBox/Gauges/WeakLockButton" to="." method="_on_weak_lock_button_pressed"]

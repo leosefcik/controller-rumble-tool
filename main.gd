@@ -28,6 +28,7 @@ var incremented := false
 
 var trigger_enabled := true
 var joystick_enabled := true
+var shoulder_enabled := true
 var control_sensitivty := 1.0
 
 var mouse_sticky_enabled := false
@@ -232,11 +233,15 @@ func _input(event: InputEvent) -> void:
 		%FlipControls.button_pressed = !%FlipControls.button_pressed
 	
 	elif event.is_action_pressed("lock_rumble_left"):
+		if not shoulder_enabled: return
+		
 		if coupled: _toggle_locks(1,1)
 		elif not flipped: _toggle_locks(1,0)
 		else: _toggle_locks(0,1)
 	
 	elif event.is_action_pressed("lock_rumble_right"):
+		if not shoulder_enabled: return
+		
 		if coupled: _toggle_locks(1,1)
 		elif not flipped: _toggle_locks(0,1)
 		else: _toggle_locks(1,0)
@@ -331,6 +336,11 @@ func _on_joystick_toggle_pressed() -> void:
 	joystick_enabled = !joystick_enabled
 	if joystick_enabled: %JoystickToggleX.hide()
 	else: %JoystickToggleX.show()
+
+func _on_shoulder_toggle_pressed() -> void:
+	shoulder_enabled = !shoulder_enabled
+	if shoulder_enabled: %ShoulderToggleX.hide()
+	else: %ShoulderToggleX.show()
 
 func _on_control_sensitivity_slider_value_changed(value: float) -> void:
 	control_sensitivty = value
