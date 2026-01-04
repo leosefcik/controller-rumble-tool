@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://cmikhaqwhlrq1"]
+[gd_scene load_steps=38 format=3 uid="uid://cmikhaqwhlrq1"]
 
 [ext_resource type="Theme" uid="uid://dxoeymo5y7ebp" path="res://theme.tres" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://ci8gltknaa8n0" path="res://main.gd" id="1_h2yge"]
@@ -25,6 +25,9 @@
 [ext_resource type="Texture2D" uid="uid://77sud8rl3qs8" path="res://icon/kenney_glyphs/Nintendo Switch/switch_buttons_left_outline.png" id="20_ryguw"]
 [ext_resource type="Texture2D" uid="uid://dpbkmplgtdokt" path="res://icon/kenney_glyphs/Nintendo Switch/switch_dpad_up_outline.png" id="21_d13ii"]
 [ext_resource type="Texture2D" uid="uid://cr4gsturnc2nc" path="res://icon/kenney_glyphs/Nintendo Switch/switch_buttons_up_outline.png" id="22_1u8w0"]
+[ext_resource type="Script" uid="uid://by1rf4skvhdw8" path="res://program_mode.gd" id="22_a6jrf"]
+[ext_resource type="Texture2D" uid="uid://bnlh0nq1ahiod" path="res://icon/play.svg" id="23_qsp4k"]
+[ext_resource type="Texture2D" uid="uid://bc3if7fk4tikx" path="res://icon/pause.svg" id="24_kq58d"]
 [ext_resource type="Texture2D" uid="uid://cst8li6a7al6b" path="res://logo/motor_icon_v1.png" id="25_0odxb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1bvp3"]
@@ -44,6 +47,19 @@ bg_color = Color(0.48235294, 0.6784314, 0.81960785, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ryguw"]
 bg_color = Color(0.8235294, 0.48235294, 0.5686275, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xuqvo"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a6jrf"]
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
 
 [node name="Main" type="Node"]
 script = ExtResource("1_h2yge")
@@ -441,13 +457,14 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 tab_alignment = 1
-current_tab = 0
+current_tab = 1
 
-[node name="Analog" type="TabBar" parent="UI/MainVBox/ModeTabs"]
+[node name="Analog Mode" type="TabBar" parent="UI/MainVBox/ModeTabs"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Analog"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Analog Mode"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -460,7 +477,7 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="UI/MainVBox/ModeTabs/Analog/VBoxContainer"]
+[node name="Label" type="Label" parent="UI/MainVBox/ModeTabs/Analog Mode/VBoxContainer"]
 layout_mode = 2
 text = "Analog mode:
 
@@ -468,37 +485,37 @@ text = "Analog mode:
 - Use either the triggers, joysticks UP/DOWN, or the slider in the top-right to control the weak and strong motors in your controller"
 autowrap_mode = 3
 
-[node name="HSeparator" type="HSeparator" parent="UI/MainVBox/ModeTabs/Analog/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="UI/MainVBox/ModeTabs/Analog Mode/VBoxContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Analog/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Analog Mode/VBoxContainer"]
 custom_minimum_size = Vector2(0, 44)
 layout_mode = 2
 
-[node name="AnalogAltMode" type="CheckBox" parent="UI/MainVBox/ModeTabs/Analog/VBoxContainer/HBoxContainer"]
+[node name="AnalogAltMode" type="CheckBox" parent="UI/MainVBox/ModeTabs/Analog Mode/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "When both motors reach 0%, toggles Flip Controls"
 text = "Alternating Mode"
 
-[node name="AnalogVelMode" type="CheckBox" parent="UI/MainVBox/ModeTabs/Analog/VBoxContainer/HBoxContainer"]
+[node name="AnalogVelMode" type="CheckBox" parent="UI/MainVBox/ModeTabs/Analog Mode/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "\"Drags\" the input along instead of having it control rumble directly"
 text = "Velocity Mode"
 
-[node name="VelocityModeSpeedContainer" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Analog/VBoxContainer/HBoxContainer"]
+[node name="VelocityModeSpeedContainer" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Analog Mode/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="VelocityModeSpeedLabel" type="Label" parent="UI/MainVBox/ModeTabs/Analog/VBoxContainer/HBoxContainer/VelocityModeSpeedContainer"]
+[node name="VelocityModeSpeedLabel" type="Label" parent="UI/MainVBox/ModeTabs/Analog Mode/VBoxContainer/HBoxContainer/VelocityModeSpeedContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Speed: 1.0x"
 
-[node name="VelocityModeSpeed" type="HSlider" parent="UI/MainVBox/ModeTabs/Analog/VBoxContainer/HBoxContainer/VelocityModeSpeedContainer"]
+[node name="VelocityModeSpeed" type="HSlider" parent="UI/MainVBox/ModeTabs/Analog Mode/VBoxContainer/HBoxContainer/VelocityModeSpeedContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 min_value = 0.1
@@ -506,12 +523,13 @@ max_value = 4.0
 step = 0.1
 value = 1.0
 
-[node name="Program" type="TabBar" parent="UI/MainVBox/ModeTabs"]
-visible = false
+[node name="Program Mode" type="TabBar" parent="UI/MainVBox/ModeTabs" node_paths=PackedStringArray("PATTERN_MAKER")]
 layout_mode = 2
+script = ExtResource("22_a6jrf")
+PATTERN_MAKER = NodePath("VBoxContainer/PatternMaker")
 metadata/_tab_index = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -524,150 +542,174 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 2
 
-[node name="Label" type="Label" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer"]
+[node name="Label" type="Label" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 6
-text = "WIP Section! Doesn't do anything."
+text = "WIP Section"
 horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer"]
+[node name="PresetButton" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer"]
+layout_mode = 2
+text = "Preset"
+
+[node name="HSeparator" type="HSeparator" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer"]
+[node name="PlayPause" type="TextureButton" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+toggle_mode = true
+texture_normal = ExtResource("23_qsp4k")
+texture_pressed = ExtResource("24_kq58d")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="PatternMaker" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer"]
+layout_mode = 2
+focus_behavior_recursive = 2
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker"]
 layout_mode = 2
 alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer/HBoxContainer3"]
-layout_mode = 2
-alignment = 1
-
-[node name="Label" type="Label" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer/HBoxContainer3/VBoxContainer"]
+[node name="Label" type="Label" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/VBoxContainer"]
 layout_mode = 2
 text = "Duration:"
 
-[node name="Control" type="Control" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer/HBoxContainer3/VBoxContainer"]
+[node name="Control" type="Control" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/VBoxContainer"]
 custom_minimum_size = Vector2(0, 6)
 layout_mode = 2
 
-[node name="Label2" type="Label" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer/HBoxContainer3/VBoxContainer"]
+[node name="Label2" type="Label" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/VBoxContainer"]
 layout_mode = 2
 text = "Pause:"
 
-[node name="Spacer" type="Control" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer/HBoxContainer3"]
+[node name="Spacer" type="Panel" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/VBoxContainer"]
+custom_minimum_size = Vector2(25, 5)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_xuqvo")
+
+[node name="Spacer" type="Control" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker"]
 custom_minimum_size = Vector2(12, 0)
 layout_mode = 2
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer/HBoxContainer3"]
+[node name="Row1" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer/HBoxContainer3/VBoxContainer2"]
-layout_mode = 2
-focus_behavior_recursive = 2
-
-[node name="SpinBox" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer/HBoxContainer3/VBoxContainer2/HBoxContainer"]
-custom_minimum_size = Vector2(90, 0)
+[node name="Duration" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row1"]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 max_value = 999.99
 step = 0.01
 suffix = "s"
+custom_arrow_step = 0.25
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer/HBoxContainer3/VBoxContainer2"]
-layout_mode = 2
-focus_behavior_recursive = 2
-
-[node name="SpinBox" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer/HBoxContainer3/VBoxContainer2/HBoxContainer2"]
-custom_minimum_size = Vector2(90, 0)
+[node name="Pause" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row1"]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 max_value = 999.99
 step = 0.01
 suffix = "s"
+custom_arrow_step = 0.25
 
-[node name="Spacer2" type="Control" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer/HBoxContainer3"]
+[node name="Indicator" type="Panel" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row1"]
+custom_minimum_size = Vector2(25, 5)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_a6jrf")
+
+[node name="Spacer2" type="Control" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker"]
 custom_minimum_size = Vector2(12, 0)
 layout_mode = 2
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer/HBoxContainer3"]
+[node name="Row2" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer/HBoxContainer3/VBoxContainer3"]
-layout_mode = 2
-focus_behavior_recursive = 2
-
-[node name="SpinBox" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer/HBoxContainer3/VBoxContainer3/HBoxContainer"]
-custom_minimum_size = Vector2(90, 0)
+[node name="Duration" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row2"]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 max_value = 999.99
 step = 0.01
 suffix = "s"
+custom_arrow_step = 0.25
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer/HBoxContainer3/VBoxContainer3"]
-layout_mode = 2
-focus_behavior_recursive = 2
-
-[node name="SpinBox" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer/HBoxContainer3/VBoxContainer3/HBoxContainer2"]
-custom_minimum_size = Vector2(90, 0)
+[node name="Pause" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row2"]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 max_value = 999.99
 step = 0.01
 suffix = "s"
+custom_arrow_step = 0.25
 
-[node name="Spacer3" type="Control" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer/HBoxContainer3"]
+[node name="Indicator" type="Panel" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row2"]
+custom_minimum_size = Vector2(25, 5)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_a6jrf")
+
+[node name="Spacer3" type="Control" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker"]
 custom_minimum_size = Vector2(12, 0)
 layout_mode = 2
 
-[node name="VBoxContainer4" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer/HBoxContainer3"]
+[node name="Row3" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer/HBoxContainer3/VBoxContainer4"]
-layout_mode = 2
-focus_behavior_recursive = 2
-
-[node name="SpinBox" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer/HBoxContainer3/VBoxContainer4/HBoxContainer"]
-custom_minimum_size = Vector2(90, 0)
+[node name="Duration" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row3"]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 max_value = 999.99
 step = 0.01
 suffix = "s"
+custom_arrow_step = 0.25
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer/HBoxContainer3/VBoxContainer4"]
-layout_mode = 2
-focus_behavior_recursive = 2
-
-[node name="SpinBox" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer/HBoxContainer3/VBoxContainer4/HBoxContainer2"]
-custom_minimum_size = Vector2(90, 0)
+[node name="Pause" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row3"]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 max_value = 999.99
 step = 0.01
 suffix = "s"
+custom_arrow_step = 0.25
 
-[node name="Spacer4" type="Control" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer/HBoxContainer3"]
+[node name="Indicator" type="Panel" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row3"]
+custom_minimum_size = Vector2(25, 5)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_a6jrf")
+
+[node name="Spacer4" type="Control" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker"]
 custom_minimum_size = Vector2(12, 0)
 layout_mode = 2
 
-[node name="VBoxContainer5" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer/HBoxContainer3"]
+[node name="Row4" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer/HBoxContainer3/VBoxContainer5"]
-layout_mode = 2
-focus_behavior_recursive = 2
-
-[node name="SpinBox" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer/HBoxContainer3/VBoxContainer5/HBoxContainer"]
-custom_minimum_size = Vector2(90, 0)
+[node name="Duration" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row4"]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 max_value = 999.99
 step = 0.01
 suffix = "s"
+custom_arrow_step = 0.25
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer/HBoxContainer3/VBoxContainer5"]
-layout_mode = 2
-focus_behavior_recursive = 2
-
-[node name="SpinBox" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program/VBoxContainer/HBoxContainer3/VBoxContainer5/HBoxContainer2"]
-custom_minimum_size = Vector2(90, 0)
+[node name="Pause" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row4"]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 max_value = 999.99
 step = 0.01
 suffix = "s"
+custom_arrow_step = 0.25
+
+[node name="Indicator" type="Panel" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row4"]
+custom_minimum_size = Vector2(25, 5)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_a6jrf")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer"]
+layout_mode = 2
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="UI/MainVBox"]
 layout_mode = 2
@@ -771,7 +813,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="MultiplierBox" type="SpinBox" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer2/MultiplierNode"]
-custom_minimum_size = Vector2(85, 0)
+custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
 tooltip_text = "Set a multiplier for the final rumble intensity,
 effectively capping the max. Some controllers
@@ -949,9 +991,11 @@ autostart = true
 [connection signal="pressed" from="UI/MainVBox/Gauges/Spacer/VBoxContainer/MouseStickyMode" to="." method="_on_mouse_sticky_mode_pressed"]
 [connection signal="toggled" from="UI/MainVBox/HBoxContainer/HideModeTabs" to="." method="_on_hide_mode_tabs_toggled"]
 [connection signal="tab_changed" from="UI/MainVBox/ModeTabs" to="." method="_on_mode_tabs_tab_changed"]
-[connection signal="toggled" from="UI/MainVBox/ModeTabs/Analog/VBoxContainer/HBoxContainer/AnalogAltMode" to="." method="_on_analog_alt_mode_toggled"]
-[connection signal="toggled" from="UI/MainVBox/ModeTabs/Analog/VBoxContainer/HBoxContainer/AnalogVelMode" to="." method="_on_analog_vel_mode_toggled"]
-[connection signal="value_changed" from="UI/MainVBox/ModeTabs/Analog/VBoxContainer/HBoxContainer/VelocityModeSpeedContainer/VelocityModeSpeed" to="." method="_on_velocity_mode_speed_value_changed"]
+[connection signal="toggled" from="UI/MainVBox/ModeTabs/Analog Mode/VBoxContainer/HBoxContainer/AnalogAltMode" to="." method="_on_analog_alt_mode_toggled"]
+[connection signal="toggled" from="UI/MainVBox/ModeTabs/Analog Mode/VBoxContainer/HBoxContainer/AnalogVelMode" to="." method="_on_analog_vel_mode_toggled"]
+[connection signal="value_changed" from="UI/MainVBox/ModeTabs/Analog Mode/VBoxContainer/HBoxContainer/VelocityModeSpeedContainer/VelocityModeSpeed" to="." method="_on_velocity_mode_speed_value_changed"]
+[connection signal="pressed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetButton" to="UI/MainVBox/ModeTabs/Program Mode" method="_on_preset_button_pressed"]
+[connection signal="toggled" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PlayPause" to="UI/MainVBox/ModeTabs/Program Mode" method="_on_play_pause_toggled"]
 [connection signal="toggled" from="UI/MainVBox/HBoxContainer3/HideBottomRow" to="." method="_on_hide_bottom_row_toggled"]
 [connection signal="toggled" from="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer/HBoxContainer/FlipControls" to="." method="_on_flip_controls_toggled"]
 [connection signal="toggled" from="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer/HBoxContainer2/CoupleMotors" to="." method="_on_couple_motors_toggled"]
