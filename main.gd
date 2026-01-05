@@ -16,21 +16,6 @@ extends Node
 @export var MOUSE_STICKY_GLYPH: CompressedTexture2D
 @export var MOUSE_SNAP_GLPYH: CompressedTexture2D
 
-var controller_id := 0
-var controller_name := "Empty"
-var control_all_ids := false
-const CONTROLLER_ID_RANGE = 32 # an arbitrarily hardcoded amount of max controllers
-
-var rumble_multiplier := 1.0
-var flipped := false
-var coupled := false
-var incremented := false
-
-var trigger_enabled := true
-var joystick_enabled := true
-var shoulder_enabled := true
-var control_sensitivty := 1.0
-
 var mouse_sticky_enabled := false
 
 # Current program mode, controlled via the 2 tabs
@@ -102,7 +87,7 @@ func _process_desired_analog() -> void:
 	var right_joy_mag := 0.0
 	var right_trigger_mag := 0.0
 	
-	if joystick_enabled:
+	if Settings.joystick_enabled:
 		left_joy_mag = maxf(
 		Input.get_action_strength("increase_rumble_left"),
 		Input.get_action_strength("decrease_rumble_left")
@@ -112,20 +97,20 @@ func _process_desired_analog() -> void:
 		Input.get_action_strength("decrease_rumble_right")
 		)
 	
-	if trigger_enabled:
+	if Settings.trigger_enabled:
 		left_trigger_mag = Input.get_action_strength("increase_rumble_trigger_left")
 		right_trigger_mag = Input.get_action_strength("increase_rumble_trigger_right")
 	
 	# Gets bigger of either joy/trigger, divs by sensitivity and caps it to 1.0
-	var left_magnitude := minf(maxf(left_joy_mag, left_trigger_mag) / control_sensitivty, 1.0)
-	var right_magnitude := minf(maxf(right_joy_mag, right_trigger_mag) / control_sensitivty, 1.0)
+	var left_magnitude := minf(maxf(left_joy_mag, left_trigger_mag) / Settings.control_sensitivty, 1.0)
+	var right_magnitude := minf(maxf(right_joy_mag, right_trigger_mag) / Settings.control_sensitivty, 1.0)
 	
 	# Mapping the controls
-	if coupled:
+	if Settings.coupled:
 		var combined_desired := maxf(left_magnitude, right_magnitude)
 		weak_desired = combined_desired
 		strong_desired = combined_desired
-	elif not flipped:
+	elif not Settings.flipped:
 		weak_desired = left_magnitude
 		strong_desired = right_magnitude
 	else:
@@ -135,7 +120,7 @@ func _process_desired_analog() -> void:
 	weak_desired = maxf(weak_desired, %WeakSlider.value)
 	strong_desired = maxf(strong_desired, %StrongSlider.value)
 	
-	if incremented:
+	if Settings.incremented:
 		strong_desired = snappedf(strong_desired, 0.1)
 		weak_desired = snappedf(weak_desired, 0.1)
 
@@ -159,9 +144,9 @@ func _rumble_analog() -> void:
 	var fix := _get_fix_multiplier()
 	
 	# Regular vs. "All" mode
-	if not control_all_ids: _continuous_vibration(controller_id, fix)
+	if not Settings.control_all_ids: _continuous_vibration(Settings.controller_id, fix)
 	else:
-		for i in range(CONTROLLER_ID_RANGE):
+		for i in range(Settings.CONTROLLER_ID_RANGE):
 			_continuous_vibration(i, fix)
 	
 	# Alternating mode check - readies hit_zero check if motors in use
@@ -174,8 +159,8 @@ func _rumble_analog() -> void:
 func _continuous_vibration(id: int, fix: float) -> void:
 	Input.start_joy_vibration(
 		id,
-		weak_power * rumble_multiplier * fix,
-		strong_power * rumble_multiplier * fix,
+		weak_power * Settings.rumble_multiplier * fix,
+		strong_power * Settings.rumble_multiplier * fix,
 		0.0)
 
 # Every 2 seconds of _process, make the current frame a fix frame
@@ -199,14 +184,14 @@ func _update_glyphs() -> void:
 	%StrongLock.texture = LOCK_ICON if strong_locked else UNLOCK_ICON
 	
 	if not weak_locked:
-		%WeakLockGlyph.texture = LB_OFF_GLYPH if not flipped else RB_OFF_GLYPH
+		%WeakLockGlyph.texture = LB_OFF_GLYPH if not Settings.flipped else RB_OFF_GLYPH
 	else:
-		%WeakLockGlyph.texture = LB_ON_GLYPH if not flipped else RB_ON_GLYPH
+		%WeakLockGlyph.texture = LB_ON_GLYPH if not Settings.flipped else RB_ON_GLYPH
 	
 	if not strong_locked:
-		%StrongLockGlyph.texture = RB_OFF_GLYPH if not flipped else LB_OFF_GLYPH
+		%StrongLockGlyph.texture = RB_OFF_GLYPH if not Settings.flipped else LB_OFF_GLYPH
 	else:
-		%StrongLockGlyph.texture = RB_ON_GLYPH if not flipped else LB_ON_GLYPH
+		%StrongLockGlyph.texture = RB_ON_GLYPH if not Settings.flipped else LB_ON_GLYPH
 	
 	# Disabled after changing the controls
 	#%FlipControlsGlyph.texture = SELECT_OFF_GLYPH if not flipped else SELECT_ON_GLYPH
@@ -233,17 +218,17 @@ func _input(event: InputEvent) -> void:
 		%FlipControls.button_pressed = !%FlipControls.button_pressed
 	
 	elif event.is_action_pressed("lock_rumble_left"):
-		if not shoulder_enabled: return
+		if not Settings.shoulder_enabled: return
 		
-		if coupled: _toggle_locks(1,1)
-		elif not flipped: _toggle_locks(1,0)
+		if Settings.coupled: _toggle_locks(1,1)
+		elif not Settings.flipped: _toggle_locks(1,0)
 		else: _toggle_locks(0,1)
 	
 	elif event.is_action_pressed("lock_rumble_right"):
-		if not shoulder_enabled: return
+		if not Settings.shoulder_enabled: return
 		
-		if coupled: _toggle_locks(1,1)
-		elif not flipped: _toggle_locks(0,1)
+		if Settings.coupled: _toggle_locks(1,1)
+		elif not Settings.flipped: _toggle_locks(0,1)
 		else: _toggle_locks(1,0)
 	
 	elif event.is_action_pressed("lock_both_rumbles"):
@@ -262,22 +247,22 @@ func _toggle_locks(toggle_weak: bool, toggle_strong: bool) -> void:
 
 # Checks for controller name every 0.5 seconds
 func _on_controller_check_timer_timeout() -> void:
-	if not control_all_ids:
-		var current_controller_name := Input.get_joy_name(controller_id)
-		if current_controller_name != controller_name:
-			controller_name = current_controller_name
+	if not Settings.control_all_ids:
+		var current_controller_name := Input.get_joy_name(Settings.controller_id)
+		if current_controller_name != Settings.controller_name:
+			Settings.controller_name = current_controller_name
 			
-			if not controller_name:
-				%NameLabel.text = "No device detected on ID #" + str(controller_id)
-				if controller_id != 0: %NameLabel.text += " (try #0)"
+			if not Settings.controller_name:
+				%NameLabel.text = "No device detected on ID #" + str(Settings.controller_id)
+				if Settings.controller_id != 0: %NameLabel.text += " (try #0)"
 				%ControllerStatusIcon.modulate = Color.DIM_GRAY
 			else:
-				%NameLabel.text = controller_name
+				%NameLabel.text = Settings.controller_name
 				%ControllerStatusIcon.modulate = Color.WHITE
 	
 	else: # "All" checked
 		var connected_count := 0
-		for i in range(CONTROLLER_ID_RANGE):
+		for i in range(Settings.CONTROLLER_ID_RANGE):
 			if Input.get_joy_name(i) != "":
 				connected_count += 1
 		%NameLabel.text = str("Controlling ", connected_count, " devices from #0 to #31")
@@ -286,17 +271,17 @@ func _on_controller_check_timer_timeout() -> void:
 
 func _on_controller_id_box_value_changed(value: float) -> void:
 	# this is changed so the label update in _on_controller_check_timer_timeout() triggers
-	controller_name = "asdfasf"
-	controller_id = int(value)
+	Settings.controller_name = "asdfasf"
+	Settings.controller_id = int(value)
 
 
 func _on_all_ids_box_toggled(toggled_on: bool) -> void:
-	control_all_ids = toggled_on
+	Settings.control_all_ids = toggled_on
 	if toggled_on: %ControllerIdBox.editable = false
 	else: %ControllerIdBox.editable = true
 	
 	# this is changed so the label update in _on_controller_check_timer_timeout() triggers
-	controller_name = "asdfasf"
+	Settings.controller_name = "asdfasf"
 
 ### TAB NAVIGATION
 
@@ -306,7 +291,7 @@ func _on_mode_tabs_tab_changed(tab: int) -> void:
 
 
 func _reset_rumble() -> void:
-	Input.stop_joy_vibration(controller_id)
+	Input.stop_joy_vibration(Settings.controller_id)
 	weak_desired = 0.0
 	strong_desired = 0.0
 	_update_desired_gauges(0.0, 0.0)
@@ -319,54 +304,54 @@ func _reset_rumble() -> void:
 
 func _on_weak_lock_button_pressed() -> void:
 	_toggle_locks(1,0)
-	if coupled: _toggle_locks(0,1)
+	if Settings.coupled: _toggle_locks(0,1)
 
 func _on_strong_lock_button_pressed() -> void:
 	_toggle_locks(0,1)
-	if coupled: _toggle_locks(1,0)
+	if Settings.coupled: _toggle_locks(1,0)
 
 ## TOGLGES
 
 func _on_trigger_toggle_pressed() -> void:
-	trigger_enabled = !trigger_enabled
-	if trigger_enabled: %TriggerToggleX.hide()
+	Settings.trigger_enabled = !Settings.trigger_enabled
+	if Settings.trigger_enabled: %TriggerToggleX.hide()
 	else: %TriggerToggleX.show()
 
 func _on_joystick_toggle_pressed() -> void:
-	joystick_enabled = !joystick_enabled
-	if joystick_enabled: %JoystickToggleX.hide()
+	Settings.joystick_enabled = !Settings.joystick_enabled
+	if Settings.joystick_enabled: %JoystickToggleX.hide()
 	else: %JoystickToggleX.show()
 
 func _on_shoulder_toggle_pressed() -> void:
-	shoulder_enabled = !shoulder_enabled
-	if shoulder_enabled: %ShoulderToggleX.hide()
+	Settings.shoulder_enabled = !Settings.shoulder_enabled
+	if Settings.shoulder_enabled: %ShoulderToggleX.hide()
 	else: %ShoulderToggleX.show()
 
 func _on_control_sensitivity_slider_value_changed(value: float) -> void:
-	control_sensitivty = value
+	Settings.control_sensitivty = value
 	%ControlSensitivityLabel.text = str("Sensitivity: ", value)
 
 
 ### SETTINGS
 
 func _on_multiplier_box_value_changed(value: float) -> void:
-	rumble_multiplier = value
+	Settings.rumble_multiplier = value
 
 func _on_flip_controls_toggled(toggled_on: bool) -> void:
-	flipped = toggled_on
+	Settings.flipped = toggled_on
 	# Flip mouse slides too. A bit ugly but eh
 	if toggled_on: %WeakSlider.get_parent().move_child(%WeakSlider, 2)
 	else: %WeakSlider.get_parent().move_child(%WeakSlider, 1)
 	_update_glyphs() # to update LB/RB glyphs
 
 func _on_couple_motors_toggled(toggled_on: bool) -> void:
-	coupled = toggled_on
+	Settings.coupled = toggled_on
 	weak_locked = false
 	strong_locked = false
 	_update_glyphs() # to update LB/RB glyphs
 
 func _on_snap_controls_toggled(toggled_on: bool) -> void:
-	incremented = toggled_on
+	Settings.incremented = toggled_on
 
 
 
@@ -402,11 +387,11 @@ func _on_strong_slider_drag_started() -> void:
 	strong_slider_in_use = true
 
 func _on_weak_slider_value_changed(value: float) -> void:
-	if coupled and not strong_slider_in_use:
+	if Settings.coupled and not strong_slider_in_use:
 		%StrongSlider.value = value
 
 func _on_strong_slider_value_changed(value: float) -> void:
-	if coupled and not weak_slider_in_use:
+	if Settings.coupled and not weak_slider_in_use:
 		%WeakSlider.value = value
 
 func _on_weak_slider_drag_ended(_value_changed: bool) -> void:

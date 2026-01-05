@@ -18,6 +18,10 @@ run/low_processor_mode=true
 boot_splash/image="uid://bqlw2dstnbqor"
 config/icon="uid://cst8li6a7al6b"
 
+[autoload]
+
+Settings="*res://settings.gd"
+
 [debug]
 
 gdscript/warnings/untyped_declaration=1

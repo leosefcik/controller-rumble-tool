@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://cmikhaqwhlrq1"]
+[gd_scene load_steps=40 format=3 uid="uid://cmikhaqwhlrq1"]
 
 [ext_resource type="Theme" uid="uid://dxoeymo5y7ebp" path="res://theme.tres" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://ci8gltknaa8n0" path="res://main.gd" id="1_h2yge"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://cydtbpei7bv56" path="res://icon/kenney_glyphs/Xbox Series/controller_xboxone.png" id="13_ycdy4"]
 [ext_resource type="Texture2D" uid="uid://dsw3y5kyg543j" path="res://icon/kenney_glyphs/Generic/generic_button_trigger_b_fill.png" id="14_2cqfq"]
 [ext_resource type="Texture2D" uid="uid://clyw8g54blu5p" path="res://icon/kenney_glyphs/Generic/generic_stick_vertical.png" id="14_vivmo"]
+[ext_resource type="Script" uid="uid://bcmif82n5dhw6" path="res://script/ui.gd" id="15_kq58d"]
 [ext_resource type="Texture2D" uid="uid://cgxhsima8b2d3" path="res://icon/kenney_glyphs/Flairs/flair_disabled_cross.png" id="15_yaehf"]
 [ext_resource type="Texture2D" uid="uid://c4k7h56m5qum3" path="res://icon/kenney_glyphs/Generic/generic_joystick_left.png" id="17_074og"]
 [ext_resource type="Texture2D" uid="uid://vn8gli8llxvq" path="res://icon/drop_down.svg" id="19_0odxb"]
@@ -25,8 +26,9 @@
 [ext_resource type="Texture2D" uid="uid://77sud8rl3qs8" path="res://icon/kenney_glyphs/Nintendo Switch/switch_buttons_left_outline.png" id="20_ryguw"]
 [ext_resource type="Texture2D" uid="uid://dpbkmplgtdokt" path="res://icon/kenney_glyphs/Nintendo Switch/switch_dpad_up_outline.png" id="21_d13ii"]
 [ext_resource type="Texture2D" uid="uid://cr4gsturnc2nc" path="res://icon/kenney_glyphs/Nintendo Switch/switch_buttons_up_outline.png" id="22_1u8w0"]
-[ext_resource type="Script" uid="uid://by1rf4skvhdw8" path="res://program_mode.gd" id="22_a6jrf"]
+[ext_resource type="Script" uid="uid://by1rf4skvhdw8" path="res://script/program_mode.gd" id="22_a6jrf"]
 [ext_resource type="Texture2D" uid="uid://bnlh0nq1ahiod" path="res://icon/play.svg" id="23_qsp4k"]
+[ext_resource type="Script" uid="uid://dghdn10ni5ga5" path="res://script/analog_mode.gd" id="23_seu75"]
 [ext_resource type="Texture2D" uid="uid://bc3if7fk4tikx" path="res://icon/pause.svg" id="24_kq58d"]
 [ext_resource type="Texture2D" uid="uid://cst8li6a7al6b" path="res://logo/motor_icon_v1.png" id="25_0odxb"]
 
@@ -85,6 +87,7 @@ grow_horizontal = 2
 grow_vertical = 2
 focus_behavior_recursive = 1
 theme = ExtResource("1_0xm2m")
+script = ExtResource("15_kq58d")
 
 [node name="MainVBox" type="VBoxContainer" parent="UI"]
 layout_mode = 1
@@ -457,11 +460,11 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 tab_alignment = 1
-current_tab = 1
+current_tab = 0
 
 [node name="Analog Mode" type="TabBar" parent="UI/MainVBox/ModeTabs"]
-visible = false
 layout_mode = 2
+script = ExtResource("23_seu75")
 metadata/_tab_index = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Analog Mode"]
@@ -524,6 +527,7 @@ step = 0.1
 value = 1.0
 
 [node name="Program Mode" type="TabBar" parent="UI/MainVBox/ModeTabs" node_paths=PackedStringArray("PATTERN_MAKER")]
+visible = false
 layout_mode = 2
 script = ExtResource("22_a6jrf")
 PATTERN_MAKER = NodePath("VBoxContainer/PatternMaker")
