@@ -8,17 +8,17 @@
  🚨 **Warning:** We are not responsible for any damage that may be caused to you or your controller. Be mindful of excessive vibrations and battery drain.
 
 ## Features
- - ⚡ **Interact directly** with the 2 motors, weak and strong, that are present in most modern controllers
- - 🕹️ Use either the **triggers, joysticks** or **mouse** for a variety of tactile input options
- - 🎮 **Choose** which device to control using its ID (or even **all** of them!)
- - 🔒 **Lock** any (or both) motors to keep them rumbling continuously
- - ↔️ **Ambidextrous** gamepad controls (a mouse is still needed for full program functionality)
- - 🔧 **Snap, flip or join** controls with various settings you can enable on the fly
+ - ⚡ Interact directly with the 2 motors, weak and strong, that are present in most modern controllers
+ - 🕹️ Use either the triggers, joysticks or mouse for a variety of tactile input options
+ - 🎮 Choose which device to control using its ID (or even all of them!)
+ - 🔒 Lock any (or both) motors to keep them rumbling continuously
+ - ↔️ Ambidextrous gamepad controls (a mouse is still needed for full program functionality)
+ - 🔧 Snap, flip or join controls with various settings you can enable on the fly
  
- Technical:
+ **Technical:**
  
- - 🔁 **Continuity fix:** Allows controllers to rumble indefinitely at the same intensity (overcoming possible rumble duration hardware limitations)
- - *️⃣ **Rumble Multiplier:** Apply a custom multiplier to reduce maximum intensity (can help with stubborn rumble cut-off issues on Linux)
+ - 🔁 Continuity fix: Allows controllers to rumble indefinitely at the same intensity (overcoming possible rumble duration hardware limitations)
+ - *️⃣ Rumble Multiplier: Apply a custom multiplier to reduce maximum intensity (can help with stubborn rumble cut-off issues on Linux)
  
 ## Download & Links
  To get the latest version: https://github.com/leosefcik/controller-rumble-tool/releases/latest
