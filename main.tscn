@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://cmikhaqwhlrq1"]
+[gd_scene load_steps=38 format=3 uid="uid://cmikhaqwhlrq1"]
 
 [ext_resource type="Theme" uid="uid://dxoeymo5y7ebp" path="res://theme.tres" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://ci8gltknaa8n0" path="res://main.gd" id="1_h2yge"]
@@ -7,9 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://ckbr8bdov2vbg" path="res://icon/kenney_glyphs/Xbox Series/xbox_lb.png" id="5_vivmo"]
 [ext_resource type="Texture2D" uid="uid://br5rppxn7r5cb" path="res://icon/kenney_glyphs/Xbox Series/xbox_rb.png" id="7_2cqfq"]
 [ext_resource type="Texture2D" uid="uid://c6tew0gsdkewp" path="res://icon/kenney_glyphs/Xbox Series/xbox_button_back_icon_outline.png" id="8_yaehf"]
-[ext_resource type="Texture2D" uid="uid://cd1atd5fn6l1m" path="res://icon/kenney_glyphs/Xbox Series/xbox_button_back_icon.png" id="9_074og"]
 [ext_resource type="Texture2D" uid="uid://huvc07wk6boa" path="res://icon/kenney_glyphs/Xbox Series/xbox_button_start_icon_outline.png" id="10_cegan"]
-[ext_resource type="Texture2D" uid="uid://c128ifahpnhil" path="res://icon/kenney_glyphs/Xbox Series/xbox_button_start_icon.png" id="11_82xsv"]
 [ext_resource type="Texture2D" uid="uid://bl85x6w66rijj" path="res://icon/kenney_glyphs/Xbox Series/xbox_rb_outline.png" id="11_w48qg"]
 [ext_resource type="Texture2D" uid="uid://db0xia0noybfi" path="res://icon/kenney_glyphs/Generic/generic_joystick_horizontal.png" id="12_cegan"]
 [ext_resource type="Texture2D" uid="uid://dqfjtcdx6ghms" path="res://icon/kenney_glyphs/Xbox Series/xbox_lb_outline.png" id="12_vivmo"]
@@ -63,22 +61,13 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
-[node name="Main" type="Node"]
+[node name="Main" type="Node" node_paths=PackedStringArray("UI")]
 script = ExtResource("1_h2yge")
-LOCK_ICON = ExtResource("2_dg77c")
-UNLOCK_ICON = ExtResource("4_7mycd")
-LB_OFF_GLYPH = ExtResource("12_vivmo")
-LB_ON_GLYPH = ExtResource("5_vivmo")
-RB_OFF_GLYPH = ExtResource("11_w48qg")
-RB_ON_GLYPH = ExtResource("7_2cqfq")
-SELECT_OFF_GLYPH = ExtResource("8_yaehf")
-SELECT_ON_GLYPH = ExtResource("9_074og")
-START_OFF_GLYPH = ExtResource("10_cegan")
-START_ON_GLYPH = ExtResource("11_82xsv")
 MOUSE_STICKY_GLYPH = ExtResource("12_cegan")
 MOUSE_SNAP_GLPYH = ExtResource("17_074og")
+UI = NodePath("UI")
 
-[node name="UI" type="Control" parent="."]
+[node name="UI" type="Control" parent="." node_paths=PackedStringArray("Main")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -88,6 +77,15 @@ grow_vertical = 2
 focus_behavior_recursive = 1
 theme = ExtResource("1_0xm2m")
 script = ExtResource("15_kq58d")
+LOCK_ICON = ExtResource("2_dg77c")
+UNLOCK_ICON = ExtResource("4_7mycd")
+LB_OFF_GLYPH = ExtResource("12_vivmo")
+LB_ON_GLYPH = ExtResource("5_vivmo")
+RB_OFF_GLYPH = ExtResource("11_w48qg")
+RB_ON_GLYPH = ExtResource("7_2cqfq")
+MOUSE_STICKY_GLYPH = ExtResource("12_cegan")
+MOUSE_SNAP_GLPYH = ExtResource("17_074og")
+Main = NodePath("..")
 
 [node name="MainVBox" type="VBoxContainer" parent="UI"]
 layout_mode = 1
@@ -978,14 +976,14 @@ stretch_mode = 4
 wait_time = 0.5
 autostart = true
 
-[connection signal="value_changed" from="UI/MainVBox/Title/ControllerIdBox" to="." method="_on_controller_id_box_value_changed"]
-[connection signal="toggled" from="UI/MainVBox/Title/AllIdsBox" to="." method="_on_all_ids_box_toggled"]
-[connection signal="pressed" from="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer/HBoxContainer/TriggerToggle" to="." method="_on_trigger_toggle_pressed"]
-[connection signal="pressed" from="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer/HBoxContainer/JoystickToggle" to="." method="_on_joystick_toggle_pressed"]
-[connection signal="pressed" from="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer/HBoxContainer/ShoulderToggle" to="." method="_on_shoulder_toggle_pressed"]
-[connection signal="value_changed" from="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer/ControlSensitivitySlider" to="." method="_on_control_sensitivity_slider_value_changed"]
-[connection signal="pressed" from="UI/MainVBox/Gauges/StrongLockButton" to="." method="_on_strong_lock_button_pressed"]
-[connection signal="pressed" from="UI/MainVBox/Gauges/WeakLockButton" to="." method="_on_weak_lock_button_pressed"]
+[connection signal="value_changed" from="UI/MainVBox/Title/ControllerIdBox" to="UI" method="_on_controller_id_box_value_changed"]
+[connection signal="toggled" from="UI/MainVBox/Title/AllIdsBox" to="UI" method="_on_all_ids_box_toggled"]
+[connection signal="pressed" from="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer/HBoxContainer/TriggerToggle" to="UI" method="_on_trigger_toggle_pressed"]
+[connection signal="pressed" from="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer/HBoxContainer/JoystickToggle" to="UI" method="_on_joystick_toggle_pressed"]
+[connection signal="pressed" from="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer/HBoxContainer/ShoulderToggle" to="UI" method="_on_shoulder_toggle_pressed"]
+[connection signal="value_changed" from="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer/ControlSensitivitySlider" to="UI" method="_on_control_sensitivity_slider_value_changed"]
+[connection signal="pressed" from="UI/MainVBox/Gauges/StrongLockButton" to="UI" method="_on_strong_lock_button_pressed"]
+[connection signal="pressed" from="UI/MainVBox/Gauges/WeakLockButton" to="UI" method="_on_weak_lock_button_pressed"]
 [connection signal="drag_ended" from="UI/MainVBox/Gauges/Spacer/VBoxContainer/WeakSlider" to="." method="_on_weak_slider_drag_ended"]
 [connection signal="drag_started" from="UI/MainVBox/Gauges/Spacer/VBoxContainer/WeakSlider" to="." method="_on_weak_slider_drag_started"]
 [connection signal="value_changed" from="UI/MainVBox/Gauges/Spacer/VBoxContainer/WeakSlider" to="." method="_on_weak_slider_value_changed"]
@@ -993,19 +991,19 @@ autostart = true
 [connection signal="drag_started" from="UI/MainVBox/Gauges/Spacer/VBoxContainer/StrongSlider" to="." method="_on_strong_slider_drag_started"]
 [connection signal="value_changed" from="UI/MainVBox/Gauges/Spacer/VBoxContainer/StrongSlider" to="." method="_on_strong_slider_value_changed"]
 [connection signal="pressed" from="UI/MainVBox/Gauges/Spacer/VBoxContainer/MouseStickyMode" to="." method="_on_mouse_sticky_mode_pressed"]
-[connection signal="toggled" from="UI/MainVBox/HBoxContainer/HideModeTabs" to="." method="_on_hide_mode_tabs_toggled"]
-[connection signal="tab_changed" from="UI/MainVBox/ModeTabs" to="." method="_on_mode_tabs_tab_changed"]
+[connection signal="toggled" from="UI/MainVBox/HBoxContainer/HideModeTabs" to="UI" method="_on_hide_mode_tabs_toggled"]
+[connection signal="tab_changed" from="UI/MainVBox/ModeTabs" to="UI" method="_on_mode_tabs_tab_changed"]
 [connection signal="toggled" from="UI/MainVBox/ModeTabs/Analog Mode/VBoxContainer/HBoxContainer/AnalogAltMode" to="." method="_on_analog_alt_mode_toggled"]
 [connection signal="toggled" from="UI/MainVBox/ModeTabs/Analog Mode/VBoxContainer/HBoxContainer/AnalogVelMode" to="." method="_on_analog_vel_mode_toggled"]
 [connection signal="value_changed" from="UI/MainVBox/ModeTabs/Analog Mode/VBoxContainer/HBoxContainer/VelocityModeSpeedContainer/VelocityModeSpeed" to="." method="_on_velocity_mode_speed_value_changed"]
 [connection signal="pressed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetButton" to="UI/MainVBox/ModeTabs/Program Mode" method="_on_preset_button_pressed"]
 [connection signal="toggled" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PlayPause" to="UI/MainVBox/ModeTabs/Program Mode" method="_on_play_pause_toggled"]
-[connection signal="toggled" from="UI/MainVBox/HBoxContainer3/HideBottomRow" to="." method="_on_hide_bottom_row_toggled"]
-[connection signal="toggled" from="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer/HBoxContainer/FlipControls" to="." method="_on_flip_controls_toggled"]
-[connection signal="toggled" from="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer/HBoxContainer2/CoupleMotors" to="." method="_on_couple_motors_toggled"]
-[connection signal="value_changed" from="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer2/MultiplierNode/MultiplierBox" to="." method="_on_multiplier_box_value_changed"]
-[connection signal="toggled" from="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer2/SnapControls" to="." method="_on_snap_controls_toggled"]
-[connection signal="pressed" from="UI/InfoButton" to="." method="_on_info_button_pressed"]
-[connection signal="popup_hide" from="UI/InfoPopup" to="." method="_on_info_popup_popup_hide"]
-[connection signal="meta_clicked" from="UI/InfoPopup/Panel/VBoxContainer/InfoCredits" to="." method="_on_info_credits_meta_clicked"]
+[connection signal="toggled" from="UI/MainVBox/HBoxContainer3/HideBottomRow" to="UI" method="_on_hide_bottom_row_toggled"]
+[connection signal="toggled" from="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer/HBoxContainer/FlipControls" to="UI" method="_on_flip_controls_toggled"]
+[connection signal="toggled" from="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer/HBoxContainer2/CoupleMotors" to="UI" method="_on_couple_motors_toggled"]
+[connection signal="value_changed" from="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer2/MultiplierNode/MultiplierBox" to="UI" method="_on_multiplier_box_value_changed"]
+[connection signal="toggled" from="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer2/SnapControls" to="UI" method="_on_snap_controls_toggled"]
+[connection signal="pressed" from="UI/InfoButton" to="UI" method="_on_info_button_pressed"]
+[connection signal="popup_hide" from="UI/InfoPopup" to="UI" method="_on_info_popup_popup_hide"]
+[connection signal="meta_clicked" from="UI/InfoPopup/Panel/VBoxContainer/InfoCredits" to="UI" method="_on_info_credits_meta_clicked"]
 [connection signal="timeout" from="ControllerCheckTimer" to="." method="_on_controller_check_timer_timeout"]

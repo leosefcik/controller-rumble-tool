@@ -10,6 +10,9 @@ var joystick_enabled := true
 var shoulder_enabled := true
 var control_sensitivty := 1.0
 
+var weak_locked := false
+var strong_locked := false
+
 var rumble_multiplier := 1.0
 var flipped := false
 var coupled := false

@@ -1,20 +1,9 @@
 extends Node
 
-@export var LOCK_ICON: CompressedTexture2D
-@export var UNLOCK_ICON: CompressedTexture2D
-
-@export var LB_OFF_GLYPH: CompressedTexture2D
-@export var LB_ON_GLYPH: CompressedTexture2D
-@export var RB_OFF_GLYPH: CompressedTexture2D
-@export var RB_ON_GLYPH: CompressedTexture2D
-
-@export var SELECT_OFF_GLYPH: CompressedTexture2D
-@export var SELECT_ON_GLYPH: CompressedTexture2D
-@export var START_OFF_GLYPH: CompressedTexture2D
-@export var START_ON_GLYPH: CompressedTexture2D
-
 @export var MOUSE_STICKY_GLYPH: CompressedTexture2D
 @export var MOUSE_SNAP_GLPYH: CompressedTexture2D
+
+@export var UI: Control
 
 var mouse_sticky_enabled := false
 
@@ -28,10 +17,6 @@ var strong_desired := 0.0
 # Power - current power of controller motors
 var weak_power := 0.0
 var strong_power := 0.0
-
-# Lock - statuses of both motors locks and values theyre locked at
-var weak_locked := false
-var strong_locked := false
 
 # Mouse slider
 var weak_slider_in_use := false
@@ -54,7 +39,7 @@ var apply_fix_frame := false
 
 
 func _ready() -> void:
-	_update_glyphs()
+	UI.update_glyphs()
 
 
 func _process(delta: float) -> void:
@@ -66,7 +51,7 @@ func _process(delta: float) -> void:
 		_process_desired_analog() # sets desired values
 		_process_power_analog(delta) # sets final values
 		_rumble_analog() # processes final values into real rumble
-		_update_desired_gauges(weak_desired, strong_desired)
+		UI.update_desired_gauges(weak_desired, strong_desired)
 		
 		# Alternating mode check - flips controls exactly once, resets hit_zero check
 		if alternating_mode:
@@ -126,13 +111,13 @@ func _process_desired_analog() -> void:
 
 
 func _process_power_analog(delta: float) -> void:
-	if not weak_locked:
+	if not Settings.weak_locked:
 		if not velocity_mode:
 			weak_power = weak_desired
 		else:
 			weak_power = move_toward(weak_power, weak_desired, delta*velocity_mode_speed)
 	
-	if not strong_locked:
+	if not Settings.strong_locked:
 		if not velocity_mode:
 			strong_power = strong_desired
 		else:
@@ -154,7 +139,8 @@ func _rumble_analog() -> void:
 		if hit_zero and (weak_power > 0.0 or strong_power > 0.0):
 			hit_zero = false
 	
-	_update_power_gauges(weak_power, strong_power)
+	UI.update_power_gauges(weak_power, strong_power)
+
 
 func _continuous_vibration(id: int, fix: float) -> void:
 	Input.start_joy_vibration(
@@ -163,12 +149,14 @@ func _continuous_vibration(id: int, fix: float) -> void:
 		strong_power * Settings.rumble_multiplier * fix,
 		0.0)
 
+
 # Every 2 seconds of _process, make the current frame a fix frame
 func _increment_fix_frame(delta: float) -> void:
 	fix_delta_counter += delta
 	if fix_delta_counter > 2.0:
 		apply_fix_frame = true
 		fix_delta_counter = 0.0
+
 
 # When in a fix frame, return a 0.99 multiplier for rumble functions to use
 # (and reset fix frame status)
@@ -179,36 +167,9 @@ func _get_fix_multiplier() -> float:
 		apply_fix_frame = false
 	return fix
 
-func _update_glyphs() -> void:
-	%WeakLock.texture = LOCK_ICON if weak_locked else UNLOCK_ICON
-	%StrongLock.texture = LOCK_ICON if strong_locked else UNLOCK_ICON
-	
-	if not weak_locked:
-		%WeakLockGlyph.texture = LB_OFF_GLYPH if not Settings.flipped else RB_OFF_GLYPH
-	else:
-		%WeakLockGlyph.texture = LB_ON_GLYPH if not Settings.flipped else RB_ON_GLYPH
-	
-	if not strong_locked:
-		%StrongLockGlyph.texture = RB_OFF_GLYPH if not Settings.flipped else LB_OFF_GLYPH
-	else:
-		%StrongLockGlyph.texture = RB_ON_GLYPH if not Settings.flipped else LB_ON_GLYPH
-	
-	# Disabled after changing the controls
-	#%FlipControlsGlyph.texture = SELECT_OFF_GLYPH if not flipped else SELECT_ON_GLYPH
-	#%CoupleMotorsGlyph.texture = START_OFF_GLYPH if not coupled else START_ON_GLYPH
 
 
-func _update_desired_gauges(weak: float, strong: float) -> void:
-	%WeakDesired.value = weak
-	%StrongDesired.value = strong
-
-func _update_power_gauges(weak: float, strong: float) -> void:
-	%WeakPower.value = weak
-	%StrongPower.value = strong
-
-
-
-## INPUT
+### INPUT
 
 # Processing of button inputs
 func _input(event: InputEvent) -> void:
@@ -220,27 +181,29 @@ func _input(event: InputEvent) -> void:
 	elif event.is_action_pressed("lock_rumble_left"):
 		if not Settings.shoulder_enabled: return
 		
-		if Settings.coupled: _toggle_locks(1,1)
-		elif not Settings.flipped: _toggle_locks(1,0)
-		else: _toggle_locks(0,1)
+		if Settings.coupled: toggle_locks(1,1)
+		elif not Settings.flipped: toggle_locks(1,0)
+		else: toggle_locks(0,1)
 	
 	elif event.is_action_pressed("lock_rumble_right"):
 		if not Settings.shoulder_enabled: return
 		
-		if Settings.coupled: _toggle_locks(1,1)
-		elif not Settings.flipped: _toggle_locks(0,1)
-		else: _toggle_locks(1,0)
+		if Settings.coupled: toggle_locks(1,1)
+		elif not Settings.flipped: toggle_locks(0,1)
+		else: toggle_locks(1,0)
 	
 	elif event.is_action_pressed("lock_both_rumbles"):
-		_toggle_locks(1,1)
+		toggle_locks(1,1)
 
 
-func _toggle_locks(toggle_weak: bool, toggle_strong: bool) -> void:
+func toggle_locks(toggle_weak: bool, toggle_strong: bool) -> void:
 	if toggle_weak:
-		weak_locked = !weak_locked
+		Settings.weak_locked = !Settings.weak_locked
 	if toggle_strong:
-		strong_locked = !strong_locked
-	_update_glyphs()
+		Settings.strong_locked = !Settings.strong_locked
+	UI.update_glyphs()
+
+
 
 
 ### CONTROLLER
@@ -269,104 +232,17 @@ func _on_controller_check_timer_timeout() -> void:
 		%ControllerStatusIcon.modulate = Color.WHITE if connected_count > 0 else Color.DIM_GRAY
 
 
-func _on_controller_id_box_value_changed(value: float) -> void:
-	# this is changed so the label update in _on_controller_check_timer_timeout() triggers
-	Settings.controller_name = "asdfasf"
-	Settings.controller_id = int(value)
-
-
-func _on_all_ids_box_toggled(toggled_on: bool) -> void:
-	Settings.control_all_ids = toggled_on
-	if toggled_on: %ControllerIdBox.editable = false
-	else: %ControllerIdBox.editable = true
-	
-	# this is changed so the label update in _on_controller_check_timer_timeout() triggers
-	Settings.controller_name = "asdfasf"
-
-### TAB NAVIGATION
-
-func _on_mode_tabs_tab_changed(tab: int) -> void:
-	mode = tab as Modes
-	_reset_rumble()
-
-
-func _reset_rumble() -> void:
-	Input.stop_joy_vibration(Settings.controller_id)
+func reset_rumble() -> void:
+	for i in range(Settings.CONTROLLER_ID_RANGE):
+		Input.stop_joy_vibration(i)
 	weak_desired = 0.0
 	strong_desired = 0.0
-	_update_desired_gauges(0.0, 0.0)
-	_update_power_gauges(0.0, 0.0)
-	weak_locked = false
-	strong_locked = false
-	_update_glyphs()
+	UI.update_desired_gauges(0.0, 0.0)
+	UI.update_power_gauges(0.0, 0.0)
+	Settings.weak_locked = false
+	Settings.strong_locked = false
+	UI.update_glyphs()
 
-### LOCK BUTTON UI
-
-func _on_weak_lock_button_pressed() -> void:
-	_toggle_locks(1,0)
-	if Settings.coupled: _toggle_locks(0,1)
-
-func _on_strong_lock_button_pressed() -> void:
-	_toggle_locks(0,1)
-	if Settings.coupled: _toggle_locks(1,0)
-
-## TOGLGES
-
-func _on_trigger_toggle_pressed() -> void:
-	Settings.trigger_enabled = !Settings.trigger_enabled
-	if Settings.trigger_enabled: %TriggerToggleX.hide()
-	else: %TriggerToggleX.show()
-
-func _on_joystick_toggle_pressed() -> void:
-	Settings.joystick_enabled = !Settings.joystick_enabled
-	if Settings.joystick_enabled: %JoystickToggleX.hide()
-	else: %JoystickToggleX.show()
-
-func _on_shoulder_toggle_pressed() -> void:
-	Settings.shoulder_enabled = !Settings.shoulder_enabled
-	if Settings.shoulder_enabled: %ShoulderToggleX.hide()
-	else: %ShoulderToggleX.show()
-
-func _on_control_sensitivity_slider_value_changed(value: float) -> void:
-	Settings.control_sensitivty = value
-	%ControlSensitivityLabel.text = str("Sensitivity: ", value)
-
-
-### SETTINGS
-
-func _on_multiplier_box_value_changed(value: float) -> void:
-	Settings.rumble_multiplier = value
-
-func _on_flip_controls_toggled(toggled_on: bool) -> void:
-	Settings.flipped = toggled_on
-	# Flip mouse slides too. A bit ugly but eh
-	if toggled_on: %WeakSlider.get_parent().move_child(%WeakSlider, 2)
-	else: %WeakSlider.get_parent().move_child(%WeakSlider, 1)
-	_update_glyphs() # to update LB/RB glyphs
-
-func _on_couple_motors_toggled(toggled_on: bool) -> void:
-	Settings.coupled = toggled_on
-	weak_locked = false
-	strong_locked = false
-	_update_glyphs() # to update LB/RB glyphs
-
-func _on_snap_controls_toggled(toggled_on: bool) -> void:
-	Settings.incremented = toggled_on
-
-
-
-### OTHER
-
-func _on_info_button_pressed() -> void:
-	%BlurRect.show()
-	%InfoPopup.popup()
-
-func _on_info_popup_popup_hide() -> void:
-	%BlurRect.hide()
-
-# For the URLs to work in the Credits Popup
-func _on_info_credits_meta_clicked(meta: Variant) -> void:
-	OS.shell_open(str(meta))
 
 
 # Mouse control slider logic
@@ -419,16 +295,3 @@ func _on_analog_vel_mode_toggled(toggled_on: bool) -> void:
 func _on_velocity_mode_speed_value_changed(value: float) -> void:
 	velocity_mode_speed = value
 	%VelocityModeSpeedLabel.text = str("Speed: ", value, "x")
-
-
-## Dropdowns
-
-func _on_hide_mode_tabs_toggled(toggled_on: bool) -> void:
-	if toggled_on: %ModeTabs.hide()
-	else: %ModeTabs.show()
-
-func _on_hide_bottom_row_toggled(toggled_on: bool) -> void:
-	if toggled_on:
-		%SettingsBox.hide()
-	else:
-		%SettingsBox.show()

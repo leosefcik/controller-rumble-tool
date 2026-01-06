@@ -20,9 +20,10 @@
  - 🔁 Continuity fix: Allows controllers to rumble indefinitely at the same intensity (overcoming possible rumble duration hardware limitations)
  - *️⃣ Rumble Multiplier: Apply a custom multiplier to reduce maximum intensity (can help with stubborn rumble cut-off issues on Linux)
  
-## Download & Links
+## Download
  To get the latest version: https://github.com/leosefcik/controller-rumble-tool/releases/latest
- 
+
+## Links
  This GitHub: https://github.com/leosefcik/controller-rumble-tool
  
  Itch.io (WIP): https://leosefcik.itch.io/controller-rumble-tool
