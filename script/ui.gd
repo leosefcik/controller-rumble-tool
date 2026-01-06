@@ -10,9 +10,6 @@ extends Control
 @export var RB_OFF_GLYPH: CompressedTexture2D
 @export var RB_ON_GLYPH: CompressedTexture2D
 
-@export var MOUSE_STICKY_GLYPH: CompressedTexture2D
-@export var MOUSE_SNAP_GLPYH: CompressedTexture2D
-
 @export_group("Nodes")
 
 @export var Main: Node

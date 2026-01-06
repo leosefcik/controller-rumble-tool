@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://cmikhaqwhlrq1"]
+[gd_scene load_steps=39 format=3 uid="uid://cmikhaqwhlrq1"]
 
 [ext_resource type="Theme" uid="uid://dxoeymo5y7ebp" path="res://theme.tres" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://ci8gltknaa8n0" path="res://main.gd" id="1_h2yge"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" uid="uid://bcmif82n5dhw6" path="res://script/ui.gd" id="15_kq58d"]
 [ext_resource type="Texture2D" uid="uid://cgxhsima8b2d3" path="res://icon/kenney_glyphs/Flairs/flair_disabled_cross.png" id="15_yaehf"]
 [ext_resource type="Texture2D" uid="uid://c4k7h56m5qum3" path="res://icon/kenney_glyphs/Generic/generic_joystick_left.png" id="17_074og"]
+[ext_resource type="Script" uid="uid://dd8utxtchtrsb" path="res://script/analog_mouse_control.gd" id="17_kq58d"]
 [ext_resource type="Texture2D" uid="uid://vn8gli8llxvq" path="res://icon/drop_down.svg" id="19_0odxb"]
 [ext_resource type="Texture2D" uid="uid://cobfw7wvbxehb" path="res://icon/kenney_glyphs/Nintendo Switch/switch_dpad_right_outline.png" id="19_getpj"]
 [ext_resource type="Texture2D" uid="uid://t7f811s4a6nd" path="res://icon/kenney_glyphs/Generic/generic_button_trigger_a_fill.png" id="19_lswn8"]
@@ -83,8 +84,6 @@ LB_OFF_GLYPH = ExtResource("12_vivmo")
 LB_ON_GLYPH = ExtResource("5_vivmo")
 RB_OFF_GLYPH = ExtResource("11_w48qg")
 RB_ON_GLYPH = ExtResource("7_2cqfq")
-MOUSE_STICKY_GLYPH = ExtResource("12_cegan")
-MOUSE_SNAP_GLPYH = ExtResource("17_074og")
 Main = NodePath("..")
 
 [node name="MainVBox" type="VBoxContainer" parent="UI"]
@@ -383,11 +382,14 @@ stretch_mode = 5
 [node name="VSeparator" type="VSeparator" parent="UI/MainVBox/Gauges"]
 layout_mode = 2
 
-[node name="Spacer" type="Control" parent="UI/MainVBox/Gauges"]
+[node name="AnalogMouseControl" type="Control" parent="UI/MainVBox/Gauges"]
 layout_mode = 2
 size_flags_horizontal = 3
+script = ExtResource("17_kq58d")
+MOUSE_STICKY_GLYPH = ExtResource("12_cegan")
+MOUSE_SNAP_GLPYH = ExtResource("17_074og")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/MainVBox/Gauges/Spacer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MainVBox/Gauges/AnalogMouseControl"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -396,13 +398,13 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="UI/MainVBox/Gauges/Spacer/VBoxContainer"]
+[node name="Label" type="Label" parent="UI/MainVBox/Gauges/AnalogMouseControl/VBoxContainer"]
 visible = false
 layout_mode = 2
 text = "Mouse control"
 horizontal_alignment = 1
 
-[node name="WeakSlider" type="HSlider" parent="UI/MainVBox/Gauges/Spacer/VBoxContainer"]
+[node name="WeakSlider" type="HSlider" parent="UI/MainVBox/Gauges/AnalogMouseControl/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Mouse slider for controlling the weak motor"
@@ -411,7 +413,7 @@ theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_getpj")
 max_value = 1.0
 step = 0.01
 
-[node name="StrongSlider" type="HSlider" parent="UI/MainVBox/Gauges/Spacer/VBoxContainer"]
+[node name="StrongSlider" type="HSlider" parent="UI/MainVBox/Gauges/AnalogMouseControl/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Mouse slider for controlling the strong motor"
@@ -420,7 +422,7 @@ theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_ryguw")
 max_value = 1.0
 step = 0.01
 
-[node name="MouseStickyMode" type="Button" parent="UI/MainVBox/Gauges/Spacer/VBoxContainer"]
+[node name="MouseStickyMode" type="Button" parent="UI/MainVBox/Gauges/AnalogMouseControl/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(35, 35)
 layout_mode = 2
@@ -749,7 +751,7 @@ size_flags_horizontal = 3
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer"]
 layout_mode = 2
 
-[node name="FlipControls" type="CheckBox" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer/HBoxContainer"]
+[node name="#" type="CheckBox" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -984,13 +986,13 @@ autostart = true
 [connection signal="value_changed" from="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer/ControlSensitivitySlider" to="UI" method="_on_control_sensitivity_slider_value_changed"]
 [connection signal="pressed" from="UI/MainVBox/Gauges/StrongLockButton" to="UI" method="_on_strong_lock_button_pressed"]
 [connection signal="pressed" from="UI/MainVBox/Gauges/WeakLockButton" to="UI" method="_on_weak_lock_button_pressed"]
-[connection signal="drag_ended" from="UI/MainVBox/Gauges/Spacer/VBoxContainer/WeakSlider" to="." method="_on_weak_slider_drag_ended"]
-[connection signal="drag_started" from="UI/MainVBox/Gauges/Spacer/VBoxContainer/WeakSlider" to="." method="_on_weak_slider_drag_started"]
-[connection signal="value_changed" from="UI/MainVBox/Gauges/Spacer/VBoxContainer/WeakSlider" to="." method="_on_weak_slider_value_changed"]
-[connection signal="drag_ended" from="UI/MainVBox/Gauges/Spacer/VBoxContainer/StrongSlider" to="." method="_on_strong_slider_drag_ended"]
-[connection signal="drag_started" from="UI/MainVBox/Gauges/Spacer/VBoxContainer/StrongSlider" to="." method="_on_strong_slider_drag_started"]
-[connection signal="value_changed" from="UI/MainVBox/Gauges/Spacer/VBoxContainer/StrongSlider" to="." method="_on_strong_slider_value_changed"]
-[connection signal="pressed" from="UI/MainVBox/Gauges/Spacer/VBoxContainer/MouseStickyMode" to="." method="_on_mouse_sticky_mode_pressed"]
+[connection signal="drag_ended" from="UI/MainVBox/Gauges/AnalogMouseControl/VBoxContainer/WeakSlider" to="UI/MainVBox/Gauges/AnalogMouseControl" method="_on_weak_slider_drag_ended"]
+[connection signal="drag_started" from="UI/MainVBox/Gauges/AnalogMouseControl/VBoxContainer/WeakSlider" to="UI/MainVBox/Gauges/AnalogMouseControl" method="_on_weak_slider_drag_started"]
+[connection signal="value_changed" from="UI/MainVBox/Gauges/AnalogMouseControl/VBoxContainer/WeakSlider" to="UI/MainVBox/Gauges/AnalogMouseControl" method="_on_weak_slider_value_changed"]
+[connection signal="drag_ended" from="UI/MainVBox/Gauges/AnalogMouseControl/VBoxContainer/StrongSlider" to="UI/MainVBox/Gauges/AnalogMouseControl" method="_on_strong_slider_drag_ended"]
+[connection signal="drag_started" from="UI/MainVBox/Gauges/AnalogMouseControl/VBoxContainer/StrongSlider" to="UI/MainVBox/Gauges/AnalogMouseControl" method="_on_strong_slider_drag_started"]
+[connection signal="value_changed" from="UI/MainVBox/Gauges/AnalogMouseControl/VBoxContainer/StrongSlider" to="UI/MainVBox/Gauges/AnalogMouseControl" method="_on_strong_slider_value_changed"]
+[connection signal="pressed" from="UI/MainVBox/Gauges/AnalogMouseControl/VBoxContainer/MouseStickyMode" to="UI/MainVBox/Gauges/AnalogMouseControl" method="_on_mouse_sticky_mode_pressed"]
 [connection signal="toggled" from="UI/MainVBox/HBoxContainer/HideModeTabs" to="UI" method="_on_hide_mode_tabs_toggled"]
 [connection signal="tab_changed" from="UI/MainVBox/ModeTabs" to="UI" method="_on_mode_tabs_tab_changed"]
 [connection signal="toggled" from="UI/MainVBox/ModeTabs/Analog Mode/VBoxContainer/HBoxContainer/AnalogAltMode" to="." method="_on_analog_alt_mode_toggled"]
@@ -999,7 +1001,7 @@ autostart = true
 [connection signal="pressed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetButton" to="UI/MainVBox/ModeTabs/Program Mode" method="_on_preset_button_pressed"]
 [connection signal="toggled" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PlayPause" to="UI/MainVBox/ModeTabs/Program Mode" method="_on_play_pause_toggled"]
 [connection signal="toggled" from="UI/MainVBox/HBoxContainer3/HideBottomRow" to="UI" method="_on_hide_bottom_row_toggled"]
-[connection signal="toggled" from="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer/HBoxContainer/FlipControls" to="UI" method="_on_flip_controls_toggled"]
+[connection signal="toggled" from="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer/HBoxContainer/#" to="UI" method="_on_flip_controls_toggled"]
 [connection signal="toggled" from="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer/HBoxContainer2/CoupleMotors" to="UI" method="_on_couple_motors_toggled"]
 [connection signal="value_changed" from="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer2/MultiplierNode/MultiplierBox" to="UI" method="_on_multiplier_box_value_changed"]
 [connection signal="toggled" from="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer2/SnapControls" to="UI" method="_on_snap_controls_toggled"]
