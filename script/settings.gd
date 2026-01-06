@@ -1,5 +1,7 @@
 extends Node
 
+# This is an autoload
+
 # These settings are stored here as reference for other functions globally to use.
 # Some of the settings that require to be dynamically changed (like Flipped and Coupled)
 # are controlled via changing the .enabled value on their respective buttons, as this keeps the

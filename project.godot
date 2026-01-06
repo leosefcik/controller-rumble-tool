@@ -20,7 +20,7 @@ config/icon="uid://cst8li6a7al6b"
 
 [autoload]
 
-Settings="*res://settings.gd"
+Settings="*res://script/settings.gd"
 
 [debug]
 
