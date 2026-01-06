@@ -30,7 +30,7 @@ func _setup_row_nodes() -> void:
 
 
 func _process(delta: float) -> void:
-	if not visible: return
+	if not visible: return # Only if on tab
 	
 	if playing:
 		#Input.start_joy_vibration(MAIN.controller_id, 0.2, 0.2, 0.0)

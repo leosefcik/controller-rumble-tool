@@ -14,6 +14,11 @@ extends Control
 
 @export var Main: Node
 
+# Ideally, I should get rid of the unique names
+# used all over this project
+# and just like make a bunch of references to the nodes in this script
+# so i can @export them and do so only once which would be better
+# but eh
 
 # Updates Lock glyphs
 func update_glyphs() -> void:
@@ -100,8 +105,7 @@ func _on_strong_lock_button_pressed() -> void:
 
 ### MODE TABS
 
-func _on_mode_tabs_tab_changed(tab: int) -> void:
-	Main.mode = tab
+func _on_mode_tabs_tab_changed(_tab: int) -> void:
 	Main.reset_rumble()
 
 

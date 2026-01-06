@@ -462,9 +462,10 @@ size_flags_vertical = 3
 tab_alignment = 1
 current_tab = 0
 
-[node name="Analog Mode" type="TabBar" parent="UI/MainVBox/ModeTabs"]
+[node name="Analog Mode" type="TabBar" parent="UI/MainVBox/ModeTabs" node_paths=PackedStringArray("UI")]
 layout_mode = 2
 script = ExtResource("23_seu75")
+UI = NodePath("../../..")
 metadata/_tab_index = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Analog Mode"]
@@ -751,7 +752,7 @@ size_flags_horizontal = 3
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer"]
 layout_mode = 2
 
-[node name="#" type="CheckBox" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer/HBoxContainer"]
+[node name="FlipControls" type="CheckBox" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -995,13 +996,13 @@ autostart = true
 [connection signal="pressed" from="UI/MainVBox/Gauges/AnalogMouseControl/VBoxContainer/MouseStickyMode" to="UI/MainVBox/Gauges/AnalogMouseControl" method="_on_mouse_sticky_mode_pressed"]
 [connection signal="toggled" from="UI/MainVBox/HBoxContainer/HideModeTabs" to="UI" method="_on_hide_mode_tabs_toggled"]
 [connection signal="tab_changed" from="UI/MainVBox/ModeTabs" to="UI" method="_on_mode_tabs_tab_changed"]
-[connection signal="toggled" from="UI/MainVBox/ModeTabs/Analog Mode/VBoxContainer/HBoxContainer/AnalogAltMode" to="." method="_on_analog_alt_mode_toggled"]
-[connection signal="toggled" from="UI/MainVBox/ModeTabs/Analog Mode/VBoxContainer/HBoxContainer/AnalogVelMode" to="." method="_on_analog_vel_mode_toggled"]
-[connection signal="value_changed" from="UI/MainVBox/ModeTabs/Analog Mode/VBoxContainer/HBoxContainer/VelocityModeSpeedContainer/VelocityModeSpeed" to="." method="_on_velocity_mode_speed_value_changed"]
+[connection signal="toggled" from="UI/MainVBox/ModeTabs/Analog Mode/VBoxContainer/HBoxContainer/AnalogAltMode" to="UI/MainVBox/ModeTabs/Analog Mode" method="_on_analog_alt_mode_toggled"]
+[connection signal="toggled" from="UI/MainVBox/ModeTabs/Analog Mode/VBoxContainer/HBoxContainer/AnalogVelMode" to="UI/MainVBox/ModeTabs/Analog Mode" method="_on_analog_vel_mode_toggled"]
+[connection signal="value_changed" from="UI/MainVBox/ModeTabs/Analog Mode/VBoxContainer/HBoxContainer/VelocityModeSpeedContainer/VelocityModeSpeed" to="UI/MainVBox/ModeTabs/Analog Mode" method="_on_velocity_mode_speed_value_changed"]
 [connection signal="pressed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetButton" to="UI/MainVBox/ModeTabs/Program Mode" method="_on_preset_button_pressed"]
 [connection signal="toggled" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PlayPause" to="UI/MainVBox/ModeTabs/Program Mode" method="_on_play_pause_toggled"]
 [connection signal="toggled" from="UI/MainVBox/HBoxContainer3/HideBottomRow" to="UI" method="_on_hide_bottom_row_toggled"]
-[connection signal="toggled" from="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer/HBoxContainer/#" to="UI" method="_on_flip_controls_toggled"]
+[connection signal="toggled" from="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer/HBoxContainer/FlipControls" to="UI" method="_on_flip_controls_toggled"]
 [connection signal="toggled" from="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer/HBoxContainer2/CoupleMotors" to="UI" method="_on_couple_motors_toggled"]
 [connection signal="value_changed" from="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer2/MultiplierNode/MultiplierBox" to="UI" method="_on_multiplier_box_value_changed"]
 [connection signal="toggled" from="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer2/SnapControls" to="UI" method="_on_snap_controls_toggled"]

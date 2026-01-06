@@ -24,3 +24,34 @@ var rumble_multiplier := 1.0
 var flipped := false # %FlipControls
 var coupled := false # %CoupleMotors
 var incremented := false
+
+
+
+
+# These are used to apply a "fix frame" every ~2 seconds
+# Every "fix frame", rumble functions should run a 0.99x multiplier,
+# and then return to normal. This variation will allow the controller
+# to rumble continuously, because usually, hardware prevents the controller
+# from rumbling too long with the same intensity.
+var fix_delta_counter := 0.0
+var apply_fix_frame := false
+
+func _process(delta: float) -> void:
+	# Fix Frame counter - every 2 seconds ish
+	_increment_fix_frame(delta)
+
+# Every 2 seconds of _process, make the current frame a fix frame
+func _increment_fix_frame(delta: float) -> void:
+	fix_delta_counter += delta
+	if fix_delta_counter > 2.0:
+		apply_fix_frame = true
+		fix_delta_counter = 0.0
+
+# When in a fix frame, return a 0.99 multiplier for rumble functions to use
+# (and reset fix frame status)
+func get_fix_multiplier() -> float:
+	var fix := 1.0
+	if apply_fix_frame:
+		fix = 0.99
+		apply_fix_frame = false
+	return fix
