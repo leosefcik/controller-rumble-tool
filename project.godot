@@ -34,6 +34,15 @@ window/energy_saving/keep_screen_on=false
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[file_customization]
+
+folder_colors={
+"res://font/": "orange",
+"res://icon/": "green",
+"res://logo/": "blue",
+"res://script/": "gray"
+}
+
 [input]
 
 increase_rumble_left={

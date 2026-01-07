@@ -3,45 +3,184 @@ extends TabBar
 @export var PATTERN_MAKER : HBoxContainer
 
 # Idk why i called them rows. They're columns
+# hardcoded max, if i ever wanted to expand it i could go ahead
+# (and add more corresponding spinboxes too)
 const ROWS := 4
 
-# [row node 0-3][0: Duration, 1: Pause, 2: Indicator]
-var PATTERN_NODES := []
+var PATTERN_NODES := [] # [row node 0-3][0: Duration, 1: Pause, 2: Indicator]
+var tact_amount := 1
+var durations := [0.0, 0.0, 0.0, 0.0]
+var pauses := [0.0, 0.0, 0.0, 0.0]
 
 var current_tact := 0
-var time_elapsed := 0.0
-var playing := false
+var time_elapsed := 0.0 # used to time tacts
+var playing := false # play button
+var duration_phase := true # if in first (duration) or second (pause) phase of the tact
 
-@onready var MAIN := get_node("/root/Main")
-
-
-func _ready() -> void:
-	_setup_row_nodes()
+var complex_tacts := true # option to switch between progress/dot tacts
 
 
-func _setup_row_nodes() -> void:
+func _setup_row_nodes_array() -> void:
 	for i in range(ROWS):
 		var current_node := PATTERN_MAKER.get_node(str("Row", i+1))
 		PATTERN_NODES.append({
 			"Duration": current_node.get_node("Duration"),
 			"Pause": current_node.get_node("Pause"),
 			"Indicator": current_node.get_node("Indicator"),
+			"DurationProgress": current_node.get_node("Indicators/DurationProgress"),
+			"PauseProgress": current_node.get_node("Indicators/PauseProgress"),
 		})
+		PATTERN_NODES[i]["Duration"].value_changed.connect(_on_any_spinbox_value_changed)
+		PATTERN_NODES[i]["Pause"].value_changed.connect(_on_any_spinbox_value_changed)
 
+
+func _ready() -> void:
+	_setup_row_nodes_array()
+	_update_pattern_box_editability()
+	_reset_tact_indicators()
+
+
+### PLAYING
 
 func _process(delta: float) -> void:
 	if not visible: return # Only if on tab
 	
 	if playing:
-		#Input.start_joy_vibration(MAIN.controller_id, 0.2, 0.2, 0.0)
+		_play_program(delta)
+
+
+func _play_program(delta: float) -> void:
+	time_elapsed += delta
+	_update_current_tact_indicator()
+	
+	if duration_phase and time_elapsed > durations[current_tact]:
+		duration_phase = false
+		time_elapsed = 0.0
+	
+	elif not duration_phase and time_elapsed > pauses[current_tact]:
+		duration_phase = true
+		time_elapsed = 0.0
+		current_tact += 1
+	if current_tact >= tact_amount:
+		current_tact = 0
+		_reset_tact_indicators()
+
+
+func _reset_progress() -> void:
+	time_elapsed = 0.0
+	current_tact = 0
+	duration_phase = true
+	_reset_tact_indicators()
+
+
+### PATTERN LOGIC
+
+# Stored Tact amount --> SpinBox editability
+func _update_pattern_box_editability() -> void:
+	for i in range(ROWS):
+		PATTERN_NODES[i]["Duration"].editable = false
+		PATTERN_NODES[i]["Pause"].editable = false
+	
+	for i in range(tact_amount):
+		PATTERN_NODES[i]["Duration"].editable = true
+		PATTERN_NODES[i]["Pause"].editable = true
+
+# Stored dur/pause values --> SpinBox values
+func _update_pattern_box_values() -> void:
+	for i in range(ROWS):
+		PATTERN_NODES[i]["Duration"].set_value_no_signal(durations[i])
+		PATTERN_NODES[i]["Pause"].set_value_no_signal(pauses[i])
+
+# SpinBox values --> Stored dur/pause values
+func _update_pattern_stored_values() -> void:
+	for i in range(ROWS):
+		durations[i] = PATTERN_NODES[i]["Duration"].value
+		pauses[i] = PATTERN_NODES[i]["Pause"].value
+
+# Resets the little indicators below the tacts to a clean slate
+func _reset_tact_indicators() -> void:
+	if complex_tacts: # complex, progress tacts
+		for i in PATTERN_NODES:
+			i["DurationProgress"].value = 0.0
+			i["PauseProgress"].value = 0.0
+	
+	else:
 		pass
 
-func _on_preset_button_pressed() -> void:
-	PATTERN_NODES[0]["Duration"].value = 1.0
-	PATTERN_NODES[0]["Pause"].value = 1.0
-	PATTERN_NODES[1]["Duration"].value = 0.5
-	PATTERN_NODES[1]["Pause"].value = 0.5
+func _update_current_tact_indicator() -> void:
+	if complex_tacts: # complex, progress tacts
+		if duration_phase:
+			var progress: float = time_elapsed / durations[current_tact]
+			PATTERN_NODES[current_tact]["DurationProgress"].value = progress
+		else:
+			var progress: float = time_elapsed / pauses[current_tact]
+			PATTERN_NODES[current_tact]["PauseProgress"].value = progress
 
+
+### INPUT
+
+func _input(event: InputEvent) -> void:
+	if visible:
+		if event.is_action_pressed("pause_resume_rumble"):
+			%PlayPause.button_pressed = !%PlayPause.button_pressed
+
+
+### UI
 
 func _on_play_pause_toggled(toggled_on: bool) -> void:
 	playing = toggled_on
+
+
+func _on_tact_amount_value_changed(value: float) -> void:
+	tact_amount = int(value)
+	_update_pattern_box_editability()
+
+
+func _on_any_spinbox_value_changed(_value: float) -> void:
+	_update_pattern_stored_values()
+
+
+"""
+func _on_simple_tact_toggle_pressed() -> void:
+	if %SimpleTactToggle.text == "C": # From complex to simple
+		complex_tacts = false
+		%SimpleTactToggle.text = "S"
+		for i in PATTERN_NODES:
+			i["DurationProgress"].hide()
+			i["PauseProgress"].hide()
+			i["Indicator"].show()
+	
+	else: # From simple to complex
+		complex_tacts = true
+		%SimpleTactToggle.text = "C"
+		for i in PATTERN_NODES:
+			i["DurationProgress"].show()
+			i["PauseProgress"].show()
+			i["Indicator"].hide()
+"""
+
+
+### OTHER UI
+
+func _on_preset_button_pressed() -> void:
+	durations = [1.0, 0.5, 0.0, 0.0]
+	pauses = [1.0, 0.5, 0.0, 0.0]
+	%TactAmount.value = 2
+	_update_pattern_box_values()
+	_reset_progress()
+
+func _on_preset_2_button_pressed() -> void:
+	durations = [0.4, 0.4, 0.8, 0.8]
+	pauses = [0.8, 0.8, 0.4, 0.4]
+	#durations = [1,1,2,2]
+	#pauses = [2,2,1,1]
+	%TactAmount.value = 4
+	_update_pattern_box_values()
+	_reset_progress()
+
+func _on_clear_button_pressed() -> void:
+	durations = [0.0, 0.0, 0.0, 0.0]
+	pauses = [0.0, 0.0, 0.0, 0.0]
+	%TactAmount.value = 1
+	_update_pattern_box_values()
+	_reset_progress()

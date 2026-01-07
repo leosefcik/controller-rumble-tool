@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://cmikhaqwhlrq1"]
+[gd_scene load_steps=43 format=3 uid="uid://cmikhaqwhlrq1"]
 
 [ext_resource type="Theme" uid="uid://dxoeymo5y7ebp" path="res://theme.tres" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://ci8gltknaa8n0" path="res://script/main.gd" id="1_h2yge"]
@@ -28,8 +28,10 @@
 [ext_resource type="Script" uid="uid://by1rf4skvhdw8" path="res://script/program_mode.gd" id="22_a6jrf"]
 [ext_resource type="Texture2D" uid="uid://bnlh0nq1ahiod" path="res://icon/play.svg" id="23_qsp4k"]
 [ext_resource type="Script" uid="uid://dghdn10ni5ga5" path="res://script/analog_mode.gd" id="23_seu75"]
+[ext_resource type="Texture2D" uid="uid://dqwemni60trqp" path="res://icon/kenney_glyphs/Nintendo Switch/switch_dpad_left_outline.png" id="24_htxhm"]
 [ext_resource type="Texture2D" uid="uid://bc3if7fk4tikx" path="res://icon/pause.svg" id="24_kq58d"]
 [ext_resource type="Texture2D" uid="uid://cst8li6a7al6b" path="res://logo/motor_icon_v1.png" id="25_0odxb"]
+[ext_resource type="Texture2D" uid="uid://bdfgi71ao14ht" path="res://icon/kenney_glyphs/Nintendo Switch/switch_buttons_right_outline.png" id="25_jq2sk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1bvp3"]
 bg_color = Color(0.66, 0.66, 0.66, 0.27058825)
@@ -57,6 +59,21 @@ corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a6jrf"]
+bg_color = Color(0.8217887, 0.8217887, 0.8217885, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_htxhm"]
+bg_color = Color(0.13319641, 0.13319638, 0.13319644, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jq2sk"]
+bg_color = Color(0.7708395, 0.77083945, 0.7708394, 1)
 corner_radius_top_left = 3
 corner_radius_top_right = 3
 corner_radius_bottom_right = 3
@@ -119,6 +136,7 @@ clip_text = true
 
 [node name="ControllerIdBox" type="SpinBox" parent="UI/MainVBox/Title"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 tooltip_text = "The ID of the device to activate rumble on.
 Usually, the first connected gamepad is at #0.
@@ -469,14 +487,16 @@ UI = NodePath("../../..")
 metadata/_tab_index = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Analog Mode"]
+custom_minimum_size = Vector2(550, 0)
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 12.0
-offset_top = 12.0
-offset_right = -12.0
-offset_bottom = -12.0
+offset_left = -275.0
+offset_top = 6.0
+offset_right = 275.0
+offset_bottom = -6.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
@@ -536,12 +556,13 @@ metadata/_tab_index = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 6.0
+offset_left = -275.5
 offset_top = 6.0
-offset_right = -6.0
+offset_right = 275.5
 offset_bottom = -6.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -553,22 +574,79 @@ size_flags_vertical = 6
 text = "WIP Section"
 horizontal_alignment = 1
 
-[node name="PresetButton" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer"]
+[node name="PlaceholderPresets" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="PresetButton" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PlaceholderPresets"]
 layout_mode = 2
 text = "Preset"
+
+[node name="Preset2Button" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PlaceholderPresets"]
+layout_mode = 2
+text = "Preset2"
+
+[node name="ClearButton" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PlaceholderPresets"]
+layout_mode = 2
+text = "Clear"
 
 [node name="HSeparator" type="HSeparator" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer"]
 layout_mode = 2
 
-[node name="PlayPause" type="TextureButton" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer"]
+[node name="ProgrammerControls" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TactAmount" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "The amount of active \"tacts\" in the current program"
+min_value = 1.0
+max_value = 4.0
+value = 1.0
+rounded = true
+
+[node name="VSeparator2" type="VSeparator" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VSeparator" type="VSeparator" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls"]
+layout_mode = 2
+texture = ExtResource("24_htxhm")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="TextureRect2" type="TextureRect" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls"]
+layout_mode = 2
+texture = ExtResource("25_jq2sk")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls"]
+layout_mode = 2
+text = "-"
+
+[node name="PlayPause" type="TextureButton" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 size_flags_horizontal = 4
+tooltip_text = "Play/pause the playback of the program."
 toggle_mode = true
 texture_normal = ExtResource("23_qsp4k")
 texture_pressed = ExtResource("24_kq58d")
 ignore_texture_size = true
 stretch_mode = 5
+
+[node name="VSpacer" type="Control" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="PatternMaker" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer"]
 layout_mode = 2
@@ -582,6 +660,7 @@ alignment = 1
 [node name="Label" type="Label" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/VBoxContainer"]
 layout_mode = 2
 text = "Duration:"
+horizontal_alignment = 2
 
 [node name="Control" type="Control" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/VBoxContainer"]
 custom_minimum_size = Vector2(0, 6)
@@ -590,6 +669,7 @@ layout_mode = 2
 [node name="Label2" type="Label" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/VBoxContainer"]
 layout_mode = 2
 text = "Pause:"
+horizontal_alignment = 2
 
 [node name="Spacer" type="Panel" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/VBoxContainer"]
 custom_minimum_size = Vector2(25, 5)
@@ -621,10 +701,32 @@ suffix = "s"
 custom_arrow_step = 0.25
 
 [node name="Indicator" type="Panel" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row1"]
+visible = false
 custom_minimum_size = Vector2(25, 5)
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_a6jrf")
+
+[node name="Indicators" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row1"]
+layout_mode = 2
+
+[node name="DurationProgress" type="ProgressBar" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row1/Indicators"]
+custom_minimum_size = Vector2(39, 5)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_htxhm")
+theme_override_styles/fill = SubResource("StyleBoxFlat_jq2sk")
+max_value = 1.0
+value = 1.0
+show_percentage = false
+
+[node name="PauseProgress" type="ProgressBar" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row1/Indicators"]
+custom_minimum_size = Vector2(39, 5)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_htxhm")
+theme_override_styles/fill = SubResource("StyleBoxFlat_jq2sk")
+max_value = 1.0
+value = 1.0
+show_percentage = false
 
 [node name="Spacer2" type="Control" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker"]
 custom_minimum_size = Vector2(12, 0)
@@ -650,10 +752,32 @@ suffix = "s"
 custom_arrow_step = 0.25
 
 [node name="Indicator" type="Panel" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row2"]
+visible = false
 custom_minimum_size = Vector2(25, 5)
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_a6jrf")
+
+[node name="Indicators" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row2"]
+layout_mode = 2
+
+[node name="DurationProgress" type="ProgressBar" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row2/Indicators"]
+custom_minimum_size = Vector2(39, 5)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_htxhm")
+theme_override_styles/fill = SubResource("StyleBoxFlat_jq2sk")
+max_value = 1.0
+value = 1.0
+show_percentage = false
+
+[node name="PauseProgress" type="ProgressBar" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row2/Indicators"]
+custom_minimum_size = Vector2(39, 5)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_htxhm")
+theme_override_styles/fill = SubResource("StyleBoxFlat_jq2sk")
+max_value = 1.0
+value = 0.5
+show_percentage = false
 
 [node name="Spacer3" type="Control" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker"]
 custom_minimum_size = Vector2(12, 0)
@@ -679,10 +803,30 @@ suffix = "s"
 custom_arrow_step = 0.25
 
 [node name="Indicator" type="Panel" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row3"]
+visible = false
 custom_minimum_size = Vector2(25, 5)
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_a6jrf")
+
+[node name="Indicators" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row3"]
+layout_mode = 2
+
+[node name="DurationProgress" type="ProgressBar" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row3/Indicators"]
+custom_minimum_size = Vector2(39, 5)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_htxhm")
+theme_override_styles/fill = SubResource("StyleBoxFlat_jq2sk")
+max_value = 1.0
+show_percentage = false
+
+[node name="PauseProgress" type="ProgressBar" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row3/Indicators"]
+custom_minimum_size = Vector2(39, 5)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_htxhm")
+theme_override_styles/fill = SubResource("StyleBoxFlat_jq2sk")
+max_value = 1.0
+show_percentage = false
 
 [node name="Spacer4" type="Control" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker"]
 custom_minimum_size = Vector2(12, 0)
@@ -708,13 +852,46 @@ suffix = "s"
 custom_arrow_step = 0.25
 
 [node name="Indicator" type="Panel" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row4"]
+visible = false
 custom_minimum_size = Vector2(25, 5)
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_a6jrf")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer"]
+[node name="Indicators" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row4"]
 layout_mode = 2
+
+[node name="DurationProgress" type="ProgressBar" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row4/Indicators"]
+custom_minimum_size = Vector2(39, 5)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_htxhm")
+theme_override_styles/fill = SubResource("StyleBoxFlat_jq2sk")
+max_value = 1.0
+show_percentage = false
+
+[node name="PauseProgress" type="ProgressBar" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row4/Indicators"]
+custom_minimum_size = Vector2(39, 5)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_htxhm")
+theme_override_styles/fill = SubResource("StyleBoxFlat_jq2sk")
+max_value = 1.0
+show_percentage = false
+
+[node name="SimpleTactToggle" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -296.0
+offset_top = 203.0
+offset_right = -278.0
+offset_bottom = -9.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "C"
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="UI/MainVBox"]
 layout_mode = 2
@@ -897,7 +1074,7 @@ offset_top = -35.0
 grow_horizontal = 0
 grow_vertical = 0
 tooltip_text = "Tip: Hover over anything to see its function!"
-text = "ⓘ"
+text = "i"
 flat = true
 expand_icon = true
 
@@ -999,8 +1176,11 @@ autostart = true
 [connection signal="toggled" from="UI/MainVBox/ModeTabs/Analog Mode/VBoxContainer/HBoxContainer/AnalogAltMode" to="UI/MainVBox/ModeTabs/Analog Mode" method="_on_analog_alt_mode_toggled"]
 [connection signal="toggled" from="UI/MainVBox/ModeTabs/Analog Mode/VBoxContainer/HBoxContainer/AnalogVelMode" to="UI/MainVBox/ModeTabs/Analog Mode" method="_on_analog_vel_mode_toggled"]
 [connection signal="value_changed" from="UI/MainVBox/ModeTabs/Analog Mode/VBoxContainer/HBoxContainer/VelocityModeSpeedContainer/VelocityModeSpeed" to="UI/MainVBox/ModeTabs/Analog Mode" method="_on_velocity_mode_speed_value_changed"]
-[connection signal="pressed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetButton" to="UI/MainVBox/ModeTabs/Program Mode" method="_on_preset_button_pressed"]
-[connection signal="toggled" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PlayPause" to="UI/MainVBox/ModeTabs/Program Mode" method="_on_play_pause_toggled"]
+[connection signal="pressed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PlaceholderPresets/PresetButton" to="UI/MainVBox/ModeTabs/Program Mode" method="_on_preset_button_pressed"]
+[connection signal="pressed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PlaceholderPresets/Preset2Button" to="UI/MainVBox/ModeTabs/Program Mode" method="_on_preset_2_button_pressed"]
+[connection signal="pressed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PlaceholderPresets/ClearButton" to="UI/MainVBox/ModeTabs/Program Mode" method="_on_clear_button_pressed"]
+[connection signal="value_changed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls/TactAmount" to="UI/MainVBox/ModeTabs/Program Mode" method="_on_tact_amount_value_changed"]
+[connection signal="toggled" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls/PlayPause" to="UI/MainVBox/ModeTabs/Program Mode" method="_on_play_pause_toggled"]
 [connection signal="toggled" from="UI/MainVBox/HBoxContainer3/HideBottomRow" to="UI" method="_on_hide_bottom_row_toggled"]
 [connection signal="toggled" from="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer/HBoxContainer/FlipControls" to="UI" method="_on_flip_controls_toggled"]
 [connection signal="toggled" from="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer/HBoxContainer2/CoupleMotors" to="UI" method="_on_couple_motors_toggled"]
