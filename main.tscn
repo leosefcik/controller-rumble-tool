@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://cmikhaqwhlrq1"]
+[gd_scene load_steps=44 format=3 uid="uid://cmikhaqwhlrq1"]
 
 [ext_resource type="Theme" uid="uid://dxoeymo5y7ebp" path="res://theme.tres" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://ci8gltknaa8n0" path="res://script/main.gd" id="1_h2yge"]
@@ -78,6 +78,13 @@ corner_radius_top_left = 3
 corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4k2k6"]
+bg_color = Color(0.27051407, 0.70091105, 0.37897292, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
 
 [node name="Main" type="Node" node_paths=PackedStringArray("UI")]
 script = ExtResource("1_h2yge")
@@ -475,12 +482,15 @@ size_flags_horizontal = 3
 
 [node name="ModeTabs" type="TabContainer" parent="UI/MainVBox"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(608, 0)
 layout_mode = 2
+size_flags_horizontal = 4
 size_flags_vertical = 3
 tab_alignment = 1
-current_tab = 0
+current_tab = 1
 
 [node name="Analog Mode" type="TabBar" parent="UI/MainVBox/ModeTabs" node_paths=PackedStringArray("UI")]
+visible = false
 layout_mode = 2
 script = ExtResource("23_seu75")
 UI = NodePath("../../..")
@@ -548,7 +558,6 @@ step = 0.1
 value = 1.0
 
 [node name="Program Mode" type="TabBar" parent="UI/MainVBox/ModeTabs" node_paths=PackedStringArray("PATTERN_MAKER")]
-visible = false
 layout_mode = 2
 script = ExtResource("22_a6jrf")
 PATTERN_MAKER = NodePath("VBoxContainer/PatternMaker")
@@ -560,9 +569,9 @@ anchors_preset = 13
 anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -275.5
+offset_left = -296.0
 offset_top = 6.0
-offset_right = 275.5
+offset_right = 296.0
 offset_bottom = -6.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -892,6 +901,21 @@ offset_bottom = -9.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "C"
+
+[node name="RumbleIndicator" type="Panel" parent="UI/MainVBox/ModeTabs/Program Mode"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = -15.0
+offset_right = 15.0
+offset_bottom = -5.0
+grow_vertical = 0
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_4k2k6")
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="UI/MainVBox"]
 layout_mode = 2

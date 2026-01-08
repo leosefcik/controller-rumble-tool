@@ -46,24 +46,34 @@ func _process(delta: float) -> void:
 	if not visible: return # Only if on tab
 	
 	if playing:
-		_play_program(delta)
+		time_elapsed += delta
+		_play_program()
 
 
-func _play_program(delta: float) -> void:
-	time_elapsed += delta
+func _play_program() -> void:
 	_update_current_tact_indicator()
 	
 	if duration_phase and time_elapsed > durations[current_tact]:
-		duration_phase = false
 		time_elapsed = 0.0
+		if pauses[current_tact] != 0.0:
+			duration_phase = false
+		else:
+			duration_phase = true
+			current_tact += 1
 	
 	elif not duration_phase and time_elapsed > pauses[current_tact]:
 		duration_phase = true
 		time_elapsed = 0.0
 		current_tact += 1
+	
 	if current_tact >= tact_amount:
 		current_tact = 0
 		_reset_tact_indicators()
+	
+	if duration_phase:
+		%RumbleIndicator.modulate = Color.WHITE
+	else:
+		%RumbleIndicator.modulate = Color.DIM_GRAY
 
 
 func _reset_progress() -> void:
