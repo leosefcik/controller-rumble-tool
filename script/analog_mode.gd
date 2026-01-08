@@ -72,8 +72,8 @@ func _process_desired_analog() -> void:
 		weak_desired = right_magnitude
 		strong_desired = left_magnitude
 	
-	weak_desired = maxf(weak_desired, %WeakSlider.value)
-	strong_desired = maxf(strong_desired, %StrongSlider.value)
+	weak_desired = maxf(weak_desired, %WeakSliderAnalog.value)
+	strong_desired = maxf(strong_desired, %StrongSliderAnalog.value)
 	
 	if Settings.incremented:
 		strong_desired = snappedf(strong_desired, 0.1)

@@ -1,6 +1,7 @@
 extends TabBar
 
 @export var PATTERN_MAKER : HBoxContainer
+@export var UI: Control
 
 # Idk why i called them rows. They're columns
 # hardcoded max, if i ever wanted to expand it i could go ahead
@@ -17,7 +18,11 @@ var time_elapsed := 0.0 # used to time tacts
 var playing := false # play button
 var duration_phase := true # if in first (duration) or second (pause) phase of the tact
 
+# Unused
 var complex_tacts := true # option to switch between progress/dot tacts
+
+var weak_desired := 0.0
+var strong_desired := 0.0
 
 
 func _setup_row_nodes_array() -> void:
@@ -44,6 +49,8 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if not visible: return # Only if on tab
+	
+	_process_controls(delta)
 	
 	if playing:
 		time_elapsed += delta
@@ -127,6 +134,35 @@ func _update_current_tact_indicator() -> void:
 			PATTERN_NODES[current_tact]["PauseProgress"].value = progress
 
 
+### Controls
+
+func _process_controls(delta: float) -> void:
+	var left_axis := 0.0
+	var right_axis := 0.0
+	var weak_axis := 0.0
+	var strong_axis := 0.0
+	
+	if Settings.joystick_enabled:
+		left_axis = Input.get_axis("decrease_rumble_left", "increase_rumble_left")
+		right_axis = Input.get_axis("decrease_rumble_right", "increase_rumble_right")
+	
+	# Mapping the controls
+	if Settings.coupled:
+		var combined_desired := clampf(left_axis + right_axis, -1.0, 1.0)
+		weak_axis = combined_desired
+		strong_axis = combined_desired
+	elif not Settings.flipped:
+		weak_axis = left_axis
+		strong_axis = right_axis
+	else:
+		weak_axis = right_axis
+		strong_axis = left_axis
+	
+	weak_desired = clampf(weak_desired + (weak_axis * delta), 0.0, 1.0)
+	strong_desired = clampf(strong_desired + (strong_axis * delta), 0.0, 1.0)
+	UI.update_desired_gauges(weak_desired, strong_desired)
+
+
 ### INPUT
 
 func _input(event: InputEvent) -> void:
@@ -139,6 +175,10 @@ func _input(event: InputEvent) -> void:
 
 func _on_play_pause_toggled(toggled_on: bool) -> void:
 	playing = toggled_on
+	if toggled_on:
+		%RumbleIndicator.show()
+	else:
+		%RumbleIndicator.hide()
 
 
 func _on_tact_amount_value_changed(value: float) -> void:

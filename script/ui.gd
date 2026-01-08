@@ -20,6 +20,22 @@ extends Control
 # so i can @export them and do so only once which would be better
 # but eh
 
+
+func _ready() -> void:
+	_mouse_control_visibility_update(%ModeTabs.current_tab)
+
+
+# Hides/unhides corresponding UI elements according to current mode
+# Called on ready, and when tab changed
+func _mouse_control_visibility_update(tab: int) -> void:
+	if tab == 0:
+		%AnalogMouseControl.show()
+		%ProgramMouseControl.hide()
+	else:
+		%AnalogMouseControl.hide()
+		%ProgramMouseControl.show()
+
+
 # Updates Lock glyphs
 func update_glyphs() -> void:
 	%WeakLock.texture = LOCK_ICON if Settings.weak_locked else UNLOCK_ICON
@@ -105,9 +121,9 @@ func _on_strong_lock_button_pressed() -> void:
 
 ### MODE TABS
 
-func _on_mode_tabs_tab_changed(_tab: int) -> void:
+func _on_mode_tabs_tab_changed(tab: int) -> void:
 	Main.reset_rumble()
-
+	_mouse_control_visibility_update(tab)
 
 
 ### SETTINGS
@@ -115,8 +131,8 @@ func _on_mode_tabs_tab_changed(_tab: int) -> void:
 func _on_flip_controls_toggled(toggled_on: bool) -> void:
 	Settings.flipped = toggled_on
 	# Flip mouse slides too. A bit ugly but eh
-	if toggled_on: %WeakSlider.get_parent().move_child(%WeakSlider, 2)
-	else: %WeakSlider.get_parent().move_child(%WeakSlider, 1)
+	if toggled_on: %WeakSliderAnalog.get_parent().move_child(%WeakSliderAnalog, 2)
+	else: %WeakSliderAnalog.get_parent().move_child(%WeakSliderAnalog, 1)
 	update_glyphs() # to update LB/RB glyphs
 
 func _on_couple_motors_toggled(toggled_on: bool) -> void:
