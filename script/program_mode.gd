@@ -24,6 +24,7 @@ var complex_tacts := true # option to switch between progress/dot tacts
 var weak_desired := 0.0
 var strong_desired := 0.0
 
+var speed_slider := 1.0 # Updated externally by ProgramMouseControl
 
 func _setup_row_nodes_array() -> void:
 	for i in range(ROWS):
@@ -141,6 +142,13 @@ func _process_controls(delta: float) -> void:
 	var right_axis := 0.0
 	var weak_axis := 0.0
 	var strong_axis := 0.0
+	var speed_mod := 1.0
+	
+	if Settings.trigger_enabled: # Speed modifier triggers for fun
+		if Input.is_action_pressed("increase_rumble_trigger_left"):
+			speed_mod *= (1.0/3.0)
+		if Input.is_action_pressed("increase_rumble_trigger_right"):
+			speed_mod *= 3.0
 	
 	if Settings.joystick_enabled:
 		left_axis = Input.get_axis("decrease_rumble_left", "increase_rumble_left")
@@ -158,8 +166,11 @@ func _process_controls(delta: float) -> void:
 		weak_axis = right_axis
 		strong_axis = left_axis
 	
-	weak_desired = clampf(weak_desired + (weak_axis * delta), 0.0, 1.0)
-	strong_desired = clampf(strong_desired + (strong_axis * delta), 0.0, 1.0)
+	weak_axis = clampf(weak_axis + %WeakSliderProgram.value, -1.0, 1.0)
+	strong_axis = clampf(strong_axis + %StrongSliderProgram.value, -1.0, 1.0)
+	
+	weak_desired = clampf(weak_desired + (weak_axis * delta * speed_mod * speed_slider), 0.0, 1.0)
+	strong_desired = clampf(strong_desired + (strong_axis * delta * speed_mod * speed_slider), 0.0, 1.0)
 	UI.update_desired_gauges(weak_desired, strong_desired)
 
 

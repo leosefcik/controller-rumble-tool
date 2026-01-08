@@ -290,7 +290,7 @@ The lower this number is, the less you have to push to reach 100% power.
 If you push the trigger/joystick further, it'll stay at 100%."
 min_value = 0.01
 max_value = 1.0
-step = 0.01
+step = 0.05
 value = 1.0
 
 [node name="VSeparator2" type="VSeparator" parent="UI/MainVBox/Gauges"]
@@ -460,11 +460,12 @@ icon = ExtResource("17_074og")
 icon_alignment = 1
 expand_icon = true
 
-[node name="ProgramMouseControl" type="Control" parent="UI/MainVBox/Gauges"]
+[node name="ProgramMouseControl" type="Control" parent="UI/MainVBox/Gauges" node_paths=PackedStringArray("ProgramMode")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("18_jq2sk")
+ProgramMode = NodePath("../../ModeTabs/Program Mode")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/MainVBox/Gauges/ProgramMouseControl"]
 layout_mode = 1
@@ -474,12 +475,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
-
-[node name="Label" type="Label" parent="UI/MainVBox/Gauges/ProgramMouseControl/VBoxContainer"]
-visible = false
-layout_mode = 2
-text = "Mouse control"
-horizontal_alignment = 1
 
 [node name="WeakSliderProgram" type="HSlider" parent="UI/MainVBox/Gauges/ProgramMouseControl/VBoxContainer"]
 unique_name_in_owner = true
@@ -501,6 +496,12 @@ min_value = -1.0
 max_value = 1.0
 step = 0.01
 
+[node name="ProgramModeSpeedLabel" type="Label" parent="UI/MainVBox/Gauges/ProgramMouseControl/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Speed: 1.0x"
+horizontal_alignment = 1
+
 [node name="MouseStickyMode" type="Button" parent="UI/MainVBox/Gauges/ProgramMouseControl/VBoxContainer"]
 visible = false
 custom_minimum_size = Vector2(35, 35)
@@ -511,6 +512,16 @@ Returns the slider to 0 if released"
 icon = ExtResource("17_074og")
 icon_alignment = 1
 expand_icon = true
+
+[node name="ProgramModeSpeedSlider" type="HSlider" parent="UI/MainVBox/Gauges/ProgramMouseControl/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "How fast the desired sliders go up/down when controlled."
+min_value = 0.1
+max_value = 8.0
+step = 0.05
+value = 1.0
+exp_edit = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/MainVBox"]
 layout_mode = 2
@@ -1286,6 +1297,7 @@ autostart = true
 [connection signal="pressed" from="UI/MainVBox/Gauges/AnalogMouseControl/VBoxContainer/MouseStickyMode" to="UI/MainVBox/Gauges/AnalogMouseControl" method="_on_mouse_sticky_mode_pressed"]
 [connection signal="drag_ended" from="UI/MainVBox/Gauges/ProgramMouseControl/VBoxContainer/WeakSliderProgram" to="UI/MainVBox/Gauges/ProgramMouseControl" method="_on_weak_slider_program_drag_ended"]
 [connection signal="drag_ended" from="UI/MainVBox/Gauges/ProgramMouseControl/VBoxContainer/StrongSliderProgram" to="UI/MainVBox/Gauges/ProgramMouseControl" method="_on_strong_slider_program_drag_ended"]
+[connection signal="value_changed" from="UI/MainVBox/Gauges/ProgramMouseControl/VBoxContainer/ProgramModeSpeedSlider" to="UI/MainVBox/Gauges/ProgramMouseControl" method="_on_program_mode_speed_slider_value_changed"]
 [connection signal="toggled" from="UI/MainVBox/HBoxContainer/HideModeTabs" to="UI" method="_on_hide_mode_tabs_toggled"]
 [connection signal="tab_changed" from="UI/MainVBox/ModeTabs" to="UI" method="_on_mode_tabs_tab_changed"]
 [connection signal="toggled" from="UI/MainVBox/ModeTabs/Analog Mode/VBoxContainer/HBoxContainer/AnalogAltMode" to="UI/MainVBox/ModeTabs/Analog Mode" method="_on_analog_alt_mode_toggled"]
