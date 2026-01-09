@@ -57,3 +57,24 @@ func get_fix_multiplier() -> float:
 		fix = 0.99
 		apply_fix_frame = false
 	return fix
+
+
+
+# Rumble function called from other nodes
+func rumble(weak_power: float, strong_power: float) -> void:
+	# Applying 0.99x fix every frame after 2 seconds, otherwise it's 1.00x
+	var fix := get_fix_multiplier()
+	
+	# Regular vs. "All" mode
+	if not control_all_ids: _continuous_vibration(weak_power, strong_power, controller_id, fix)
+	else:
+		for i in range(CONTROLLER_ID_RANGE):
+			_continuous_vibration(weak_power, strong_power, i, fix)
+	
+
+func _continuous_vibration(weak_power: float, strong_power: float, id: int, fix: float) -> void:
+	Input.start_joy_vibration(
+		id,
+		weak_power * rumble_multiplier * fix,
+		strong_power * rumble_multiplier * fix,
+		0.0)

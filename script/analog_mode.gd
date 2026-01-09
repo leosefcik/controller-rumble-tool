@@ -19,14 +19,17 @@ var velocity_mode_speed := 1.0
 func _process(delta: float) -> void:
 	if not visible: return # Only if on tab
 	
-	_process_desired_analog() # sets desired values
-	_process_power_analog(delta) # sets final values
-	_rumble_analog() # processes final values into real rumble
+	_process_desired() # sets desired values
+	_process_power(delta) # sets final values
+	Settings.rumble(weak_power, strong_power) # processes final values into real rumble
+	UI.update_power_gauges(weak_power, strong_power)
 	UI.update_desired_gauges(weak_desired, strong_desired)
 	
-	# Alternating mode check - flips controls exactly once, resets hit_zero check
 	if alternating_mode:
-		if (
+		if hit_zero and (weak_power > 0.0 or strong_power > 0.0):
+			hit_zero = false
+		
+		elif (
 			(weak_power == 0.0 and strong_power == 0.0)
 			and
 			not hit_zero
@@ -34,7 +37,7 @@ func _process(delta: float) -> void:
 			hit_zero = true
 			%FlipControls.button_pressed = !%FlipControls.button_pressed
 
-func _process_desired_analog() -> void:
+func _process_desired() -> void:
 	# We take the max of either the triggers/joyUP/joyDOWN for control variety
 	# first checking if they're enabled
 	var left_joy_mag := 0.0
@@ -80,7 +83,7 @@ func _process_desired_analog() -> void:
 		weak_desired = snappedf(weak_desired, 0.1)
 
 
-func _process_power_analog(delta: float) -> void:
+func _process_power(delta: float) -> void:
 	if not Settings.weak_locked:
 		if not velocity_mode:
 			weak_power = weak_desired
@@ -92,32 +95,6 @@ func _process_power_analog(delta: float) -> void:
 			strong_power = strong_desired
 		else:
 			strong_power = move_toward(strong_power, strong_desired, delta*velocity_mode_speed)
-
-
-func _rumble_analog() -> void:
-	# Applying 0.99x fix every frame after 2 seconds, otherwise it's 1.00x
-	var fix := Settings.get_fix_multiplier()
-	
-	# Regular vs. "All" mode
-	if not Settings.control_all_ids: _continuous_vibration(Settings.controller_id, fix)
-	else:
-		for i in range(Settings.CONTROLLER_ID_RANGE):
-			_continuous_vibration(i, fix)
-	
-	# Alternating mode check - readies hit_zero check if motors in use
-	if alternating_mode:
-		if hit_zero and (weak_power > 0.0 or strong_power > 0.0):
-			hit_zero = false
-	
-	UI.update_power_gauges(weak_power, strong_power)
-
-
-func _continuous_vibration(id: int, fix: float) -> void:
-	Input.start_joy_vibration(
-		id,
-		weak_power * Settings.rumble_multiplier * fix,
-		strong_power * Settings.rumble_multiplier * fix,
-		0.0)
 
 
 

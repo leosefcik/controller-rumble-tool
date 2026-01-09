@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=8 format=3 uid="uid://dxoeymo5y7ebp"]
+[gd_resource type="Theme" load_steps=10 format=3 uid="uid://dxoeymo5y7ebp"]
 
 [ext_resource type="FontFile" uid="uid://cfhihdagg725w" path="res://font/Cabin-Bold.ttf" id="1_cjfk0"]
 [ext_resource type="FontFile" uid="uid://cyvnbcshmtw7w" path="res://font/Cabin-Italic.ttf" id="2_110ce"]
@@ -19,6 +19,29 @@ corner_radius_bottom_left = 4
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vj6dk"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_05tig"]
+bg_color = Color(0.60038817, 0.60038817, 0.60038817, 0.381)
+draw_center = false
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 11
+corner_radius_top_right = 11
+corner_radius_bottom_right = 11
+corner_radius_bottom_left = 11
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1rmny"]
+bg_color = Color(0.60038817, 0.60038817, 0.60038817, 0.381)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 11
+corner_radius_top_right = 11
+corner_radius_bottom_right = 11
+corner_radius_bottom_left = 11
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wvktn"]
 bg_color = Color(0.11489678, 0.11489683, 0.11489671, 1)
 
@@ -32,6 +55,10 @@ FlipButton/styles/pressed = SubResource("StyleBoxFlat_110ce")
 HSeparator/constants/separation = 12
 LineEdit/constants/minimum_character_width = 1
 LineEdit/styles/focus = SubResource("StyleBoxEmpty_vj6dk")
+MiniButton/base_type = &"Button"
+MiniButton/styles/hover = SubResource("StyleBoxFlat_05tig")
+MiniButton/styles/normal = SubResource("StyleBoxFlat_05tig")
+MiniButton/styles/pressed = SubResource("StyleBoxFlat_1rmny")
 ProgressBar/styles/background = SubResource("StyleBoxFlat_wvktn")
 RichTextLabel/fonts/bold_font = ExtResource("1_cjfk0")
 RichTextLabel/fonts/italics_font = ExtResource("2_110ce")

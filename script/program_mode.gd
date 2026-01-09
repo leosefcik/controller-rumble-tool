@@ -21,8 +21,12 @@ var duration_phase := true # if in first (duration) or second (pause) phase of t
 # Unused
 var complex_tacts := true # option to switch between progress/dot tacts
 
+# Desired - where the controls point to
 var weak_desired := 0.0
 var strong_desired := 0.0
+# Power - current power of controller motors
+var weak_power := 0.0
+var strong_power := 0.0
 
 var speed_slider := 1.0 # Updated externally by ProgramMouseControl
 
@@ -56,6 +60,8 @@ func _process(delta: float) -> void:
 	if playing:
 		time_elapsed += delta
 		_play_program()
+	
+	_process_rumble()
 
 
 func _play_program() -> void:
@@ -84,11 +90,37 @@ func _play_program() -> void:
 		%RumbleIndicator.modulate = Color.DIM_GRAY
 
 
+func _process_rumble() -> void:
+	if Settings.weak_locked:
+		pass
+	elif not playing or not duration_phase:
+		weak_power = 0.0
+	else:
+		weak_power = weak_desired
+	
+	if Settings.strong_locked:
+		pass
+	elif not playing or not duration_phase:
+		strong_power = 0.0
+	else:
+		strong_power = strong_desired
+	
+	Settings.rumble(weak_power, strong_power)
+	UI.update_power_gauges(weak_power, strong_power)
+
+
 func _reset_progress() -> void:
 	time_elapsed = 0.0
 	current_tact = 0
 	duration_phase = true
 	_reset_tact_indicators()
+
+
+func _flip_desired_values() -> void:
+	var m := weak_desired
+	weak_desired = strong_desired
+	strong_desired = m
+	UI.update_desired_gauges(weak_desired, strong_desired)
 
 
 ### PATTERN LOGIC
@@ -180,6 +212,9 @@ func _input(event: InputEvent) -> void:
 	if visible:
 		if event.is_action_pressed("pause_resume_rumble"):
 			%PlayPause.button_pressed = !%PlayPause.button_pressed
+		if event.is_action_pressed("flip_desired_values"):
+			_flip_desired_values()
+			%FlipControls.button_pressed = !%FlipControls.button_pressed
 
 
 ### UI
@@ -187,9 +222,22 @@ func _input(event: InputEvent) -> void:
 func _on_play_pause_toggled(toggled_on: bool) -> void:
 	playing = toggled_on
 	if toggled_on:
-		%RumbleIndicator.show()
+		%RumbleIndicator.modulate = Color.WHITE
 	else:
-		%RumbleIndicator.hide()
+		%RumbleIndicator.modulate = Color.DARK_RED
+
+
+func _on_half_all_tacts_pressed() -> void:
+	for i in range(ROWS):
+		durations[i] *= 0.5
+		pauses[i] *= 0.5
+	_update_pattern_box_values()
+
+func _on_double_all_tacts_pressed() -> void:
+	for i in range(ROWS):
+		durations[i] *= 2
+		pauses[i] *= 2
+	_update_pattern_box_values()
 
 
 func _on_tact_amount_value_changed(value: float) -> void:

@@ -288,7 +288,7 @@ layout_mode = 2
 tooltip_text = "Sensitivity of trigger/joystick.
 The lower this number is, the less you have to push to reach 100% power.
 If you push the trigger/joystick further, it'll stay at 100%."
-min_value = 0.01
+min_value = 0.05
 max_value = 1.0
 step = 0.05
 value = 1.0
@@ -646,7 +646,7 @@ alignment = 2
 [node name="Label" type="Label" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 6
-text = "WIP Section"
+text = "This section will be filled with presets in a future update!"
 horizontal_alignment = 1
 
 [node name="PlaceholderPresets" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer"]
@@ -675,7 +675,9 @@ alignment = 1
 [node name="TactAmount" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls"]
 unique_name_in_owner = true
 layout_mode = 2
-tooltip_text = "The amount of active \"tacts\" in the current program"
+tooltip_text = "The amount of active \"tacts\" in the current program.
+Each active tact will play in a sequence, and is composed
+of a (rumble) duration and a pause duration"
 min_value = 1.0
 max_value = 4.0
 value = 1.0
@@ -683,6 +685,16 @@ rounded = true
 
 [node name="VSeparator2" type="VSeparator" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls"]
 layout_mode = 2
+
+[node name="HalfAllTacts" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls"]
+layout_mode = 2
+tooltip_text = "Halves all the values below"
+text = "Halve"
+
+[node name="DoubleAllTacts" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls"]
+layout_mode = 2
+tooltip_text = "Doubles all the values below"
+text = "Double"
 
 [node name="Control" type="Control" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls"]
 layout_mode = 2
@@ -753,7 +765,7 @@ size_flags_horizontal = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_xuqvo")
 
 [node name="Spacer" type="Control" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker"]
-custom_minimum_size = Vector2(12, 0)
+custom_minimum_size = Vector2(6, 0)
 layout_mode = 2
 
 [node name="Row1" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker"]
@@ -762,18 +774,20 @@ layout_mode = 2
 [node name="Duration" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row1"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+tooltip_text = "The duration of rumble for this tact"
 max_value = 999.99
-step = 0.01
+step = 0.001
 suffix = "s"
-custom_arrow_step = 0.25
+custom_arrow_step = 0.125
 
 [node name="Pause" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row1"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+tooltip_text = "The length of the pause of this tact"
 max_value = 999.99
-step = 0.01
+step = 0.001
 suffix = "s"
-custom_arrow_step = 0.25
+custom_arrow_step = 0.125
 
 [node name="Indicator" type="Panel" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row1"]
 visible = false
@@ -810,10 +824,9 @@ size_flags_vertical = 4
 focus_behavior_recursive = 1
 theme_type_variation = &"FlipButton"
 toggle_mode = true
-button_pressed = true
 
 [node name="Spacer2" type="Control" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker"]
-custom_minimum_size = Vector2(5, 0)
+custom_minimum_size = Vector2(6, 0)
 layout_mode = 2
 
 [node name="Row2" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker"]
@@ -822,18 +835,20 @@ layout_mode = 2
 [node name="Duration" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row2"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+tooltip_text = "The duration of rumble for this tact"
 max_value = 999.99
-step = 0.01
+step = 0.001
 suffix = "s"
-custom_arrow_step = 0.25
+custom_arrow_step = 0.125
 
 [node name="Pause" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row2"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+tooltip_text = "The length of the pause of this tact"
 max_value = 999.99
-step = 0.01
+step = 0.001
 suffix = "s"
-custom_arrow_step = 0.25
+custom_arrow_step = 0.125
 
 [node name="Indicator" type="Panel" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row2"]
 visible = false
@@ -872,7 +887,7 @@ theme_type_variation = &"FlipButton"
 toggle_mode = true
 
 [node name="Spacer3" type="Control" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker"]
-custom_minimum_size = Vector2(5, 0)
+custom_minimum_size = Vector2(6, 0)
 layout_mode = 2
 
 [node name="Row3" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker"]
@@ -881,18 +896,20 @@ layout_mode = 2
 [node name="Duration" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row3"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+tooltip_text = "The duration of rumble for this tact"
 max_value = 999.99
-step = 0.01
+step = 0.001
 suffix = "s"
-custom_arrow_step = 0.25
+custom_arrow_step = 0.125
 
 [node name="Pause" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row3"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+tooltip_text = "The length of the pause of this tact"
 max_value = 999.99
-step = 0.01
+step = 0.001
 suffix = "s"
-custom_arrow_step = 0.25
+custom_arrow_step = 0.125
 
 [node name="Indicator" type="Panel" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row3"]
 visible = false
@@ -929,7 +946,7 @@ theme_type_variation = &"FlipButton"
 toggle_mode = true
 
 [node name="Spacer4" type="Control" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker"]
-custom_minimum_size = Vector2(5, 0)
+custom_minimum_size = Vector2(6, 0)
 layout_mode = 2
 
 [node name="Row4" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker"]
@@ -938,18 +955,20 @@ layout_mode = 2
 [node name="Duration" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row4"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+tooltip_text = "The duration of rumble for this tact"
 max_value = 999.99
-step = 0.01
+step = 0.001
 suffix = "s"
-custom_arrow_step = 0.25
+custom_arrow_step = 0.125
 
 [node name="Pause" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row4"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+tooltip_text = "The length of the pause of this tact"
 max_value = 999.99
-step = 0.01
+step = 0.001
 suffix = "s"
-custom_arrow_step = 0.25
+custom_arrow_step = 0.125
 
 [node name="Indicator" type="Panel" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row4"]
 visible = false
@@ -1003,7 +1022,7 @@ text = "C"
 
 [node name="RumbleIndicator" type="Panel" parent="UI/MainVBox/ModeTabs/Program Mode"]
 unique_name_in_owner = true
-visible = false
+modulate = Color(0.7642523, 0, 0, 1)
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 1
 anchors_preset = 2
@@ -1194,12 +1213,32 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -32.0
-offset_top = -35.0
+offset_top = -32.0
+offset_right = -8.0
+offset_bottom = -8.0
 grow_horizontal = 0
 grow_vertical = 0
 tooltip_text = "Tip: Hover over anything to see its function!"
+theme_type_variation = &"MiniButton"
 text = "i"
-flat = true
+expand_icon = true
+
+[node name="ControlsButton" type="Button" parent="UI"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -64.0
+offset_top = -32.0
+offset_right = -40.0
+offset_bottom = -8.0
+grow_horizontal = 0
+grow_vertical = 0
+tooltip_text = "Tip: Hover over anything to see its function!"
+theme_type_variation = &"MiniButton"
+text = "c"
 expand_icon = true
 
 [node name="BlurRect" type="ColorRect" parent="UI"]
@@ -1276,6 +1315,35 @@ texture = ExtResource("25_0odxb")
 expand_mode = 1
 stretch_mode = 4
 
+[node name="ControlsPopup" type="Popup" parent="UI"]
+unique_name_in_owner = true
+oversampling_override = 1.0
+initial_position = 1
+size = Vector2i(550, 550)
+
+[node name="Panel" type="Panel" parent="UI/ControlsPopup"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/ControlsPopup/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Unfinished controls section!"
+
 [node name="ControllerCheckTimer" type="Timer" parent="."]
 wait_time = 0.5
 autostart = true
@@ -1307,6 +1375,8 @@ autostart = true
 [connection signal="pressed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PlaceholderPresets/Preset2Button" to="UI/MainVBox/ModeTabs/Program Mode" method="_on_preset_2_button_pressed"]
 [connection signal="pressed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PlaceholderPresets/ClearButton" to="UI/MainVBox/ModeTabs/Program Mode" method="_on_clear_button_pressed"]
 [connection signal="value_changed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls/TactAmount" to="UI/MainVBox/ModeTabs/Program Mode" method="_on_tact_amount_value_changed"]
+[connection signal="pressed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls/HalfAllTacts" to="UI/MainVBox/ModeTabs/Program Mode" method="_on_half_all_tacts_pressed"]
+[connection signal="pressed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls/DoubleAllTacts" to="UI/MainVBox/ModeTabs/Program Mode" method="_on_double_all_tacts_pressed"]
 [connection signal="toggled" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls/PlayPause" to="UI/MainVBox/ModeTabs/Program Mode" method="_on_play_pause_toggled"]
 [connection signal="toggled" from="UI/MainVBox/HBoxContainer3/HideBottomRow" to="UI" method="_on_hide_bottom_row_toggled"]
 [connection signal="toggled" from="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer/HBoxContainer/FlipControls" to="UI" method="_on_flip_controls_toggled"]
@@ -1314,6 +1384,8 @@ autostart = true
 [connection signal="value_changed" from="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer2/MultiplierNode/MultiplierBox" to="UI" method="_on_multiplier_box_value_changed"]
 [connection signal="toggled" from="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer2/SnapControls" to="UI" method="_on_snap_controls_toggled"]
 [connection signal="pressed" from="UI/InfoButton" to="UI" method="_on_info_button_pressed"]
+[connection signal="pressed" from="UI/ControlsButton" to="UI" method="_on_controls_button_pressed"]
 [connection signal="popup_hide" from="UI/InfoPopup" to="UI" method="_on_info_popup_popup_hide"]
 [connection signal="meta_clicked" from="UI/InfoPopup/Panel/VBoxContainer/InfoCredits" to="UI" method="_on_info_credits_meta_clicked"]
+[connection signal="popup_hide" from="UI/ControlsPopup" to="UI" method="_on_controls_popup_popup_hide"]
 [connection signal="timeout" from="ControllerCheckTimer" to="." method="_on_controller_check_timer_timeout"]

@@ -130,9 +130,14 @@ func _on_mode_tabs_tab_changed(tab: int) -> void:
 
 func _on_flip_controls_toggled(toggled_on: bool) -> void:
 	Settings.flipped = toggled_on
+	
 	# Flip mouse slides too. A bit ugly but eh
-	if toggled_on: %WeakSliderAnalog.get_parent().move_child(%WeakSliderAnalog, 2)
-	else: %WeakSliderAnalog.get_parent().move_child(%WeakSliderAnalog, 1)
+	if toggled_on:
+		%WeakSliderAnalog.get_parent().move_child(%WeakSliderAnalog, 2)
+		%WeakSliderProgram.get_parent().move_child(%WeakSliderProgram, 1)
+	else:
+		%WeakSliderAnalog.get_parent().move_child(%WeakSliderAnalog, 1)
+		%WeakSliderProgram.get_parent().move_child(%WeakSliderProgram, 0)
 	update_glyphs() # to update LB/RB glyphs
 
 func _on_couple_motors_toggled(toggled_on: bool) -> void:
@@ -175,3 +180,10 @@ func _on_info_popup_popup_hide() -> void:
 # For the URLs to work in the Credits Popup
 func _on_info_credits_meta_clicked(meta: Variant) -> void:
 	OS.shell_open(str(meta))
+
+func _on_controls_button_pressed() -> void:
+	%BlurRect.show()
+	%ControlsPopup.show()
+
+func _on_controls_popup_popup_hide() -> void:
+	%BlurRect.hide()
