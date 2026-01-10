@@ -621,6 +621,7 @@ min_value = 0.1
 max_value = 4.0
 step = 0.1
 value = 1.0
+exp_edit = true
 
 [node name="Program Mode" type="TabBar" parent="UI/MainVBox/ModeTabs" node_paths=PackedStringArray("PATTERN_MAKER", "UI")]
 layout_mode = 2
@@ -821,6 +822,7 @@ show_percentage = false
 custom_minimum_size = Vector2(10, 30)
 layout_mode = 2
 size_flags_vertical = 4
+tooltip_text = "WIP Feature"
 focus_behavior_recursive = 1
 theme_type_variation = &"FlipButton"
 toggle_mode = true
@@ -882,6 +884,7 @@ show_percentage = false
 custom_minimum_size = Vector2(10, 30)
 layout_mode = 2
 size_flags_vertical = 4
+tooltip_text = "WIP Feature"
 focus_behavior_recursive = 1
 theme_type_variation = &"FlipButton"
 toggle_mode = true
@@ -941,6 +944,7 @@ show_percentage = false
 custom_minimum_size = Vector2(10, 30)
 layout_mode = 2
 size_flags_vertical = 4
+tooltip_text = "WIP Feature"
 focus_behavior_recursive = 1
 theme_type_variation = &"FlipButton"
 toggle_mode = true
@@ -1000,6 +1004,7 @@ show_percentage = false
 custom_minimum_size = Vector2(10, 30)
 layout_mode = 2
 size_flags_vertical = 4
+tooltip_text = "WIP Feature"
 focus_behavior_recursive = 1
 theme_type_variation = &"FlipButton"
 toggle_mode = true
@@ -1154,8 +1159,8 @@ suffix = "x"
 [node name="SnapControls" type="CheckBox" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
-tooltip_text = "Snap the controls to increments of 10%"
-text = "Snap Controls"
+tooltip_text = "Snaps the power output to increments of 10%"
+text = "Snap to 10%"
 
 [node name="B2" type="HSeparator" parent="UI/MainVBox"]
 layout_mode = 2

@@ -105,6 +105,10 @@ func _process_rumble() -> void:
 	else:
 		strong_power = strong_desired
 	
+	if Settings.incremented:
+		weak_power = snappedf(weak_power, 0.1)
+		strong_power = snappedf(strong_power, 0.1)
+	
 	Settings.rumble(weak_power, strong_power)
 	UI.update_power_gauges(weak_power, strong_power)
 
@@ -185,6 +189,8 @@ func _process_controls(delta: float) -> void:
 	if Settings.joystick_enabled:
 		left_axis = Input.get_axis("decrease_rumble_left", "increase_rumble_left")
 		right_axis = Input.get_axis("decrease_rumble_right", "increase_rumble_right")
+		left_axis = clampf(left_axis / Settings.control_sensitivty, -1.0, 1.0)
+		right_axis = clampf(right_axis / Settings.control_sensitivty, -1.0, 1.0)
 	
 	# Mapping the controls
 	if Settings.coupled:
@@ -212,9 +218,13 @@ func _input(event: InputEvent) -> void:
 	if visible:
 		if event.is_action_pressed("pause_resume_rumble"):
 			%PlayPause.button_pressed = !%PlayPause.button_pressed
-		if event.is_action_pressed("flip_desired_values"):
+		elif event.is_action_pressed("flip_desired_values"):
 			_flip_desired_values()
 			%FlipControls.button_pressed = !%FlipControls.button_pressed
+		elif event.is_action_pressed("couple_motors"):
+			var big := maxf(weak_desired, strong_desired)
+			weak_desired = big
+			strong_desired = big
 
 
 ### UI

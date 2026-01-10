@@ -59,6 +59,11 @@ func get_fix_multiplier() -> float:
 	return fix
 
 
+# Stop vibrations so controllers dont vibrate when ID changed
+func stop_vibrations() -> void:
+	for i in range(CONTROLLER_ID_RANGE):
+		Input.stop_joy_vibration(i)
+
 
 # Rumble function called from other nodes
 func rumble(weak_power: float, strong_power: float) -> void:

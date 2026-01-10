@@ -78,6 +78,7 @@ func _on_all_ids_box_toggled(toggled_on: bool) -> void:
 	Settings.control_all_ids = toggled_on
 	if toggled_on: %ControllerIdBox.editable = false
 	else: %ControllerIdBox.editable = true
+	Settings.stop_vibrations()
 	
 	# this is changed so the label update in _on_controller_check_timer_timeout() triggers
 	Settings.controller_name = "asdfasf"

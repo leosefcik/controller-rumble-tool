@@ -77,10 +77,6 @@ func _process_desired() -> void:
 	
 	weak_desired = maxf(weak_desired, %WeakSliderAnalog.value)
 	strong_desired = maxf(strong_desired, %StrongSliderAnalog.value)
-	
-	if Settings.incremented:
-		strong_desired = snappedf(strong_desired, 0.1)
-		weak_desired = snappedf(weak_desired, 0.1)
 
 
 func _process_power(delta: float) -> void:
@@ -95,6 +91,10 @@ func _process_power(delta: float) -> void:
 			strong_power = strong_desired
 		else:
 			strong_power = move_toward(strong_power, strong_desired, delta*velocity_mode_speed)
+		
+	if Settings.incremented:
+		weak_power = snappedf(weak_power, 0.1)
+		strong_power = snappedf(strong_power, 0.1)
 
 
 
