@@ -139,11 +139,9 @@ func _on_flip_controls_toggled(toggled_on: bool) -> void:
 	
 	# Flip mouse slides too. A bit ugly but eh
 	if toggled_on:
-		%WeakSliderAnalog.get_parent().move_child(%WeakSliderAnalog, 2)
-		%WeakSliderProgram.get_parent().move_child(%WeakSliderProgram, 1)
-	else:
 		%WeakSliderAnalog.get_parent().move_child(%WeakSliderAnalog, 1)
-		%WeakSliderProgram.get_parent().move_child(%WeakSliderProgram, 0)
+	else:
+		%WeakSliderAnalog.get_parent().move_child(%WeakSliderAnalog, 2)
 	update_glyphs() # to update LB/RB glyphs
 
 func _on_couple_motors_toggled(toggled_on: bool) -> void:
