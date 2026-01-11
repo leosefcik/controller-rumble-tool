@@ -14,6 +14,8 @@ var alternating_mode := false
 var hit_zero := true
 var velocity_mode := false
 var velocity_mode_speed := 1.0
+var velocity_snap_weak_power := 0.0 # Workarounds for Snap with Velocity
+var velocity_snap_strong_power := 0.0
 
 
 func _process(delta: float) -> void:
@@ -84,13 +86,22 @@ func _process_power(delta: float) -> void:
 		if not velocity_mode:
 			weak_power = weak_desired
 		else:
-			weak_power = move_toward(weak_power, weak_desired, delta*velocity_mode_speed)
+			velocity_snap_weak_power = move_toward(
+				velocity_snap_weak_power,
+				weak_desired,
+				delta*velocity_mode_speed)
+			weak_power = velocity_snap_weak_power
 	
 	if not Settings.strong_locked:
 		if not velocity_mode:
 			strong_power = strong_desired
 		else:
-			strong_power = move_toward(strong_power, strong_desired, delta*velocity_mode_speed)
+			velocity_snap_strong_power = move_toward(
+				velocity_snap_strong_power,
+				strong_desired,
+				delta*velocity_mode_speed
+				)
+			strong_power = velocity_snap_strong_power
 		
 	if Settings.incremented:
 		weak_power = snappedf(weak_power, 0.1)
@@ -105,8 +116,12 @@ func _on_analog_alt_mode_toggled(toggled_on: bool) -> void:
 
 func _on_analog_vel_mode_toggled(toggled_on: bool) -> void:
 	velocity_mode = toggled_on
-	if toggled_on: %VelocityModeSpeedContainer.show()
-	else: %VelocityModeSpeedContainer.hide()
+	if toggled_on:
+		%VelocityModeSpeedContainer.show()
+		velocity_snap_weak_power = weak_power
+		velocity_snap_strong_power = strong_power
+	else:
+		%VelocityModeSpeedContainer.hide()
 
 func _on_velocity_mode_speed_value_changed(value: float) -> void:
 	velocity_mode_speed = value
