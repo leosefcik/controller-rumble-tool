@@ -12,6 +12,7 @@ var PATTERN_NODES := [] # [row node 0-3][0: Duration, 1: Pause, 2: Indicator]
 var tact_amount := 1
 var durations := [0.0, 0.0, 0.0, 0.0]
 var pauses := [0.0, 0.0, 0.0, 0.0]
+var flips := [false, false, false, false]
 
 var current_tact := 0
 var time_elapsed := 0.0 # used to time tacts
@@ -36,12 +37,14 @@ func _setup_row_nodes_array() -> void:
 		PATTERN_NODES.append({
 			"Duration": current_node.get_node("Duration"),
 			"Pause": current_node.get_node("Pause"),
-			"Indicator": current_node.get_node("Indicator"),
+			"Indicator": current_node.get_node("Indicator"), # old unused indicator
 			"DurationProgress": current_node.get_node("Indicators/DurationProgress"),
 			"PauseProgress": current_node.get_node("Indicators/PauseProgress"),
+			"Flip": PATTERN_MAKER.get_node(str("Flip", i+1))
 		})
 		PATTERN_NODES[i]["Duration"].value_changed.connect(_on_any_spinbox_value_changed)
 		PATTERN_NODES[i]["Pause"].value_changed.connect(_on_any_spinbox_value_changed)
+		PATTERN_NODES[i]["Flip"].toggled.connect(_on_any_flip_value_changed)
 
 
 func _ready() -> void:
@@ -73,22 +76,27 @@ func _play_program() -> void:
 			duration_phase = false
 		else:
 			duration_phase = true
-			current_tact += 1
+			_increment_tact()
 	
 	elif not duration_phase and time_elapsed > pauses[current_tact]:
 		duration_phase = true
 		time_elapsed = 0.0
-		current_tact += 1
-	
-	if current_tact >= tact_amount:
-		current_tact = 0
-		_reset_tact_indicators()
+		_increment_tact()
 	
 	if duration_phase:
 		%RumbleIndicator.modulate = Color.WHITE
 	else:
 		%RumbleIndicator.modulate = Color.DIM_GRAY
 
+func _increment_tact() -> void:
+	current_tact += 1
+	
+	if current_tact >= tact_amount:
+		current_tact = 0
+		_reset_tact_indicators()
+	
+	if flips[current_tact]:
+		_flip_controls_and_desired_values()
 
 func _process_rumble() -> void:
 	if Settings.weak_locked:
@@ -126,6 +134,9 @@ func _flip_desired_values() -> void:
 	strong_desired = m
 	UI.update_desired_gauges(weak_desired, strong_desired)
 
+func _flip_controls_and_desired_values() -> void:
+	UI.flip_controls()
+	_flip_desired_values()
 
 ### PATTERN LOGIC
 
@@ -134,19 +145,21 @@ func _update_pattern_box_editability() -> void:
 	for i in range(ROWS):
 		PATTERN_NODES[i]["Duration"].editable = false
 		PATTERN_NODES[i]["Pause"].editable = false
+		PATTERN_NODES[i]["Flip"].disabled = true
 	
 	for i in range(tact_amount):
 		PATTERN_NODES[i]["Duration"].editable = true
 		PATTERN_NODES[i]["Pause"].editable = true
+		PATTERN_NODES[i]["Flip"].disabled = false
 
 # Stored dur/pause values --> SpinBox values
-func _update_pattern_box_values() -> void:
+func _update_ui_time_values() -> void:
 	for i in range(ROWS):
 		PATTERN_NODES[i]["Duration"].set_value_no_signal(durations[i])
 		PATTERN_NODES[i]["Pause"].set_value_no_signal(pauses[i])
 
 # SpinBox values --> Stored dur/pause values
-func _update_pattern_stored_values() -> void:
+func _update_stored_time_values() -> void:
 	for i in range(ROWS):
 		durations[i] = PATTERN_NODES[i]["Duration"].value
 		pauses[i] = PATTERN_NODES[i]["Pause"].value
@@ -169,6 +182,18 @@ func _update_current_tact_indicator() -> void:
 		else:
 			var progress: float = time_elapsed / pauses[current_tact]
 			PATTERN_NODES[current_tact]["PauseProgress"].value = progress
+
+
+### PATTERN LOGIC - FLIP
+# Stored flip values --> Flip button values
+func _update_ui_flip_values() -> void:
+	for i in range(ROWS):
+		PATTERN_NODES[i]["Flip"].set_pressed_no_signal(flips[i])
+
+# Flip button values --> Stored flip values
+func _update_stored_flip_values() -> void:
+	for i in range(ROWS):
+		flips[i] = PATTERN_NODES[i]["Flip"].button_pressed
 
 
 ### Controls
@@ -219,8 +244,7 @@ func _input(event: InputEvent) -> void:
 		if event.is_action_pressed("pause_resume_rumble"):
 			%PlayPause.button_pressed = !%PlayPause.button_pressed
 		elif event.is_action_pressed("flip_desired_values"):
-			_flip_desired_values()
-			%FlipControls.button_pressed = !%FlipControls.button_pressed
+			_flip_controls_and_desired_values()
 		elif event.is_action_pressed("couple_motors"):
 			var big := maxf(weak_desired, strong_desired)
 			weak_desired = big
@@ -241,13 +265,13 @@ func _on_half_all_tacts_pressed() -> void:
 	for i in range(ROWS):
 		durations[i] *= 0.5
 		pauses[i] *= 0.5
-	_update_pattern_box_values()
+	_update_ui_time_values()
 
 func _on_double_all_tacts_pressed() -> void:
 	for i in range(ROWS):
 		durations[i] *= 2
 		pauses[i] *= 2
-	_update_pattern_box_values()
+	_update_ui_time_values()
 
 
 func _on_tact_amount_value_changed(value: float) -> void:
@@ -256,7 +280,10 @@ func _on_tact_amount_value_changed(value: float) -> void:
 
 
 func _on_any_spinbox_value_changed(_value: float) -> void:
-	_update_pattern_stored_values()
+	_update_stored_time_values()
+
+func _on_any_flip_value_changed(_toggled: float) -> void:
+	_update_stored_flip_values()
 
 
 """
@@ -284,22 +311,22 @@ func _on_simple_tact_toggle_pressed() -> void:
 func _on_preset_button_pressed() -> void:
 	durations = [1.0, 0.5, 0.0, 0.0]
 	pauses = [1.0, 0.5, 0.0, 0.0]
+	_update_ui_time_values()
 	%TactAmount.value = 2
-	_update_pattern_box_values()
 	_reset_progress()
 
 func _on_preset_2_button_pressed() -> void:
 	durations = [0.4, 0.4, 0.8, 0.8]
 	pauses = [0.8, 0.8, 0.4, 0.4]
-	#durations = [1,1,2,2]
-	#pauses = [2,2,1,1]
+	_update_ui_time_values()
 	%TactAmount.value = 4
-	_update_pattern_box_values()
 	_reset_progress()
 
 func _on_clear_button_pressed() -> void:
 	durations = [0.0, 0.0, 0.0, 0.0]
 	pauses = [0.0, 0.0, 0.0, 0.0]
+	_update_ui_time_values()
+	flips = [false, false, false, false]
+	_update_ui_flip_values()
 	%TactAmount.value = 1
-	_update_pattern_box_values()
 	_reset_progress()

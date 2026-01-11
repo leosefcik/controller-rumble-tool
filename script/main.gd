@@ -5,6 +5,16 @@ extends Node
 
 @export var UI: Control
 
+const THEMES_ARRAY := [
+	Color("534666"),
+	Color("664649"),
+	Color("#596646"),
+	Color("#466663"),
+	Color("474747"),
+	Color("000000"),
+]
+var current_theme := 0
+
 # Current program mode, controlled via the 2 tabs
 #enum Modes {ANALOG, PROGAM}
 #var mode := Modes.ANALOG
@@ -22,7 +32,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("couple_motors"):
 		%CoupleMotors.button_pressed = !%CoupleMotors.button_pressed
 	elif event.is_action_pressed("flip_controls"):
-		%FlipControls.button_pressed = !%FlipControls.button_pressed
+		UI.flip_controls()
 	
 	elif event.is_action_pressed("lock_rumble_left"):
 		if not Settings.shoulder_enabled: return
@@ -50,6 +60,13 @@ func toggle_locks(toggle_weak: bool, toggle_strong: bool) -> void:
 	if toggle_strong:
 		Settings.strong_locked = !Settings.strong_locked
 	UI.update_glyphs()
+
+
+### Theme functionality
+func cycle_theme() -> void:
+	current_theme += 1
+	if current_theme >= len(THEMES_ARRAY): current_theme = 0
+	RenderingServer.set_default_clear_color(THEMES_ARRAY[current_theme])
 
 
 ### CONTROLLER

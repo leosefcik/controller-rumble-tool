@@ -35,7 +35,7 @@ func _process(delta: float) -> void:
 			not hit_zero
 		):
 			hit_zero = true
-			%FlipControls.button_pressed = !%FlipControls.button_pressed
+			UI.flip_controls()
 
 func _process_desired() -> void:
 	# We take the max of either the triggers/joyUP/joyDOWN for control variety

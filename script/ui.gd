@@ -64,6 +64,11 @@ func update_power_gauges(weak: float, strong: float) -> void:
 	%WeakPower.value = weak
 	%StrongPower.value = strong
 
+# A flip controls function. Seemed prettier than putting
+# %FlipControls.button_pressed = !%FlipControls.button_pressed
+# everywhere.
+func flip_controls() -> void:
+	%FlipControls.button_pressed = !%FlipControls.button_pressed
 
 
 # TITLE BAR
@@ -188,3 +193,6 @@ func _on_controls_button_pressed() -> void:
 
 func _on_controls_popup_popup_hide() -> void:
 	%BlurRect.hide()
+
+func _on_theme_button_pressed() -> void:
+	Main.cycle_theme()

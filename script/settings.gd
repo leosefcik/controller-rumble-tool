@@ -28,8 +28,6 @@ var coupled := false # %CoupleMotors
 var incremented := false
 
 
-
-
 # These are used to apply a "fix frame" every ~2 seconds
 # Every "fix frame", rumble functions should run a 0.99x multiplier,
 # and then return to normal. This variation will allow the controller

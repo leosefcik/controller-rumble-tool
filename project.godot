@@ -120,4 +120,4 @@ flip_desired_values={
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
-environment/defaults/default_clear_color=Color(0.32707596, 0.27334663, 0.39913496, 1)
+environment/defaults/default_clear_color=Color(0.3254902, 0.27450982, 0.4, 1)

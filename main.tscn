@@ -552,10 +552,9 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
 tab_alignment = 1
-current_tab = 1
+current_tab = 0
 
 [node name="Analog Mode" type="TabBar" parent="UI/MainVBox/ModeTabs" node_paths=PackedStringArray("UI")]
-visible = false
 layout_mode = 2
 script = ExtResource("23_seu75")
 UI = NodePath("../../..")
@@ -624,6 +623,7 @@ value = 1.0
 exp_edit = true
 
 [node name="Program Mode" type="TabBar" parent="UI/MainVBox/ModeTabs" node_paths=PackedStringArray("PATTERN_MAKER", "UI")]
+visible = false
 layout_mode = 2
 script = ExtResource("22_a6jrf")
 PATTERN_MAKER = NodePath("VBoxContainer/PatternMaker")
@@ -769,6 +769,17 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_xuqvo")
 custom_minimum_size = Vector2(6, 0)
 layout_mode = 2
 
+[node name="Flip1" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker"]
+custom_minimum_size = Vector2(10, 30)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Flip: When checked, the desired intensities
+of the weak/strong motors will be flipped
+when the tact becomes active"
+focus_behavior_recursive = 1
+theme_type_variation = &"FlipButton"
+toggle_mode = true
+
 [node name="Row1" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker"]
 layout_mode = 2
 
@@ -818,18 +829,20 @@ max_value = 1.0
 value = 1.0
 show_percentage = false
 
-[node name="Flip1" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker"]
-custom_minimum_size = Vector2(10, 30)
-layout_mode = 2
-size_flags_vertical = 4
-tooltip_text = "WIP Feature"
-focus_behavior_recursive = 1
-theme_type_variation = &"FlipButton"
-toggle_mode = true
-
 [node name="Spacer2" type="Control" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker"]
 custom_minimum_size = Vector2(6, 0)
 layout_mode = 2
+
+[node name="Flip2" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker"]
+custom_minimum_size = Vector2(10, 30)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Flip: When checked, the desired intensities
+of the weak/strong motors will be flipped
+when the tact becomes active"
+focus_behavior_recursive = 1
+theme_type_variation = &"FlipButton"
+toggle_mode = true
 
 [node name="Row2" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker"]
 layout_mode = 2
@@ -880,18 +893,20 @@ max_value = 1.0
 value = 0.5
 show_percentage = false
 
-[node name="Flip2" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker"]
-custom_minimum_size = Vector2(10, 30)
-layout_mode = 2
-size_flags_vertical = 4
-tooltip_text = "WIP Feature"
-focus_behavior_recursive = 1
-theme_type_variation = &"FlipButton"
-toggle_mode = true
-
 [node name="Spacer3" type="Control" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker"]
 custom_minimum_size = Vector2(6, 0)
 layout_mode = 2
+
+[node name="Flip3" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker"]
+custom_minimum_size = Vector2(10, 30)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Flip: When checked, the desired intensities
+of the weak/strong motors will be flipped
+when the tact becomes active"
+focus_behavior_recursive = 1
+theme_type_variation = &"FlipButton"
+toggle_mode = true
 
 [node name="Row3" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker"]
 layout_mode = 2
@@ -940,18 +955,20 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_jq2sk")
 max_value = 1.0
 show_percentage = false
 
-[node name="Flip3" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker"]
-custom_minimum_size = Vector2(10, 30)
-layout_mode = 2
-size_flags_vertical = 4
-tooltip_text = "WIP Feature"
-focus_behavior_recursive = 1
-theme_type_variation = &"FlipButton"
-toggle_mode = true
-
 [node name="Spacer4" type="Control" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker"]
 custom_minimum_size = Vector2(6, 0)
 layout_mode = 2
+
+[node name="Flip4" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker"]
+custom_minimum_size = Vector2(10, 30)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Flip: When checked, the desired intensities
+of the weak/strong motors will be flipped
+when the tact becomes active"
+focus_behavior_recursive = 1
+theme_type_variation = &"FlipButton"
+toggle_mode = true
 
 [node name="Row4" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker"]
 layout_mode = 2
@@ -999,15 +1016,6 @@ theme_override_styles/background = SubResource("StyleBoxFlat_htxhm")
 theme_override_styles/fill = SubResource("StyleBoxFlat_jq2sk")
 max_value = 1.0
 show_percentage = false
-
-[node name="Flip4" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker"]
-custom_minimum_size = Vector2(10, 30)
-layout_mode = 2
-size_flags_vertical = 4
-tooltip_text = "WIP Feature"
-focus_behavior_recursive = 1
-theme_type_variation = &"FlipButton"
-toggle_mode = true
 
 [node name="SimpleTactToggle" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode"]
 unique_name_in_owner = true
@@ -1210,6 +1218,11 @@ stretch_mode = 5
 layout_mode = 2
 text = "- Toggle both locks"
 
+[node name="Control" type="Control" parent="UI/MainVBox/B1"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+
 [node name="InfoButton" type="Button" parent="UI"]
 layout_mode = 1
 anchors_preset = 3
@@ -1223,7 +1236,7 @@ offset_right = -8.0
 offset_bottom = -8.0
 grow_horizontal = 0
 grow_vertical = 0
-tooltip_text = "Tip: Hover over anything to see its function!"
+tooltip_text = "Program credits"
 theme_type_variation = &"MiniButton"
 text = "i"
 expand_icon = true
@@ -1241,9 +1254,27 @@ offset_right = -40.0
 offset_bottom = -8.0
 grow_horizontal = 0
 grow_vertical = 0
-tooltip_text = "Tip: Hover over anything to see its function!"
+tooltip_text = "Controls guide"
 theme_type_variation = &"MiniButton"
 text = "c"
+expand_icon = true
+
+[node name="ThemeButton" type="Button" parent="UI"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -96.0
+offset_top = -32.0
+offset_right = -72.0
+offset_bottom = -7.0
+grow_horizontal = 0
+grow_vertical = 0
+tooltip_text = "Theme cycle"
+theme_type_variation = &"MiniButton"
+text = "t"
 expand_icon = true
 
 [node name="BlurRect" type="ColorRect" parent="UI"]
@@ -1390,6 +1421,7 @@ autostart = true
 [connection signal="toggled" from="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer2/SnapControls" to="UI" method="_on_snap_controls_toggled"]
 [connection signal="pressed" from="UI/InfoButton" to="UI" method="_on_info_button_pressed"]
 [connection signal="pressed" from="UI/ControlsButton" to="UI" method="_on_controls_button_pressed"]
+[connection signal="pressed" from="UI/ThemeButton" to="UI" method="_on_theme_button_pressed"]
 [connection signal="popup_hide" from="UI/InfoPopup" to="UI" method="_on_info_popup_popup_hide"]
 [connection signal="meta_clicked" from="UI/InfoPopup/Panel/VBoxContainer/InfoCredits" to="UI" method="_on_info_credits_meta_clicked"]
 [connection signal="popup_hide" from="UI/ControlsPopup" to="UI" method="_on_controls_popup_popup_hide"]
