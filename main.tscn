@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://cmikhaqwhlrq1"]
+[gd_scene load_steps=47 format=3 uid="uid://cmikhaqwhlrq1"]
 
 [ext_resource type="Theme" uid="uid://dxoeymo5y7ebp" path="res://theme.tres" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://ci8gltknaa8n0" path="res://script/main.gd" id="1_h2yge"]
@@ -27,8 +27,10 @@
 [ext_resource type="Texture2D" uid="uid://dpbkmplgtdokt" path="res://icon/kenney_glyphs/Nintendo Switch/switch_dpad_up_outline.png" id="21_d13ii"]
 [ext_resource type="Texture2D" uid="uid://cr4gsturnc2nc" path="res://icon/kenney_glyphs/Nintendo Switch/switch_buttons_up_outline.png" id="22_1u8w0"]
 [ext_resource type="Script" uid="uid://by1rf4skvhdw8" path="res://script/program_mode.gd" id="22_a6jrf"]
+[ext_resource type="Texture2D" uid="uid://3ijhyewd6hww" path="res://icon/reset.svg" id="23_4k2k6"]
 [ext_resource type="Texture2D" uid="uid://bnlh0nq1ahiod" path="res://icon/play.svg" id="23_qsp4k"]
 [ext_resource type="Script" uid="uid://dghdn10ni5ga5" path="res://script/analog_mode.gd" id="23_seu75"]
+[ext_resource type="Texture2D" uid="uid://snd4uxhfsi2j" path="res://icon/reset_disabled.svg" id="24_0rl1p"]
 [ext_resource type="Texture2D" uid="uid://dqwemni60trqp" path="res://icon/kenney_glyphs/Nintendo Switch/switch_dpad_left_outline.png" id="24_htxhm"]
 [ext_resource type="Texture2D" uid="uid://bc3if7fk4tikx" path="res://icon/pause.svg" id="24_kq58d"]
 [ext_resource type="Texture2D" uid="uid://cst8li6a7al6b" path="res://logo/motor_icon_v1.png" id="25_0odxb"]
@@ -552,9 +554,10 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
 tab_alignment = 1
-current_tab = 0
+current_tab = 1
 
 [node name="Analog Mode" type="TabBar" parent="UI/MainVBox/ModeTabs" node_paths=PackedStringArray("UI")]
+visible = false
 layout_mode = 2
 script = ExtResource("23_seu75")
 UI = NodePath("../../..")
@@ -623,7 +626,6 @@ value = 1.0
 exp_edit = true
 
 [node name="Program Mode" type="TabBar" parent="UI/MainVBox/ModeTabs" node_paths=PackedStringArray("PATTERN_MAKER", "UI")]
-visible = false
 layout_mode = 2
 script = ExtResource("22_a6jrf")
 PATTERN_MAKER = NodePath("VBoxContainer/PatternMaker")
@@ -698,10 +700,49 @@ tooltip_text = "Doubles all the values below"
 text = "Double"
 
 [node name="Control" type="Control" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="VSeparator" type="VSeparator" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls"]
+[node name="VSeparator4" type="VSeparator" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls"]
+layout_mode = 2
+
+[node name="TimescaleLabel" type="Label" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(36, 0)
+layout_mode = 2
+text = "1.0"
+
+[node name="Label2" type="Label" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls"]
+layout_mode = 2
+text = "x "
+
+[node name="TimescaleSlider" type="HSlider" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+tooltip_text = "Timescale control.
+Useful for changing program speed on the fly.
+Also controlled by holding any trigger + joysticks"
+min_value = 0.1
+max_value = 10.0
+step = 0.05
+value = 1.0
+exp_edit = true
+
+[node name="TimescaleReset" type="TextureButton" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+tooltip_text = "Reset timescale to 1.0x"
+disabled = true
+texture_normal = ExtResource("23_4k2k6")
+texture_disabled = ExtResource("24_0rl1p")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="VSeparator3" type="VSeparator" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls"]
 layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls"]
@@ -1413,6 +1454,8 @@ autostart = true
 [connection signal="value_changed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls/TactAmount" to="UI/MainVBox/ModeTabs/Program Mode" method="_on_tact_amount_value_changed"]
 [connection signal="pressed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls/HalfAllTacts" to="UI/MainVBox/ModeTabs/Program Mode" method="_on_half_all_tacts_pressed"]
 [connection signal="pressed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls/DoubleAllTacts" to="UI/MainVBox/ModeTabs/Program Mode" method="_on_double_all_tacts_pressed"]
+[connection signal="value_changed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls/TimescaleSlider" to="UI/MainVBox/ModeTabs/Program Mode" method="_on_timescale_slider_value_changed"]
+[connection signal="pressed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls/TimescaleReset" to="UI/MainVBox/ModeTabs/Program Mode" method="_on_timescale_reset_pressed"]
 [connection signal="toggled" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls/PlayPause" to="UI/MainVBox/ModeTabs/Program Mode" method="_on_play_pause_toggled"]
 [connection signal="toggled" from="UI/MainVBox/HBoxContainer3/HideBottomRow" to="UI" method="_on_hide_bottom_row_toggled"]
 [connection signal="toggled" from="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer/HBoxContainer/FlipControls" to="UI" method="_on_flip_controls_toggled"]

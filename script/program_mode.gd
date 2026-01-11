@@ -18,6 +18,7 @@ var current_tact := 0
 var time_elapsed := 0.0 # used to time tacts
 var playing := false # play button
 var duration_phase := true # if in first (duration) or second (pause) phase of the tact
+var timescale := 1.0
 
 # Unused
 var complex_tacts := true # option to switch between progress/dot tacts
@@ -61,7 +62,7 @@ func _process(delta: float) -> void:
 	_process_controls(delta)
 	
 	if playing:
-		time_elapsed += delta
+		time_elapsed += delta*timescale
 		_play_program()
 	
 	_process_rumble()
@@ -196,6 +197,27 @@ func _update_stored_flip_values() -> void:
 		flips[i] = PATTERN_NODES[i]["Flip"].button_pressed
 
 
+### Timescale
+
+func _on_timescale_slider_value_changed(value: float) -> void:
+	timescale = value
+	%TimescaleLabel.text = str(value)
+	_check_timescale_reset_editability()
+
+func _update_ui_timescale() -> void:
+	%TimescaleSlider.set_value_no_signal(timescale)
+	%TimescaleLabel.text = str(%TimescaleSlider.value)
+	_check_timescale_reset_editability()
+
+func _on_timescale_reset_pressed() -> void:
+	timescale = 1.0
+	_update_ui_timescale()
+	%TimescaleReset.disabled = true
+
+func _check_timescale_reset_editability() -> void:
+	if timescale != 1.0:
+		%TimescaleReset.disabled = false
+
 ### Controls
 
 func _process_controls(delta: float) -> void:
@@ -203,13 +225,6 @@ func _process_controls(delta: float) -> void:
 	var right_axis := 0.0
 	var weak_axis := 0.0
 	var strong_axis := 0.0
-	var speed_mod := 1.0
-	
-	if Settings.trigger_enabled: # Speed modifier triggers for fun
-		if Input.is_action_pressed("increase_rumble_trigger_left"):
-			speed_mod *= (1.0/3.0)
-		if Input.is_action_pressed("increase_rumble_trigger_right"):
-			speed_mod *= 3.0
 	
 	if Settings.joystick_enabled:
 		left_axis = Input.get_axis("decrease_rumble_left", "increase_rumble_left")
@@ -229,11 +244,19 @@ func _process_controls(delta: float) -> void:
 		weak_axis = right_axis
 		strong_axis = left_axis
 	
+	if Settings.trigger_enabled: # Hold trigger to change timescale instead
+		if (Input.is_action_pressed("increase_rumble_trigger_left")
+		or Input.is_action_pressed("increase_rumble_trigger_right")):
+			var adder := clampf(weak_axis + strong_axis, -1.0, 1.0) * delta
+			timescale = clampf(timescale + adder, 0.1, 10.0)
+			_update_ui_timescale()
+			return
+	
 	weak_axis = clampf(weak_axis + %WeakSliderProgram.value, -1.0, 1.0)
 	strong_axis = clampf(strong_axis + %StrongSliderProgram.value, -1.0, 1.0)
 	
-	weak_desired = clampf(weak_desired + (weak_axis * delta * speed_mod * speed_slider), 0.0, 1.0)
-	strong_desired = clampf(strong_desired + (strong_axis * delta * speed_mod * speed_slider), 0.0, 1.0)
+	weak_desired = clampf(weak_desired + (weak_axis * delta  * speed_slider), 0.0, 1.0)
+	strong_desired = clampf(strong_desired + (strong_axis * delta * speed_slider), 0.0, 1.0)
 	UI.update_desired_gauges(weak_desired, strong_desired)
 
 
