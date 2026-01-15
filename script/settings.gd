@@ -26,6 +26,7 @@ var rumble_multiplier := 1.0
 var flipped := false # %FlipControls
 var coupled := false # %CoupleMotors
 var incremented := false
+var fix_disabled := false
 
 
 # These are used to apply a "fix frame" every ~2 seconds
@@ -51,7 +52,7 @@ func _increment_fix_frame(delta: float) -> void:
 # (and reset fix frame status)
 func get_fix_multiplier() -> float:
 	var fix := 1.0
-	if apply_fix_frame:
+	if apply_fix_frame and not fix_disabled:
 		fix = 0.99
 		apply_fix_frame = false
 	return fix

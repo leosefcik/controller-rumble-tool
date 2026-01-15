@@ -126,3 +126,13 @@ func _on_analog_vel_mode_toggled(toggled_on: bool) -> void:
 func _on_velocity_mode_speed_value_changed(value: float) -> void:
 	velocity_mode_speed = value
 	%VelocityModeSpeedLabel.text = str("Speed: ", value, "x")
+
+### Analog specific inputs
+
+func _input(event: InputEvent) -> void:
+	if not visible: return
+	
+	if event.is_action_pressed("velocity_mode"):
+		%AnalogVelMode.button_pressed = !%AnalogVelMode.button_pressed
+	elif event.is_action_pressed("alternating_mode"):
+		%AnalogAltMode.button_pressed = !%AnalogAltMode.button_pressed

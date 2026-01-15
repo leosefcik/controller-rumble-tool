@@ -1,8 +1,15 @@
-[gd_resource type="Theme" load_steps=10 format=3 uid="uid://dxoeymo5y7ebp"]
+[gd_resource type="Theme" load_steps=11 format=3 uid="uid://dxoeymo5y7ebp"]
 
 [ext_resource type="FontFile" uid="uid://cfhihdagg725w" path="res://font/Cabin-Bold.ttf" id="1_cjfk0"]
 [ext_resource type="FontFile" uid="uid://cyvnbcshmtw7w" path="res://font/Cabin-Italic.ttf" id="2_110ce"]
 [ext_resource type="FontFile" uid="uid://car6m0wxvtbx2" path="res://font/Cabin-Regular.ttf" id="2_vj6dk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mihib"]
+bg_color = Color(0.32172796, 0.32172796, 0.32172796, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vj6dk"]
 bg_color = Color(0.24840015, 0.24840021, 0.24840006, 1)
@@ -49,10 +56,12 @@ bg_color = Color(0.11489678, 0.11489683, 0.11489671, 1)
 default_font = ExtResource("2_vj6dk")
 default_font_size = 18
 FlipButton/base_type = &"Button"
-FlipButton/styles/hover = SubResource("StyleBoxFlat_vj6dk")
+FlipButton/styles/hover = SubResource("StyleBoxFlat_mihib")
 FlipButton/styles/normal = SubResource("StyleBoxFlat_vj6dk")
 FlipButton/styles/pressed = SubResource("StyleBoxFlat_110ce")
 HSeparator/constants/separation = 12
+HeaderLarge/font_sizes/font_size = 28
+HeaderLarge/fonts/font = ExtResource("2_vj6dk")
 LineEdit/constants/minimum_character_width = 1
 LineEdit/styles/focus = SubResource("StyleBoxEmpty_vj6dk")
 MiniButton/base_type = &"Button"

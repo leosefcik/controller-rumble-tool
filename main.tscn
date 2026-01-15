@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://cmikhaqwhlrq1"]
+[gd_scene load_steps=50 format=3 uid="uid://cmikhaqwhlrq1"]
 
 [ext_resource type="Theme" uid="uid://dxoeymo5y7ebp" path="res://theme.tres" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://ci8gltknaa8n0" path="res://script/main.gd" id="1_h2yge"]
@@ -6,8 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://5nds8kddfl4l" path="res://icon/lock_open.svg" id="4_7mycd"]
 [ext_resource type="Texture2D" uid="uid://ckbr8bdov2vbg" path="res://icon/kenney_glyphs/Xbox Series/xbox_lb.png" id="5_vivmo"]
 [ext_resource type="Texture2D" uid="uid://br5rppxn7r5cb" path="res://icon/kenney_glyphs/Xbox Series/xbox_rb.png" id="7_2cqfq"]
-[ext_resource type="Texture2D" uid="uid://c6tew0gsdkewp" path="res://icon/kenney_glyphs/Xbox Series/xbox_button_back_icon_outline.png" id="8_yaehf"]
-[ext_resource type="Texture2D" uid="uid://huvc07wk6boa" path="res://icon/kenney_glyphs/Xbox Series/xbox_button_start_icon_outline.png" id="10_cegan"]
 [ext_resource type="Texture2D" uid="uid://bl85x6w66rijj" path="res://icon/kenney_glyphs/Xbox Series/xbox_rb_outline.png" id="11_w48qg"]
 [ext_resource type="Texture2D" uid="uid://db0xia0noybfi" path="res://icon/kenney_glyphs/Generic/generic_joystick_horizontal.png" id="12_cegan"]
 [ext_resource type="Texture2D" uid="uid://dqfjtcdx6ghms" path="res://icon/kenney_glyphs/Xbox Series/xbox_lb_outline.png" id="12_vivmo"]
@@ -35,6 +33,11 @@
 [ext_resource type="Texture2D" uid="uid://bc3if7fk4tikx" path="res://icon/pause.svg" id="24_kq58d"]
 [ext_resource type="Texture2D" uid="uid://cst8li6a7al6b" path="res://logo/motor_icon_v1.png" id="25_0odxb"]
 [ext_resource type="Texture2D" uid="uid://bdfgi71ao14ht" path="res://icon/kenney_glyphs/Nintendo Switch/switch_buttons_right_outline.png" id="25_jq2sk"]
+[ext_resource type="Texture2D" uid="uid://c73y5tpf43tkc" path="res://icon/kenney_glyphs/Nintendo Switch/switch_dpad_down_outline.png" id="31_ok6jj"]
+[ext_resource type="Texture2D" uid="uid://d3d7a0q37safg" path="res://icon/kenney_glyphs/Nintendo Switch/switch_buttons_down_outline.png" id="32_facbu"]
+[ext_resource type="Texture2D" uid="uid://be5q3onrjogpo" path="res://icon/slider.svg" id="36_ok6jj"]
+[ext_resource type="Texture2D" uid="uid://cd1atd5fn6l1m" path="res://icon/kenney_glyphs/Xbox Series/xbox_button_back_icon.png" id="37_b1qrp"]
+[ext_resource type="Texture2D" uid="uid://c128ifahpnhil" path="res://icon/kenney_glyphs/Xbox Series/xbox_button_start_icon.png" id="38_come4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1bvp3"]
 bg_color = Color(0.66, 0.66, 0.66, 0.27058825)
@@ -95,7 +98,7 @@ MOUSE_STICKY_GLYPH = ExtResource("12_cegan")
 MOUSE_SNAP_GLPYH = ExtResource("17_074og")
 UI = NodePath("UI")
 
-[node name="UI" type="Control" parent="." node_paths=PackedStringArray("Main")]
+[node name="UI" type="Control" parent="." node_paths=PackedStringArray("Main", "ProgramMode")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -112,6 +115,7 @@ LB_ON_GLYPH = ExtResource("5_vivmo")
 RB_OFF_GLYPH = ExtResource("11_w48qg")
 RB_ON_GLYPH = ExtResource("7_2cqfq")
 Main = NodePath("..")
+ProgramMode = NodePath("MainVBox/ModeTabs/Program Mode")
 
 [node name="MainVBox" type="VBoxContainer" parent="UI"]
 layout_mode = 1
@@ -554,10 +558,9 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
 tab_alignment = 1
-current_tab = 1
+current_tab = 0
 
 [node name="Analog Mode" type="TabBar" parent="UI/MainVBox/ModeTabs" node_paths=PackedStringArray("UI")]
-visible = false
 layout_mode = 2
 script = ExtResource("23_seu75")
 UI = NodePath("../../..")
@@ -580,10 +583,10 @@ alignment = 1
 
 [node name="Label" type="Label" parent="UI/MainVBox/ModeTabs/Analog Mode/VBoxContainer"]
 layout_mode = 2
-text = "Analog mode:
-
+text = "Welcome!
 - Connect a controller (if you have multiple, use the ID selector to choose which one to control)
-- Use either the triggers, joysticks UP/DOWN, or the slider in the top-right to control the weak and strong motors in your controller"
+- Use either the triggers, joysticks UP/DOWN, or the slider in the top-right to control the weak and strong motors in your controller
+- Be sure to check out the Controls menu (\"c\" button in the bottom-left)"
 autowrap_mode = 3
 
 [node name="HSeparator" type="HSeparator" parent="UI/MainVBox/ModeTabs/Analog Mode/VBoxContainer"]
@@ -594,12 +597,14 @@ custom_minimum_size = Vector2(0, 44)
 layout_mode = 2
 
 [node name="AnalogAltMode" type="CheckBox" parent="UI/MainVBox/ModeTabs/Analog Mode/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "When both motors reach 0%, toggles Flip Controls"
 text = "Alternating Mode"
 
 [node name="AnalogVelMode" type="CheckBox" parent="UI/MainVBox/ModeTabs/Analog Mode/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "\"Drags\" the input along instead of having it control rumble directly"
@@ -626,6 +631,7 @@ value = 1.0
 exp_edit = true
 
 [node name="Program Mode" type="TabBar" parent="UI/MainVBox/ModeTabs" node_paths=PackedStringArray("PATTERN_MAKER", "UI")]
+visible = false
 layout_mode = 2
 script = ExtResource("22_a6jrf")
 PATTERN_MAKER = NodePath("VBoxContainer/PatternMaker")
@@ -649,7 +655,9 @@ alignment = 2
 [node name="Label" type="Label" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 6
-text = "This section will be filled with presets in a future update!"
+text = "Program your own timings to automate rumble!
+This section will be filled with presets in a future update.
+Maybe a visual guide somewhere too."
 horizontal_alignment = 1
 
 [node name="PlaceholderPresets" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer"]
@@ -678,8 +686,8 @@ alignment = 1
 [node name="TactAmount" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls"]
 unique_name_in_owner = true
 layout_mode = 2
-tooltip_text = "The amount of active \"tacts\" in the current program.
-Each active tact will play in a sequence, and is composed
+tooltip_text = "The amount of active \"beats\" in the current program.
+Each active beat will play in a sequence, and is composed
 of a (rumble) duration and a pause duration"
 min_value = 1.0
 max_value = 4.0
@@ -745,22 +753,6 @@ stretch_mode = 5
 [node name="VSeparator3" type="VSeparator" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls"]
-layout_mode = 2
-texture = ExtResource("24_htxhm")
-expand_mode = 2
-stretch_mode = 5
-
-[node name="TextureRect2" type="TextureRect" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls"]
-layout_mode = 2
-texture = ExtResource("25_jq2sk")
-expand_mode = 2
-stretch_mode = 5
-
-[node name="Label" type="Label" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls"]
-layout_mode = 2
-text = "-"
-
 [node name="PlayPause" type="TextureButton" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(30, 30)
@@ -816,7 +808,7 @@ layout_mode = 2
 size_flags_vertical = 4
 tooltip_text = "Flip: When checked, the desired intensities
 of the weak/strong motors will be flipped
-when the tact becomes active"
+when the beat becomes active"
 focus_behavior_recursive = 1
 theme_type_variation = &"FlipButton"
 toggle_mode = true
@@ -827,7 +819,7 @@ layout_mode = 2
 [node name="Duration" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row1"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-tooltip_text = "The duration of rumble for this tact"
+tooltip_text = "The duration of rumble for this beat"
 max_value = 999.99
 step = 0.001
 suffix = "s"
@@ -836,7 +828,7 @@ custom_arrow_step = 0.125
 [node name="Pause" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row1"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-tooltip_text = "The length of the pause of this tact"
+tooltip_text = "The length of the pause of this beat"
 max_value = 999.99
 step = 0.001
 suffix = "s"
@@ -880,7 +872,7 @@ layout_mode = 2
 size_flags_vertical = 4
 tooltip_text = "Flip: When checked, the desired intensities
 of the weak/strong motors will be flipped
-when the tact becomes active"
+when the beat becomes active"
 focus_behavior_recursive = 1
 theme_type_variation = &"FlipButton"
 toggle_mode = true
@@ -891,7 +883,7 @@ layout_mode = 2
 [node name="Duration" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row2"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-tooltip_text = "The duration of rumble for this tact"
+tooltip_text = "The duration of rumble for this beat"
 max_value = 999.99
 step = 0.001
 suffix = "s"
@@ -900,7 +892,7 @@ custom_arrow_step = 0.125
 [node name="Pause" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row2"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-tooltip_text = "The length of the pause of this tact"
+tooltip_text = "The length of the pause of this beat"
 max_value = 999.99
 step = 0.001
 suffix = "s"
@@ -944,7 +936,7 @@ layout_mode = 2
 size_flags_vertical = 4
 tooltip_text = "Flip: When checked, the desired intensities
 of the weak/strong motors will be flipped
-when the tact becomes active"
+when the beat becomes active"
 focus_behavior_recursive = 1
 theme_type_variation = &"FlipButton"
 toggle_mode = true
@@ -955,7 +947,7 @@ layout_mode = 2
 [node name="Duration" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row3"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-tooltip_text = "The duration of rumble for this tact"
+tooltip_text = "The duration of rumble for this beat"
 max_value = 999.99
 step = 0.001
 suffix = "s"
@@ -964,7 +956,7 @@ custom_arrow_step = 0.125
 [node name="Pause" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row3"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-tooltip_text = "The length of the pause of this tact"
+tooltip_text = "The length of the pause of this beat"
 max_value = 999.99
 step = 0.001
 suffix = "s"
@@ -1006,7 +998,7 @@ layout_mode = 2
 size_flags_vertical = 4
 tooltip_text = "Flip: When checked, the desired intensities
 of the weak/strong motors will be flipped
-when the tact becomes active"
+when the beat becomes active"
 focus_behavior_recursive = 1
 theme_type_variation = &"FlipButton"
 toggle_mode = true
@@ -1017,7 +1009,7 @@ layout_mode = 2
 [node name="Duration" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row4"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-tooltip_text = "The duration of rumble for this tact"
+tooltip_text = "The duration of rumble for this beat"
 max_value = 999.99
 step = 0.001
 suffix = "s"
@@ -1026,7 +1018,7 @@ custom_arrow_step = 0.125
 [node name="Pause" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row4"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-tooltip_text = "The length of the pause of this tact"
+tooltip_text = "The length of the pause of this beat"
 max_value = 999.99
 step = 0.001
 suffix = "s"
@@ -1097,9 +1089,10 @@ alignment = 1
 [node name="Label" type="Label" parent="UI/MainVBox/HBoxContainer3"]
 layout_mode = 2
 theme_type_variation = &"TooltipLabel"
-text = "Settings"
+text = "Settings "
 
 [node name="HideBottomRow" type="TextureButton" parent="UI/MainVBox/HBoxContainer3"]
+visible = false
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 toggle_mode = true
@@ -1133,18 +1126,6 @@ size_flags_horizontal = 3
 tooltip_text = "Flips the triggers/joysticks that control each motor"
 text = "Flip L/R Controls"
 
-[node name="FlipControlsGlyph2" type="TextureRect" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-texture = ExtResource("21_d13ii")
-expand_mode = 2
-
-[node name="FlipControlsGlyph" type="TextureRect" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-texture = ExtResource("22_1u8w0")
-expand_mode = 2
-
 [node name="HBoxContainer2" type="HBoxContainer" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer"]
 layout_mode = 2
 
@@ -1154,18 +1135,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "Control both motors together with either L/R input"
 text = "Couple Motors"
-
-[node name="CoupleMotorsGlyph" type="TextureRect" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer/HBoxContainer2"]
-unique_name_in_owner = true
-layout_mode = 2
-texture = ExtResource("8_yaehf")
-expand_mode = 2
-
-[node name="CoupleMotorsGlyph2" type="TextureRect" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer/HBoxContainer2"]
-unique_name_in_owner = true
-layout_mode = 2
-texture = ExtResource("10_cegan")
-expand_mode = 2
 
 [node name="VSeparator" type="VSeparator" parent="UI/MainVBox/SettingsBox/HBoxContainer3"]
 layout_mode = 2
@@ -1211,111 +1180,47 @@ size_flags_horizontal = 3
 tooltip_text = "Snaps the power output to increments of 10%"
 text = "Snap to 10%"
 
-[node name="B2" type="HSeparator" parent="UI/MainVBox"]
+[node name="VSeparator2" type="VSeparator" parent="UI/MainVBox/SettingsBox/HBoxContainer3"]
 layout_mode = 2
 
-[node name="B1" type="HBoxContainer" parent="UI/MainVBox"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="UI/MainVBox/SettingsBox/HBoxContainer3"]
 layout_mode = 2
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="UI/MainVBox/B1"]
-custom_minimum_size = Vector2(0, 35)
+[node name="DisableFix" type="CheckBox" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer3"]
 layout_mode = 2
-size_flags_horizontal = 3
+tooltip_text = "Disables the workaround preventing certain controllers from
+turning off after a period of constant, unchanging rumble.
+Keep off unless you want this behavior"
+text = "Disable Fix"
 
-[node name="GlyphIcon" type="TextureRect" parent="UI/MainVBox/B1/HBoxContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer3"]
 layout_mode = 2
-texture = ExtResource("14_2cqfq")
-expand_mode = 2
-stretch_mode = 5
 
-[node name="GlyphIcon2" type="TextureRect" parent="UI/MainVBox/B1/HBoxContainer2"]
-layout_mode = 2
-texture = ExtResource("14_vivmo")
-expand_mode = 2
-stretch_mode = 5
-
-[node name="Label" type="Label" parent="UI/MainVBox/B1/HBoxContainer2"]
-layout_mode = 2
-text = "- Control motors"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/MainVBox/B1"]
-custom_minimum_size = Vector2(0, 35)
+[node name="ThemeButton" type="Button" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer3/HBoxContainer"]
+custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_horizontal = 3
-
-[node name="GlyphIcon" type="TextureRect" parent="UI/MainVBox/B1/HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("19_getpj")
-expand_mode = 2
-stretch_mode = 5
-
-[node name="GlyphIcon2" type="TextureRect" parent="UI/MainVBox/B1/HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("20_ryguw")
-expand_mode = 2
-stretch_mode = 5
-
-[node name="Label" type="Label" parent="UI/MainVBox/B1/HBoxContainer"]
-layout_mode = 2
-text = "- Toggle both locks"
-
-[node name="Control" type="Control" parent="UI/MainVBox/B1"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.5
-
-[node name="InfoButton" type="Button" parent="UI"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -32.0
-offset_top = -32.0
-offset_right = -8.0
-offset_bottom = -8.0
-grow_horizontal = 0
-grow_vertical = 0
-tooltip_text = "Program credits"
+tooltip_text = "Theme cycle"
 theme_type_variation = &"MiniButton"
-text = "i"
+text = "t"
 expand_icon = true
 
-[node name="ControlsButton" type="Button" parent="UI"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -64.0
-offset_top = -32.0
-offset_right = -40.0
-offset_bottom = -8.0
-grow_horizontal = 0
-grow_vertical = 0
+[node name="ControlsButton" type="Button" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer3/HBoxContainer"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_horizontal = 3
 tooltip_text = "Controls guide"
 theme_type_variation = &"MiniButton"
 text = "c"
 expand_icon = true
 
-[node name="ThemeButton" type="Button" parent="UI"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -96.0
-offset_top = -32.0
-offset_right = -72.0
-offset_bottom = -7.0
-grow_horizontal = 0
-grow_vertical = 0
-tooltip_text = "Theme cycle"
+[node name="InfoButton" type="Button" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer3/HBoxContainer"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Program credits"
 theme_type_variation = &"MiniButton"
-text = "t"
+text = "i"
 expand_icon = true
 
 [node name="BlurRect" type="ColorRect" parent="UI"]
@@ -1360,7 +1265,7 @@ layout_mode = 2
 bbcode_enabled = true
 text = "[center][b]Controller Rumble Tool[/b]
 (Gamepad Vibration Massager)
-[i]v0.4.1[/i][/center]
+[i]v0.5[/i][/center]
 
 Credits:
 [ul]Cabin Font - [url]https://github.com/impallari/Cabin[/url]
@@ -1419,7 +1324,287 @@ grow_vertical = 2
 
 [node name="Label" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer"]
 layout_mode = 2
-text = "Unfinished controls section!"
+theme_type_variation = &"HeaderLarge"
+text = "Controls: Analog Mode"
+
+[node name="HSeparator" type="HSeparator" parent="UI/ControlsPopup/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="UI/ControlsPopup/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+texture = ExtResource("36_ok6jj")
+expand_mode = 2
+
+[node name="Label3" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "/"
+
+[node name="TextureRect" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+texture = ExtResource("14_2cqfq")
+expand_mode = 2
+
+[node name="Label2" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "/"
+
+[node name="TextureRect2" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+texture = ExtResource("14_vivmo")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = ":  Control L/R intensity"
+
+[node name="HBoxContainer11" type="HBoxContainer" parent="UI/ControlsPopup/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer11"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+texture = ExtResource("19_getpj")
+expand_mode = 2
+
+[node name="Label2" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer11"]
+layout_mode = 2
+text = "/"
+
+[node name="TextureRect2" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer11"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+texture = ExtResource("20_ryguw")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer11"]
+layout_mode = 2
+text = ":  Toggle Alternating Mode"
+
+[node name="HBoxContainer10" type="HBoxContainer" parent="UI/ControlsPopup/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer10"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+texture = ExtResource("31_ok6jj")
+expand_mode = 2
+
+[node name="Label2" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer10"]
+layout_mode = 2
+text = "/"
+
+[node name="TextureRect2" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer10"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+texture = ExtResource("32_facbu")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer10"]
+layout_mode = 2
+text = ":  Toggle Velocity Mode"
+
+[node name="Spacer" type="Control" parent="UI/ControlsPopup/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label2" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+text = "Controls: Program Mode"
+
+[node name="HSeparator2" type="HSeparator" parent="UI/ControlsPopup/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="UI/ControlsPopup/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer5"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+texture = ExtResource("36_ok6jj")
+expand_mode = 2
+
+[node name="Label2" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+text = "/"
+
+[node name="TextureRect2" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer5"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+texture = ExtResource("14_vivmo")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+text = ":  Control L/R intensity (reached when program plays)"
+
+[node name="HBoxContainer7" type="HBoxContainer" parent="UI/ControlsPopup/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer7"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+texture = ExtResource("24_htxhm")
+expand_mode = 2
+
+[node name="Label2" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer7"]
+layout_mode = 2
+text = "/"
+
+[node name="TextureRect2" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer7"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+texture = ExtResource("25_jq2sk")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer7"]
+layout_mode = 2
+text = ":  Play/pause the program"
+
+[node name="HBoxContainer9" type="HBoxContainer" parent="UI/ControlsPopup/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer9"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+texture = ExtResource("31_ok6jj")
+expand_mode = 2
+
+[node name="Label2" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer9"]
+layout_mode = 2
+text = "/"
+
+[node name="TextureRect2" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer9"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+texture = ExtResource("32_facbu")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer9"]
+layout_mode = 2
+text = ":  Flip Controls AND flip the two intensities"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="UI/ControlsPopup/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect4" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+texture = ExtResource("36_ok6jj")
+expand_mode = 2
+
+[node name="Label3" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+text = "/"
+
+[node name="TextureRect3" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+texture = ExtResource("14_2cqfq")
+expand_mode = 2
+
+[node name="Label2" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+text = "+"
+
+[node name="TextureRect2" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+texture = ExtResource("14_vivmo")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+text = ":  Change the timescale of running program"
+
+[node name="Spacer2" type="Control" parent="UI/ControlsPopup/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label3" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+text = "Global Controls"
+
+[node name="HSeparator3" type="HSeparator" parent="UI/ControlsPopup/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="UI/ControlsPopup/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer4"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+texture = ExtResource("5_vivmo")
+expand_mode = 2
+
+[node name="Label2" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+text = "/"
+
+[node name="TextureRect2" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer4"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+texture = ExtResource("7_2cqfq")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+text = ":  Toggle either motor's rumble lock"
+
+[node name="HBoxContainer6" type="HBoxContainer" parent="UI/ControlsPopup/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer6"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("37_b1qrp")
+expand_mode = 2
+
+[node name="Label2" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer6"]
+layout_mode = 2
+text = "/"
+
+[node name="TextureRect2" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer6"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("38_come4")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer6"]
+layout_mode = 2
+text = ":  Toggle the Couple Motors option (Hold: switch mode tabs)"
+
+[node name="HBoxContainer8" type="HBoxContainer" parent="UI/ControlsPopup/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer8"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+texture = ExtResource("21_d13ii")
+expand_mode = 2
+
+[node name="Label2" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer8"]
+layout_mode = 2
+text = "/"
+
+[node name="TextureRect2" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer8"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+texture = ExtResource("22_1u8w0")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer8"]
+layout_mode = 2
+text = ":  Toggle the Flip Controls option"
 
 [node name="ControllerCheckTimer" type="Timer" parent="."]
 wait_time = 0.5
@@ -1462,9 +1647,10 @@ autostart = true
 [connection signal="toggled" from="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer/HBoxContainer2/CoupleMotors" to="UI" method="_on_couple_motors_toggled"]
 [connection signal="value_changed" from="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer2/MultiplierNode/MultiplierBox" to="UI" method="_on_multiplier_box_value_changed"]
 [connection signal="toggled" from="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer2/SnapControls" to="UI" method="_on_snap_controls_toggled"]
-[connection signal="pressed" from="UI/InfoButton" to="UI" method="_on_info_button_pressed"]
-[connection signal="pressed" from="UI/ControlsButton" to="UI" method="_on_controls_button_pressed"]
-[connection signal="pressed" from="UI/ThemeButton" to="UI" method="_on_theme_button_pressed"]
+[connection signal="toggled" from="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer3/DisableFix" to="UI" method="_on_disable_fix_toggled"]
+[connection signal="pressed" from="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer3/HBoxContainer/ThemeButton" to="UI" method="_on_theme_button_pressed"]
+[connection signal="pressed" from="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer3/HBoxContainer/ControlsButton" to="UI" method="_on_controls_button_pressed"]
+[connection signal="pressed" from="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer3/HBoxContainer/InfoButton" to="UI" method="_on_info_button_pressed"]
 [connection signal="popup_hide" from="UI/InfoPopup" to="UI" method="_on_info_popup_popup_hide"]
 [connection signal="meta_clicked" from="UI/InfoPopup/Panel/VBoxContainer/InfoCredits" to="UI" method="_on_info_credits_meta_clicked"]
 [connection signal="popup_hide" from="UI/ControlsPopup" to="UI" method="_on_controls_popup_popup_hide"]

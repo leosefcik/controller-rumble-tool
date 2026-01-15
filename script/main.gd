@@ -5,6 +5,9 @@ extends Node
 
 @export var UI: Control
 
+var held_button_framecount := 0.0
+var held_button_used := false
+
 const THEMES_ARRAY := [
 	Color("534666"),
 	Color("664649"),
@@ -29,9 +32,7 @@ func _ready() -> void:
 
 # Processing of button inputs
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("couple_motors"):
-		%CoupleMotors.button_pressed = !%CoupleMotors.button_pressed
-	elif event.is_action_pressed("flip_controls"):
+	if event.is_action_pressed("flip_controls"):
 		UI.flip_controls()
 	
 	elif event.is_action_pressed("lock_rumble_left"):
@@ -47,9 +48,19 @@ func _input(event: InputEvent) -> void:
 		if Settings.coupled: toggle_locks(1,1)
 		elif not Settings.flipped: toggle_locks(0,1)
 		else: toggle_locks(1,0)
-	
-	elif event.is_action_pressed("lock_both_rumbles"):
-		toggle_locks(1,1)
+
+# for held inputs
+func _process(delta: float) -> void:
+	if Input.is_action_pressed("couple_motors"):
+		held_button_framecount += delta
+		if held_button_framecount >= 0.5 and not held_button_used:
+			UI.cycle_mode_tab()
+			held_button_used = true
+	elif Input.is_action_just_released("couple_motors"):
+		if held_button_framecount < 0.5:
+			%CoupleMotors.button_pressed = !%CoupleMotors.button_pressed
+		held_button_framecount = 0.0
+		held_button_used = false
 
 
 ### Lock functionality

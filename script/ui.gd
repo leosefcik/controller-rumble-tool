@@ -13,6 +13,7 @@ extends Control
 @export_group("Nodes")
 
 @export var Main: Node
+@export var ProgramMode: TabBar
 
 # Ideally, I should get rid of the unique names
 # used all over this project
@@ -69,6 +70,12 @@ func update_power_gauges(weak: float, strong: float) -> void:
 # everywhere.
 func flip_controls() -> void:
 	%FlipControls.button_pressed = !%FlipControls.button_pressed
+
+func cycle_mode_tab() -> void:
+	if %ModeTabs.current_tab >= %ModeTabs.get_tab_count() - 1:
+		%ModeTabs.current_tab = 0
+	else:
+		%ModeTabs.current_tab += 1
 
 
 # TITLE BAR
@@ -148,6 +155,7 @@ func _on_couple_motors_toggled(toggled_on: bool) -> void:
 	Settings.coupled = toggled_on
 	Settings.weak_locked = false
 	Settings.strong_locked = false
+	if toggled_on: ProgramMode.couple_motors_sync()
 	update_glyphs() # to update LB/RB glyphs
 
 func _on_multiplier_box_value_changed(value: float) -> void:
@@ -157,6 +165,10 @@ func _on_snap_controls_toggled(toggled_on: bool) -> void:
 	Settings.incremented = toggled_on
 
 
+func _on_disable_fix_toggled(toggled_on: bool) -> void:
+	Settings.fix_disabled = toggled_on
+
+
 
 ### DROPDOWNS
 
@@ -164,6 +176,7 @@ func _on_hide_mode_tabs_toggled(toggled_on: bool) -> void:
 	if toggled_on: %ModeTabs.hide()
 	else: %ModeTabs.show()
 
+# This one's been disabled just because it doesn't look good when hidden
 func _on_hide_bottom_row_toggled(toggled_on: bool) -> void:
 	if toggled_on:
 		%SettingsBox.hide()

@@ -9,9 +9,10 @@
 
 ## Features
  - ⚡ Interact directly with the 2 motors, weak and strong, that are present in most modern controllers
+ - 📜 Program your own rhythms with up to 4 beats, with the ability to adjust speed and intensity live
  - 🕹️ Use either the triggers, joysticks or mouse for a variety of tactile input options
- - 🎮 Choose which device to control using its ID (or even all of them!)
- - 🔒 Lock any (or both) motors to keep them rumbling continuously
+ - 🎮 Support for multiple controllers, either choose one or control all at once
+ - 🔒 Lock any of the two motors to keep them rumbling continuously
  - ↔️ Ambidextrous gamepad controls (a mouse is still needed to navigate menus)
  - 🔧 Snap, flip or join controls with various settings you can enable on the fly
  

@@ -268,10 +268,14 @@ func _input(event: InputEvent) -> void:
 			%PlayPause.button_pressed = !%PlayPause.button_pressed
 		elif event.is_action_pressed("flip_desired_values"):
 			_flip_controls_and_desired_values()
-		elif event.is_action_pressed("couple_motors"):
-			var big := maxf(weak_desired, strong_desired)
-			weak_desired = big
-			strong_desired = big
+
+
+# Called by UI when Couple Motors switches
+func couple_motors_sync() -> void:
+	if visible:
+		var big := maxf(weak_desired, strong_desired)
+		weak_desired = big
+		strong_desired = big
 
 
 ### UI
