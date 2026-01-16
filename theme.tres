@@ -1,8 +1,17 @@
-[gd_resource type="Theme" load_steps=11 format=3 uid="uid://dxoeymo5y7ebp"]
+[gd_resource type="Theme" load_steps=13 format=3 uid="uid://dxoeymo5y7ebp"]
 
 [ext_resource type="FontFile" uid="uid://cfhihdagg725w" path="res://font/Cabin-Bold.ttf" id="1_cjfk0"]
 [ext_resource type="FontFile" uid="uid://cyvnbcshmtw7w" path="res://font/Cabin-Italic.ttf" id="2_110ce"]
 [ext_resource type="FontFile" uid="uid://car6m0wxvtbx2" path="res://font/Cabin-Regular.ttf" id="2_vj6dk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yin2u"]
+content_margin_left = 4.0
+content_margin_right = 4.0
+bg_color = Color(0.48380002, 0.67991674, 0.82, 0.49803922)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mihib"]
 bg_color = Color(0.32172796, 0.32172796, 0.32172796, 1)
@@ -52,9 +61,20 @@ corner_radius_bottom_left = 11
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wvktn"]
 bg_color = Color(0.11489678, 0.11489683, 0.11489671, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ttqs8"]
+content_margin_left = 4.0
+content_margin_right = 4.0
+bg_color = Color(0.82, 0.48380002, 0.56785, 0.49803922)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
 [resource]
 default_font = ExtResource("2_vj6dk")
 default_font_size = 18
+BlueButton/base_type = &"Button"
+BlueButton/styles/normal = SubResource("StyleBoxFlat_yin2u")
 FlipButton/base_type = &"Button"
 FlipButton/styles/hover = SubResource("StyleBoxFlat_mihib")
 FlipButton/styles/normal = SubResource("StyleBoxFlat_vj6dk")
@@ -69,6 +89,8 @@ MiniButton/styles/hover = SubResource("StyleBoxFlat_05tig")
 MiniButton/styles/normal = SubResource("StyleBoxFlat_05tig")
 MiniButton/styles/pressed = SubResource("StyleBoxFlat_1rmny")
 ProgressBar/styles/background = SubResource("StyleBoxFlat_wvktn")
+RedButton/base_type = &"Button"
+RedButton/styles/normal = SubResource("StyleBoxFlat_ttqs8")
 RichTextLabel/fonts/bold_font = ExtResource("1_cjfk0")
 RichTextLabel/fonts/italics_font = ExtResource("2_110ce")
 VSeparator/constants/separation = 12

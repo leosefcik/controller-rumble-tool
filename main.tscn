@@ -700,12 +700,12 @@ layout_mode = 2
 size_flags_vertical = 3
 columns = 3
 
-[node name="Button" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets/GridContainer"]
+[node name="PClear" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets/GridContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Clear"
 
-[node name="Button2" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets/GridContainer"]
+[node name="PSimple" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets/GridContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Simple"
@@ -768,7 +768,7 @@ text = "Cycle"
 [node name="Button3" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Flips"]
 layout_mode = 2
 size_flags_vertical = 3
-text = "Full"
+text = "Every"
 
 [node name="VSeparator2" type="VSeparator" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza"]
 layout_mode = 2
@@ -785,34 +785,40 @@ layout_mode = 2
 size_flags_vertical = 3
 columns = 2
 
-[node name="Button" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors/GridContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-text = "Full"
-
 [node name="Button2" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors/GridContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_type_variation = &"RedButton"
 text = "Full"
 
-[node name="Button3" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors/GridContainer"]
+[node name="Button" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors/GridContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-text = "Half"
+theme_type_variation = &"BlueButton"
+text = "Full"
 
 [node name="Button4" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors/GridContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_type_variation = &"RedButton"
 text = "Half"
 
-[node name="Button5" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors/GridContainer"]
+[node name="Button3" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors/GridContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-text = "Off"
+theme_type_variation = &"BlueButton"
+text = "Half"
 
 [node name="Button6" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors/GridContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_type_variation = &"RedButton"
+text = "Off"
+
+[node name="Button5" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"BlueButton"
 text = "Off"
 
 [node name="VSeparator" type="VSeparator" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza"]
@@ -1643,7 +1649,7 @@ expand_mode = 2
 
 [node name="Label" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer7"]
 layout_mode = 2
-text = ":  Play/pause the program"
+text = ":  Play/pause the program (Pressing spacebar also works)"
 
 [node name="HBoxContainer9" type="HBoxContainer" parent="UI/ControlsPopup/Panel/VBoxContainer"]
 layout_mode = 2
