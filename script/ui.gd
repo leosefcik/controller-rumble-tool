@@ -10,6 +10,9 @@ extends Control
 @export var RB_OFF_GLYPH: CompressedTexture2D
 @export var RB_ON_GLYPH: CompressedTexture2D
 
+@export var LEFT_GLYPH: CompressedTexture2D
+@export var RIGHT_GLYPH: CompressedTexture2D
+
 @export_group("Nodes")
 
 @export var Main: Node
@@ -52,9 +55,12 @@ func update_glyphs() -> void:
 	else:
 		%StrongLockGlyph.texture = RB_ON_GLYPH if not Settings.flipped else LB_ON_GLYPH
 	
-	# Disabled after changing the controls
-	#%FlipControlsGlyph.texture = SELECT_OFF_GLYPH if not flipped else SELECT_ON_GLYPH
-	#%CoupleMotorsGlyph.texture = START_OFF_GLYPH if not coupled else START_ON_GLYPH
+	if not Settings.flipped:
+		%WeakSideGlyph.texture = LEFT_GLYPH
+		%StrongSideGlyph.texture = RIGHT_GLYPH
+	else:
+		%WeakSideGlyph.texture = RIGHT_GLYPH
+		%StrongSideGlyph.texture = LEFT_GLYPH
 
 
 func update_desired_gauges(weak: float, strong: float) -> void:

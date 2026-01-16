@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://cmikhaqwhlrq1"]
+[gd_scene load_steps=55 format=3 uid="uid://cmikhaqwhlrq1"]
 
 [ext_resource type="Theme" uid="uid://dxoeymo5y7ebp" path="res://theme.tres" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://ci8gltknaa8n0" path="res://script/main.gd" id="1_h2yge"]
@@ -8,14 +8,18 @@
 [ext_resource type="Texture2D" uid="uid://br5rppxn7r5cb" path="res://icon/kenney_glyphs/Xbox Series/xbox_rb.png" id="7_2cqfq"]
 [ext_resource type="Texture2D" uid="uid://bl85x6w66rijj" path="res://icon/kenney_glyphs/Xbox Series/xbox_rb_outline.png" id="11_w48qg"]
 [ext_resource type="Texture2D" uid="uid://db0xia0noybfi" path="res://icon/kenney_glyphs/Generic/generic_joystick_horizontal.png" id="12_cegan"]
+[ext_resource type="Texture2D" uid="uid://g8j0ujab1vb" path="res://icon/kenney_glyphs/Nintendo Switch/switch_stick_top_l.png" id="12_d2t1y"]
 [ext_resource type="Texture2D" uid="uid://dqfjtcdx6ghms" path="res://icon/kenney_glyphs/Xbox Series/xbox_lb_outline.png" id="12_vivmo"]
+[ext_resource type="Texture2D" uid="uid://soyukxo82hqq" path="res://icon/kenney_glyphs/Nintendo Switch/switch_stick_top_r.png" id="13_gngh3"]
 [ext_resource type="Texture2D" uid="uid://cydtbpei7bv56" path="res://icon/kenney_glyphs/Xbox Series/controller_xboxone.png" id="13_ycdy4"]
 [ext_resource type="Texture2D" uid="uid://dsw3y5kyg543j" path="res://icon/kenney_glyphs/Generic/generic_button_trigger_b_fill.png" id="14_2cqfq"]
 [ext_resource type="Texture2D" uid="uid://clyw8g54blu5p" path="res://icon/kenney_glyphs/Generic/generic_stick_vertical.png" id="14_vivmo"]
 [ext_resource type="Script" uid="uid://bcmif82n5dhw6" path="res://script/ui.gd" id="15_kq58d"]
 [ext_resource type="Texture2D" uid="uid://cgxhsima8b2d3" path="res://icon/kenney_glyphs/Flairs/flair_disabled_cross.png" id="15_yaehf"]
+[ext_resource type="Texture2D" uid="uid://fces8d066ydn" path="res://icon/kenney_glyphs/Nintendo Switch/switch_stick_r_vertical.png" id="17_4lmeg"]
 [ext_resource type="Texture2D" uid="uid://c4k7h56m5qum3" path="res://icon/kenney_glyphs/Generic/generic_joystick_left.png" id="17_074og"]
 [ext_resource type="Script" uid="uid://dd8utxtchtrsb" path="res://script/analog_mouse_control.gd" id="17_kq58d"]
+[ext_resource type="Texture2D" uid="uid://b5r4jl8crtigu" path="res://icon/kenney_glyphs/Nintendo Switch/switch_stick_l_vertical.png" id="18_0cp0l"]
 [ext_resource type="Script" uid="uid://b2ge2uuslrqf1" path="res://script/program_mouse_control.gd" id="18_jq2sk"]
 [ext_resource type="Texture2D" uid="uid://vn8gli8llxvq" path="res://icon/drop_down.svg" id="19_0odxb"]
 [ext_resource type="Texture2D" uid="uid://cobfw7wvbxehb" path="res://icon/kenney_glyphs/Nintendo Switch/switch_dpad_right_outline.png" id="19_getpj"]
@@ -32,6 +36,7 @@
 [ext_resource type="Texture2D" uid="uid://dqwemni60trqp" path="res://icon/kenney_glyphs/Nintendo Switch/switch_dpad_left_outline.png" id="24_htxhm"]
 [ext_resource type="Texture2D" uid="uid://bc3if7fk4tikx" path="res://icon/pause.svg" id="24_kq58d"]
 [ext_resource type="Texture2D" uid="uid://cst8li6a7al6b" path="res://logo/motor_icon_v1.png" id="25_0odxb"]
+[ext_resource type="Script" uid="uid://cymp7o5y30wlk" path="res://script/preset_plaza.gd" id="25_d2t1y"]
 [ext_resource type="Texture2D" uid="uid://bdfgi71ao14ht" path="res://icon/kenney_glyphs/Nintendo Switch/switch_buttons_right_outline.png" id="25_jq2sk"]
 [ext_resource type="Texture2D" uid="uid://c73y5tpf43tkc" path="res://icon/kenney_glyphs/Nintendo Switch/switch_dpad_down_outline.png" id="31_ok6jj"]
 [ext_resource type="Texture2D" uid="uid://d3d7a0q37safg" path="res://icon/kenney_glyphs/Nintendo Switch/switch_buttons_down_outline.png" id="32_facbu"]
@@ -114,6 +119,8 @@ LB_OFF_GLYPH = ExtResource("12_vivmo")
 LB_ON_GLYPH = ExtResource("5_vivmo")
 RB_OFF_GLYPH = ExtResource("11_w48qg")
 RB_ON_GLYPH = ExtResource("7_2cqfq")
+LEFT_GLYPH = ExtResource("12_d2t1y")
+RIGHT_GLYPH = ExtResource("13_gngh3")
 Main = NodePath("..")
 ProgramMode = NodePath("MainVBox/ModeTabs/Program Mode")
 
@@ -333,6 +340,13 @@ texture = ExtResource("11_w48qg")
 expand_mode = 4
 stretch_mode = 5
 
+[node name="StrongSideGlyph" type="TextureRect" parent="UI/MainVBox/Gauges/StrongLockButton/StrongLockIcons"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("17_4lmeg")
+expand_mode = 4
+stretch_mode = 5
+
 [node name="StrongDesired" type="ProgressBar" parent="UI/MainVBox/Gauges"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(20, 100)
@@ -408,6 +422,13 @@ stretch_mode = 5
 unique_name_in_owner = true
 layout_mode = 2
 texture = ExtResource("12_vivmo")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="WeakSideGlyph" type="TextureRect" parent="UI/MainVBox/Gauges/WeakLockButton/WeakLockIcons"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("18_0cp0l")
 expand_mode = 4
 stretch_mode = 5
 
@@ -661,99 +682,156 @@ This section will be filled with presets in a future update.
 Maybe a visual guide somewhere too."
 horizontal_alignment = 1
 
-[node name="ProgramPlaza" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer"]
+[node name="PresetPlaza" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+alignment = 1
+script = ExtResource("25_d2t1y")
 
-[node name="Presets" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgramPlaza"]
+[node name="Presets" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgramPlaza/Presets"]
+[node name="Label" type="Label" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets"]
 layout_mode = 2
 text = "Presets"
 
-[node name="GridContainer" type="GridContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgramPlaza/Presets"]
+[node name="GridContainer" type="GridContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets"]
 layout_mode = 2
 size_flags_vertical = 3
-columns = 2
+columns = 3
 
-[node name="Button" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgramPlaza/Presets/GridContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-text = "Simple"
-
-[node name="Button2" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgramPlaza/Presets/GridContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-text = "Simple"
-
-[node name="Button3" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgramPlaza/Presets/GridContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-text = "Simple"
-
-[node name="Button4" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgramPlaza/Presets/GridContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-text = "Simple"
-
-[node name="Button5" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgramPlaza/Presets/GridContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-text = "Simple"
-
-[node name="Button6" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgramPlaza/Presets/GridContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-text = "Simple"
-
-[node name="Button7" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgramPlaza/Presets/GridContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-text = "Simple"
-
-[node name="VSeparator" type="VSeparator" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgramPlaza"]
-layout_mode = 2
-
-[node name="Controls2" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgramPlaza"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgramPlaza/Controls2"]
-layout_mode = 2
-text = "Flips"
-
-[node name="Button" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgramPlaza/Controls2"]
+[node name="Button" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets/GridContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Clear"
 
-[node name="Button2" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgramPlaza/Controls2"]
+[node name="Button2" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Simple"
+
+[node name="Button3" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Fafd"
+
+[node name="Button4" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "dfd"
+
+[node name="Button5" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Simple"
+
+[node name="Button6" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Simple"
+
+[node name="Button7" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Simple"
+
+[node name="Button8" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Simple"
+
+[node name="Button9" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Simple"
+
+[node name="VSeparator3" type="VSeparator" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza"]
+layout_mode = 2
+
+[node name="Flips" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Flips"]
+layout_mode = 2
+text = "Flips"
+
+[node name="Button" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Flips"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Clear"
+
+[node name="Button2" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Flips"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Cycle"
 
-[node name="Button3" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgramPlaza/Controls2"]
+[node name="Button3" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Flips"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Full"
 
-[node name="VSeparator2" type="VSeparator" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgramPlaza"]
+[node name="VSeparator2" type="VSeparator" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza"]
 layout_mode = 2
 
-[node name="Controls" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgramPlaza"]
+[node name="Motors" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgramPlaza/Controls"]
+[node name="Label" type="Label" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors"]
+layout_mode = 2
+text = "Motors"
+
+[node name="GridContainer" type="GridContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors"]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 2
+
+[node name="Button" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Full"
+
+[node name="Button2" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Full"
+
+[node name="Button3" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Half"
+
+[node name="Button4" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Half"
+
+[node name="Button5" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Off"
+
+[node name="Button6" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Off"
+
+[node name="VSeparator" type="VSeparator" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza"]
+layout_mode = 2
+
+[node name="Controls" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Controls"]
 layout_mode = 2
 text = "Controls"
 
-[node name="Button" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgramPlaza/Controls"]
+[node name="Button" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Controls"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Flip
 intensities"
 
-[node name="Button2" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgramPlaza/Controls"]
+[node name="Button2" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Controls"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Random
