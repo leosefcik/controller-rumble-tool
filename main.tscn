@@ -122,10 +122,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 16.0
-offset_top = 16.0
-offset_right = -16.0
-offset_bottom = -16.0
+offset_left = 12.0
+offset_top = 12.0
+offset_right = -12.0
+offset_bottom = -12.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -558,9 +558,10 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
 tab_alignment = 1
-current_tab = 0
+current_tab = 1
 
 [node name="Analog Mode" type="TabBar" parent="UI/MainVBox/ModeTabs" node_paths=PackedStringArray("UI")]
+visible = false
 layout_mode = 2
 script = ExtResource("23_seu75")
 UI = NodePath("../../..")
@@ -631,7 +632,6 @@ value = 1.0
 exp_edit = true
 
 [node name="Program Mode" type="TabBar" parent="UI/MainVBox/ModeTabs" node_paths=PackedStringArray("PATTERN_MAKER", "UI")]
-visible = false
 layout_mode = 2
 script = ExtResource("22_a6jrf")
 PATTERN_MAKER = NodePath("VBoxContainer/PatternMaker")
@@ -652,7 +652,8 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 2
 
-[node name="Label" type="Label" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer"]
+[node name="OldText" type="Label" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 6
 text = "Program your own timings to automate rumble!
@@ -660,7 +661,106 @@ This section will be filled with presets in a future update.
 Maybe a visual guide somewhere too."
 horizontal_alignment = 1
 
+[node name="ProgramPlaza" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Presets" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgramPlaza"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgramPlaza/Presets"]
+layout_mode = 2
+text = "Presets"
+
+[node name="GridContainer" type="GridContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgramPlaza/Presets"]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 2
+
+[node name="Button" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgramPlaza/Presets/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Simple"
+
+[node name="Button2" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgramPlaza/Presets/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Simple"
+
+[node name="Button3" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgramPlaza/Presets/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Simple"
+
+[node name="Button4" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgramPlaza/Presets/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Simple"
+
+[node name="Button5" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgramPlaza/Presets/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Simple"
+
+[node name="Button6" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgramPlaza/Presets/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Simple"
+
+[node name="Button7" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgramPlaza/Presets/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Simple"
+
+[node name="VSeparator" type="VSeparator" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgramPlaza"]
+layout_mode = 2
+
+[node name="Controls2" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgramPlaza"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgramPlaza/Controls2"]
+layout_mode = 2
+text = "Flips"
+
+[node name="Button" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgramPlaza/Controls2"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Clear"
+
+[node name="Button2" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgramPlaza/Controls2"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Cycle"
+
+[node name="Button3" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgramPlaza/Controls2"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Full"
+
+[node name="VSeparator2" type="VSeparator" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgramPlaza"]
+layout_mode = 2
+
+[node name="Controls" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgramPlaza"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgramPlaza/Controls"]
+layout_mode = 2
+text = "Controls"
+
+[node name="Button" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgramPlaza/Controls"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Flip
+intensities"
+
+[node name="Button2" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgramPlaza/Controls"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Random
+preset"
+
 [node name="PlaceholderPresets" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer"]
+visible = false
 layout_mode = 2
 alignment = 1
 

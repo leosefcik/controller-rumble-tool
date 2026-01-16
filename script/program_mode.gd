@@ -186,6 +186,7 @@ func _update_current_tact_indicator() -> void:
 
 
 ### PATTERN LOGIC - FLIP
+
 # Stored flip values --> Flip button values
 func _update_ui_flip_values() -> void:
 	for i in range(ROWS):
