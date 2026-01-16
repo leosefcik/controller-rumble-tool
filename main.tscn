@@ -48,7 +48,7 @@
 bg_color = Color(0.66, 0.66, 0.66, 0.27058825)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lquwl"]
-bg_color = Color(0.6748146, 0.67481464, 0.6748144, 1)
+bg_color = Color(0.6745098, 0.6745098, 0.6745098, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0xm2m"]
 bg_color = Color(0.8235294, 0.48235294, 0.5686275, 1)
@@ -168,6 +168,7 @@ max_value = 31.0
 rounded = true
 alignment = 1
 prefix = "ID"
+select_all_on_focus = true
 
 [node name="AllIdsBox" type="CheckBox" parent="UI/MainVBox/Title"]
 layout_mode = 2
@@ -325,6 +326,14 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
+[node name="StrongSideGlyph" type="TextureRect" parent="UI/MainVBox/Gauges/StrongLockButton/StrongLockIcons"]
+unique_name_in_owner = true
+modulate = Color(0.6745098, 0.6745098, 0.6745098, 1)
+layout_mode = 2
+texture = ExtResource("17_4lmeg")
+expand_mode = 4
+stretch_mode = 5
+
 [node name="StrongLock" type="TextureRect" parent="UI/MainVBox/Gauges/StrongLockButton/StrongLockIcons"]
 unique_name_in_owner = true
 layout_mode = 2
@@ -337,13 +346,6 @@ flip_h = true
 unique_name_in_owner = true
 layout_mode = 2
 texture = ExtResource("11_w48qg")
-expand_mode = 4
-stretch_mode = 5
-
-[node name="StrongSideGlyph" type="TextureRect" parent="UI/MainVBox/Gauges/StrongLockButton/StrongLockIcons"]
-unique_name_in_owner = true
-layout_mode = 2
-texture = ExtResource("17_4lmeg")
 expand_mode = 4
 stretch_mode = 5
 
@@ -411,6 +413,14 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
+[node name="WeakSideGlyph" type="TextureRect" parent="UI/MainVBox/Gauges/WeakLockButton/WeakLockIcons"]
+unique_name_in_owner = true
+modulate = Color(0.6745098, 0.6745098, 0.6745098, 1)
+layout_mode = 2
+texture = ExtResource("18_0cp0l")
+expand_mode = 4
+stretch_mode = 5
+
 [node name="WeakLock" type="TextureRect" parent="UI/MainVBox/Gauges/WeakLockButton/WeakLockIcons"]
 unique_name_in_owner = true
 layout_mode = 2
@@ -422,13 +432,6 @@ stretch_mode = 5
 unique_name_in_owner = true
 layout_mode = 2
 texture = ExtResource("12_vivmo")
-expand_mode = 4
-stretch_mode = 5
-
-[node name="WeakSideGlyph" type="TextureRect" parent="UI/MainVBox/Gauges/WeakLockButton/WeakLockIcons"]
-unique_name_in_owner = true
-layout_mode = 2
-texture = ExtResource("18_0cp0l")
 expand_mode = 4
 stretch_mode = 5
 
@@ -710,7 +713,7 @@ layout_mode = 2
 size_flags_vertical = 3
 text = "Simple"
 
-[node name="Button3" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets/GridContainer"]
+[node name="P" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets/GridContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Fafd"
@@ -873,10 +876,12 @@ layout_mode = 2
 tooltip_text = "The amount of active \"beats\" in the current program.
 Each active beat will play in a sequence, and is composed
 of a (rumble) duration and a pause duration"
+focus_behavior_recursive = 2
 min_value = 1.0
 max_value = 4.0
 value = 1.0
 rounded = true
+select_all_on_focus = true
 
 [node name="VSeparator2" type="VSeparator" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls"]
 layout_mode = 2
@@ -1001,22 +1006,20 @@ toggle_mode = true
 layout_mode = 2
 
 [node name="Duration" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row1"]
-custom_minimum_size = Vector2(100, 0)
+custom_minimum_size = Vector2(102, 0)
 layout_mode = 2
 tooltip_text = "The duration of rumble for this beat"
-max_value = 999.99
-step = 0.001
-suffix = "s"
-custom_arrow_step = 0.125
+max_value = 900000.0
+suffix = "ms"
+custom_arrow_step = 50.0
 
 [node name="Pause" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row1"]
-custom_minimum_size = Vector2(100, 0)
+custom_minimum_size = Vector2(102, 0)
 layout_mode = 2
 tooltip_text = "The length of the pause of this beat"
-max_value = 999.99
-step = 0.001
-suffix = "s"
-custom_arrow_step = 0.125
+max_value = 900000.0
+suffix = "ms"
+custom_arrow_step = 50.0
 
 [node name="Indicator" type="Panel" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row1"]
 visible = false
@@ -1065,22 +1068,20 @@ toggle_mode = true
 layout_mode = 2
 
 [node name="Duration" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row2"]
-custom_minimum_size = Vector2(100, 0)
+custom_minimum_size = Vector2(102, 0)
 layout_mode = 2
 tooltip_text = "The duration of rumble for this beat"
-max_value = 999.99
-step = 0.001
-suffix = "s"
-custom_arrow_step = 0.125
+max_value = 900000.0
+suffix = "ms"
+custom_arrow_step = 50.0
 
 [node name="Pause" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row2"]
-custom_minimum_size = Vector2(100, 0)
+custom_minimum_size = Vector2(102, 0)
 layout_mode = 2
 tooltip_text = "The length of the pause of this beat"
-max_value = 999.99
-step = 0.001
-suffix = "s"
-custom_arrow_step = 0.125
+max_value = 900000.0
+suffix = "ms"
+custom_arrow_step = 50.0
 
 [node name="Indicator" type="Panel" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row2"]
 visible = false
@@ -1129,22 +1130,20 @@ toggle_mode = true
 layout_mode = 2
 
 [node name="Duration" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row3"]
-custom_minimum_size = Vector2(100, 0)
+custom_minimum_size = Vector2(102, 0)
 layout_mode = 2
 tooltip_text = "The duration of rumble for this beat"
-max_value = 999.99
-step = 0.001
-suffix = "s"
-custom_arrow_step = 0.125
+max_value = 900000.0
+suffix = "ms"
+custom_arrow_step = 50.0
 
 [node name="Pause" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row3"]
-custom_minimum_size = Vector2(100, 0)
+custom_minimum_size = Vector2(102, 0)
 layout_mode = 2
 tooltip_text = "The length of the pause of this beat"
-max_value = 999.99
-step = 0.001
-suffix = "s"
-custom_arrow_step = 0.125
+max_value = 900000.0
+suffix = "ms"
+custom_arrow_step = 50.0
 
 [node name="Indicator" type="Panel" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row3"]
 visible = false
@@ -1191,22 +1190,20 @@ toggle_mode = true
 layout_mode = 2
 
 [node name="Duration" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row4"]
-custom_minimum_size = Vector2(100, 0)
+custom_minimum_size = Vector2(102, 0)
 layout_mode = 2
 tooltip_text = "The duration of rumble for this beat"
-max_value = 999.99
-step = 0.001
-suffix = "s"
-custom_arrow_step = 0.125
+max_value = 900000.0
+suffix = "ms"
+custom_arrow_step = 50.0
 
 [node name="Pause" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row4"]
-custom_minimum_size = Vector2(100, 0)
+custom_minimum_size = Vector2(102, 0)
 layout_mode = 2
 tooltip_text = "The length of the pause of this beat"
-max_value = 999.99
-step = 0.001
-suffix = "s"
-custom_arrow_step = 0.125
+max_value = 900000.0
+suffix = "ms"
+custom_arrow_step = 50.0
 
 [node name="Indicator" type="Panel" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row4"]
 visible = false
@@ -1357,6 +1354,7 @@ max_value = 1.0
 step = 0.001
 value = 1.0
 suffix = "x"
+select_all_on_focus = true
 
 [node name="SnapControls" type="CheckBox" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer2"]
 layout_mode = 2

@@ -62,7 +62,7 @@ func _process(delta: float) -> void:
 	_process_controls(delta)
 	
 	if playing:
-		time_elapsed += delta*timescale
+		time_elapsed += delta*timescale*1000 # second to millisecond
 		_play_program()
 	
 	_process_rumble()
@@ -309,10 +309,20 @@ func _on_tact_amount_value_changed(value: float) -> void:
 
 func _on_any_spinbox_value_changed(_value: float) -> void:
 	_update_stored_time_values()
+	_spinboxes_suffix_fix()
 
 func _on_any_flip_value_changed(_toggled: float) -> void:
 	_update_stored_flip_values()
 
+
+# a function to fix the value being clipped when it's too big
+func _spinboxes_suffix_fix() -> void:
+	for i in PATTERN_NODES:
+		for j in ["Duration", "Pause"]:
+			if i[j].value >= 10000:
+				i[j].suffix = ""
+			else:
+				i[j].suffix = "ms"
 
 """
 func _on_simple_tact_toggle_pressed() -> void:
