@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://cmikhaqwhlrq1"]
+[gd_scene load_steps=57 format=3 uid="uid://cmikhaqwhlrq1"]
 
 [ext_resource type="Theme" uid="uid://dxoeymo5y7ebp" path="res://theme.tres" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://ci8gltknaa8n0" path="res://script/main.gd" id="1_h2yge"]
@@ -8,14 +8,18 @@
 [ext_resource type="Texture2D" uid="uid://br5rppxn7r5cb" path="res://icon/kenney_glyphs/Xbox Series/xbox_rb.png" id="7_2cqfq"]
 [ext_resource type="Texture2D" uid="uid://bl85x6w66rijj" path="res://icon/kenney_glyphs/Xbox Series/xbox_rb_outline.png" id="11_w48qg"]
 [ext_resource type="Texture2D" uid="uid://db0xia0noybfi" path="res://icon/kenney_glyphs/Generic/generic_joystick_horizontal.png" id="12_cegan"]
+[ext_resource type="Texture2D" uid="uid://g8j0ujab1vb" path="res://icon/kenney_glyphs/Nintendo Switch/switch_stick_top_l.png" id="12_d2t1y"]
 [ext_resource type="Texture2D" uid="uid://dqfjtcdx6ghms" path="res://icon/kenney_glyphs/Xbox Series/xbox_lb_outline.png" id="12_vivmo"]
+[ext_resource type="Texture2D" uid="uid://soyukxo82hqq" path="res://icon/kenney_glyphs/Nintendo Switch/switch_stick_top_r.png" id="13_gngh3"]
 [ext_resource type="Texture2D" uid="uid://cydtbpei7bv56" path="res://icon/kenney_glyphs/Xbox Series/controller_xboxone.png" id="13_ycdy4"]
 [ext_resource type="Texture2D" uid="uid://dsw3y5kyg543j" path="res://icon/kenney_glyphs/Generic/generic_button_trigger_b_fill.png" id="14_2cqfq"]
 [ext_resource type="Texture2D" uid="uid://clyw8g54blu5p" path="res://icon/kenney_glyphs/Generic/generic_stick_vertical.png" id="14_vivmo"]
 [ext_resource type="Script" uid="uid://bcmif82n5dhw6" path="res://script/ui.gd" id="15_kq58d"]
 [ext_resource type="Texture2D" uid="uid://cgxhsima8b2d3" path="res://icon/kenney_glyphs/Flairs/flair_disabled_cross.png" id="15_yaehf"]
+[ext_resource type="Texture2D" uid="uid://fces8d066ydn" path="res://icon/kenney_glyphs/Nintendo Switch/switch_stick_r_vertical.png" id="17_4lmeg"]
 [ext_resource type="Texture2D" uid="uid://c4k7h56m5qum3" path="res://icon/kenney_glyphs/Generic/generic_joystick_left.png" id="17_074og"]
 [ext_resource type="Script" uid="uid://dd8utxtchtrsb" path="res://script/analog_mouse_control.gd" id="17_kq58d"]
+[ext_resource type="Texture2D" uid="uid://b5r4jl8crtigu" path="res://icon/kenney_glyphs/Nintendo Switch/switch_stick_l_vertical.png" id="18_0cp0l"]
 [ext_resource type="Script" uid="uid://b2ge2uuslrqf1" path="res://script/program_mouse_control.gd" id="18_jq2sk"]
 [ext_resource type="Texture2D" uid="uid://vn8gli8llxvq" path="res://icon/drop_down.svg" id="19_0odxb"]
 [ext_resource type="Texture2D" uid="uid://cobfw7wvbxehb" path="res://icon/kenney_glyphs/Nintendo Switch/switch_dpad_right_outline.png" id="19_getpj"]
@@ -32,8 +36,11 @@
 [ext_resource type="Texture2D" uid="uid://dqwemni60trqp" path="res://icon/kenney_glyphs/Nintendo Switch/switch_dpad_left_outline.png" id="24_htxhm"]
 [ext_resource type="Texture2D" uid="uid://bc3if7fk4tikx" path="res://icon/pause.svg" id="24_kq58d"]
 [ext_resource type="Texture2D" uid="uid://cst8li6a7al6b" path="res://logo/motor_icon_v1.png" id="25_0odxb"]
+[ext_resource type="Script" uid="uid://cymp7o5y30wlk" path="res://script/preset_plaza.gd" id="25_d2t1y"]
 [ext_resource type="Texture2D" uid="uid://bdfgi71ao14ht" path="res://icon/kenney_glyphs/Nintendo Switch/switch_buttons_right_outline.png" id="25_jq2sk"]
+[ext_resource type="Texture2D" uid="uid://dyvk682vby8rw" path="res://icon/repeat_disabled.svg" id="30_0n3wm"]
 [ext_resource type="Texture2D" uid="uid://c73y5tpf43tkc" path="res://icon/kenney_glyphs/Nintendo Switch/switch_dpad_down_outline.png" id="31_ok6jj"]
+[ext_resource type="Texture2D" uid="uid://busc1en3g71n4" path="res://icon/repeat.svg" id="31_qnost"]
 [ext_resource type="Texture2D" uid="uid://d3d7a0q37safg" path="res://icon/kenney_glyphs/Nintendo Switch/switch_buttons_down_outline.png" id="32_facbu"]
 [ext_resource type="Texture2D" uid="uid://be5q3onrjogpo" path="res://icon/slider.svg" id="36_ok6jj"]
 [ext_resource type="Texture2D" uid="uid://cd1atd5fn6l1m" path="res://icon/kenney_glyphs/Xbox Series/xbox_button_back_icon.png" id="37_b1qrp"]
@@ -43,7 +50,7 @@
 bg_color = Color(0.66, 0.66, 0.66, 0.27058825)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lquwl"]
-bg_color = Color(0.6748146, 0.67481464, 0.6748144, 1)
+bg_color = Color(0.6745098, 0.6745098, 0.6745098, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0xm2m"]
 bg_color = Color(0.8235294, 0.48235294, 0.5686275, 1)
@@ -114,6 +121,8 @@ LB_OFF_GLYPH = ExtResource("12_vivmo")
 LB_ON_GLYPH = ExtResource("5_vivmo")
 RB_OFF_GLYPH = ExtResource("11_w48qg")
 RB_ON_GLYPH = ExtResource("7_2cqfq")
+LEFT_GLYPH = ExtResource("12_d2t1y")
+RIGHT_GLYPH = ExtResource("13_gngh3")
 Main = NodePath("..")
 ProgramMode = NodePath("MainVBox/ModeTabs/Program Mode")
 
@@ -122,10 +131,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 16.0
-offset_top = 16.0
-offset_right = -16.0
-offset_bottom = -16.0
+offset_left = 12.0
+offset_top = 12.0
+offset_right = -12.0
+offset_bottom = -12.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -161,6 +170,7 @@ max_value = 31.0
 rounded = true
 alignment = 1
 prefix = "ID"
+select_all_on_focus = true
 
 [node name="AllIdsBox" type="CheckBox" parent="UI/MainVBox/Title"]
 layout_mode = 2
@@ -318,6 +328,14 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
+[node name="StrongSideGlyph" type="TextureRect" parent="UI/MainVBox/Gauges/StrongLockButton/StrongLockIcons"]
+unique_name_in_owner = true
+modulate = Color(0.8431839, 0.8431839, 0.84318376, 1)
+layout_mode = 2
+texture = ExtResource("17_4lmeg")
+expand_mode = 4
+stretch_mode = 5
+
 [node name="StrongLock" type="TextureRect" parent="UI/MainVBox/Gauges/StrongLockButton/StrongLockIcons"]
 unique_name_in_owner = true
 layout_mode = 2
@@ -396,6 +414,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
+
+[node name="WeakSideGlyph" type="TextureRect" parent="UI/MainVBox/Gauges/WeakLockButton/WeakLockIcons"]
+unique_name_in_owner = true
+modulate = Color(0.8431839, 0.8431839, 0.84318376, 1)
+layout_mode = 2
+texture = ExtResource("18_0cp0l")
+expand_mode = 4
+stretch_mode = 5
 
 [node name="WeakLock" type="TextureRect" parent="UI/MainVBox/Gauges/WeakLockButton/WeakLockIcons"]
 unique_name_in_owner = true
@@ -558,9 +584,10 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
 tab_alignment = 1
-current_tab = 0
+current_tab = 1
 
 [node name="Analog Mode" type="TabBar" parent="UI/MainVBox/ModeTabs" node_paths=PackedStringArray("UI")]
+visible = false
 layout_mode = 2
 script = ExtResource("23_seu75")
 UI = NodePath("../../..")
@@ -600,14 +627,16 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-tooltip_text = "When both motors reach 0%, toggles Flip Controls"
+tooltip_text = "When both motors reach 0%, toggles Flip Controls.
+ⓘ Can also be toggled with DPAD RIGHT / BUTTON LEFT"
 text = "Alternating Mode"
 
 [node name="AnalogVelMode" type="CheckBox" parent="UI/MainVBox/ModeTabs/Analog Mode/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-tooltip_text = "\"Drags\" the input along instead of having it control rumble directly"
+tooltip_text = "\"Drags\" the input along instead of having it control rumble directly.
+ⓘ Can also be toggled with DPAD DOWN / BUTTON DOWN"
 text = "Velocity Mode"
 
 [node name="VelocityModeSpeedContainer" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Analog Mode/VBoxContainer/HBoxContainer"]
@@ -631,7 +660,6 @@ value = 1.0
 exp_edit = true
 
 [node name="Program Mode" type="TabBar" parent="UI/MainVBox/ModeTabs" node_paths=PackedStringArray("PATTERN_MAKER", "UI")]
-visible = false
 layout_mode = 2
 script = ExtResource("22_a6jrf")
 PATTERN_MAKER = NodePath("VBoxContainer/PatternMaker")
@@ -652,7 +680,8 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 2
 
-[node name="Label" type="Label" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer"]
+[node name="OldText" type="Label" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 6
 text = "Program your own timings to automate rumble!
@@ -660,7 +689,173 @@ This section will be filled with presets in a future update.
 Maybe a visual guide somewhere too."
 horizontal_alignment = 1
 
+[node name="PresetPlaza" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer" node_paths=PackedStringArray("ProgramMode")]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+script = ExtResource("25_d2t1y")
+ProgramMode = NodePath("../..")
+
+[node name="Presets" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets"]
+layout_mode = 2
+text = "Presets"
+
+[node name="GridContainer" type="GridContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets"]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 3
+
+[node name="PClear" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Clear"
+
+[node name="PSimple" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Simple"
+
+[node name="P" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Fafd"
+
+[node name="Button4" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "dfd"
+
+[node name="Button5" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Simple"
+
+[node name="Button6" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Simple"
+
+[node name="Button7" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Simple"
+
+[node name="Button8" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Simple"
+
+[node name="Button9" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Simple"
+
+[node name="VSeparator3" type="VSeparator" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza"]
+layout_mode = 2
+
+[node name="Flips" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Flips"]
+layout_mode = 2
+text = "Flips"
+
+[node name="FClear" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Flips"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Clear"
+
+[node name="FCycle" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Flips"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Cycle"
+
+[node name="FEvery" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Flips"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Every"
+
+[node name="VSeparator2" type="VSeparator" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza"]
+layout_mode = 2
+
+[node name="Motors" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors"]
+layout_mode = 2
+text = "Motors"
+
+[node name="GridContainer" type="GridContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors"]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 2
+
+[node name="Strong100" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"RedButton"
+text = "Full"
+
+[node name="Weak100" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"BlueButton"
+text = "Full"
+
+[node name="Strong50" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"RedButton"
+text = "Half"
+
+[node name="Weak50" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"BlueButton"
+text = "Half"
+
+[node name="Strong0" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"RedButton"
+text = "Off"
+
+[node name="Weak0" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"BlueButton"
+text = "Off"
+
+[node name="VSeparator" type="VSeparator" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza"]
+layout_mode = 2
+
+[node name="Controls" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Controls"]
+layout_mode = 2
+text = "Controls"
+
+[node name="FlipIntensities" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Controls"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+tooltip_text = "Flips the weak/strong values AND toggles Flip Controls.
+ⓘ Can also be pressed with DPAD DOWN / BUTTON DOWN"
+text = "Flip
+intensities"
+
+[node name="RandomPreset" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Controls"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Random
+preset"
+
 [node name="PlaceholderPresets" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer"]
+visible = false
 layout_mode = 2
 alignment = 1
 
@@ -689,10 +884,12 @@ layout_mode = 2
 tooltip_text = "The amount of active \"beats\" in the current program.
 Each active beat will play in a sequence, and is composed
 of a (rumble) duration and a pause duration"
+focus_behavior_recursive = 2
 min_value = 1.0
 max_value = 4.0
 value = 1.0
 rounded = true
+select_all_on_focus = true
 
 [node name="VSeparator2" type="VSeparator" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls"]
 layout_mode = 2
@@ -732,7 +929,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 4
 tooltip_text = "Timescale control.
 Useful for changing program speed on the fly.
-Also controlled by holding any trigger + joysticks"
+ⓘ Also controlled by holding any trigger + joysticks"
 min_value = 0.1
 max_value = 10.0
 step = 0.05
@@ -753,12 +950,24 @@ stretch_mode = 5
 [node name="VSeparator3" type="VSeparator" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls"]
 layout_mode = 2
 
+[node name="LoopProgram" type="TextureButton" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+tooltip_text = "Loop program"
+toggle_mode = true
+button_pressed = true
+texture_normal = ExtResource("30_0n3wm")
+texture_pressed = ExtResource("31_qnost")
+ignore_texture_size = true
+stretch_mode = 5
+
 [node name="PlayPause" type="TextureButton" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 size_flags_horizontal = 4
-tooltip_text = "Play/pause the playback of the program."
+tooltip_text = "Play/pause the playback of the program.
+ⓘ Can also be toggled with DPAD LEFT / BUTTON RIGHT"
 toggle_mode = true
 texture_normal = ExtResource("23_qsp4k")
 texture_pressed = ExtResource("24_kq58d")
@@ -817,22 +1026,20 @@ toggle_mode = true
 layout_mode = 2
 
 [node name="Duration" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row1"]
-custom_minimum_size = Vector2(100, 0)
+custom_minimum_size = Vector2(102, 0)
 layout_mode = 2
 tooltip_text = "The duration of rumble for this beat"
-max_value = 999.99
-step = 0.001
-suffix = "s"
-custom_arrow_step = 0.125
+max_value = 900000.0
+suffix = "ms"
+custom_arrow_step = 50.0
 
 [node name="Pause" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row1"]
-custom_minimum_size = Vector2(100, 0)
+custom_minimum_size = Vector2(102, 0)
 layout_mode = 2
 tooltip_text = "The length of the pause of this beat"
-max_value = 999.99
-step = 0.001
-suffix = "s"
-custom_arrow_step = 0.125
+max_value = 900000.0
+suffix = "ms"
+custom_arrow_step = 50.0
 
 [node name="Indicator" type="Panel" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row1"]
 visible = false
@@ -881,22 +1088,20 @@ toggle_mode = true
 layout_mode = 2
 
 [node name="Duration" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row2"]
-custom_minimum_size = Vector2(100, 0)
+custom_minimum_size = Vector2(102, 0)
 layout_mode = 2
 tooltip_text = "The duration of rumble for this beat"
-max_value = 999.99
-step = 0.001
-suffix = "s"
-custom_arrow_step = 0.125
+max_value = 900000.0
+suffix = "ms"
+custom_arrow_step = 50.0
 
 [node name="Pause" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row2"]
-custom_minimum_size = Vector2(100, 0)
+custom_minimum_size = Vector2(102, 0)
 layout_mode = 2
 tooltip_text = "The length of the pause of this beat"
-max_value = 999.99
-step = 0.001
-suffix = "s"
-custom_arrow_step = 0.125
+max_value = 900000.0
+suffix = "ms"
+custom_arrow_step = 50.0
 
 [node name="Indicator" type="Panel" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row2"]
 visible = false
@@ -945,22 +1150,20 @@ toggle_mode = true
 layout_mode = 2
 
 [node name="Duration" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row3"]
-custom_minimum_size = Vector2(100, 0)
+custom_minimum_size = Vector2(102, 0)
 layout_mode = 2
 tooltip_text = "The duration of rumble for this beat"
-max_value = 999.99
-step = 0.001
-suffix = "s"
-custom_arrow_step = 0.125
+max_value = 900000.0
+suffix = "ms"
+custom_arrow_step = 50.0
 
 [node name="Pause" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row3"]
-custom_minimum_size = Vector2(100, 0)
+custom_minimum_size = Vector2(102, 0)
 layout_mode = 2
 tooltip_text = "The length of the pause of this beat"
-max_value = 999.99
-step = 0.001
-suffix = "s"
-custom_arrow_step = 0.125
+max_value = 900000.0
+suffix = "ms"
+custom_arrow_step = 50.0
 
 [node name="Indicator" type="Panel" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row3"]
 visible = false
@@ -1007,22 +1210,20 @@ toggle_mode = true
 layout_mode = 2
 
 [node name="Duration" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row4"]
-custom_minimum_size = Vector2(100, 0)
+custom_minimum_size = Vector2(102, 0)
 layout_mode = 2
 tooltip_text = "The duration of rumble for this beat"
-max_value = 999.99
-step = 0.001
-suffix = "s"
-custom_arrow_step = 0.125
+max_value = 900000.0
+suffix = "ms"
+custom_arrow_step = 50.0
 
 [node name="Pause" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row4"]
-custom_minimum_size = Vector2(100, 0)
+custom_minimum_size = Vector2(102, 0)
 layout_mode = 2
 tooltip_text = "The length of the pause of this beat"
-max_value = 999.99
-step = 0.001
-suffix = "s"
-custom_arrow_step = 0.125
+max_value = 900000.0
+suffix = "ms"
+custom_arrow_step = 50.0
 
 [node name="Indicator" type="Panel" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row4"]
 visible = false
@@ -1123,7 +1324,8 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-tooltip_text = "Flips the triggers/joysticks that control each motor"
+tooltip_text = "Flips the triggers/joysticks that control each motor.
+ⓘ Can also be toggled with DPAD UP / BUTTON UP"
 text = "Flip L/R Controls"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer"]
@@ -1133,7 +1335,8 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-tooltip_text = "Control both motors together with either L/R input"
+tooltip_text = "Control both motors together with either L/R input.
+ⓘ Can also be toggled with tapping SELECT / START"
 text = "Couple Motors"
 
 [node name="VSeparator" type="VSeparator" parent="UI/MainVBox/SettingsBox/HBoxContainer3"]
@@ -1173,6 +1376,7 @@ max_value = 1.0
 step = 0.001
 value = 1.0
 suffix = "x"
+select_all_on_focus = true
 
 [node name="SnapControls" type="CheckBox" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer2"]
 layout_mode = 2
@@ -1465,7 +1669,7 @@ expand_mode = 2
 
 [node name="Label" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer7"]
 layout_mode = 2
-text = ":  Play/pause the program"
+text = ":  Play/pause the program (Pressing spacebar also works)"
 
 [node name="HBoxContainer9" type="HBoxContainer" parent="UI/ControlsPopup/Panel/VBoxContainer"]
 layout_mode = 2
@@ -1633,6 +1837,17 @@ autostart = true
 [connection signal="toggled" from="UI/MainVBox/ModeTabs/Analog Mode/VBoxContainer/HBoxContainer/AnalogAltMode" to="UI/MainVBox/ModeTabs/Analog Mode" method="_on_analog_alt_mode_toggled"]
 [connection signal="toggled" from="UI/MainVBox/ModeTabs/Analog Mode/VBoxContainer/HBoxContainer/AnalogVelMode" to="UI/MainVBox/ModeTabs/Analog Mode" method="_on_analog_vel_mode_toggled"]
 [connection signal="value_changed" from="UI/MainVBox/ModeTabs/Analog Mode/VBoxContainer/HBoxContainer/VelocityModeSpeedContainer/VelocityModeSpeed" to="UI/MainVBox/ModeTabs/Analog Mode" method="_on_velocity_mode_speed_value_changed"]
+[connection signal="pressed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Flips/FClear" to="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza" method="_on_f_clear_pressed"]
+[connection signal="pressed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Flips/FCycle" to="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza" method="_on_f_cycle_pressed"]
+[connection signal="pressed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Flips/FEvery" to="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza" method="_on_f_every_pressed"]
+[connection signal="pressed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors/GridContainer/Strong100" to="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza" method="_on_strong_100_pressed"]
+[connection signal="pressed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors/GridContainer/Weak100" to="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza" method="_on_weak_100_pressed"]
+[connection signal="pressed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors/GridContainer/Strong50" to="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza" method="_on_strong_50_pressed"]
+[connection signal="pressed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors/GridContainer/Weak50" to="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza" method="_on_weak_50_pressed"]
+[connection signal="pressed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors/GridContainer/Strong0" to="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza" method="_on_strong_0_pressed"]
+[connection signal="pressed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors/GridContainer/Weak0" to="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza" method="_on_weak_0_pressed"]
+[connection signal="pressed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Controls/FlipIntensities" to="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza" method="_on_flip_intensities_pressed"]
+[connection signal="pressed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Controls/RandomPreset" to="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza" method="_on_random_preset_pressed"]
 [connection signal="pressed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PlaceholderPresets/PresetButton" to="UI/MainVBox/ModeTabs/Program Mode" method="_on_preset_button_pressed"]
 [connection signal="pressed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PlaceholderPresets/Preset2Button" to="UI/MainVBox/ModeTabs/Program Mode" method="_on_preset_2_button_pressed"]
 [connection signal="pressed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PlaceholderPresets/ClearButton" to="UI/MainVBox/ModeTabs/Program Mode" method="_on_clear_button_pressed"]
@@ -1641,6 +1856,7 @@ autostart = true
 [connection signal="pressed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls/DoubleAllTacts" to="UI/MainVBox/ModeTabs/Program Mode" method="_on_double_all_tacts_pressed"]
 [connection signal="value_changed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls/TimescaleSlider" to="UI/MainVBox/ModeTabs/Program Mode" method="_on_timescale_slider_value_changed"]
 [connection signal="pressed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls/TimescaleReset" to="UI/MainVBox/ModeTabs/Program Mode" method="_on_timescale_reset_pressed"]
+[connection signal="toggled" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls/LoopProgram" to="UI/MainVBox/ModeTabs/Program Mode" method="_on_loop_program_toggled"]
 [connection signal="toggled" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls/PlayPause" to="UI/MainVBox/ModeTabs/Program Mode" method="_on_play_pause_toggled"]
 [connection signal="toggled" from="UI/MainVBox/HBoxContainer3/HideBottomRow" to="UI" method="_on_hide_bottom_row_toggled"]
 [connection signal="toggled" from="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer/HBoxContainer/FlipControls" to="UI" method="_on_flip_controls_toggled"]

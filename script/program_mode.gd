@@ -17,11 +17,9 @@ var flips := [false, false, false, false]
 var current_tact := 0
 var time_elapsed := 0.0 # used to time tacts
 var playing := false # play button
+var looping := true
 var duration_phase := true # if in first (duration) or second (pause) phase of the tact
 var timescale := 1.0
-
-# Unused
-var complex_tacts := true # option to switch between progress/dot tacts
 
 # Desired - where the controls point to
 var weak_desired := 0.0
@@ -62,7 +60,7 @@ func _process(delta: float) -> void:
 	_process_controls(delta)
 	
 	if playing:
-		time_elapsed += delta*timescale
+		time_elapsed += delta*timescale*1000 # second to millisecond
 		_play_program()
 	
 	_process_rumble()
@@ -89,15 +87,22 @@ func _play_program() -> void:
 	else:
 		%RumbleIndicator.modulate = Color.DIM_GRAY
 
+
 func _increment_tact() -> void:
 	current_tact += 1
 	
 	if current_tact >= tact_amount:
 		current_tact = 0
 		_reset_tact_indicators()
+		if not looping:
+			_stop_playing()
 	
 	if flips[current_tact]:
 		_flip_controls_and_desired_values()
+
+func _stop_playing() -> void:
+	%PlayPause.button_pressed = false
+
 
 func _process_rumble() -> void:
 	if Settings.weak_locked:
@@ -139,84 +144,6 @@ func _flip_controls_and_desired_values() -> void:
 	UI.flip_controls()
 	_flip_desired_values()
 
-### PATTERN LOGIC
-
-# Stored Tact amount --> SpinBox editability
-func _update_pattern_box_editability() -> void:
-	for i in range(ROWS):
-		PATTERN_NODES[i]["Duration"].editable = false
-		PATTERN_NODES[i]["Pause"].editable = false
-		PATTERN_NODES[i]["Flip"].disabled = true
-	
-	for i in range(tact_amount):
-		PATTERN_NODES[i]["Duration"].editable = true
-		PATTERN_NODES[i]["Pause"].editable = true
-		PATTERN_NODES[i]["Flip"].disabled = false
-
-# Stored dur/pause values --> SpinBox values
-func _update_ui_time_values() -> void:
-	for i in range(ROWS):
-		PATTERN_NODES[i]["Duration"].set_value_no_signal(durations[i])
-		PATTERN_NODES[i]["Pause"].set_value_no_signal(pauses[i])
-
-# SpinBox values --> Stored dur/pause values
-func _update_stored_time_values() -> void:
-	for i in range(ROWS):
-		durations[i] = PATTERN_NODES[i]["Duration"].value
-		pauses[i] = PATTERN_NODES[i]["Pause"].value
-
-# Resets the little indicators below the tacts to a clean slate
-func _reset_tact_indicators() -> void:
-	if complex_tacts: # complex, progress tacts
-		for i in PATTERN_NODES:
-			i["DurationProgress"].value = 0.0
-			i["PauseProgress"].value = 0.0
-	
-	else:
-		pass
-
-func _update_current_tact_indicator() -> void:
-	if complex_tacts: # complex, progress tacts
-		if duration_phase:
-			var progress: float = time_elapsed / durations[current_tact]
-			PATTERN_NODES[current_tact]["DurationProgress"].value = progress
-		else:
-			var progress: float = time_elapsed / pauses[current_tact]
-			PATTERN_NODES[current_tact]["PauseProgress"].value = progress
-
-
-### PATTERN LOGIC - FLIP
-# Stored flip values --> Flip button values
-func _update_ui_flip_values() -> void:
-	for i in range(ROWS):
-		PATTERN_NODES[i]["Flip"].set_pressed_no_signal(flips[i])
-
-# Flip button values --> Stored flip values
-func _update_stored_flip_values() -> void:
-	for i in range(ROWS):
-		flips[i] = PATTERN_NODES[i]["Flip"].button_pressed
-
-
-### Timescale
-
-func _on_timescale_slider_value_changed(value: float) -> void:
-	timescale = value
-	%TimescaleLabel.text = str(value)
-	_check_timescale_reset_editability()
-
-func _update_ui_timescale() -> void:
-	%TimescaleSlider.set_value_no_signal(timescale)
-	%TimescaleLabel.text = str(%TimescaleSlider.value)
-	_check_timescale_reset_editability()
-
-func _on_timescale_reset_pressed() -> void:
-	timescale = 1.0
-	_update_ui_timescale()
-	%TimescaleReset.disabled = true
-
-func _check_timescale_reset_editability() -> void:
-	if timescale != 1.0:
-		%TimescaleReset.disabled = false
 
 ### Controls
 
@@ -260,6 +187,97 @@ func _process_controls(delta: float) -> void:
 	UI.update_desired_gauges(weak_desired, strong_desired)
 
 
+
+
+
+
+
+### PATTERN LOGIC
+
+# Stored Tact amount --> SpinBox editability
+func _update_pattern_box_editability() -> void:
+	for i in range(ROWS):
+		PATTERN_NODES[i]["Duration"].editable = false
+		PATTERN_NODES[i]["Pause"].editable = false
+		PATTERN_NODES[i]["Flip"].disabled = true
+	
+	for i in range(tact_amount):
+		PATTERN_NODES[i]["Duration"].editable = true
+		PATTERN_NODES[i]["Pause"].editable = true
+		PATTERN_NODES[i]["Flip"].disabled = false
+
+# Stored dur/pause values --> SpinBox values
+func _update_ui_time_values() -> void:
+	for i in range(ROWS):
+		PATTERN_NODES[i]["Duration"].set_value_no_signal(durations[i])
+		PATTERN_NODES[i]["Pause"].set_value_no_signal(pauses[i])
+
+# SpinBox values --> Stored dur/pause values
+func _update_stored_time_values() -> void:
+	for i in range(ROWS):
+		durations[i] = PATTERN_NODES[i]["Duration"].value
+		pauses[i] = PATTERN_NODES[i]["Pause"].value
+
+# Resets the little indicators below the tacts to a clean slate
+func _reset_tact_indicators() -> void:
+	for i in PATTERN_NODES:
+		i["DurationProgress"].value = 0.0
+		i["PauseProgress"].value = 0.0
+
+func _update_current_tact_indicator() -> void:
+	if duration_phase:
+		var progress: float = time_elapsed / durations[current_tact]
+		PATTERN_NODES[current_tact]["DurationProgress"].value = progress
+	else:
+		var progress: float = time_elapsed / pauses[current_tact]
+		PATTERN_NODES[current_tact]["PauseProgress"].value = progress
+
+
+### PATTERN LOGIC - FLIP
+
+# Stored flip values --> Flip button values
+func _update_ui_flip_values() -> void:
+	for i in range(ROWS):
+		PATTERN_NODES[i]["Flip"].set_pressed_no_signal(flips[i])
+
+# Flip button values --> Stored flip values
+func _update_stored_flip_values() -> void:
+	for i in range(ROWS):
+		flips[i] = PATTERN_NODES[i]["Flip"].button_pressed
+
+# Only for the preset buttons
+func import_flips(new_flips: Array) -> void:
+	for i in range(ROWS):
+		flips[i] = new_flips[i]
+		_update_ui_flip_values()
+
+
+
+
+### Timescale
+
+func _on_timescale_slider_value_changed(value: float) -> void:
+	timescale = value
+	%TimescaleLabel.text = str(value)
+	_check_timescale_reset_editability()
+
+func _update_ui_timescale() -> void:
+	%TimescaleSlider.set_value_no_signal(timescale)
+	%TimescaleLabel.text = str(%TimescaleSlider.value)
+	_check_timescale_reset_editability()
+
+func _on_timescale_reset_pressed() -> void:
+	timescale = 1.0
+	_update_ui_timescale()
+	%TimescaleReset.disabled = true
+
+func _check_timescale_reset_editability() -> void:
+	if timescale != 1.0:
+		%TimescaleReset.disabled = false
+
+
+
+
 ### INPUT
 
 func _input(event: InputEvent) -> void:
@@ -267,8 +285,7 @@ func _input(event: InputEvent) -> void:
 		if event.is_action_pressed("pause_resume_rumble"):
 			%PlayPause.button_pressed = !%PlayPause.button_pressed
 		elif event.is_action_pressed("flip_desired_values"):
-			_flip_controls_and_desired_values()
-
+			flip_intensities()
 
 # Called by UI when Couple Motors switches
 func couple_motors_sync() -> void:
@@ -276,6 +293,10 @@ func couple_motors_sync() -> void:
 		var big := maxf(weak_desired, strong_desired)
 		weak_desired = big
 		strong_desired = big
+
+# Called by PresetPlaza or the control
+func flip_intensities() -> void:
+	_flip_controls_and_desired_values()
 
 
 ### UI
@@ -286,6 +307,10 @@ func _on_play_pause_toggled(toggled_on: bool) -> void:
 		%RumbleIndicator.modulate = Color.WHITE
 	else:
 		%RumbleIndicator.modulate = Color.DARK_RED
+
+
+func _on_loop_program_toggled(toggled_on: bool) -> void:
+	looping = toggled_on
 
 
 func _on_half_all_tacts_pressed() -> void:
@@ -308,29 +333,22 @@ func _on_tact_amount_value_changed(value: float) -> void:
 
 func _on_any_spinbox_value_changed(_value: float) -> void:
 	_update_stored_time_values()
+	_spinboxes_suffix_fix()
 
 func _on_any_flip_value_changed(_toggled: float) -> void:
 	_update_stored_flip_values()
 
 
-"""
-func _on_simple_tact_toggle_pressed() -> void:
-	if %SimpleTactToggle.text == "C": # From complex to simple
-		complex_tacts = false
-		%SimpleTactToggle.text = "S"
-		for i in PATTERN_NODES:
-			i["DurationProgress"].hide()
-			i["PauseProgress"].hide()
-			i["Indicator"].show()
-	
-	else: # From simple to complex
-		complex_tacts = true
-		%SimpleTactToggle.text = "C"
-		for i in PATTERN_NODES:
-			i["DurationProgress"].show()
-			i["PauseProgress"].show()
-			i["Indicator"].hide()
-"""
+# a function to fix the value being clipped when it's too big
+func _spinboxes_suffix_fix() -> void:
+	for i in PATTERN_NODES:
+		for j in ["Duration", "Pause"]:
+			if i[j].value >= 10000:
+				i[j].suffix = ""
+			else:
+				i[j].suffix = "ms"
+
+
 
 
 ### OTHER UI
