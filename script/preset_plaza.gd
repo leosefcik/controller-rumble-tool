@@ -1,11 +1,24 @@
 extends HBoxContainer
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+@export var ProgramMode : TabBar
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+### Motors
+
+func _on_strong_100_pressed() -> void:
+	ProgramMode.strong_desired = 1.0
+
+func _on_weak_100_pressed() -> void:
+	ProgramMode.weak_desired = 1.0
+
+func _on_strong_50_pressed() -> void:
+	ProgramMode.strong_desired = 0.5
+
+func _on_weak_50_pressed() -> void:
+	ProgramMode.weak_desired = 0.5
+
+func _on_strong_0_pressed() -> void:
+	ProgramMode.strong_desired = 0.0
+
+func _on_weak_0_pressed() -> void:
+	ProgramMode.weak_desired = 0.0

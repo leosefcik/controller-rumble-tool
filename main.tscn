@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://cmikhaqwhlrq1"]
+[gd_scene load_steps=57 format=3 uid="uid://cmikhaqwhlrq1"]
 
 [ext_resource type="Theme" uid="uid://dxoeymo5y7ebp" path="res://theme.tres" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://ci8gltknaa8n0" path="res://script/main.gd" id="1_h2yge"]
@@ -38,7 +38,9 @@
 [ext_resource type="Texture2D" uid="uid://cst8li6a7al6b" path="res://logo/motor_icon_v1.png" id="25_0odxb"]
 [ext_resource type="Script" uid="uid://cymp7o5y30wlk" path="res://script/preset_plaza.gd" id="25_d2t1y"]
 [ext_resource type="Texture2D" uid="uid://bdfgi71ao14ht" path="res://icon/kenney_glyphs/Nintendo Switch/switch_buttons_right_outline.png" id="25_jq2sk"]
+[ext_resource type="Texture2D" uid="uid://dyvk682vby8rw" path="res://icon/repeat_disabled.svg" id="30_0n3wm"]
 [ext_resource type="Texture2D" uid="uid://c73y5tpf43tkc" path="res://icon/kenney_glyphs/Nintendo Switch/switch_dpad_down_outline.png" id="31_ok6jj"]
+[ext_resource type="Texture2D" uid="uid://busc1en3g71n4" path="res://icon/repeat.svg" id="31_qnost"]
 [ext_resource type="Texture2D" uid="uid://d3d7a0q37safg" path="res://icon/kenney_glyphs/Nintendo Switch/switch_buttons_down_outline.png" id="32_facbu"]
 [ext_resource type="Texture2D" uid="uid://be5q3onrjogpo" path="res://icon/slider.svg" id="36_ok6jj"]
 [ext_resource type="Texture2D" uid="uid://cd1atd5fn6l1m" path="res://icon/kenney_glyphs/Xbox Series/xbox_button_back_icon.png" id="37_b1qrp"]
@@ -328,7 +330,7 @@ alignment = 1
 
 [node name="StrongSideGlyph" type="TextureRect" parent="UI/MainVBox/Gauges/StrongLockButton/StrongLockIcons"]
 unique_name_in_owner = true
-modulate = Color(0.6745098, 0.6745098, 0.6745098, 1)
+modulate = Color(0.8431839, 0.8431839, 0.84318376, 1)
 layout_mode = 2
 texture = ExtResource("17_4lmeg")
 expand_mode = 4
@@ -415,7 +417,7 @@ alignment = 1
 
 [node name="WeakSideGlyph" type="TextureRect" parent="UI/MainVBox/Gauges/WeakLockButton/WeakLockIcons"]
 unique_name_in_owner = true
-modulate = Color(0.6745098, 0.6745098, 0.6745098, 1)
+modulate = Color(0.8431839, 0.8431839, 0.84318376, 1)
 layout_mode = 2
 texture = ExtResource("18_0cp0l")
 expand_mode = 4
@@ -685,11 +687,12 @@ This section will be filled with presets in a future update.
 Maybe a visual guide somewhere too."
 horizontal_alignment = 1
 
-[node name="PresetPlaza" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer"]
+[node name="PresetPlaza" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer" node_paths=PackedStringArray("ProgramMode")]
 layout_mode = 2
 size_flags_vertical = 3
 alignment = 1
 script = ExtResource("25_d2t1y")
+ProgramMode = NodePath("../..")
 
 [node name="Presets" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza"]
 layout_mode = 2
@@ -788,37 +791,37 @@ layout_mode = 2
 size_flags_vertical = 3
 columns = 2
 
-[node name="Button2" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors/GridContainer"]
+[node name="Strong100" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors/GridContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_type_variation = &"RedButton"
 text = "Full"
 
-[node name="Button" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors/GridContainer"]
+[node name="Weak100" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors/GridContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_type_variation = &"BlueButton"
 text = "Full"
 
-[node name="Button4" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors/GridContainer"]
+[node name="Strong50" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors/GridContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_type_variation = &"RedButton"
 text = "Half"
 
-[node name="Button3" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors/GridContainer"]
+[node name="Weak50" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors/GridContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_type_variation = &"BlueButton"
 text = "Half"
 
-[node name="Button6" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors/GridContainer"]
+[node name="Strong0" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors/GridContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_type_variation = &"RedButton"
 text = "Off"
 
-[node name="Button5" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors/GridContainer"]
+[node name="Weak0" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors/GridContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_type_variation = &"BlueButton"
@@ -942,12 +945,23 @@ stretch_mode = 5
 [node name="VSeparator3" type="VSeparator" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls"]
 layout_mode = 2
 
+[node name="LoopProgram" type="TextureButton" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+tooltip_text = "Loop program"
+toggle_mode = true
+button_pressed = true
+texture_normal = ExtResource("30_0n3wm")
+texture_pressed = ExtResource("31_qnost")
+ignore_texture_size = true
+stretch_mode = 5
+
 [node name="PlayPause" type="TextureButton" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 size_flags_horizontal = 4
-tooltip_text = "Play/pause the playback of the program."
+tooltip_text = "Play/pause the playback of the program"
 toggle_mode = true
 texture_normal = ExtResource("23_qsp4k")
 texture_pressed = ExtResource("24_kq58d")
@@ -1815,6 +1829,12 @@ autostart = true
 [connection signal="toggled" from="UI/MainVBox/ModeTabs/Analog Mode/VBoxContainer/HBoxContainer/AnalogAltMode" to="UI/MainVBox/ModeTabs/Analog Mode" method="_on_analog_alt_mode_toggled"]
 [connection signal="toggled" from="UI/MainVBox/ModeTabs/Analog Mode/VBoxContainer/HBoxContainer/AnalogVelMode" to="UI/MainVBox/ModeTabs/Analog Mode" method="_on_analog_vel_mode_toggled"]
 [connection signal="value_changed" from="UI/MainVBox/ModeTabs/Analog Mode/VBoxContainer/HBoxContainer/VelocityModeSpeedContainer/VelocityModeSpeed" to="UI/MainVBox/ModeTabs/Analog Mode" method="_on_velocity_mode_speed_value_changed"]
+[connection signal="pressed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors/GridContainer/Strong100" to="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza" method="_on_strong_100_pressed"]
+[connection signal="pressed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors/GridContainer/Weak100" to="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza" method="_on_weak_100_pressed"]
+[connection signal="pressed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors/GridContainer/Strong50" to="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza" method="_on_strong_50_pressed"]
+[connection signal="pressed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors/GridContainer/Weak50" to="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza" method="_on_weak_50_pressed"]
+[connection signal="pressed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors/GridContainer/Strong0" to="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza" method="_on_strong_0_pressed"]
+[connection signal="pressed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors/GridContainer/Weak0" to="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza" method="_on_weak_0_pressed"]
 [connection signal="pressed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PlaceholderPresets/PresetButton" to="UI/MainVBox/ModeTabs/Program Mode" method="_on_preset_button_pressed"]
 [connection signal="pressed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PlaceholderPresets/Preset2Button" to="UI/MainVBox/ModeTabs/Program Mode" method="_on_preset_2_button_pressed"]
 [connection signal="pressed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PlaceholderPresets/ClearButton" to="UI/MainVBox/ModeTabs/Program Mode" method="_on_clear_button_pressed"]
@@ -1823,6 +1843,7 @@ autostart = true
 [connection signal="pressed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls/DoubleAllTacts" to="UI/MainVBox/ModeTabs/Program Mode" method="_on_double_all_tacts_pressed"]
 [connection signal="value_changed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls/TimescaleSlider" to="UI/MainVBox/ModeTabs/Program Mode" method="_on_timescale_slider_value_changed"]
 [connection signal="pressed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls/TimescaleReset" to="UI/MainVBox/ModeTabs/Program Mode" method="_on_timescale_reset_pressed"]
+[connection signal="toggled" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls/LoopProgram" to="UI/MainVBox/ModeTabs/Program Mode" method="_on_loop_program_toggled"]
 [connection signal="toggled" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls/PlayPause" to="UI/MainVBox/ModeTabs/Program Mode" method="_on_play_pause_toggled"]
 [connection signal="toggled" from="UI/MainVBox/HBoxContainer3/HideBottomRow" to="UI" method="_on_hide_bottom_row_toggled"]
 [connection signal="toggled" from="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer/HBoxContainer/FlipControls" to="UI" method="_on_flip_controls_toggled"]

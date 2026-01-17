@@ -17,6 +17,7 @@ var flips := [false, false, false, false]
 var current_tact := 0
 var time_elapsed := 0.0 # used to time tacts
 var playing := false # play button
+var looping := true
 var duration_phase := true # if in first (duration) or second (pause) phase of the tact
 var timescale := 1.0
 
@@ -89,15 +90,22 @@ func _play_program() -> void:
 	else:
 		%RumbleIndicator.modulate = Color.DIM_GRAY
 
+
 func _increment_tact() -> void:
 	current_tact += 1
 	
 	if current_tact >= tact_amount:
 		current_tact = 0
 		_reset_tact_indicators()
+		if not looping:
+			_stop_playing()
 	
 	if flips[current_tact]:
 		_flip_controls_and_desired_values()
+
+func _stop_playing() -> void:
+	%PlayPause.button_pressed = false
+
 
 func _process_rumble() -> void:
 	if Settings.weak_locked:
@@ -287,6 +295,10 @@ func _on_play_pause_toggled(toggled_on: bool) -> void:
 		%RumbleIndicator.modulate = Color.WHITE
 	else:
 		%RumbleIndicator.modulate = Color.DARK_RED
+
+
+func _on_loop_program_toggled(toggled_on: bool) -> void:
+	looping = toggled_on
 
 
 func _on_half_all_tacts_pressed() -> void:
