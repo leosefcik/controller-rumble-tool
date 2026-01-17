@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://cmikhaqwhlrq1"]
+[gd_scene load_steps=58 format=3 uid="uid://cmikhaqwhlrq1"]
 
 [ext_resource type="Theme" uid="uid://dxoeymo5y7ebp" path="res://theme.tres" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://ci8gltknaa8n0" path="res://script/main.gd" id="1_h2yge"]
@@ -38,6 +38,7 @@
 [ext_resource type="Texture2D" uid="uid://cst8li6a7al6b" path="res://logo/motor_icon_v1.png" id="25_0odxb"]
 [ext_resource type="Script" uid="uid://cymp7o5y30wlk" path="res://script/preset_plaza.gd" id="25_d2t1y"]
 [ext_resource type="Texture2D" uid="uid://bdfgi71ao14ht" path="res://icon/kenney_glyphs/Nintendo Switch/switch_buttons_right_outline.png" id="25_jq2sk"]
+[ext_resource type="PackedScene" uid="uid://bxc3ix01im1em" path="res://scenes/preset_button.tscn" id="28_qnost"]
 [ext_resource type="Texture2D" uid="uid://dyvk682vby8rw" path="res://icon/repeat_disabled.svg" id="30_0n3wm"]
 [ext_resource type="Texture2D" uid="uid://c73y5tpf43tkc" path="res://icon/kenney_glyphs/Nintendo Switch/switch_dpad_down_outline.png" id="31_ok6jj"]
 [ext_resource type="Texture2D" uid="uid://busc1en3g71n4" path="res://icon/repeat.svg" id="31_qnost"]
@@ -581,13 +582,11 @@ size_flags_horizontal = 3
 unique_name_in_owner = true
 custom_minimum_size = Vector2(608, 0)
 layout_mode = 2
-size_flags_horizontal = 4
 size_flags_vertical = 3
 tab_alignment = 1
-current_tab = 1
+current_tab = 0
 
 [node name="Analog Mode" type="TabBar" parent="UI/MainVBox/ModeTabs" node_paths=PackedStringArray("UI")]
-visible = false
 layout_mode = 2
 script = ExtResource("23_seu75")
 UI = NodePath("../../..")
@@ -660,6 +659,7 @@ value = 1.0
 exp_edit = true
 
 [node name="Program Mode" type="TabBar" parent="UI/MainVBox/ModeTabs" node_paths=PackedStringArray("PATTERN_MAKER", "UI")]
+visible = false
 layout_mode = 2
 script = ExtResource("22_a6jrf")
 PATTERN_MAKER = NodePath("VBoxContainer/PatternMaker")
@@ -689,66 +689,95 @@ This section will be filled with presets in a future update.
 Maybe a visual guide somewhere too."
 horizontal_alignment = 1
 
-[node name="PresetPlaza" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer" node_paths=PackedStringArray("ProgramMode")]
+[node name="PresetPlaza" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer" node_paths=PackedStringArray("ProgramMode", "PresetsGrid")]
 layout_mode = 2
 size_flags_vertical = 3
 alignment = 1
 script = ExtResource("25_d2t1y")
 ProgramMode = NodePath("../..")
+PresetsGrid = NodePath("Presets/PresetsGrid")
+PresetButton = ExtResource("28_qnost")
+
+[node name="Memory" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Memory"]
+layout_mode = 2
+text = "WIP"
+
+[node name="FClear" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Memory"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Save"
+
+[node name="FCycle" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Memory"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Load"
+
+[node name="FEvery" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Memory"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Code"
+
+[node name="VSeparator4" type="VSeparator" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza"]
+layout_mode = 2
 
 [node name="Presets" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza"]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets"]
 layout_mode = 2
 text = "Presets"
 
-[node name="GridContainer" type="GridContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets"]
+[node name="PresetsGrid" type="GridContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets"]
 layout_mode = 2
 size_flags_vertical = 3
 columns = 3
 
-[node name="PClear" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets/GridContainer"]
+[node name="P0" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets/PresetsGrid"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Clear"
 
-[node name="PSimple" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets/GridContainer"]
+[node name="P1" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets/PresetsGrid"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Simple"
 
-[node name="P" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets/GridContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-text = "Fafd"
-
-[node name="Button4" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets/GridContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-text = "dfd"
-
-[node name="Button5" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets/GridContainer"]
+[node name="P2" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets/PresetsGrid"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Simple"
 
-[node name="Button6" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets/GridContainer"]
+[node name="P3" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets/PresetsGrid"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Simple"
 
-[node name="Button7" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets/GridContainer"]
+[node name="P4" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets/PresetsGrid"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Simple"
 
-[node name="Button8" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets/GridContainer"]
+[node name="P5" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets/PresetsGrid"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Simple"
 
-[node name="Button9" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets/GridContainer"]
+[node name="P6" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets/PresetsGrid"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Simple"
+
+[node name="P7" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets/PresetsGrid"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Simple"
+
+[node name="P8" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets/PresetsGrid"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Simple"
@@ -758,6 +787,7 @@ layout_mode = 2
 
 [node name="Flips" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza"]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Flips"]
 layout_mode = 2
@@ -783,6 +813,7 @@ layout_mode = 2
 
 [node name="Motors" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza"]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors"]
 layout_mode = 2
@@ -834,6 +865,7 @@ layout_mode = 2
 
 [node name="Controls" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza"]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Controls"]
 layout_mode = 2
@@ -851,6 +883,8 @@ intensities"
 [node name="RandomPreset" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Controls"]
 layout_mode = 2
 size_flags_vertical = 3
+tooltip_text = "Picks a random preset from the ones in the menu.
+ⓘ Can also be pressed with DPAD RIGHT / BUTTON LEFT"
 text = "Random
 preset"
 
@@ -1272,14 +1306,16 @@ unique_name_in_owner = true
 modulate = Color(0.7642523, 0, 0, 1)
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 5.0
-offset_top = -15.0
-offset_right = 15.0
-offset_bottom = -5.0
-grow_vertical = 0
+offset_left = -302.0
+offset_top = 290.0
+offset_right = -292.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_4k2k6")
 

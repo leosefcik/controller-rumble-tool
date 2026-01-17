@@ -7,6 +7,7 @@ extends TabBar
 # hardcoded max, if i ever wanted to expand it i could go ahead
 # (and add more corresponding spinboxes too)
 const ROWS := 4
+const MAX_LENGTH := 900000.0
 
 var PATTERN_NODES := [] # [row node 0-3][0: Duration, 1: Pause, 2: Indicator]
 var tact_amount := 1
@@ -351,7 +352,7 @@ func _spinboxes_suffix_fix() -> void:
 
 
 
-### OTHER UI
+### IMPORTER
 
 func _on_preset_button_pressed() -> void:
 	durations = [1.0, 0.5, 0.0, 0.0]
@@ -375,3 +376,78 @@ func _on_clear_button_pressed() -> void:
 	_update_ui_flip_values()
 	%TactAmount.value = 1
 	_reset_progress()
+
+
+# Examples:
+# "200,100,100,50" = 2 tacts, keep flips
+# "200,100,100" = 2 tacts, keep flips, set second tact's pause to 0
+# "200,100,100,50|tf" = 2 tacts, force flips to true, false, false, false
+
+func import_pattern(pattern: String) -> String:
+	print("Pattern: ", pattern)
+	var final_length := 1
+	var final_durations := []
+	var final_pauses := []
+	var final_flips := []
+	
+	# Flips stage (if exists)
+	var m_main := pattern.split("|")
+	if len(m_main) == 2:
+		var m_flips := m_main[1]
+		if len(m_flips) > ROWS:
+			return "Incorrect format! Too many flips"
+		for i in m_flips:
+			if i != "f" and i != "t":
+				return "Incorrect format! Flip part can only have \"t\" or \"f\""
+		
+		final_length = len(m_flips)
+		for i in range(final_length):
+			if m_flips[i] == "t":
+				final_flips.append(true)
+			else:
+				final_flips.append(false)
+		while len(final_flips) < ROWS:
+			final_flips.append(false)
+	
+	# Timings stage
+	var m_times := m_main[0].split(",")
+	if len(m_times) > ROWS*2:
+		return "Incorrect format! Too many timings"
+	
+	var in_dur_part := true
+	for i in m_times:
+		if not i.is_valid_int():
+			return "Incorrect format! Invalid/non-integer timings"
+		var m_timing := float(i)
+		if m_timing > MAX_LENGTH or m_timing < 0.0:
+			return "Incorrect format! One of the timings is too large/below zero"
+		
+		if in_dur_part:
+			final_durations.append(m_timing)
+		else:
+			final_pauses.append(m_timing)
+		in_dur_part = !in_dur_part
+	
+	final_length = maxi(final_length, len(final_durations))
+	final_length = maxi(final_length, len(final_pauses))
+	
+	while len(final_durations) < ROWS:
+		final_durations.append(0.0)
+	while len(final_pauses) < ROWS:
+		final_pauses.append(0.0)
+	
+	print(final_durations)
+	print(final_pauses)
+	print(final_flips)
+	print(final_length)
+	
+	%TactAmount.value = final_length
+	durations = final_durations
+	pauses = final_pauses
+	_update_ui_time_values()
+	
+	if not final_flips.is_empty():
+		flips = final_flips
+		_update_ui_flip_values()
+	
+	return "Imported!"

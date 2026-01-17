@@ -40,6 +40,7 @@ folder_colors={
 "res://font/": "orange",
 "res://icon/": "green",
 "res://logo/": "blue",
+"res://scenes/": "red",
 "res://script/": "gray"
 }
 

@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bxc3ix01im1em"]
+
+[ext_resource type="Script" uid="uid://uwngq60n3efj" path="res://scenes/preset_button.gd" id="1_3v6bn"]
+
+[node name="PresetButton" type="Button"]
+offset_right = 8.0
+offset_bottom = 8.0
+size_flags_vertical = 3
+script = ExtResource("1_3v6bn")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]
