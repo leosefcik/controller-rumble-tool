@@ -8,12 +8,16 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
 config/name="Controller Rumble Tool (Gamepad Vibration Massager)"
 config/version="0.5"
 run/main_scene="uid://cmikhaqwhlrq1"
-config/features=PackedStringArray("4.5", "GL Compatibility")
+config/features=PackedStringArray("4.6", "GL Compatibility")
 run/low_processor_mode=true
 boot_splash/image="uid://bqlw2dstnbqor"
 config/icon="uid://cst8li6a7al6b"
