@@ -71,7 +71,7 @@ func _play_program() -> void:
 	_update_current_tact_indicator()
 	
 	if duration_phase and time_elapsed > durations[current_tact]:
-		time_elapsed = time_elapsed - durations[current_tact]
+		time_elapsed = minf(time_elapsed - durations[current_tact], 1000.0) #capped to prevent it from taking too long in case of a large overflow
 		if pauses[current_tact] != 0.0:
 			duration_phase = false
 		else:
@@ -80,7 +80,7 @@ func _play_program() -> void:
 	
 	elif not duration_phase and time_elapsed > pauses[current_tact]:
 		duration_phase = true
-		time_elapsed = time_elapsed - pauses[current_tact]
+		time_elapsed = minf(time_elapsed - pauses[current_tact], 1000.0)
 		_increment_tact()
 	
 	if duration_phase:
