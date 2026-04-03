@@ -475,3 +475,19 @@ func _on_q_save_pressed() -> void:
 
 func _on_q_load_pressed() -> void:
 	import_pattern(qsaved_pattern)
+
+### Pattern edit popup
+
+func _on_import_export_pressed() -> void:
+	%BlurRect.show()
+	%ProgramImportPopup.show()
+	
+	%ExportPatternBox.text = export_pattern()
+	%ImportPatternBox.text = ""
+	%ImportPatternStatus.text = "Waiting..."
+
+func _on_program_import_popup_popup_hide() -> void:
+	%BlurRect.hide()
+
+func _on_import_pattern_button_pressed() -> void:
+	%ImportPatternStatus.text = import_pattern(%ImportPatternBox.text)

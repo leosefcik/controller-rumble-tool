@@ -214,9 +214,3 @@ func _on_controls_button_pressed() -> void:
 	%ControlsPopup.show()
 func _on_controls_popup_popup_hide() -> void:
 	%BlurRect.hide()
-
-func _on_import_export_pressed() -> void:
-	%BlurRect.show()
-	%ProgramImportPopup.show()
-func _on_program_import_popup_popup_hide() -> void:
-	%BlurRect.hide()

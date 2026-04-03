@@ -721,6 +721,7 @@ text = "Q-Load"
 [node name="ImportExport" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Memory" unique_id=2144506139]
 layout_mode = 2
 size_flags_vertical = 3
+tooltip_text = "Opens a menu for importing/exporting current pattern as a code."
 text = "Import/
 Export"
 
@@ -1878,11 +1879,63 @@ offset_right = -10.0
 offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
+alignment = 1
 
 [node name="Label" type="Label" parent="UI/ProgramImportPopup/Panel/VBoxContainer" unique_id=1736139490]
 layout_mode = 2
 theme_type_variation = &"HeaderLarge"
-text = "Import/export menu: Wip"
+text = "Export"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="UI/ProgramImportPopup/Panel/VBoxContainer" unique_id=1654011043]
+layout_mode = 2
+text = "Current active pattern (copyable):"
+
+[node name="ExportPatternBox" type="LineEdit" parent="UI/ProgramImportPopup/Panel/VBoxContainer" unique_id=1322292327]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "Pattern should be here"
+editable = false
+
+[node name="HSeparator" type="HSeparator" parent="UI/ProgramImportPopup/Panel/VBoxContainer" unique_id=1875797822]
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="UI/ProgramImportPopup/Panel/VBoxContainer" unique_id=1900066393]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+text = "Import"
+horizontal_alignment = 1
+
+[node name="Label4" type="Label" parent="UI/ProgramImportPopup/Panel/VBoxContainer" unique_id=1646454199]
+layout_mode = 2
+text = "Paste your pattern here:"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/ProgramImportPopup/Panel/VBoxContainer" unique_id=518721227]
+layout_mode = 2
+
+[node name="ImportPatternBox" type="LineEdit" parent="UI/ProgramImportPopup/Panel/VBoxContainer/HBoxContainer" unique_id=814569978]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ImportPatternButton" type="Button" parent="UI/ProgramImportPopup/Panel/VBoxContainer/HBoxContainer" unique_id=1327435950]
+layout_mode = 2
+text = "Import"
+
+[node name="ImportPatternStatus" type="Label" parent="UI/ProgramImportPopup/Panel/VBoxContainer" unique_id=671892735]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Waiting..."
+horizontal_alignment = 1
+
+[node name="Label5" type="Label" parent="UI/ProgramImportPopup/Panel/VBoxContainer" unique_id=514430580]
+layout_mode = 2
+theme_type_variation = &"TooltipLabel"
+text = "Examples:
+\"200,100,100,50\" = 2 beats, don't change flips
+\"200,100,100,50|tf\" = 2 beats, forces flips to true, false, false, false
+max. 8 timings (4 beats), 4 flip values"
 
 [node name="ControllerCheckTimer" type="Timer" parent="." unique_id=589275321]
 wait_time = 0.5
@@ -1913,7 +1966,7 @@ autostart = true
 [connection signal="value_changed" from="UI/MainVBox/ModeTabs/Analog Mode/VBoxContainer/HBoxContainer/VelocityModeSpeedContainer/VelocityModeSpeed" to="UI/MainVBox/ModeTabs/Analog Mode" method="_on_velocity_mode_speed_value_changed"]
 [connection signal="pressed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Memory/QSave" to="UI/MainVBox/ModeTabs/Program Mode" method="_on_q_save_pressed"]
 [connection signal="pressed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Memory/QLoad" to="UI/MainVBox/ModeTabs/Program Mode" method="_on_q_load_pressed"]
-[connection signal="pressed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Memory/ImportExport" to="UI" method="_on_import_export_pressed"]
+[connection signal="pressed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Memory/ImportExport" to="UI/MainVBox/ModeTabs/Program Mode" method="_on_import_export_pressed"]
 [connection signal="pressed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Flips/FClear" to="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza" method="_on_f_clear_pressed"]
 [connection signal="pressed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Flips/FCycle" to="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza" method="_on_f_cycle_pressed"]
 [connection signal="pressed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Flips/FEvery" to="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza" method="_on_f_every_pressed"]
@@ -1947,5 +2000,6 @@ autostart = true
 [connection signal="popup_hide" from="UI/InfoPopup" to="UI" method="_on_info_popup_popup_hide"]
 [connection signal="meta_clicked" from="UI/InfoPopup/Panel/VBoxContainer/InfoCredits" to="UI" method="_on_info_credits_meta_clicked"]
 [connection signal="popup_hide" from="UI/ControlsPopup" to="UI" method="_on_controls_popup_popup_hide"]
-[connection signal="popup_hide" from="UI/ProgramImportPopup" to="UI" method="_on_program_import_popup_popup_hide"]
+[connection signal="popup_hide" from="UI/ProgramImportPopup" to="UI/MainVBox/ModeTabs/Program Mode" method="_on_program_import_popup_popup_hide"]
+[connection signal="pressed" from="UI/ProgramImportPopup/Panel/VBoxContainer/HBoxContainer/ImportPatternButton" to="UI/MainVBox/ModeTabs/Program Mode" method="_on_import_pattern_button_pressed"]
 [connection signal="timeout" from="ControllerCheckTimer" to="." method="_on_controller_check_timer_timeout"]
