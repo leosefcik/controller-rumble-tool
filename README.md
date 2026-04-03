@@ -1,7 +1,7 @@
 # Controller Rumble Tool
  (Gamepad Vibration Massager)
  
- A Godot app for directly controlling the rumble motors of a gamepad. Useful for controller diagnostics and massages!
+ Advanced Godot app for directly controlling the rumble motors of a gamepad. Useful for controller diagnostics and massages!
  
  ![Preview](.production/screenshot1.png)
  
@@ -33,7 +33,7 @@
  - Cabin Font - https://github.com/impallari/Cabin
  - Glyphs - https://kenney.nl/assets/input-prompts
  - Icons - https://fonts.google.com/icons
- - Godot 4.5.1, Blender 5.0.1
+ - Godot 4.6.1, Blender 5.0.1
  
  Made by leosefcik 2025-2026
  

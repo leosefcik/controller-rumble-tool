@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=17 format=3 uid="uid://dxoeymo5y7ebp"]
+[gd_resource type="Theme" format=3 uid="uid://dxoeymo5y7ebp"]
 
 [ext_resource type="FontFile" uid="uid://cfhihdagg725w" path="res://font/Cabin-Bold.ttf" id="1_cjfk0"]
 [ext_resource type="FontFile" uid="uid://cyvnbcshmtw7w" path="res://font/Cabin-Italic.ttf" id="2_110ce"]

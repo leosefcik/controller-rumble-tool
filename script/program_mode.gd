@@ -31,6 +31,8 @@ var strong_power := 0.0
 
 var speed_slider := 1.0 # Updated externally by ProgramMouseControl
 
+var qsaved_pattern := "" # for quicksaving/loading
+
 func _setup_row_nodes_array() -> void:
 	for i in range(ROWS):
 		var current_node := PATTERN_MAKER.get_node(str("Row", i+1))
@@ -384,7 +386,7 @@ func _on_clear_button_pressed() -> void:
 # "200,100,100,50|tf" = 2 tacts, force flips to true, false, false, false
 
 func import_pattern(pattern: String) -> String:
-	print("Pattern: ", pattern)
+	print("\nImporting pattern: ", pattern)
 	var final_length := 1
 	var final_durations := []
 	var final_pauses := []
@@ -451,3 +453,25 @@ func import_pattern(pattern: String) -> String:
 		_update_ui_flip_values()
 	
 	return "Imported!"
+
+func export_pattern() -> String:
+	var pattern = ""
+	for i in range(tact_amount):
+		pattern = pattern + str(int(durations[i])) + ","
+		pattern = pattern + str(int(pauses[i])) + ","
+	pattern[-1] = "|"
+	
+	for i in range(tact_amount):
+		pattern = pattern + "t" if flips[i] else pattern + "f"
+	
+	print("\nExported pattern as: ", pattern)
+	return pattern
+
+### Import/export/quicksaveload buttons
+
+func _on_q_save_pressed() -> void:
+	qsaved_pattern = ""
+	qsaved_pattern = export_pattern()
+
+func _on_q_load_pressed() -> void:
+	import_pattern(qsaved_pattern)

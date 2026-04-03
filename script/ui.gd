@@ -193,23 +193,30 @@ func _on_hide_bottom_row_toggled(toggled_on: bool) -> void:
 
 ### OTHER
 
-func _on_info_button_pressed() -> void:
-	%BlurRect.show()
-	%InfoPopup.popup()
-
-func _on_info_popup_popup_hide() -> void:
-	%BlurRect.hide()
-
 # For the URLs to work in the Credits Popup
 func _on_info_credits_meta_clicked(meta: Variant) -> void:
 	OS.shell_open(str(meta))
 
+func _on_theme_button_pressed() -> void:
+	Main.cycle_theme()
+
+# popups
+
+func _on_info_button_pressed() -> void:
+	%BlurRect.show()
+	%InfoPopup.popup()
+func _on_info_popup_popup_hide() -> void:
+	%BlurRect.hide()
+	
+
 func _on_controls_button_pressed() -> void:
 	%BlurRect.show()
 	%ControlsPopup.show()
-
 func _on_controls_popup_popup_hide() -> void:
 	%BlurRect.hide()
 
-func _on_theme_button_pressed() -> void:
-	Main.cycle_theme()
+func _on_import_export_pressed() -> void:
+	%BlurRect.show()
+	%ProgramImportPopup.show()
+func _on_program_import_popup_popup_hide() -> void:
+	%BlurRect.hide()

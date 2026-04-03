@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://cmikhaqwhlrq1"]
+[gd_scene format=3 uid="uid://cmikhaqwhlrq1"]
 
 [ext_resource type="Theme" uid="uid://dxoeymo5y7ebp" path="res://theme.tres" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://ci8gltknaa8n0" path="res://script/main.gd" id="1_h2yge"]
@@ -100,13 +100,13 @@ corner_radius_top_right = 15
 corner_radius_bottom_right = 15
 corner_radius_bottom_left = 15
 
-[node name="Main" type="Node" node_paths=PackedStringArray("UI")]
+[node name="Main" type="Node" unique_id=1916268054 node_paths=PackedStringArray("UI")]
 script = ExtResource("1_h2yge")
 MOUSE_STICKY_GLYPH = ExtResource("12_cegan")
 MOUSE_SNAP_GLPYH = ExtResource("17_074og")
 UI = NodePath("UI")
 
-[node name="UI" type="Control" parent="." node_paths=PackedStringArray("Main", "ProgramMode")]
+[node name="UI" type="Control" parent="." unique_id=1510358127 node_paths=PackedStringArray("Main", "ProgramMode")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -127,7 +127,7 @@ RIGHT_GLYPH = ExtResource("13_gngh3")
 Main = NodePath("..")
 ProgramMode = NodePath("MainVBox/ModeTabs/Program Mode")
 
-[node name="MainVBox" type="VBoxContainer" parent="UI"]
+[node name="MainVBox" type="VBoxContainer" parent="UI" unique_id=7562598]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -139,11 +139,11 @@ offset_bottom = -12.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Title" type="HBoxContainer" parent="UI/MainVBox"]
+[node name="Title" type="HBoxContainer" parent="UI/MainVBox" unique_id=1377593196]
 layout_mode = 2
 alignment = 1
 
-[node name="ControllerStatusIcon" type="TextureRect" parent="UI/MainVBox/Title"]
+[node name="ControllerStatusIcon" type="TextureRect" parent="UI/MainVBox/Title" unique_id=667922216]
 unique_name_in_owner = true
 modulate = Color(0.41, 0.41, 0.41, 1)
 layout_mode = 2
@@ -151,14 +151,14 @@ tooltip_text = "Connection indicator"
 texture = ExtResource("13_ycdy4")
 expand_mode = 2
 
-[node name="NameLabel" type="Label" parent="UI/MainVBox/Title"]
+[node name="NameLabel" type="Label" parent="UI/MainVBox/Title" unique_id=1429473870]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Welcome"
 clip_text = true
 
-[node name="ControllerIdBox" type="SpinBox" parent="UI/MainVBox/Title"]
+[node name="ControllerIdBox" type="SpinBox" parent="UI/MainVBox/Title" unique_id=249973259]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
@@ -173,25 +173,25 @@ alignment = 1
 prefix = "ID"
 select_all_on_focus = true
 
-[node name="AllIdsBox" type="CheckBox" parent="UI/MainVBox/Title"]
+[node name="AllIdsBox" type="CheckBox" parent="UI/MainVBox/Title" unique_id=1349654231]
 layout_mode = 2
 tooltip_text = "Control rumble on all connected devices (from ID 0 to 31)"
 text = "All"
 
-[node name="HSeparator" type="HSeparator" parent="UI/MainVBox"]
+[node name="HSeparator" type="HSeparator" parent="UI/MainVBox" unique_id=568531221]
 layout_mode = 2
 
-[node name="Gauges" type="HBoxContainer" parent="UI/MainVBox"]
+[node name="Gauges" type="HBoxContainer" parent="UI/MainVBox" unique_id=967194663]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.1
 alignment = 1
 
-[node name="LeftOfGauge" type="Control" parent="UI/MainVBox/Gauges"]
+[node name="LeftOfGauge" type="Control" parent="UI/MainVBox/Gauges" unique_id=604248959]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/MainVBox/Gauges/LeftOfGauge"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MainVBox/Gauges/LeftOfGauge" unique_id=722755435]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -200,17 +200,17 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer" unique_id=924291442]
 layout_mode = 2
 alignment = 1
 
-[node name="TriggerToggle" type="Button" parent="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer/HBoxContainer"]
+[node name="TriggerToggle" type="Button" parent="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer/HBoxContainer" unique_id=1862526648]
 custom_minimum_size = Vector2(35, 35)
 layout_mode = 2
 size_flags_vertical = 4
 tooltip_text = "Toggle trigger function"
 
-[node name="TextureRect" type="TextureRect" parent="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer/HBoxContainer/TriggerToggle"]
+[node name="TextureRect" type="TextureRect" parent="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer/HBoxContainer/TriggerToggle" unique_id=1437414441]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -221,7 +221,7 @@ texture = ExtResource("14_2cqfq")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="TriggerToggleX" type="TextureRect" parent="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer/HBoxContainer/TriggerToggle"]
+[node name="TriggerToggleX" type="TextureRect" parent="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer/HBoxContainer/TriggerToggle" unique_id=1612741013]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
@@ -234,13 +234,13 @@ texture = ExtResource("15_yaehf")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="JoystickToggle" type="Button" parent="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer/HBoxContainer"]
+[node name="JoystickToggle" type="Button" parent="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer/HBoxContainer" unique_id=1573003459]
 custom_minimum_size = Vector2(35, 35)
 layout_mode = 2
 size_flags_vertical = 4
 tooltip_text = "Toggle joystick function"
 
-[node name="TextureRect" type="TextureRect" parent="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer/HBoxContainer/JoystickToggle"]
+[node name="TextureRect" type="TextureRect" parent="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer/HBoxContainer/JoystickToggle" unique_id=1151169485]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -251,7 +251,7 @@ texture = ExtResource("14_vivmo")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="JoystickToggleX" type="TextureRect" parent="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer/HBoxContainer/JoystickToggle"]
+[node name="JoystickToggleX" type="TextureRect" parent="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer/HBoxContainer/JoystickToggle" unique_id=64953189]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
@@ -264,13 +264,13 @@ texture = ExtResource("15_yaehf")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="ShoulderToggle" type="Button" parent="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer/HBoxContainer"]
+[node name="ShoulderToggle" type="Button" parent="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer/HBoxContainer" unique_id=383630342]
 custom_minimum_size = Vector2(35, 35)
 layout_mode = 2
 size_flags_vertical = 4
 tooltip_text = "Toggle shoulder button function"
 
-[node name="TextureRect" type="TextureRect" parent="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer/HBoxContainer/ShoulderToggle"]
+[node name="TextureRect" type="TextureRect" parent="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer/HBoxContainer/ShoulderToggle" unique_id=1866731848]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -281,7 +281,7 @@ texture = ExtResource("19_lswn8")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="ShoulderToggleX" type="TextureRect" parent="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer/HBoxContainer/ShoulderToggle"]
+[node name="ShoulderToggleX" type="TextureRect" parent="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer/HBoxContainer/ShoulderToggle" unique_id=1034799200]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
@@ -294,13 +294,13 @@ texture = ExtResource("15_yaehf")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="ControlSensitivityLabel" type="Label" parent="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer"]
+[node name="ControlSensitivityLabel" type="Label" parent="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer" unique_id=490262031]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Sensitivity: 1.0"
 horizontal_alignment = 1
 
-[node name="ControlSensitivitySlider" type="HSlider" parent="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer"]
+[node name="ControlSensitivitySlider" type="HSlider" parent="UI/MainVBox/Gauges/LeftOfGauge/VBoxContainer" unique_id=671564419]
 layout_mode = 2
 tooltip_text = "Sensitivity of trigger/joystick.
 The lower this number is, the less you have to push to reach 100% power.
@@ -310,16 +310,16 @@ max_value = 1.0
 step = 0.05
 value = 1.0
 
-[node name="VSeparator2" type="VSeparator" parent="UI/MainVBox/Gauges"]
+[node name="VSeparator2" type="VSeparator" parent="UI/MainVBox/Gauges" unique_id=1800164656]
 layout_mode = 2
 
-[node name="StrongLockButton" type="Button" parent="UI/MainVBox/Gauges"]
+[node name="StrongLockButton" type="Button" parent="UI/MainVBox/Gauges" unique_id=2114723296]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 tooltip_text = "Toggle strong motor lock"
 flat = true
 
-[node name="StrongLockIcons" type="VBoxContainer" parent="UI/MainVBox/Gauges/StrongLockButton"]
+[node name="StrongLockIcons" type="VBoxContainer" parent="UI/MainVBox/Gauges/StrongLockButton" unique_id=1810978577]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -329,7 +329,7 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="StrongSideGlyph" type="TextureRect" parent="UI/MainVBox/Gauges/StrongLockButton/StrongLockIcons"]
+[node name="StrongSideGlyph" type="TextureRect" parent="UI/MainVBox/Gauges/StrongLockButton/StrongLockIcons" unique_id=1276782127]
 unique_name_in_owner = true
 modulate = Color(0.8431839, 0.8431839, 0.84318376, 1)
 layout_mode = 2
@@ -337,7 +337,7 @@ texture = ExtResource("17_4lmeg")
 expand_mode = 4
 stretch_mode = 5
 
-[node name="StrongLock" type="TextureRect" parent="UI/MainVBox/Gauges/StrongLockButton/StrongLockIcons"]
+[node name="StrongLock" type="TextureRect" parent="UI/MainVBox/Gauges/StrongLockButton/StrongLockIcons" unique_id=169766333]
 unique_name_in_owner = true
 layout_mode = 2
 texture = ExtResource("4_7mycd")
@@ -345,14 +345,14 @@ expand_mode = 4
 stretch_mode = 5
 flip_h = true
 
-[node name="StrongLockGlyph" type="TextureRect" parent="UI/MainVBox/Gauges/StrongLockButton/StrongLockIcons"]
+[node name="StrongLockGlyph" type="TextureRect" parent="UI/MainVBox/Gauges/StrongLockButton/StrongLockIcons" unique_id=331057203]
 unique_name_in_owner = true
 layout_mode = 2
 texture = ExtResource("11_w48qg")
 expand_mode = 4
 stretch_mode = 5
 
-[node name="StrongDesired" type="ProgressBar" parent="UI/MainVBox/Gauges"]
+[node name="StrongDesired" type="ProgressBar" parent="UI/MainVBox/Gauges" unique_id=517858157]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(20, 100)
 layout_mode = 2
@@ -365,7 +365,7 @@ value = 0.5
 fill_mode = 3
 show_percentage = false
 
-[node name="StrongPower" type="ProgressBar" parent="UI/MainVBox/Gauges"]
+[node name="StrongPower" type="ProgressBar" parent="UI/MainVBox/Gauges" unique_id=164617658]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(50, 100)
 layout_mode = 2
@@ -376,7 +376,7 @@ max_value = 1.0
 value = 0.5
 fill_mode = 3
 
-[node name="WeakPower" type="ProgressBar" parent="UI/MainVBox/Gauges"]
+[node name="WeakPower" type="ProgressBar" parent="UI/MainVBox/Gauges" unique_id=1762623755]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(50, 100)
 layout_mode = 2
@@ -387,7 +387,7 @@ max_value = 1.0
 value = 0.5
 fill_mode = 3
 
-[node name="WeakDesired" type="ProgressBar" parent="UI/MainVBox/Gauges"]
+[node name="WeakDesired" type="ProgressBar" parent="UI/MainVBox/Gauges" unique_id=245629172]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(20, 100)
 layout_mode = 2
@@ -400,13 +400,13 @@ value = 0.5
 fill_mode = 3
 show_percentage = false
 
-[node name="WeakLockButton" type="Button" parent="UI/MainVBox/Gauges"]
+[node name="WeakLockButton" type="Button" parent="UI/MainVBox/Gauges" unique_id=474966987]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 tooltip_text = "Toggle weak motor lock"
 flat = true
 
-[node name="WeakLockIcons" type="VBoxContainer" parent="UI/MainVBox/Gauges/WeakLockButton"]
+[node name="WeakLockIcons" type="VBoxContainer" parent="UI/MainVBox/Gauges/WeakLockButton" unique_id=963062582]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -416,7 +416,7 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="WeakSideGlyph" type="TextureRect" parent="UI/MainVBox/Gauges/WeakLockButton/WeakLockIcons"]
+[node name="WeakSideGlyph" type="TextureRect" parent="UI/MainVBox/Gauges/WeakLockButton/WeakLockIcons" unique_id=183118719]
 unique_name_in_owner = true
 modulate = Color(0.8431839, 0.8431839, 0.84318376, 1)
 layout_mode = 2
@@ -424,24 +424,24 @@ texture = ExtResource("18_0cp0l")
 expand_mode = 4
 stretch_mode = 5
 
-[node name="WeakLock" type="TextureRect" parent="UI/MainVBox/Gauges/WeakLockButton/WeakLockIcons"]
+[node name="WeakLock" type="TextureRect" parent="UI/MainVBox/Gauges/WeakLockButton/WeakLockIcons" unique_id=1527407741]
 unique_name_in_owner = true
 layout_mode = 2
 texture = ExtResource("4_7mycd")
 expand_mode = 4
 stretch_mode = 5
 
-[node name="WeakLockGlyph" type="TextureRect" parent="UI/MainVBox/Gauges/WeakLockButton/WeakLockIcons"]
+[node name="WeakLockGlyph" type="TextureRect" parent="UI/MainVBox/Gauges/WeakLockButton/WeakLockIcons" unique_id=37674386]
 unique_name_in_owner = true
 layout_mode = 2
 texture = ExtResource("12_vivmo")
 expand_mode = 4
 stretch_mode = 5
 
-[node name="VSeparator" type="VSeparator" parent="UI/MainVBox/Gauges"]
+[node name="VSeparator" type="VSeparator" parent="UI/MainVBox/Gauges" unique_id=2005074615]
 layout_mode = 2
 
-[node name="AnalogMouseControl" type="Control" parent="UI/MainVBox/Gauges"]
+[node name="AnalogMouseControl" type="Control" parent="UI/MainVBox/Gauges" unique_id=1936522509]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -449,7 +449,7 @@ script = ExtResource("17_kq58d")
 MOUSE_STICKY_GLYPH = ExtResource("12_cegan")
 MOUSE_SNAP_GLPYH = ExtResource("17_074og")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/MainVBox/Gauges/AnalogMouseControl"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MainVBox/Gauges/AnalogMouseControl" unique_id=508950186]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -458,13 +458,13 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="UI/MainVBox/Gauges/AnalogMouseControl/VBoxContainer"]
+[node name="Label" type="Label" parent="UI/MainVBox/Gauges/AnalogMouseControl/VBoxContainer" unique_id=1431451785]
 visible = false
 layout_mode = 2
 text = "Mouse control"
 horizontal_alignment = 1
 
-[node name="StrongSliderAnalog" type="HSlider" parent="UI/MainVBox/Gauges/AnalogMouseControl/VBoxContainer"]
+[node name="StrongSliderAnalog" type="HSlider" parent="UI/MainVBox/Gauges/AnalogMouseControl/VBoxContainer" unique_id=1958920468]
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Mouse slider for controlling the strong motor"
@@ -473,7 +473,7 @@ theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_ryguw")
 max_value = 1.0
 step = 0.01
 
-[node name="WeakSliderAnalog" type="HSlider" parent="UI/MainVBox/Gauges/AnalogMouseControl/VBoxContainer"]
+[node name="WeakSliderAnalog" type="HSlider" parent="UI/MainVBox/Gauges/AnalogMouseControl/VBoxContainer" unique_id=1318949786]
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Mouse slider for controlling the weak motor"
@@ -482,7 +482,7 @@ theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_getpj")
 max_value = 1.0
 step = 0.01
 
-[node name="MouseStickyMode" type="Button" parent="UI/MainVBox/Gauges/AnalogMouseControl/VBoxContainer"]
+[node name="MouseStickyMode" type="Button" parent="UI/MainVBox/Gauges/AnalogMouseControl/VBoxContainer" unique_id=418035697]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(35, 35)
 layout_mode = 2
@@ -493,14 +493,14 @@ icon = ExtResource("17_074og")
 icon_alignment = 1
 expand_icon = true
 
-[node name="ProgramMouseControl" type="Control" parent="UI/MainVBox/Gauges" node_paths=PackedStringArray("ProgramMode")]
+[node name="ProgramMouseControl" type="Control" parent="UI/MainVBox/Gauges" unique_id=1114118013 node_paths=PackedStringArray("ProgramMode")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("18_jq2sk")
 ProgramMode = NodePath("../../ModeTabs/Program Mode")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/MainVBox/Gauges/ProgramMouseControl"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MainVBox/Gauges/ProgramMouseControl" unique_id=1309066536]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -509,7 +509,7 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="StrongSliderProgram" type="HSlider" parent="UI/MainVBox/Gauges/ProgramMouseControl/VBoxContainer"]
+[node name="StrongSliderProgram" type="HSlider" parent="UI/MainVBox/Gauges/ProgramMouseControl/VBoxContainer" unique_id=1410085104]
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Mouse slider for controlling the strong motor"
@@ -519,7 +519,7 @@ min_value = -1.0
 max_value = 1.0
 step = 0.01
 
-[node name="WeakSliderProgram" type="HSlider" parent="UI/MainVBox/Gauges/ProgramMouseControl/VBoxContainer"]
+[node name="WeakSliderProgram" type="HSlider" parent="UI/MainVBox/Gauges/ProgramMouseControl/VBoxContainer" unique_id=1746702504]
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Mouse slider for controlling the weak motor"
@@ -529,13 +529,13 @@ min_value = -1.0
 max_value = 1.0
 step = 0.01
 
-[node name="ProgramModeSpeedLabel" type="Label" parent="UI/MainVBox/Gauges/ProgramMouseControl/VBoxContainer"]
+[node name="ProgramModeSpeedLabel" type="Label" parent="UI/MainVBox/Gauges/ProgramMouseControl/VBoxContainer" unique_id=1427075654]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Speed: 1.0x"
 horizontal_alignment = 1
 
-[node name="MouseStickyMode" type="Button" parent="UI/MainVBox/Gauges/ProgramMouseControl/VBoxContainer"]
+[node name="MouseStickyMode" type="Button" parent="UI/MainVBox/Gauges/ProgramMouseControl/VBoxContainer" unique_id=75441661]
 visible = false
 custom_minimum_size = Vector2(35, 35)
 layout_mode = 2
@@ -546,7 +546,7 @@ icon = ExtResource("17_074og")
 icon_alignment = 1
 expand_icon = true
 
-[node name="ProgramModeSpeedSlider" type="HSlider" parent="UI/MainVBox/Gauges/ProgramMouseControl/VBoxContainer"]
+[node name="ProgramModeSpeedSlider" type="HSlider" parent="UI/MainVBox/Gauges/ProgramMouseControl/VBoxContainer" unique_id=1030519815]
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "How fast the desired sliders go up/down when controlled."
@@ -556,16 +556,16 @@ step = 0.05
 value = 1.0
 exp_edit = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/MainVBox"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/MainVBox" unique_id=1817644091]
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="UI/MainVBox/HBoxContainer"]
+[node name="Label" type="Label" parent="UI/MainVBox/HBoxContainer" unique_id=2011267184]
 layout_mode = 2
 theme_type_variation = &"TooltipLabel"
 text = "Modes"
 
-[node name="HideModeTabs" type="TextureButton" parent="UI/MainVBox/HBoxContainer"]
+[node name="HideModeTabs" type="TextureButton" parent="UI/MainVBox/HBoxContainer" unique_id=1246712397]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 toggle_mode = true
@@ -574,11 +574,11 @@ texture_pressed = ExtResource("20_lswn8")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="HSeparator2" type="HSeparator" parent="UI/MainVBox/HBoxContainer"]
+[node name="HSeparator2" type="HSeparator" parent="UI/MainVBox/HBoxContainer" unique_id=1739953177]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ModeTabs" type="TabContainer" parent="UI/MainVBox"]
+[node name="ModeTabs" type="TabContainer" parent="UI/MainVBox" unique_id=2068799376]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(608, 0)
 layout_mode = 2
@@ -586,13 +586,13 @@ size_flags_vertical = 3
 tab_alignment = 1
 current_tab = 0
 
-[node name="Analog Mode" type="TabBar" parent="UI/MainVBox/ModeTabs" node_paths=PackedStringArray("UI")]
+[node name="Analog Mode" type="TabBar" parent="UI/MainVBox/ModeTabs" unique_id=1356302334 node_paths=PackedStringArray("UI")]
 layout_mode = 2
 script = ExtResource("23_seu75")
 UI = NodePath("../../..")
 metadata/_tab_index = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Analog Mode"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Analog Mode" unique_id=1232192033]
 custom_minimum_size = Vector2(550, 0)
 layout_mode = 1
 anchors_preset = 13
@@ -607,22 +607,22 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="UI/MainVBox/ModeTabs/Analog Mode/VBoxContainer"]
+[node name="Label" type="Label" parent="UI/MainVBox/ModeTabs/Analog Mode/VBoxContainer" unique_id=962296086]
 layout_mode = 2
 text = "Welcome!
 - Connect a controller (if you have multiple, use the ID selector to choose which one to control)
 - Use either the triggers, joysticks UP/DOWN, or the slider in the top-right to control the weak and strong motors in your controller
-- Be sure to check out the Controls menu (\"c\" button in the bottom-left)"
+- Check out the Controls menu (\"c\" button in the bottom-right)"
 autowrap_mode = 3
 
-[node name="HSeparator" type="HSeparator" parent="UI/MainVBox/ModeTabs/Analog Mode/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="UI/MainVBox/ModeTabs/Analog Mode/VBoxContainer" unique_id=101241147]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Analog Mode/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Analog Mode/VBoxContainer" unique_id=390788937]
 custom_minimum_size = Vector2(0, 44)
 layout_mode = 2
 
-[node name="AnalogAltMode" type="CheckBox" parent="UI/MainVBox/ModeTabs/Analog Mode/VBoxContainer/HBoxContainer"]
+[node name="AnalogAltMode" type="CheckBox" parent="UI/MainVBox/ModeTabs/Analog Mode/VBoxContainer/HBoxContainer" unique_id=1209015272]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -630,7 +630,7 @@ tooltip_text = "When both motors reach 0%, toggles Flip Controls.
 ⓘ Can also be toggled with DPAD RIGHT / BUTTON LEFT"
 text = "Alternating Mode"
 
-[node name="AnalogVelMode" type="CheckBox" parent="UI/MainVBox/ModeTabs/Analog Mode/VBoxContainer/HBoxContainer"]
+[node name="AnalogVelMode" type="CheckBox" parent="UI/MainVBox/ModeTabs/Analog Mode/VBoxContainer/HBoxContainer" unique_id=1526539308]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -638,18 +638,18 @@ tooltip_text = "\"Drags\" the input along instead of having it control rumble di
 ⓘ Can also be toggled with DPAD DOWN / BUTTON DOWN"
 text = "Velocity Mode"
 
-[node name="VelocityModeSpeedContainer" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Analog Mode/VBoxContainer/HBoxContainer"]
+[node name="VelocityModeSpeedContainer" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Analog Mode/VBoxContainer/HBoxContainer" unique_id=1632275137]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="VelocityModeSpeedLabel" type="Label" parent="UI/MainVBox/ModeTabs/Analog Mode/VBoxContainer/HBoxContainer/VelocityModeSpeedContainer"]
+[node name="VelocityModeSpeedLabel" type="Label" parent="UI/MainVBox/ModeTabs/Analog Mode/VBoxContainer/HBoxContainer/VelocityModeSpeedContainer" unique_id=652418873]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Speed: 1.0x"
 
-[node name="VelocityModeSpeed" type="HSlider" parent="UI/MainVBox/ModeTabs/Analog Mode/VBoxContainer/HBoxContainer/VelocityModeSpeedContainer"]
+[node name="VelocityModeSpeed" type="HSlider" parent="UI/MainVBox/ModeTabs/Analog Mode/VBoxContainer/HBoxContainer/VelocityModeSpeedContainer" unique_id=170114454]
 unique_name_in_owner = true
 layout_mode = 2
 min_value = 0.1
@@ -658,7 +658,7 @@ step = 0.1
 value = 1.0
 exp_edit = true
 
-[node name="Program Mode" type="TabBar" parent="UI/MainVBox/ModeTabs" node_paths=PackedStringArray("PATTERN_MAKER", "UI")]
+[node name="Program Mode" type="TabBar" parent="UI/MainVBox/ModeTabs" unique_id=849770805 node_paths=PackedStringArray("PATTERN_MAKER", "UI")]
 visible = false
 layout_mode = 2
 script = ExtResource("22_a6jrf")
@@ -666,7 +666,7 @@ PATTERN_MAKER = NodePath("VBoxContainer/PatternMaker")
 UI = NodePath("../../..")
 metadata/_tab_index = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode" unique_id=1339689483]
 layout_mode = 1
 anchors_preset = 13
 anchor_left = 0.5
@@ -680,7 +680,7 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 2
 
-[node name="OldText" type="Label" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer"]
+[node name="OldText" type="Label" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer" unique_id=211113016]
 visible = false
 layout_mode = 2
 size_flags_vertical = 6
@@ -689,7 +689,7 @@ This section will be filled with presets in a future update.
 Maybe a visual guide somewhere too."
 horizontal_alignment = 1
 
-[node name="PresetPlaza" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer" node_paths=PackedStringArray("ProgramMode", "PresetsGrid")]
+[node name="PresetPlaza" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer" unique_id=383362251 node_paths=PackedStringArray("ProgramMode", "PresetsGrid")]
 layout_mode = 2
 size_flags_vertical = 3
 alignment = 1
@@ -698,180 +698,186 @@ ProgramMode = NodePath("../..")
 PresetsGrid = NodePath("Presets/PresetsGrid")
 PresetButton = ExtResource("28_qnost")
 
-[node name="Memory" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza"]
+[node name="Memory" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza" unique_id=1301566396]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Memory"]
+[node name="Label" type="Label" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Memory" unique_id=1667800610]
 layout_mode = 2
-text = "WIP"
+text = "Memory"
 
-[node name="FClear" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Memory"]
-layout_mode = 2
-size_flags_vertical = 3
-text = "Save"
-
-[node name="FCycle" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Memory"]
+[node name="QSave" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Memory" unique_id=1248956893]
 layout_mode = 2
 size_flags_vertical = 3
-text = "Load"
+tooltip_text = "Quicksaves your current pattern and flips"
+text = "Q-Save"
 
-[node name="FEvery" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Memory"]
+[node name="QLoad" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Memory" unique_id=89494755]
 layout_mode = 2
 size_flags_vertical = 3
-text = "Code"
+tooltip_text = "Quickloads your current pattern and flips from the last quicksave"
+text = "Q-Load"
 
-[node name="VSeparator4" type="VSeparator" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza"]
+[node name="ImportExport" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Memory" unique_id=2144506139]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Import/
+Export"
+
+[node name="VSeparator4" type="VSeparator" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza" unique_id=727579802]
 layout_mode = 2
 
-[node name="Presets" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza"]
+[node name="Presets" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza" unique_id=130559690]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets"]
+[node name="Label" type="Label" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets" unique_id=488249232]
 layout_mode = 2
 text = "Presets"
 
-[node name="PresetsGrid" type="GridContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets"]
+[node name="PresetsGrid" type="GridContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets" unique_id=1856425608]
 layout_mode = 2
 size_flags_vertical = 3
 columns = 3
 
-[node name="P0" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets/PresetsGrid"]
+[node name="P0" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets/PresetsGrid" unique_id=1249862218]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Clear"
 
-[node name="P1" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets/PresetsGrid"]
+[node name="P1" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets/PresetsGrid" unique_id=1511751166]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Simple"
 
-[node name="P2" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets/PresetsGrid"]
+[node name="P2" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets/PresetsGrid" unique_id=512729594]
 layout_mode = 2
 size_flags_vertical = 3
-text = "Simple"
+text = "Test"
 
-[node name="P3" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets/PresetsGrid"]
+[node name="P3" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets/PresetsGrid" unique_id=1616963167]
 layout_mode = 2
 size_flags_vertical = 3
-text = "Simple"
+text = "These"
 
-[node name="P4" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets/PresetsGrid"]
+[node name="P4" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets/PresetsGrid" unique_id=417619081]
 layout_mode = 2
 size_flags_vertical = 3
-text = "Simple"
+text = "are"
 
-[node name="P5" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets/PresetsGrid"]
+[node name="P5" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets/PresetsGrid" unique_id=2010125118]
 layout_mode = 2
 size_flags_vertical = 3
-text = "Simple"
+text = "place-"
 
-[node name="P6" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets/PresetsGrid"]
+[node name="P6" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets/PresetsGrid" unique_id=648886926]
 layout_mode = 2
 size_flags_vertical = 3
-text = "Simple"
+text = "holders"
 
-[node name="P7" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets/PresetsGrid"]
+[node name="P7" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets/PresetsGrid" unique_id=787181829]
 layout_mode = 2
 size_flags_vertical = 3
-text = "Simple"
+text = "willget"
 
-[node name="P8" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets/PresetsGrid"]
+[node name="P8" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Presets/PresetsGrid" unique_id=1043808592]
 layout_mode = 2
 size_flags_vertical = 3
-text = "Simple"
+text = "deletd"
 
-[node name="VSeparator3" type="VSeparator" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza"]
+[node name="VSeparator3" type="VSeparator" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza" unique_id=884716265]
 layout_mode = 2
 
-[node name="Flips" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza"]
+[node name="Flips" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza" unique_id=1496921184]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Flips"]
+[node name="Label" type="Label" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Flips" unique_id=1779525572]
 layout_mode = 2
 text = "Flips"
 
-[node name="FClear" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Flips"]
+[node name="FClear" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Flips" unique_id=753305246]
 layout_mode = 2
 size_flags_vertical = 3
+tooltip_text = "Clears all flip flags from current program"
 text = "Clear"
 
-[node name="FCycle" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Flips"]
+[node name="FCycle" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Flips" unique_id=2021715767]
 layout_mode = 2
 size_flags_vertical = 3
+tooltip_text = "Makes the motors flip intensities every cycle of the current program"
 text = "Cycle"
 
-[node name="FEvery" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Flips"]
+[node name="FEvery" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Flips" unique_id=157624122]
 layout_mode = 2
 size_flags_vertical = 3
+tooltip_text = "Makes the motors flip intensities after every beat of the current program"
 text = "Every"
 
-[node name="VSeparator2" type="VSeparator" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza"]
+[node name="VSeparator2" type="VSeparator" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza" unique_id=548684430]
 layout_mode = 2
 
-[node name="Motors" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza"]
+[node name="Motors" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza" unique_id=1495852826]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors"]
+[node name="Label" type="Label" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors" unique_id=640136389]
 layout_mode = 2
 text = "Motors"
 
-[node name="GridContainer" type="GridContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors"]
+[node name="GridContainer" type="GridContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors" unique_id=1043590799]
 layout_mode = 2
 size_flags_vertical = 3
 columns = 2
 
-[node name="Strong100" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors/GridContainer"]
+[node name="Strong100" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors/GridContainer" unique_id=1291789265]
 layout_mode = 2
 size_flags_vertical = 3
 theme_type_variation = &"RedButton"
 text = "Full"
 
-[node name="Weak100" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors/GridContainer"]
+[node name="Weak100" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors/GridContainer" unique_id=1418248196]
 layout_mode = 2
 size_flags_vertical = 3
 theme_type_variation = &"BlueButton"
 text = "Full"
 
-[node name="Strong50" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors/GridContainer"]
+[node name="Strong50" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors/GridContainer" unique_id=754064891]
 layout_mode = 2
 size_flags_vertical = 3
 theme_type_variation = &"RedButton"
 text = "Half"
 
-[node name="Weak50" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors/GridContainer"]
+[node name="Weak50" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors/GridContainer" unique_id=263531031]
 layout_mode = 2
 size_flags_vertical = 3
 theme_type_variation = &"BlueButton"
 text = "Half"
 
-[node name="Strong0" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors/GridContainer"]
+[node name="Strong0" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors/GridContainer" unique_id=952110270]
 layout_mode = 2
 size_flags_vertical = 3
 theme_type_variation = &"RedButton"
 text = "Off"
 
-[node name="Weak0" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors/GridContainer"]
+[node name="Weak0" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Motors/GridContainer" unique_id=205038888]
 layout_mode = 2
 size_flags_vertical = 3
 theme_type_variation = &"BlueButton"
 text = "Off"
 
-[node name="VSeparator" type="VSeparator" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza"]
+[node name="VSeparator" type="VSeparator" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza" unique_id=2117405995]
 layout_mode = 2
 
-[node name="Controls" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza"]
+[node name="Controls" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza" unique_id=1714314512]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Controls"]
+[node name="Label" type="Label" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Controls" unique_id=1314707509]
 layout_mode = 2
 text = "Controls"
 
-[node name="FlipIntensities" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Controls"]
+[node name="FlipIntensities" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Controls" unique_id=2108481818]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
@@ -880,7 +886,7 @@ tooltip_text = "Flips the weak/strong values AND toggles Flip Controls.
 text = "Flip
 intensities"
 
-[node name="RandomPreset" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Controls"]
+[node name="RandomPreset" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Controls" unique_id=583236206]
 layout_mode = 2
 size_flags_vertical = 3
 tooltip_text = "Picks a random preset from the ones in the menu.
@@ -888,31 +894,31 @@ tooltip_text = "Picks a random preset from the ones in the menu.
 text = "Random
 preset"
 
-[node name="PlaceholderPresets" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer"]
+[node name="PlaceholderPresets" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer" unique_id=844708281]
 visible = false
 layout_mode = 2
 alignment = 1
 
-[node name="PresetButton" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PlaceholderPresets"]
+[node name="PresetButton" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PlaceholderPresets" unique_id=600232721]
 layout_mode = 2
 text = "Preset"
 
-[node name="Preset2Button" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PlaceholderPresets"]
+[node name="Preset2Button" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PlaceholderPresets" unique_id=756819087]
 layout_mode = 2
 text = "Preset2"
 
-[node name="ClearButton" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PlaceholderPresets"]
+[node name="ClearButton" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PlaceholderPresets" unique_id=2016015304]
 layout_mode = 2
 text = "Clear"
 
-[node name="HSeparator" type="HSeparator" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer" unique_id=1135829501]
 layout_mode = 2
 
-[node name="ProgrammerControls" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer"]
+[node name="ProgrammerControls" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer" unique_id=1471707069]
 layout_mode = 2
 alignment = 1
 
-[node name="TactAmount" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls"]
+[node name="TactAmount" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls" unique_id=1377412324]
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "The amount of active \"beats\" in the current program.
@@ -925,38 +931,38 @@ value = 1.0
 rounded = true
 select_all_on_focus = true
 
-[node name="VSeparator2" type="VSeparator" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls"]
+[node name="VSeparator2" type="VSeparator" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls" unique_id=1021814852]
 layout_mode = 2
 
-[node name="HalfAllTacts" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls"]
+[node name="HalfAllTacts" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls" unique_id=238092231]
 layout_mode = 2
 tooltip_text = "Halves all the values below"
 text = "Halve"
 
-[node name="DoubleAllTacts" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls"]
+[node name="DoubleAllTacts" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls" unique_id=1315481453]
 layout_mode = 2
 tooltip_text = "Doubles all the values below"
 text = "Double"
 
-[node name="Control" type="Control" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls"]
+[node name="Control" type="Control" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls" unique_id=1608984541]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="VSeparator4" type="VSeparator" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls"]
+[node name="VSeparator4" type="VSeparator" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls" unique_id=136940224]
 layout_mode = 2
 
-[node name="TimescaleLabel" type="Label" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls"]
+[node name="TimescaleLabel" type="Label" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls" unique_id=956320495]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(36, 0)
 layout_mode = 2
 text = "1.0"
 
-[node name="Label2" type="Label" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls"]
+[node name="Label2" type="Label" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls" unique_id=551776766]
 layout_mode = 2
 text = "x "
 
-[node name="TimescaleSlider" type="HSlider" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls"]
+[node name="TimescaleSlider" type="HSlider" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls" unique_id=1803304592]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -970,7 +976,7 @@ step = 0.05
 value = 1.0
 exp_edit = true
 
-[node name="TimescaleReset" type="TextureButton" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls"]
+[node name="TimescaleReset" type="TextureButton" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls" unique_id=2141359755]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
@@ -981,10 +987,10 @@ texture_disabled = ExtResource("24_0rl1p")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="VSeparator3" type="VSeparator" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls"]
+[node name="VSeparator3" type="VSeparator" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls" unique_id=211261823]
 layout_mode = 2
 
-[node name="LoopProgram" type="TextureButton" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls"]
+[node name="LoopProgram" type="TextureButton" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls" unique_id=1205818224]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 tooltip_text = "Loop program"
@@ -995,7 +1001,7 @@ texture_pressed = ExtResource("31_qnost")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="PlayPause" type="TextureButton" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls"]
+[node name="PlayPause" type="TextureButton" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/ProgrammerControls" unique_id=44230223]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
@@ -1008,44 +1014,44 @@ texture_pressed = ExtResource("24_kq58d")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="VSpacer" type="Control" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer"]
+[node name="VSpacer" type="Control" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer" unique_id=1480499394]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="PatternMaker" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer"]
+[node name="PatternMaker" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer" unique_id=262390589]
 layout_mode = 2
 focus_behavior_recursive = 2
 alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker" unique_id=1320411314]
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/VBoxContainer"]
+[node name="Label" type="Label" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/VBoxContainer" unique_id=570314469]
 layout_mode = 2
 text = "Duration:"
 horizontal_alignment = 2
 
-[node name="Control" type="Control" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/VBoxContainer"]
+[node name="Control" type="Control" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/VBoxContainer" unique_id=1827958227]
 custom_minimum_size = Vector2(0, 6)
 layout_mode = 2
 
-[node name="Label2" type="Label" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/VBoxContainer"]
+[node name="Label2" type="Label" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/VBoxContainer" unique_id=875065811]
 layout_mode = 2
 text = "Pause:"
 horizontal_alignment = 2
 
-[node name="Spacer" type="Panel" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/VBoxContainer"]
+[node name="Spacer" type="Panel" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/VBoxContainer" unique_id=1349753103]
 custom_minimum_size = Vector2(25, 5)
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_xuqvo")
 
-[node name="Spacer" type="Control" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker"]
+[node name="Spacer" type="Control" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker" unique_id=1848488895]
 custom_minimum_size = Vector2(6, 0)
 layout_mode = 2
 
-[node name="Flip1" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker"]
+[node name="Flip1" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker" unique_id=810076761]
 custom_minimum_size = Vector2(10, 30)
 layout_mode = 2
 size_flags_vertical = 4
@@ -1056,10 +1062,10 @@ focus_behavior_recursive = 1
 theme_type_variation = &"FlipButton"
 toggle_mode = true
 
-[node name="Row1" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker"]
+[node name="Row1" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker" unique_id=2130898793]
 layout_mode = 2
 
-[node name="Duration" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row1"]
+[node name="Duration" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row1" unique_id=1780405259]
 custom_minimum_size = Vector2(102, 0)
 layout_mode = 2
 tooltip_text = "The duration of rumble for this beat"
@@ -1067,7 +1073,7 @@ max_value = 900000.0
 suffix = "ms"
 custom_arrow_step = 50.0
 
-[node name="Pause" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row1"]
+[node name="Pause" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row1" unique_id=1773300272]
 custom_minimum_size = Vector2(102, 0)
 layout_mode = 2
 tooltip_text = "The length of the pause of this beat"
@@ -1075,17 +1081,17 @@ max_value = 900000.0
 suffix = "ms"
 custom_arrow_step = 50.0
 
-[node name="Indicator" type="Panel" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row1"]
+[node name="Indicator" type="Panel" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row1" unique_id=366532641]
 visible = false
 custom_minimum_size = Vector2(25, 5)
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_a6jrf")
 
-[node name="Indicators" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row1"]
+[node name="Indicators" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row1" unique_id=227237097]
 layout_mode = 2
 
-[node name="DurationProgress" type="ProgressBar" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row1/Indicators"]
+[node name="DurationProgress" type="ProgressBar" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row1/Indicators" unique_id=1202784476]
 custom_minimum_size = Vector2(39, 5)
 layout_mode = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_htxhm")
@@ -1094,7 +1100,7 @@ max_value = 1.0
 value = 1.0
 show_percentage = false
 
-[node name="PauseProgress" type="ProgressBar" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row1/Indicators"]
+[node name="PauseProgress" type="ProgressBar" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row1/Indicators" unique_id=2104877108]
 custom_minimum_size = Vector2(39, 5)
 layout_mode = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_htxhm")
@@ -1103,11 +1109,11 @@ max_value = 1.0
 value = 1.0
 show_percentage = false
 
-[node name="Spacer2" type="Control" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker"]
+[node name="Spacer2" type="Control" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker" unique_id=1857001760]
 custom_minimum_size = Vector2(6, 0)
 layout_mode = 2
 
-[node name="Flip2" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker"]
+[node name="Flip2" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker" unique_id=2129276928]
 custom_minimum_size = Vector2(10, 30)
 layout_mode = 2
 size_flags_vertical = 4
@@ -1118,10 +1124,10 @@ focus_behavior_recursive = 1
 theme_type_variation = &"FlipButton"
 toggle_mode = true
 
-[node name="Row2" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker"]
+[node name="Row2" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker" unique_id=882680773]
 layout_mode = 2
 
-[node name="Duration" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row2"]
+[node name="Duration" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row2" unique_id=979070768]
 custom_minimum_size = Vector2(102, 0)
 layout_mode = 2
 tooltip_text = "The duration of rumble for this beat"
@@ -1129,7 +1135,7 @@ max_value = 900000.0
 suffix = "ms"
 custom_arrow_step = 50.0
 
-[node name="Pause" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row2"]
+[node name="Pause" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row2" unique_id=2046570396]
 custom_minimum_size = Vector2(102, 0)
 layout_mode = 2
 tooltip_text = "The length of the pause of this beat"
@@ -1137,17 +1143,17 @@ max_value = 900000.0
 suffix = "ms"
 custom_arrow_step = 50.0
 
-[node name="Indicator" type="Panel" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row2"]
+[node name="Indicator" type="Panel" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row2" unique_id=1936322999]
 visible = false
 custom_minimum_size = Vector2(25, 5)
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_a6jrf")
 
-[node name="Indicators" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row2"]
+[node name="Indicators" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row2" unique_id=582853187]
 layout_mode = 2
 
-[node name="DurationProgress" type="ProgressBar" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row2/Indicators"]
+[node name="DurationProgress" type="ProgressBar" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row2/Indicators" unique_id=651566561]
 custom_minimum_size = Vector2(39, 5)
 layout_mode = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_htxhm")
@@ -1156,7 +1162,7 @@ max_value = 1.0
 value = 1.0
 show_percentage = false
 
-[node name="PauseProgress" type="ProgressBar" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row2/Indicators"]
+[node name="PauseProgress" type="ProgressBar" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row2/Indicators" unique_id=1715226464]
 custom_minimum_size = Vector2(39, 5)
 layout_mode = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_htxhm")
@@ -1165,11 +1171,11 @@ max_value = 1.0
 value = 0.5
 show_percentage = false
 
-[node name="Spacer3" type="Control" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker"]
+[node name="Spacer3" type="Control" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker" unique_id=1920905008]
 custom_minimum_size = Vector2(6, 0)
 layout_mode = 2
 
-[node name="Flip3" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker"]
+[node name="Flip3" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker" unique_id=1350101204]
 custom_minimum_size = Vector2(10, 30)
 layout_mode = 2
 size_flags_vertical = 4
@@ -1180,10 +1186,10 @@ focus_behavior_recursive = 1
 theme_type_variation = &"FlipButton"
 toggle_mode = true
 
-[node name="Row3" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker"]
+[node name="Row3" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker" unique_id=1989535949]
 layout_mode = 2
 
-[node name="Duration" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row3"]
+[node name="Duration" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row3" unique_id=777490347]
 custom_minimum_size = Vector2(102, 0)
 layout_mode = 2
 tooltip_text = "The duration of rumble for this beat"
@@ -1191,7 +1197,7 @@ max_value = 900000.0
 suffix = "ms"
 custom_arrow_step = 50.0
 
-[node name="Pause" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row3"]
+[node name="Pause" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row3" unique_id=433811217]
 custom_minimum_size = Vector2(102, 0)
 layout_mode = 2
 tooltip_text = "The length of the pause of this beat"
@@ -1199,17 +1205,17 @@ max_value = 900000.0
 suffix = "ms"
 custom_arrow_step = 50.0
 
-[node name="Indicator" type="Panel" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row3"]
+[node name="Indicator" type="Panel" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row3" unique_id=391352260]
 visible = false
 custom_minimum_size = Vector2(25, 5)
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_a6jrf")
 
-[node name="Indicators" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row3"]
+[node name="Indicators" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row3" unique_id=1980009152]
 layout_mode = 2
 
-[node name="DurationProgress" type="ProgressBar" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row3/Indicators"]
+[node name="DurationProgress" type="ProgressBar" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row3/Indicators" unique_id=1867363652]
 custom_minimum_size = Vector2(39, 5)
 layout_mode = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_htxhm")
@@ -1217,7 +1223,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_jq2sk")
 max_value = 1.0
 show_percentage = false
 
-[node name="PauseProgress" type="ProgressBar" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row3/Indicators"]
+[node name="PauseProgress" type="ProgressBar" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row3/Indicators" unique_id=830648253]
 custom_minimum_size = Vector2(39, 5)
 layout_mode = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_htxhm")
@@ -1225,11 +1231,11 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_jq2sk")
 max_value = 1.0
 show_percentage = false
 
-[node name="Spacer4" type="Control" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker"]
+[node name="Spacer4" type="Control" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker" unique_id=730711589]
 custom_minimum_size = Vector2(6, 0)
 layout_mode = 2
 
-[node name="Flip4" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker"]
+[node name="Flip4" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker" unique_id=2090473262]
 custom_minimum_size = Vector2(10, 30)
 layout_mode = 2
 size_flags_vertical = 4
@@ -1240,10 +1246,10 @@ focus_behavior_recursive = 1
 theme_type_variation = &"FlipButton"
 toggle_mode = true
 
-[node name="Row4" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker"]
+[node name="Row4" type="VBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker" unique_id=1449124551]
 layout_mode = 2
 
-[node name="Duration" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row4"]
+[node name="Duration" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row4" unique_id=715282251]
 custom_minimum_size = Vector2(102, 0)
 layout_mode = 2
 tooltip_text = "The duration of rumble for this beat"
@@ -1251,7 +1257,7 @@ max_value = 900000.0
 suffix = "ms"
 custom_arrow_step = 50.0
 
-[node name="Pause" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row4"]
+[node name="Pause" type="SpinBox" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row4" unique_id=228931048]
 custom_minimum_size = Vector2(102, 0)
 layout_mode = 2
 tooltip_text = "The length of the pause of this beat"
@@ -1259,17 +1265,17 @@ max_value = 900000.0
 suffix = "ms"
 custom_arrow_step = 50.0
 
-[node name="Indicator" type="Panel" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row4"]
+[node name="Indicator" type="Panel" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row4" unique_id=219766124]
 visible = false
 custom_minimum_size = Vector2(25, 5)
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_a6jrf")
 
-[node name="Indicators" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row4"]
+[node name="Indicators" type="HBoxContainer" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row4" unique_id=1432724857]
 layout_mode = 2
 
-[node name="DurationProgress" type="ProgressBar" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row4/Indicators"]
+[node name="DurationProgress" type="ProgressBar" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row4/Indicators" unique_id=690477768]
 custom_minimum_size = Vector2(39, 5)
 layout_mode = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_htxhm")
@@ -1277,7 +1283,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_jq2sk")
 max_value = 1.0
 show_percentage = false
 
-[node name="PauseProgress" type="ProgressBar" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row4/Indicators"]
+[node name="PauseProgress" type="ProgressBar" parent="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PatternMaker/Row4/Indicators" unique_id=934888388]
 custom_minimum_size = Vector2(39, 5)
 layout_mode = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_htxhm")
@@ -1285,7 +1291,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_jq2sk")
 max_value = 1.0
 show_percentage = false
 
-[node name="SimpleTactToggle" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode"]
+[node name="SimpleTactToggle" type="Button" parent="UI/MainVBox/ModeTabs/Program Mode" unique_id=690351483]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
@@ -1301,7 +1307,7 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "C"
 
-[node name="RumbleIndicator" type="Panel" parent="UI/MainVBox/ModeTabs/Program Mode"]
+[node name="RumbleIndicator" type="Panel" parent="UI/MainVBox/ModeTabs/Program Mode" unique_id=16848162]
 unique_name_in_owner = true
 modulate = Color(0.7642523, 0, 0, 1)
 custom_minimum_size = Vector2(10, 10)
@@ -1319,16 +1325,16 @@ grow_vertical = 2
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_4k2k6")
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="UI/MainVBox"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="UI/MainVBox" unique_id=936119979]
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="UI/MainVBox/HBoxContainer3"]
+[node name="Label" type="Label" parent="UI/MainVBox/HBoxContainer3" unique_id=2021492640]
 layout_mode = 2
 theme_type_variation = &"TooltipLabel"
 text = "Settings "
 
-[node name="HideBottomRow" type="TextureButton" parent="UI/MainVBox/HBoxContainer3"]
+[node name="HideBottomRow" type="TextureButton" parent="UI/MainVBox/HBoxContainer3" unique_id=965195276]
 visible = false
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
@@ -1338,25 +1344,25 @@ texture_pressed = ExtResource("20_lswn8")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="HSeparator3" type="HSeparator" parent="UI/MainVBox/HBoxContainer3"]
+[node name="HSeparator3" type="HSeparator" parent="UI/MainVBox/HBoxContainer3" unique_id=259820777]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="SettingsBox" type="VBoxContainer" parent="UI/MainVBox"]
+[node name="SettingsBox" type="VBoxContainer" parent="UI/MainVBox" unique_id=620266636]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="UI/MainVBox/SettingsBox"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="UI/MainVBox/SettingsBox" unique_id=1769955573]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/MainVBox/SettingsBox/HBoxContainer3"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MainVBox/SettingsBox/HBoxContainer3" unique_id=325264824]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer" unique_id=427143338]
 layout_mode = 2
 
-[node name="FlipControls" type="CheckBox" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer/HBoxContainer"]
+[node name="FlipControls" type="CheckBox" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer/HBoxContainer" unique_id=1173449219]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1364,10 +1370,10 @@ tooltip_text = "Flips the triggers/joysticks that control each motor.
 ⓘ Can also be toggled with DPAD UP / BUTTON UP"
 text = "Flip L/R Controls"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer" unique_id=476560856]
 layout_mode = 2
 
-[node name="CoupleMotors" type="CheckBox" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer/HBoxContainer2"]
+[node name="CoupleMotors" type="CheckBox" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer/HBoxContainer2" unique_id=1201102981]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1375,14 +1381,14 @@ tooltip_text = "Control both motors together with either L/R input.
 ⓘ Can also be toggled with tapping SELECT / START"
 text = "Couple Motors"
 
-[node name="VSeparator" type="VSeparator" parent="UI/MainVBox/SettingsBox/HBoxContainer3"]
+[node name="VSeparator" type="VSeparator" parent="UI/MainVBox/SettingsBox/HBoxContainer3" unique_id=605000129]
 layout_mode = 2
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="UI/MainVBox/SettingsBox/HBoxContainer3"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="UI/MainVBox/SettingsBox/HBoxContainer3" unique_id=1130924467]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MultiplierNode" type="HBoxContainer" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer2"]
+[node name="MultiplierNode" type="HBoxContainer" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer2" unique_id=687912329]
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "Set a multiplier for the final rumble intensity,
@@ -1391,15 +1397,15 @@ on Linux have a problem with cutting-off rumble
 above a specific threshold, use this to mitigate
 this issue (usually around the 0.75 - 0.85 range)"
 
-[node name="Label" type="Label" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer2/MultiplierNode"]
+[node name="Label" type="Label" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer2/MultiplierNode" unique_id=1944335758]
 layout_mode = 2
 text = "Rumble Multiplier: "
 
-[node name="Control" type="Control" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer2/MultiplierNode"]
+[node name="Control" type="Control" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer2/MultiplierNode" unique_id=1628375677]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MultiplierBox" type="SpinBox" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer2/MultiplierNode"]
+[node name="MultiplierBox" type="SpinBox" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer2/MultiplierNode" unique_id=280603626]
 custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
 tooltip_text = "Set a multiplier for the final rumble intensity,
@@ -1414,29 +1420,29 @@ value = 1.0
 suffix = "x"
 select_all_on_focus = true
 
-[node name="SnapControls" type="CheckBox" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer2"]
+[node name="SnapControls" type="CheckBox" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer2" unique_id=348996999]
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "Snaps the power output to increments of 10%"
 text = "Snap to 10%"
 
-[node name="VSeparator2" type="VSeparator" parent="UI/MainVBox/SettingsBox/HBoxContainer3"]
+[node name="VSeparator2" type="VSeparator" parent="UI/MainVBox/SettingsBox/HBoxContainer3" unique_id=2018501710]
 layout_mode = 2
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="UI/MainVBox/SettingsBox/HBoxContainer3"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="UI/MainVBox/SettingsBox/HBoxContainer3" unique_id=1963751676]
 layout_mode = 2
 
-[node name="DisableFix" type="CheckBox" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer3"]
+[node name="DisableFix" type="CheckBox" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer3" unique_id=459099117]
 layout_mode = 2
 tooltip_text = "Disables the workaround preventing certain controllers from
 turning off after a period of constant, unchanging rumble.
 Keep off unless you want this behavior"
 text = "Disable Fix"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer3"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer3" unique_id=1599521801]
 layout_mode = 2
 
-[node name="ThemeButton" type="Button" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer3/HBoxContainer"]
+[node name="ThemeButton" type="Button" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer3/HBoxContainer" unique_id=267704286]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1445,7 +1451,7 @@ theme_type_variation = &"MiniButton"
 text = "t"
 expand_icon = true
 
-[node name="ControlsButton" type="Button" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer3/HBoxContainer"]
+[node name="ControlsButton" type="Button" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer3/HBoxContainer" unique_id=1259357291]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1454,7 +1460,7 @@ theme_type_variation = &"MiniButton"
 text = "c"
 expand_icon = true
 
-[node name="InfoButton" type="Button" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer3/HBoxContainer"]
+[node name="InfoButton" type="Button" parent="UI/MainVBox/SettingsBox/HBoxContainer3/VBoxContainer3/HBoxContainer" unique_id=2070185073]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1463,7 +1469,7 @@ theme_type_variation = &"MiniButton"
 text = "i"
 expand_icon = true
 
-[node name="BlurRect" type="ColorRect" parent="UI"]
+[node name="BlurRect" type="ColorRect" parent="UI" unique_id=927668420]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
@@ -1474,13 +1480,13 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0.19607843)
 
-[node name="InfoPopup" type="Popup" parent="UI"]
+[node name="InfoPopup" type="Popup" parent="UI" unique_id=1208241834]
 unique_name_in_owner = true
 oversampling_override = 1.0
 initial_position = 1
 size = Vector2i(500, 500)
 
-[node name="Panel" type="Panel" parent="UI/InfoPopup"]
+[node name="Panel" type="Panel" parent="UI/InfoPopup" unique_id=275734098]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -1488,7 +1494,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/InfoPopup/Panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/InfoPopup/Panel" unique_id=284686643]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1500,7 +1506,7 @@ offset_bottom = -26.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="InfoCredits" type="RichTextLabel" parent="UI/InfoPopup/Panel/VBoxContainer"]
+[node name="InfoCredits" type="RichTextLabel" parent="UI/InfoPopup/Panel/VBoxContainer" unique_id=674869218]
 layout_mode = 2
 bbcode_enabled = true
 text = "[center][b]Controller Rumble Tool[/b]
@@ -1511,7 +1517,7 @@ Credits:
 [ul]Cabin Font - [url]https://github.com/impallari/Cabin[/url]
 Glyphs - [url]https://kenney.nl/assets/input-prompts[/url]
 Icons - [url]https://fonts.google.com/icons[/url]
-Godot 4.5.1, Blender 5.0.1[/ul]
+Godot 4.6.1, Blender 5.0.1[/ul]
 
 This project:
 [url]https://github.com/leosefcik/controller-rumble-tool[/url]
@@ -1523,7 +1529,7 @@ Made by leosefcik 2025-2026
 [b]Warning:[/b] We are not responsible for any damage that may be caused to you or your controller. Be mindful of excessive vibrations and battery drain."
 fit_content = true
 
-[node name="IconProgram" type="TextureRect" parent="UI/InfoPopup/Panel"]
+[node name="IconProgram" type="TextureRect" parent="UI/InfoPopup/Panel" unique_id=1706743826]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -1537,20 +1543,20 @@ texture = ExtResource("25_0odxb")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="ControlsPopup" type="Popup" parent="UI"]
+[node name="ControlsPopup" type="Popup" parent="UI" unique_id=1922384059]
 unique_name_in_owner = true
 oversampling_override = 1.0
 initial_position = 1
 size = Vector2i(550, 550)
 
-[node name="Panel" type="Panel" parent="UI/ControlsPopup"]
+[node name="Panel" type="Panel" parent="UI/ControlsPopup" unique_id=1431833968]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/ControlsPopup/Panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/ControlsPopup/Panel" unique_id=596050702]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1562,291 +1568,323 @@ offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer"]
+[node name="Label" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer" unique_id=668045650]
 layout_mode = 2
 theme_type_variation = &"HeaderLarge"
 text = "Controls: Analog Mode"
 
-[node name="HSeparator" type="HSeparator" parent="UI/ControlsPopup/Panel/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="UI/ControlsPopup/Panel/VBoxContainer" unique_id=150098271]
 layout_mode = 2
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="UI/ControlsPopup/Panel/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="UI/ControlsPopup/Panel/VBoxContainer" unique_id=1024750991]
 layout_mode = 2
 
-[node name="TextureRect3" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer2"]
+[node name="TextureRect3" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer2" unique_id=1634495218]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 texture = ExtResource("36_ok6jj")
 expand_mode = 2
 
-[node name="Label3" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer2"]
+[node name="Label3" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer2" unique_id=931255333]
 layout_mode = 2
 text = "/"
 
-[node name="TextureRect" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer2"]
+[node name="TextureRect" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer2" unique_id=1158635689]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 texture = ExtResource("14_2cqfq")
 expand_mode = 2
 
-[node name="Label2" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer2"]
+[node name="Label2" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer2" unique_id=604103390]
 layout_mode = 2
 text = "/"
 
-[node name="TextureRect2" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer2"]
+[node name="TextureRect2" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer2" unique_id=1502402205]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 texture = ExtResource("14_vivmo")
 expand_mode = 2
 
-[node name="Label" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer2"]
+[node name="Label" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer2" unique_id=937648834]
 layout_mode = 2
 text = ":  Control L/R intensity"
 
-[node name="HBoxContainer11" type="HBoxContainer" parent="UI/ControlsPopup/Panel/VBoxContainer"]
+[node name="HBoxContainer11" type="HBoxContainer" parent="UI/ControlsPopup/Panel/VBoxContainer" unique_id=198079620]
 layout_mode = 2
 
-[node name="TextureRect3" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer11"]
+[node name="TextureRect3" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer11" unique_id=795003100]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 texture = ExtResource("19_getpj")
 expand_mode = 2
 
-[node name="Label2" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer11"]
+[node name="Label2" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer11" unique_id=948065525]
 layout_mode = 2
 text = "/"
 
-[node name="TextureRect2" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer11"]
+[node name="TextureRect2" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer11" unique_id=444017503]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 texture = ExtResource("20_ryguw")
 expand_mode = 2
 
-[node name="Label" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer11"]
+[node name="Label" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer11" unique_id=1432042634]
 layout_mode = 2
 text = ":  Toggle Alternating Mode"
 
-[node name="HBoxContainer10" type="HBoxContainer" parent="UI/ControlsPopup/Panel/VBoxContainer"]
+[node name="HBoxContainer10" type="HBoxContainer" parent="UI/ControlsPopup/Panel/VBoxContainer" unique_id=1075633726]
 layout_mode = 2
 
-[node name="TextureRect3" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer10"]
+[node name="TextureRect3" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer10" unique_id=355915324]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 texture = ExtResource("31_ok6jj")
 expand_mode = 2
 
-[node name="Label2" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer10"]
+[node name="Label2" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer10" unique_id=1712006719]
 layout_mode = 2
 text = "/"
 
-[node name="TextureRect2" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer10"]
+[node name="TextureRect2" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer10" unique_id=1508076583]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 texture = ExtResource("32_facbu")
 expand_mode = 2
 
-[node name="Label" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer10"]
+[node name="Label" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer10" unique_id=1257727746]
 layout_mode = 2
 text = ":  Toggle Velocity Mode"
 
-[node name="Spacer" type="Control" parent="UI/ControlsPopup/Panel/VBoxContainer"]
+[node name="Spacer" type="Control" parent="UI/ControlsPopup/Panel/VBoxContainer" unique_id=1720755951]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Label2" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer"]
+[node name="Label2" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer" unique_id=320933848]
 layout_mode = 2
 theme_type_variation = &"HeaderLarge"
 text = "Controls: Program Mode"
 
-[node name="HSeparator2" type="HSeparator" parent="UI/ControlsPopup/Panel/VBoxContainer"]
+[node name="HSeparator2" type="HSeparator" parent="UI/ControlsPopup/Panel/VBoxContainer" unique_id=1150931984]
 layout_mode = 2
 
-[node name="HBoxContainer5" type="HBoxContainer" parent="UI/ControlsPopup/Panel/VBoxContainer"]
+[node name="HBoxContainer5" type="HBoxContainer" parent="UI/ControlsPopup/Panel/VBoxContainer" unique_id=555656390]
 layout_mode = 2
 
-[node name="TextureRect3" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer5"]
+[node name="TextureRect3" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer5" unique_id=614757553]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 texture = ExtResource("36_ok6jj")
 expand_mode = 2
 
-[node name="Label2" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer5"]
+[node name="Label2" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer5" unique_id=1389209993]
 layout_mode = 2
 text = "/"
 
-[node name="TextureRect2" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer5"]
+[node name="TextureRect2" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer5" unique_id=144411568]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 texture = ExtResource("14_vivmo")
 expand_mode = 2
 
-[node name="Label" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer5"]
+[node name="Label" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer5" unique_id=2035504787]
 layout_mode = 2
 text = ":  Control L/R intensity (reached when program plays)"
 
-[node name="HBoxContainer7" type="HBoxContainer" parent="UI/ControlsPopup/Panel/VBoxContainer"]
+[node name="HBoxContainer7" type="HBoxContainer" parent="UI/ControlsPopup/Panel/VBoxContainer" unique_id=17177028]
 layout_mode = 2
 
-[node name="TextureRect3" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer7"]
+[node name="TextureRect3" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer7" unique_id=631238988]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 texture = ExtResource("24_htxhm")
 expand_mode = 2
 
-[node name="Label2" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer7"]
+[node name="Label2" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer7" unique_id=17337007]
 layout_mode = 2
 text = "/"
 
-[node name="TextureRect2" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer7"]
+[node name="TextureRect2" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer7" unique_id=1499059882]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 texture = ExtResource("25_jq2sk")
 expand_mode = 2
 
-[node name="Label" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer7"]
+[node name="Label" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer7" unique_id=1260695322]
 layout_mode = 2
 text = ":  Play/pause the program (Pressing spacebar also works)"
 
-[node name="HBoxContainer9" type="HBoxContainer" parent="UI/ControlsPopup/Panel/VBoxContainer"]
+[node name="HBoxContainer9" type="HBoxContainer" parent="UI/ControlsPopup/Panel/VBoxContainer" unique_id=1738972514]
 layout_mode = 2
 
-[node name="TextureRect3" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer9"]
+[node name="TextureRect3" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer9" unique_id=402349978]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 texture = ExtResource("31_ok6jj")
 expand_mode = 2
 
-[node name="Label2" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer9"]
+[node name="Label2" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer9" unique_id=394682578]
 layout_mode = 2
 text = "/"
 
-[node name="TextureRect2" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer9"]
+[node name="TextureRect2" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer9" unique_id=703075358]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 texture = ExtResource("32_facbu")
 expand_mode = 2
 
-[node name="Label" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer9"]
+[node name="Label" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer9" unique_id=329250235]
 layout_mode = 2
 text = ":  Flip Controls AND flip the two intensities"
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="UI/ControlsPopup/Panel/VBoxContainer"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="UI/ControlsPopup/Panel/VBoxContainer" unique_id=1809640886]
 layout_mode = 2
 
-[node name="TextureRect4" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer3"]
+[node name="TextureRect4" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer3" unique_id=1892397564]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 texture = ExtResource("36_ok6jj")
 expand_mode = 2
 
-[node name="Label3" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer3"]
+[node name="Label3" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer3" unique_id=2090377963]
 layout_mode = 2
 text = "/"
 
-[node name="TextureRect3" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer3"]
+[node name="TextureRect3" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer3" unique_id=397437080]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 texture = ExtResource("14_2cqfq")
 expand_mode = 2
 
-[node name="Label2" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer3"]
+[node name="Label2" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer3" unique_id=663815959]
 layout_mode = 2
 text = "+"
 
-[node name="TextureRect2" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer3"]
+[node name="TextureRect2" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer3" unique_id=1180879662]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 texture = ExtResource("14_vivmo")
 expand_mode = 2
 
-[node name="Label" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer3"]
+[node name="Label" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer3" unique_id=193691524]
 layout_mode = 2
 text = ":  Change the timescale of running program"
 
-[node name="Spacer2" type="Control" parent="UI/ControlsPopup/Panel/VBoxContainer"]
+[node name="Spacer2" type="Control" parent="UI/ControlsPopup/Panel/VBoxContainer" unique_id=387949947]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Label3" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer"]
+[node name="Label3" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer" unique_id=840288036]
 layout_mode = 2
 theme_type_variation = &"HeaderLarge"
 text = "Global Controls"
 
-[node name="HSeparator3" type="HSeparator" parent="UI/ControlsPopup/Panel/VBoxContainer"]
+[node name="HSeparator3" type="HSeparator" parent="UI/ControlsPopup/Panel/VBoxContainer" unique_id=842261255]
 layout_mode = 2
 
-[node name="HBoxContainer4" type="HBoxContainer" parent="UI/ControlsPopup/Panel/VBoxContainer"]
+[node name="HBoxContainer4" type="HBoxContainer" parent="UI/ControlsPopup/Panel/VBoxContainer" unique_id=282995178]
 layout_mode = 2
 
-[node name="TextureRect3" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer4"]
+[node name="TextureRect3" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer4" unique_id=1963594359]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 texture = ExtResource("5_vivmo")
 expand_mode = 2
 
-[node name="Label2" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer4"]
+[node name="Label2" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer4" unique_id=1521588801]
 layout_mode = 2
 text = "/"
 
-[node name="TextureRect2" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer4"]
+[node name="TextureRect2" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer4" unique_id=1065197664]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 texture = ExtResource("7_2cqfq")
 expand_mode = 2
 
-[node name="Label" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer4"]
+[node name="Label" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer4" unique_id=1695451523]
 layout_mode = 2
 text = ":  Toggle either motor's rumble lock"
 
-[node name="HBoxContainer6" type="HBoxContainer" parent="UI/ControlsPopup/Panel/VBoxContainer"]
+[node name="HBoxContainer6" type="HBoxContainer" parent="UI/ControlsPopup/Panel/VBoxContainer" unique_id=1124721682]
 layout_mode = 2
 
-[node name="TextureRect3" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer6"]
+[node name="TextureRect3" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer6" unique_id=671434921]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 size_flags_vertical = 4
 texture = ExtResource("37_b1qrp")
 expand_mode = 2
 
-[node name="Label2" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer6"]
+[node name="Label2" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer6" unique_id=781952648]
 layout_mode = 2
 text = "/"
 
-[node name="TextureRect2" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer6"]
+[node name="TextureRect2" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer6" unique_id=66791775]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 size_flags_vertical = 4
 texture = ExtResource("38_come4")
 expand_mode = 2
 
-[node name="Label" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer6"]
+[node name="Label" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer6" unique_id=198715297]
 layout_mode = 2
 text = ":  Toggle the Couple Motors option (Hold: switch mode tabs)"
 
-[node name="HBoxContainer8" type="HBoxContainer" parent="UI/ControlsPopup/Panel/VBoxContainer"]
+[node name="HBoxContainer8" type="HBoxContainer" parent="UI/ControlsPopup/Panel/VBoxContainer" unique_id=1692989445]
 layout_mode = 2
 
-[node name="TextureRect3" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer8"]
+[node name="TextureRect3" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer8" unique_id=1909436217]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 texture = ExtResource("21_d13ii")
 expand_mode = 2
 
-[node name="Label2" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer8"]
+[node name="Label2" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer8" unique_id=1541032040]
 layout_mode = 2
 text = "/"
 
-[node name="TextureRect2" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer8"]
+[node name="TextureRect2" type="TextureRect" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer8" unique_id=380481082]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 texture = ExtResource("22_1u8w0")
 expand_mode = 2
 
-[node name="Label" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer8"]
+[node name="Label" type="Label" parent="UI/ControlsPopup/Panel/VBoxContainer/HBoxContainer8" unique_id=1418002091]
 layout_mode = 2
 text = ":  Toggle the Flip Controls option"
 
-[node name="ControllerCheckTimer" type="Timer" parent="."]
+[node name="ProgramImportPopup" type="Popup" parent="UI" unique_id=1225259982]
+unique_name_in_owner = true
+oversampling_override = 1.0
+initial_position = 1
+size = Vector2i(600, 400)
+
+[node name="Panel" type="Panel" parent="UI/ProgramImportPopup" unique_id=137515174]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/ProgramImportPopup/Panel" unique_id=10306946]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="UI/ProgramImportPopup/Panel/VBoxContainer" unique_id=1736139490]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+text = "Import/export menu: Wip"
+
+[node name="ControllerCheckTimer" type="Timer" parent="." unique_id=589275321]
 wait_time = 0.5
 autostart = true
 
@@ -1873,6 +1911,9 @@ autostart = true
 [connection signal="toggled" from="UI/MainVBox/ModeTabs/Analog Mode/VBoxContainer/HBoxContainer/AnalogAltMode" to="UI/MainVBox/ModeTabs/Analog Mode" method="_on_analog_alt_mode_toggled"]
 [connection signal="toggled" from="UI/MainVBox/ModeTabs/Analog Mode/VBoxContainer/HBoxContainer/AnalogVelMode" to="UI/MainVBox/ModeTabs/Analog Mode" method="_on_analog_vel_mode_toggled"]
 [connection signal="value_changed" from="UI/MainVBox/ModeTabs/Analog Mode/VBoxContainer/HBoxContainer/VelocityModeSpeedContainer/VelocityModeSpeed" to="UI/MainVBox/ModeTabs/Analog Mode" method="_on_velocity_mode_speed_value_changed"]
+[connection signal="pressed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Memory/QSave" to="UI/MainVBox/ModeTabs/Program Mode" method="_on_q_save_pressed"]
+[connection signal="pressed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Memory/QLoad" to="UI/MainVBox/ModeTabs/Program Mode" method="_on_q_load_pressed"]
+[connection signal="pressed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Memory/ImportExport" to="UI" method="_on_import_export_pressed"]
 [connection signal="pressed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Flips/FClear" to="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza" method="_on_f_clear_pressed"]
 [connection signal="pressed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Flips/FCycle" to="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza" method="_on_f_cycle_pressed"]
 [connection signal="pressed" from="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza/Flips/FEvery" to="UI/MainVBox/ModeTabs/Program Mode/VBoxContainer/PresetPlaza" method="_on_f_every_pressed"]
@@ -1906,4 +1947,5 @@ autostart = true
 [connection signal="popup_hide" from="UI/InfoPopup" to="UI" method="_on_info_popup_popup_hide"]
 [connection signal="meta_clicked" from="UI/InfoPopup/Panel/VBoxContainer/InfoCredits" to="UI" method="_on_info_credits_meta_clicked"]
 [connection signal="popup_hide" from="UI/ControlsPopup" to="UI" method="_on_controls_popup_popup_hide"]
+[connection signal="popup_hide" from="UI/ProgramImportPopup" to="UI" method="_on_program_import_popup_popup_hide"]
 [connection signal="timeout" from="ControllerCheckTimer" to="." method="_on_controller_check_timer_timeout"]
