@@ -11,7 +11,7 @@ const MAX_LENGTH := 900000.0
 
 var PATTERN_NODES := [] # [row node 0-3][0: Duration, 1: Pause, 2: Indicator]
 var tact_amount := 1
-var durations := [0.0, 0.0, 0.0, 0.0]
+var durations := [1000.0, 0.0, 0.0, 0.0]
 var pauses := [0.0, 0.0, 0.0, 0.0]
 var flips := [false, false, false, false]
 

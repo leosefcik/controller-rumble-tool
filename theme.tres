@@ -133,4 +133,4 @@ RedButton/styles/normal = SubResource("StyleBoxFlat_ttqs8")
 RedButton/styles/pressed = SubResource("StyleBoxFlat_howt0")
 RichTextLabel/fonts/bold_font = ExtResource("1_cjfk0")
 RichTextLabel/fonts/italics_font = ExtResource("2_110ce")
-VSeparator/constants/separation = 12
+VSeparator/constants/separation = 8

@@ -5,12 +5,17 @@ extends HBoxContainer
 @export var PresetButton : PackedScene
 
 var PRESETS := {
-	"Clear" = "0",
+	"Default" = "1000",
+	"Long" = "500,200",
+	"Short" = "250,200",
+	"Dotted" = "100,200",
 	"Simple" = "1000,1000",
-	"4321" = "400,300,200,100",
-	"CWaltz" = "300,100,150,250,150,250",
-	"7/8" = "100,50,100,50,100,50,100",
-	"wip" = "100,500,400,400,400,400",
+	"2Step" = "400,200,200,100",
+	"Waltz" = "300,100,150,250,150,250",
+	"7/8" = "400,100,200,100,200,100",
+	"Beat 1" = "250,150,100,300,100,100,100,500",
+	"Beat 2" = "100,100,100,100,300,100,100,300",
+	"Beat 3" = "400,200,100,100,100,300,100,300",
 }
 
 
@@ -38,19 +43,21 @@ func _input(event: InputEvent) -> void:
 
 func _on_strong_100_pressed() -> void:
 	ProgramMode.strong_desired = 1.0
-
 func _on_weak_100_pressed() -> void:
 	ProgramMode.weak_desired = 1.0
 
-func _on_strong_50_pressed() -> void:
-	ProgramMode.strong_desired = 0.5
+func _on_strong_66_pressed() -> void:
+	ProgramMode.strong_desired = 0.6666
+func _on_weak_66_pressed() -> void:
+	ProgramMode.weak_desired = 0.6666
 
-func _on_weak_50_pressed() -> void:
-	ProgramMode.weak_desired = 0.5
+func _on_strong_33_pressed() -> void:
+	ProgramMode.strong_desired = 0.3333
+func _on_weak_33_pressed() -> void:
+	ProgramMode.weak_desired = 0.3333
 
 func _on_strong_0_pressed() -> void:
 	ProgramMode.strong_desired = 0.0
-
 func _on_weak_0_pressed() -> void:
 	ProgramMode.weak_desired = 0.0
 
@@ -76,3 +83,7 @@ func _on_flip_intensities_pressed() -> void:
 func _on_random_preset_pressed() -> void:
 	var code = PRESETS[PRESETS.keys().pick_random()]
 	ProgramMode.import_pattern(code)
+	
+	var flip_random = randi_range(0,1)
+	if flip_random == 0:
+		ProgramMode.flip_intensities()
